@@ -1,0 +1,167 @@
+import { useEffect, useState } from 'react';
+import './Section10.css';
+import backgroundImg from '../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png';
+
+export default function Section10() {
+  const [activeService, setActiveService] = useState(null);
+  
+  const services = [
+    { 
+      id: 1, 
+      name: 'Brand Strategy',
+      content: [
+        'Brand audits & competitive research',
+        'Brand brief',
+        'Positioning & value proposition', 
+        'Brand architecture & naming',
+        'Tone of voice & messaging frameworks'
+      ]
+    },
+    { 
+      id: 2, 
+      name: 'Brand Identity',
+      content: [
+        'Visual identity systems',
+        'Logo design',
+        'Typography & color systems',
+        'Brand guidelines'
+      ]
+    },
+    { 
+      id: 3, 
+      name: 'Campaign & Activation',
+      content: [
+        'Campaign strategy',
+        'Creative direction',
+        'Digital & print campaigns',
+        'Event design'
+      ]
+    },
+    { 
+      id: 4, 
+      name: 'Advertising Design',
+      content: [
+        'Print advertising',
+        'Digital advertising',
+        'Social media campaigns',
+        'Marketing materials'
+      ]
+    },
+    { 
+      id: 5, 
+      name: 'UI/UX',
+      content: [
+        'User experience design',
+        'User interface design',
+        'Prototyping & wireframing',
+        'Usability testing'
+      ]
+    },
+    { 
+      id: 6, 
+      name: 'Editorial Design',
+      content: [
+        'Book & magazine design',
+        'Annual reports',
+        'Editorial art direction',
+        'Typography systems'
+      ]
+    }
+  ];
+
+  const handleServiceClick = (serviceId) => {
+    setActiveService(activeService === serviceId ? null : serviceId);
+  };
+
+  useEffect(() => {
+    const serviceHeaders = document.querySelectorAll('.services-list .service-header');
+    
+    serviceHeaders.forEach(item => {
+      let animationTimeout;
+      let resetTimeout;
+      let isHovering = false;
+      let isOnRepeat = false;
+      
+      function startAnimation() {
+        // Clear any existing timeouts
+        clearTimeout(animationTimeout);
+        clearTimeout(resetTimeout);
+        
+        // Remove previous states and start animation
+        if (!isOnRepeat) {
+          item.classList.remove('locked');
+          item.classList.remove('reset');
+          item.classList.add('animate');
+        }
+        
+        // After animation completes
+        animationTimeout = setTimeout(() => {
+          item.classList.remove('animate');
+          item.classList.add('locked');
+          // After being locked for a moment
+          resetTimeout = setTimeout(() => {
+            // If still hovering, do nothing
+            if (isHovering) {
+              isOnRepeat = true;
+            } else {
+              // Otherwise reset to white
+              item.classList.remove('locked');
+              item.classList.add('reset');
+              isOnRepeat = false;
+            }
+          }, 250);
+        }, 500);
+      }
+      
+      item.addEventListener('mouseenter', () => {
+        isHovering = true;
+        startAnimation();
+      });
+      
+      item.addEventListener('mouseleave', () => {
+        isHovering = false;
+        isOnRepeat = false;
+        item.classList.remove('locked');
+        item.classList.add('reset');
+        // Animation will complete and then reset to white
+        // based on the isHovering flag in the timeout function
+      });
+    });
+  }, []);
+
+  return (
+    <div className="section10">
+      <div className="section10-container">
+        <div className="section10-header">
+          <p className="section10-label">Services</p>
+          <h2 className="section10-heading">
+            <span className="heading-black">Through </span>
+            <span className="heading-gray">a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers.</span>
+          </h2>
+        </div>
+        
+        <div className="services-list">
+          {services.map((service) => (
+            <div key={service.id} className={`service-item ${activeService === service.id ? 'expanded' : ''}`}>
+              <div 
+                className="service-header" 
+                onClick={() => handleServiceClick(service.id)}
+              >
+                <span className="service-number">{String(service.id).padStart(2, '0')}</span>
+                <span className="service-name">{service.name}</span>
+                <button className={`toggle-btn ${activeService === service.id ? 'active' : ''}`}>
+                  {activeService === service.id ? '−' : '+'}
+                </button>
+              </div>
+              <div className={`service-content ${activeService === service.id ? 'active' : ''}`}>
+                {service.content.map((item, index) => (
+                  <p key={index}>→ {item}</p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

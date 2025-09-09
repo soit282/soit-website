@@ -1,0 +1,190 @@
+.section9 {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 120px 1.25%;
+  box-sizing: border-box;
+}
+
+.section9-container {
+  width: 100%;
+}
+
+.section9-see-all {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 240px;
+}
+
+.section9-header {
+  margin-bottom: 240px;
+}
+
+.section9-label {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 24px 0;
+  font-weight: 400;
+}
+
+.section9-heading {
+  font-size: 48px;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: 400;
+  max-width: 80%;
+  color: #999;
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.625%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.client-card {
+  height: 571px;
+  position: relative;
+  overflow: hidden;
+}
+
+.client-background {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.client-card:nth-child(1):hover .client-background {
+  background-color: white;
+  background-image: none !important;
+}
+
+.client-card:nth-child(2):hover .client-background {
+  background-color: rgba(246, 194, 7, 1);
+  background-image: none !important;
+}
+
+.client-card:nth-child(3):hover .client-background {
+  background-image: url("/1_Homepage/1_Homepage/3_Clients/soit_recent_work.svg") !important;
+  background-size: cover;
+  background-position: center;
+}
+
+.client-card:nth-child(4):hover .client-background {
+  background-image: url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.svg") !important;
+  background-size: cover;
+  background-position: center;
+}
+
+.client-logo {
+  max-width: 50%;
+  max-height: 50%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.see-all-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 12px 45px 12px 25px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-block;
+  min-width: 120px;
+  font-weight: 400;
+}
+
+.button-text {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.button-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.see-all-button:hover .button-arrow {
+  right: calc(100% - 40px);
+}
+
+.see-all-button:hover .button-text {
+  transform: translateX(12px);
+}
+
+.see-all-button:hover {
+  padding: 12px 25px 12px 45px;
+}
+
+@media (max-width: 1440px) {
+  .client-card {
+    height: 428px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .clients-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .client-card {
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section9 {
+    padding: 60px 2.5%;
+  }
+
+  .section9-heading {
+    font-size: 32px;
+    max-width: 100%;
+  }
+
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625%;
+  }
+
+  .section9-header {
+    margin-bottom: 40px;
+  }
+
+  .client-card {
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section9 {
+    padding: 40px 3%;
+  }
+
+  .clients-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .client-card {
+    height: 320px;
+  }
+}

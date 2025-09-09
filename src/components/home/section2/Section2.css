@@ -1,0 +1,274 @@
+/* Hero Tagline Section */
+.hero-tagline-section {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  margin-bottom: 0;
+}
+
+.hero-tagline {
+  text-align: center;
+  padding-top: 80px;
+  font-size: 4rem;
+  position: relative;
+}
+
+/* Main text styles */
+.tagline-main {
+  font-size: inherit !important;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  line-height: 1.1;
+  font-family: "PPNeueMontreal", Arial, sans-serif;
+}
+
+.tagline-main.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tagline-sub {
+  font-size: inherit !important;
+  font-weight: 400;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  line-height: 1.1;
+  font-family: "PPNeueMontreal", Arial, sans-serif;
+}
+
+.tagline-sub.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+.tagline-fade {
+  font-size: inherit !important;
+  color: #e5e5e5;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  line-height: 1.1;
+  font-family: "PPNeueMontreal", Arial, sans-serif;
+}
+
+.tagline-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+/* Highlight text */
+.tagline-highlight-1,
+.tagline-highlight-2 {
+  position: relative;
+  display: inline-block;
+}
+
+/* Service spans */
+.tagline-fade span,
+.tagline-first-service {
+  font-style: italic;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  color: #e5e5e5;
+  display: inline;
+}
+
+/* Only change color on hover */
+.tagline-fade span:hover,
+.tagline-first-service:hover {
+  color: #111;
+}
+
+/* Side images */
+.tagline-image-left,
+.tagline-image-right {
+  width: 140px;
+  height: 180px;
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tagline-image-left.visible,
+.tagline-image-right.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.tagline-image-left img,
+.tagline-image-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Services link */
+.services-link {
+  margin-top: 60px;
+  margin-bottom: 100px;
+  text-align: center;
+  position: relative;
+}
+
+.services-link a {
+  color: #111;
+  text-decoration: underline;
+  font-size: 1.5rem;
+  font-weight: 400;
+  transition: color 0.2s ease;
+  font-family: "PPNeueMontreal", Arial, sans-serif;
+}
+
+.services-link a:hover {
+  color: #666;
+}
+
+/* Scrolling text animation */
+.scrolling-text {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  height: 1.5rem;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 30px 0;
+}
+
+.scrolling-text-content {
+  font-size: 1.8rem;
+  color: #888;
+  font-weight: 400;
+  display: inline-block;
+  animation: scroll-right-to-left 25s linear infinite;
+  position: absolute;
+  right: 0;
+  font-family: "PPNeueMontreal", Arial, sans-serif;
+}
+
+@keyframes scroll-right-to-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hero-tagline {
+    font-size: 3.5rem;
+  }
+
+  .tagline-image-left,
+  .tagline-image-right {
+    width: 120px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-tagline {
+    font-size: 3rem;
+    padding-top: 60px;
+  }
+
+  .tagline-image-left,
+  .tagline-image-right {
+    width: 100px;
+    height: 130px;
+  }
+
+  .services-link {
+    margin-top: 40px;
+    margin-bottom: 80px;
+  }
+
+  .scrolling-text-content {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-tagline {
+    font-size: 2.5rem;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .tagline-image-left,
+  .tagline-image-right {
+    width: 80px;
+    height: 100px;
+  }
+
+  .services-link a {
+    font-size: 1.2rem;
+  }
+
+  .scrolling-text-content {
+    font-size: 1.2rem;
+  }
+
+  .scrolling-text {
+    padding: 20px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-tagline {
+    font-size: 2rem;
+    padding-top: 30px;
+  }
+
+  /* Hide side images on mobile */
+  .tagline-image-left,
+  .tagline-image-right {
+    display: none;
+  }
+
+  .tagline-main,
+  .tagline-sub,
+  .tagline-fade {
+    font-size: 2rem !important;
+  }
+
+  .services-link {
+    margin-top: 30px;
+    margin-bottom: 60px;
+  }
+
+  .services-link a {
+    font-size: 1rem;
+  }
+
+  .scrolling-text-content {
+    font-size: 1rem;
+  }
+
+  .scrolling-text {
+    padding: 15px 0;
+    height: 1.2rem;
+  }
+}
