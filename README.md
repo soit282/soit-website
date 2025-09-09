@@ -167,4 +167,4 @@ Output sẽ nằm trong folder `dist/` và có thể deploy lên bất kỳ stat
 
 ## 📄 License
 
-© 2025 SOIT - Student Organization of Information Technology
+© 2025 SOIT
