@@ -156,10 +156,9 @@
 
 .scrolling-text-content {
   font-size: 1.8rem;
-  color: #888;
+  color: rgba(31, 31, 31, 1);
   font-weight: 400;
   display: inline-block;
-  animation: scroll-right-to-left 25s linear infinite;
   position: absolute;
   right: 0;
   font-family: "PPNeueMontreal", Arial, sans-serif;

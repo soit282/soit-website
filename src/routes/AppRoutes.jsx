@@ -4,7 +4,6 @@ import { lazy, Suspense } from "react";
 // Lazy-load pages
 const HomePage = lazy(() => import("@pages/HomePage"));
 const AboutPage = lazy(() => import("@pages/AboutPage"));
-const NotFoundPage = lazy(() => import("@pages/NotFoundPage"));
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -19,9 +18,9 @@ export default function AppRoutes() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          
-          {/* 404 - Catch all route */}
-          <Route path="*" element={<NotFoundPage />} />
+
+          {/* 404 - Catch all route
+          <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
       </Suspense>
     </>
