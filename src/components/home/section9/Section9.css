@@ -20,20 +20,14 @@
 }
 
 .section9-label {
-  font-size: 16px;
-  color: #666;
+  color: #1F1F1F;
   margin: 0 0 24px 0;
-  font-weight: 400;
 }
 
 .section9-heading {
-  font-size: 48px;
-  line-height: 1.2;
-  color: #1a1a1a;
-  margin: 0;
-  font-weight: 400;
-  max-width: 80%;
   color: #999;
+  margin: 0;
+  max-width: 80%;
 }
 
 .clients-grid {

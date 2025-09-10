@@ -133,8 +133,8 @@ export default function Section10() {
     <div className="section10">
       <div className="section10-container">
         <div className="section10-header">
-          <p className="section10-label">Services</p>
-          <h2 className="section10-heading">
+          <p className="section10-label text-4">Services</p>
+          <h2 className="section10-heading text-2_100pt_medium">
             <span className="heading-black">Through </span>
             <span className="heading-gray">a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers.</span>
           </h2>
@@ -147,8 +147,7 @@ export default function Section10() {
                 className="service-header" 
                 onClick={() => handleServiceClick(service.id)}
               >
-                <span className="service-number">{String(service.id).padStart(2, '0')}</span>
-                <span className="service-name">{service.name}</span>
+                <span className="service-name text-4">{service.name}</span>
                 <button className={`toggle-btn ${activeService === service.id ? 'active' : ''}`}>
                   {activeService === service.id ? '−' : '+'}
                 </button>

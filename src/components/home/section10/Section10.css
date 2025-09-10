@@ -16,17 +16,12 @@
 }
 
 .section10-label {
-  font-size: 16px;
   color: #666;
-  margin: 0 0 48px 0;
-  font-weight: 400;
+  margin: 0 0 24px 0;
 }
 
 .section10-heading {
-  font-size: 72px;
-  line-height: 1.1;
   margin: 0;
-  font-weight: 400;
   max-width: 100%;
 }
 
@@ -45,20 +40,42 @@
 }
 
 @keyframes grayscale-hover {
-  20%  { background-color: #f0f0f0; }
-  40%  { background-color: #eaeaea; }
-  60%  { background-color: #dedede; }
-  80%  { background-color: #d0d0d0; }
-  100% { background-color: #c4c4c4; }
+  20% {
+    background-color: #f0f0f0;
+  }
+  40% {
+    background-color: #eaeaea;
+  }
+  60% {
+    background-color: #dedede;
+  }
+  80% {
+    background-color: #d0d0d0;
+  }
+  100% {
+    background-color: #c4c4c4;
+  }
 }
 
 @keyframes text-color-hover {
-  0%   { color: #111; }
-  20%  { color: #333; }
-  40%  { color: #555; }
-  60%  { color: #777; }
-  80%  { color: #999; }
-  100% { color: #E0E0E0; }
+  0% {
+    color: #111;
+  }
+  20% {
+    color: #333;
+  }
+  40% {
+    color: #555;
+  }
+  60% {
+    color: #777;
+  }
+  80% {
+    color: #999;
+  }
+  100% {
+    color: #e0e0e0;
+  }
 }
 
 .service-item {
@@ -76,7 +93,7 @@
 
 /* Expanded state - apply background to entire service-item */
 .service-item.expanded {
-  background-image: url('../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png');
+  background-image: url("../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -84,13 +101,13 @@
 }
 
 .service-item.expanded::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png');
+  background-image: url("../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -99,7 +116,7 @@
 }
 
 .service-item.expanded::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -140,9 +157,7 @@
 }
 
 .service-name {
-  font-size: 36px;
-  color: #111;
-  font-weight: 400;
+  color: #e0e0e0;
   transition: color 0.4s ease, transform 0.3s ease;
   padding-left: 8px;
   flex: 1;
@@ -173,7 +188,7 @@
 }
 
 .service-item:not(.expanded) .service-header.animate::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -195,7 +210,7 @@
 }
 
 .service-item:not(.expanded) .service-header.animate .toggle-btn {
-  color: #E0E0E0;
+  color: #e0e0e0;
   transition: color 0.5s ease;
 }
 
@@ -206,7 +221,7 @@
 }
 
 .service-item:not(.expanded) .service-header.locked .service-name {
-  color: #E0E0E0;
+  color: #e0e0e0;
   transition: color 0.3s ease;
   transform: translateX(20px);
 }
@@ -217,7 +232,7 @@
 }
 
 .service-item:not(.expanded) .service-header.locked .toggle-btn {
-  color: #E0E0E0;
+  color: #e0e0e0;
   transition: color 0.3s ease;
 }
 
@@ -225,11 +240,6 @@
 .service-item:not(.expanded) .service-header.reset {
   background-color: #fff;
   transition: background-color 0.5s ease;
-}
-
-.service-item:not(.expanded) .service-header.reset .service-number {
-  color: #999;
-  transition: color 0.5s ease;
 }
 
 .service-item:not(.expanded) .service-header.reset .service-name {
@@ -266,24 +276,9 @@
 }
 
 @media (max-width: 1440px) {
-  .section10-heading {
-    font-size: 60px;
-  }
-  
-  .service-name {
-    font-size: 32px;
-  }
 }
 
 @media (max-width: 1200px) {
-  .section10-heading {
-    font-size: 48px;
-  }
-  
-  .service-name {
-    font-size: 28px;
-  }
-  
   .service-item {
     padding: 32px 0;
   }
@@ -293,27 +288,19 @@
   .section10 {
     padding: 60px 2.5%;
   }
-  
+
   .section10-header {
     margin-bottom: 60px;
   }
-  
+
   .section10-label {
     margin-bottom: 24px;
   }
-  
-  .section10-heading {
-    font-size: 36px;
-  }
-  
-  .service-name {
-    font-size: 24px;
-  }
-  
+
   .service-item {
     padding: 24px 0;
   }
-  
+
   .service-number {
     margin-right: 30px;
   }
@@ -323,19 +310,11 @@
   .section10 {
     padding: 40px 3%;
   }
-  
-  .section10-heading {
-    font-size: 28px;
-  }
-  
-  .service-name {
-    font-size: 20px;
-  }
-  
+
   .service-item {
     padding: 20px 0;
   }
-  
+
   .service-number {
     margin-right: 20px;
     font-size: 12px;

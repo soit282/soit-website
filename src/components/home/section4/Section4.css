@@ -16,13 +16,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: black;
+  color: white;
   padding-left: 1.25%;
   padding-right: 1.25%;
   box-sizing: border-box;
-  /* Ensure mix-blend-mode can work with section4 background */
-  background: transparent;
-  isolation: auto;
+  /* Create isolated stacking context like Mirror client */
+  isolation: isolate;
+  mix-blend-mode: difference;
 }
 
 .section4-content > div {
@@ -45,6 +45,5 @@
 
 .section4-content p {
   margin: 0;
-  mix-blend-mode: difference;
   color: white;
 }
