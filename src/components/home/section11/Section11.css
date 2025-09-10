@@ -14,13 +14,9 @@
 }
 
 .section11-title {
-  font-size: 56px;
-  font-weight: 400;
-  line-height: 1.15;
   margin-top: 399px;
   margin-bottom: 261px;
-  letter-spacing: -0.03em;
-  max-width: 800px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -371,6 +367,22 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+@media (max-width: 1440px) {
+  .section11-title {
+    max-width: 1200px;
+    margin-top: 320px;
+    margin-bottom: 220px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .section11-title {
+    max-width: 900px;
+    margin-top: 260px;
+    margin-bottom: 180px;
+  }
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .section11 {
@@ -378,7 +390,9 @@
   }
 
   .section11-title {
-    font-size: 32px;
+    max-width: 100%;
+    margin-top: 200px;
+    margin-bottom: 120px;
   }
 
   .services-grid {
@@ -393,6 +407,14 @@
 
   .footer-text {
     font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section11-title {
+    max-width: 100%;
+    margin-top: 140px;
+    margin-bottom: 80px;
   }
 
   .footer-content {

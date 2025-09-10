@@ -48,7 +48,7 @@ export default function Section11() {
   return (
     <section className="section11">
       <div className="section11-header">
-        <h1 className="section11-title">
+        <h1 className="section11-title text-2_100pt_medium">
           Hello!<br />
           Looking to rebrand or get<br />
           a brand check-up?

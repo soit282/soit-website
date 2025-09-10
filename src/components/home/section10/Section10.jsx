@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import './Section10.css';
+import plusIcon from '/icon/Icon/+.svg';
+import minusIcon from '/icon/Icon/-.svg';
+import arrowIcon from '/icon/Icon/-_.svg';
 import backgroundImg from '../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png';
 
 export default function Section10() {
@@ -149,12 +152,18 @@ export default function Section10() {
               >
                 <span className="service-name text-4">{service.name}</span>
                 <button className={`toggle-btn ${activeService === service.id ? 'active' : ''}`}>
-                  {activeService === service.id ? '−' : '+'}
+                  {activeService === service.id ? 
+                    <img src={minusIcon} alt="collapse" className="minus-icon" /> : 
+                    <img src={plusIcon} alt="expand" className="plus-icon" />
+                  }
                 </button>
               </div>
               <div className={`service-content ${activeService === service.id ? 'active' : ''}`}>
                 {service.content.map((item, index) => (
-                  <p key={index}>→ {item}</p>
+                  <p key={index} className="text-6">
+                    <img src={arrowIcon} alt="arrow" className="content-arrow" />
+                    {item}
+                  </p>
                 ))}
               </div>
             </div>
