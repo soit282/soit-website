@@ -7,6 +7,8 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  padding-left: 1.25%;
+  padding-right: 1.25%;
 }
 
 .section4-content {
@@ -15,10 +17,18 @@
   justify-content: space-between;
   align-items: center;
   color: black;
+  padding-left: 1.25%;
+  padding-right: 1.25%;
+  box-sizing: border-box;
+  /* Ensure mix-blend-mode can work with section4 background */
+  background: transparent;
+  isolation: auto;
 }
 
 .section4-content > div {
   flex: 1;
+  /* Ensure transparent background for blend mode */
+  background: transparent;
 }
 
 .section4-content .text-left {
@@ -35,6 +45,6 @@
 
 .section4-content p {
   margin: 0;
-  font-size: 16px;
-  line-height: 1.4;
+  mix-blend-mode: difference;
+  color: white;
 }

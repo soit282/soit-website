@@ -40,14 +40,14 @@ export default function Section4() {
       onMouseMove={handleMouseMove}
     >
       <div 
-        className="section4-content"
+        className="section4-content text-8"
         style={{
           position: 'absolute',
           top: `${mouseY}%`,
           transform: 'translateY(-50%)',
           left: 0,
           right: 0,
-          padding: '0 24px'
+          padding: '0 1.25%'
         }}
       >
         <div className="text-left">

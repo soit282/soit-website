@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./Section2.css";
+import ArrowButton from "../../common/ArrowButton";
 import img1 from "../../../../public/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_1.jpg";
 import img2 from "../../../../public/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_2.png";
 
@@ -153,12 +154,15 @@ export default function Section2() {
 
         {/* Services link */}
         <div className="services-link">
-          <a href="#services">Services ↗</a>
+          <ArrowButton 
+            text="Services" 
+            onClick={() => window.location.href = "#services"}
+          />
         </div>
 
         {/* Scrolling text */}
         <div className="scrolling-text">
-          <div className="scrolling-text-content">
+          <div className="scrolling-text-content text-7_16pt_medium">
             Số Ít ≠ Số Nhiều. We're a design studio that believes in less - but
             better.
           </div>

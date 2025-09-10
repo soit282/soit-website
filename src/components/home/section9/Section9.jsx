@@ -1,5 +1,5 @@
 import "./Section9.css";
-import buttonIcon from "/icon/Icon/-_.svg";
+import ArrowButton from "../../common/ArrowButton";
 
 export default function Section9() {
   const clients = [
@@ -28,10 +28,7 @@ export default function Section9() {
   return (
     <div className="section9">
       <div className="section9-see-all">
-        <button className="see-all-button">
-          <span className="button-text">See all</span>
-          <img src={buttonIcon} alt="arrow" className="button-arrow" />
-        </button>
+        <ArrowButton text="See all" />
       </div>
 
       <div className="section9-container">

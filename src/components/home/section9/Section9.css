@@ -92,50 +92,7 @@
   z-index: 1;
 }
 
-.see-all-button {
-  background: none;
-  border: none;
-  font-size: 16px;
-  color: #1a1a1a;
-  cursor: pointer;
-  padding: 12px 45px 12px 25px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  display: inline-block;
-  min-width: 120px;
-  font-weight: 400;
-}
-
-.button-text {
-  display: inline-block;
-  position: relative;
-  z-index: 2;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.button-arrow {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  z-index: 1;
-  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  width: 20px;
-  height: 20px;
-}
-
-.see-all-button:hover .button-arrow {
-  right: calc(100% - 40px);
-}
-
-.see-all-button:hover .button-text {
-  transform: translateX(12px);
-}
-
-.see-all-button:hover {
-  padding: 12px 25px 12px 45px;
-}
+/* Button styles moved to ArrowButton component */
 
 @media (max-width: 1440px) {
   .client-card {
