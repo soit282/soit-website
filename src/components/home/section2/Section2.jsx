@@ -112,19 +112,31 @@ export default function Section2() {
         </div>
 
         {/* Main content */}
-        <div className={`tagline-main ${isVisible ? "visible" : ""}`}>
+        <div
+          className={`tagline-main text-2_100pt_medium ${
+            isVisible ? "visible" : ""
+          }`}
+        >
           As a fiercely <span className="tagline-highlight-1">independent</span>
           <br />
           design and technology
           <br />
           studio in Saigon.
         </div>
-        <div className={`tagline-sub ${isVisible ? "visible" : ""}`}>
+        <div
+          className={`tagline-sub text-2_100pt_medium ${
+            isVisible ? "visible" : ""
+          }`}
+        >
           Số Ít crafts research - driven
           <br />
           solutions across
         </div>
-        <div className={`tagline-fade ${isVisible ? "visible" : ""}`}>
+        <div
+          className={`tagline-fade text-2_100pt_medium ${
+            isVisible ? "visible" : ""
+          }`}
+        >
           <span className="tagline-first-service">Brand Strategy, </span>{" "}
           <span>Brand Identity,</span>
           <br />

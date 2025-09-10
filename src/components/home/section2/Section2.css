@@ -9,21 +9,17 @@
 .hero-tagline {
   text-align: center;
   padding-top: 80px;
-  font-size: 4rem;
   position: relative;
 }
 
 /* Main text styles */
 .tagline-main {
-  font-size: inherit !important;
-  font-weight: 400;
+  color: #1f1f1f;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  line-height: 1.1;
-  font-family: "PPNeueMontreal", Arial, sans-serif;
 }
 
 .tagline-main.visible {
@@ -32,16 +28,13 @@
 }
 
 .tagline-sub {
-  font-size: inherit !important;
-  font-weight: 400;
+  color: #1f1f1f;
   margin-top: 10px;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  line-height: 1.1;
-  font-family: "PPNeueMontreal", Arial, sans-serif;
 }
 
 .tagline-sub.visible {
@@ -51,18 +44,13 @@
 }
 
 .tagline-fade {
-  font-size: inherit !important;
   color: #e5e5e5;
-  font-weight: 400;
-  font-style: italic;
   margin-top: 10px;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  line-height: 1.1;
-  font-family: "PPNeueMontreal", Arial, sans-serif;
 }
 
 .tagline-fade.visible {
@@ -81,7 +69,6 @@
 /* Service spans */
 .tagline-fade span,
 .tagline-first-service {
-  font-style: italic;
   cursor: pointer;
   transition: color 0.2s ease;
   color: #e5e5e5;
@@ -175,10 +162,6 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-  .hero-tagline {
-    font-size: 3.5rem;
-  }
-
   .tagline-image-left,
   .tagline-image-right {
     width: 120px;
@@ -188,7 +171,6 @@
 
 @media (max-width: 992px) {
   .hero-tagline {
-    font-size: 3rem;
     padding-top: 60px;
   }
 
@@ -210,7 +192,6 @@
 
 @media (max-width: 768px) {
   .hero-tagline {
-    font-size: 2.5rem;
     padding-top: 40px;
     padding-left: 20px;
     padding-right: 20px;
@@ -237,7 +218,6 @@
 
 @media (max-width: 480px) {
   .hero-tagline {
-    font-size: 2rem;
     padding-top: 30px;
   }
 
@@ -245,12 +225,6 @@
   .tagline-image-left,
   .tagline-image-right {
     display: none;
-  }
-
-  .tagline-main,
-  .tagline-sub,
-  .tagline-fade {
-    font-size: 2rem !important;
   }
 
   .services-link {

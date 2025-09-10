@@ -1,4 +1,5 @@
 import "./Section9.css";
+import buttonIcon from "/icon/Icon/-_.svg";
 
 export default function Section9() {
   const clients = [
@@ -29,7 +30,7 @@ export default function Section9() {
       <div className="section9-see-all">
         <button className="see-all-button">
           <span className="button-text">See all</span>
-          <span className="button-arrow">↗</span>
+          <img src={buttonIcon} alt="arrow" className="button-arrow" />
         </button>
       </div>
 
