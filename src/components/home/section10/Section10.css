@@ -1,19 +1,9 @@
 .section10 {
   width: 100%;
   background-color: #ffffff;
-  padding: 120px 1.25%;
+  padding: 0;
   box-sizing: border-box;
-  min-height: 350vh; /* Increased height for full text reveal */
-  position: relative;
-}
-
-.section10-container {
-  width: 100%;
-  max-width: 100%;
-}
-
-.section10-header-container {
-  height: 200vh; /* Increased height to ensure full text reveal before unsticking */
+  height: 300vh; /* Fixed height for sticky scroll effect */
   position: relative;
 }
 
@@ -21,16 +11,17 @@
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1.25%;
+  padding: 120px 1.25%;
+  box-sizing: border-box;
 }
 
-.section10-header {
+.section10-content {
   width: 100%;
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
 }
 
 .section10-label {
@@ -338,11 +329,7 @@
 
 @media (max-width: 1200px) {
   .section10 {
-    min-height: 220vh;
-  }
-
-  .section10-header-container {
-    height: 130vh;
+    height: 220vh;
   }
 
   .service-item {
@@ -353,12 +340,7 @@
 @media (max-width: 768px) {
   .section10 {
     padding: 60px 2.5%;
-    min-height: 200vh;
-  }
-
-  .section10-header-container {
-    height: 120vh;
-    margin-bottom: 40px;
+    height: 200vh;
   }
 
   .section10-sticky-wrapper {
@@ -381,11 +363,7 @@
 @media (max-width: 480px) {
   .section10 {
     padding: 40px 3%;
-    min-height: 180vh;
-  }
-
-  .section10-header-container {
-    height: 100vh;
+    height: 180vh;
   }
 
   .section10-sticky-wrapper {

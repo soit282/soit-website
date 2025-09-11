@@ -65,11 +65,6 @@ export default function Section11() {
           >
             <div className="service-header">
               <h3 className="service-title">{service.title}</h3>
-              <div className="service-tags">
-                {service.tags.map((tag, index) => (
-                  <span key={index} className="service-tag">{tag}</span>
-                ))}
-              </div>
             </div>
             <p className="service-description">{service.description}</p>
             <button className="service-link">
