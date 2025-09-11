@@ -22,9 +22,15 @@
 }
 
 .arrow-down {
-  font-size: 32px;
-  font-weight: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: bounce 2s infinite;
+}
+
+.arrow-icon {
+  width: 70px;
+  height: 70px;
 }
 
 @keyframes bounce {
@@ -43,7 +49,7 @@
   }
 }
 
-.services-grid {
+.offerings-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
@@ -52,16 +58,23 @@
   margin: 0 auto 140px;
 }
 
-.service-card {
-  padding: 50px 30px;
+.offering-card {
+  padding: 54px 54px 50px 54px;
   border-radius: 0;
   display: flex;
   flex-direction: column;
-  min-height: 400px;
+  justify-content: space-between;
+  min-height: 540px;
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: 
-    linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.50) 30%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.50) 70%, rgba(0, 0, 0, 0.00) 100%),
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0.75) 50%,
+      rgba(0, 0, 0, 0.5) 70%,
+      rgba(0, 0, 0, 0) 100%
+    ),
     url("../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png");
   background-size: cover;
   background-position: center;
@@ -70,14 +83,20 @@
   cursor: pointer;
 }
 
-.service-card:hover {
+.offering-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.service-card.featured {
-  background: 
-    linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.50) 30%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.50) 70%, rgba(0, 0, 0, 0.00) 100%),
+.offering-card.featured {
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0.75) 50%,
+      rgba(0, 0, 0, 0.5) 70%,
+      rgba(0, 0, 0, 0) 100%
+    ),
     url("../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png");
   background-size: cover;
   background-position: center;
@@ -86,7 +105,7 @@
   position: relative;
 }
 
-.service-card.featured::before {
+.offering-card.featured::before {
   content: "";
   position: absolute;
   top: -1px;
@@ -105,68 +124,80 @@
   z-index: -1;
 }
 
-.service-card.featured:hover::before {
+.offering-card.featured:hover::before {
   opacity: 1;
 }
 
-.service-header {
-  margin-bottom: 30px;
-}
-
-.service-title {
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  letter-spacing: -0.01em;
-}
-
-.service-tags {
+.offering-header {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 0;
 }
 
-.service-tag {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.offering-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 16px 0;
 }
 
-.service-description {
+.offering-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   flex: 1;
-  font-size: 16px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 30px;
 }
 
-.service-link {
+.offering-title {
+  color: #ffffff;
+  margin: 0 0 24px 0;
+}
+
+.offering-tags {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.offering-tag {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.offering-description {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 40px 0;
+}
+
+.offering-link {
   color: #ffffff;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   transition: gap 0.3s ease;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   font-family: inherit;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  align-self: flex-start;
 }
 
-.service-link:hover {
-  gap: 12px;
+.offering-link:hover {
+  gap: 16px;
 }
 
-.service-link .arrow {
+.offering-link .arrow {
   display: inline-block;
   transition: transform 0.3s ease;
 }
 
-.service-link:hover .arrow {
+.offering-link:hover .arrow {
   transform: translateX(4px);
 }
 
@@ -190,9 +221,7 @@
 }
 
 .expanded-content {
-  max-width: 600px;
   margin: 0 auto;
-  padding: 80px 40px;
   text-align: center;
 }
 
@@ -201,19 +230,11 @@
 }
 
 .footer-line1 {
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.6);
   margin: 0 0 8px 0;
 }
 
 .footer-line2 {
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.6);
   margin: 0 0 16px 0;
   display: block;
@@ -235,11 +256,8 @@
   border: none;
   outline: none;
   padding: 0 30px 2px 0;
-  font-size: 32px;
-  font-weight: 400;
   cursor: pointer;
   min-width: 200px;
-  letter-spacing: -0.02em;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -258,10 +276,6 @@
 }
 
 .contact-text {
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
   margin: 0;
   color: rgba(255, 255, 255, 0.6);
 }
@@ -307,11 +321,17 @@
 }
 
 /* All pattern cards use the same background with gradient overlay */
-.service-card.pattern-dots,
-.service-card.pattern-grid,
-.service-card.pattern-diagonal {
-  background: 
-    linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.50) 30%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.50) 70%, rgba(0, 0, 0, 0.00) 100%),
+.offering-card.pattern-dots,
+.offering-card.pattern-grid,
+.offering-card.pattern-diagonal {
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0.75) 50%,
+      rgba(0, 0, 0, 0.5) 70%,
+      rgba(0, 0, 0, 0) 100%
+    ),
     url("../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png");
   background-size: cover;
   background-position: center;
@@ -362,12 +382,12 @@
     margin-bottom: 120px;
   }
 
-  .services-grid {
+  .offerings-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  .service-card {
+  .offering-card {
     padding: 30px;
     min-height: auto;
   }

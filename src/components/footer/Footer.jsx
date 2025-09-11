@@ -1,4 +1,5 @@
 import './Footer.css';
+import soitLogo from '/icon/Icon/Số Ít logo.svg';
 
 export default function Footer() {
   return (
@@ -30,7 +31,7 @@ export default function Footer() {
         </div>
         
         <div className="footer-logo">
-          <span className="logo-text">SOIT</span>
+          <img src={soitLogo} alt="Số Ít Logo" className="footer-logo-img" />
         </div>
       </div>
       

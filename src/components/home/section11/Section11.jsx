@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './Section11.css';
+import arrowIcon from '/icon/Icon/→.svg';
 
 export default function Section11() {
   const [showFooter, setShowFooter] = useState(false);
   const [selectedService, setSelectedService] = useState('');
   
-  const services = [
+  const offerings = [
     {
       id: 1,
       title: "Brand Check-up",
@@ -53,23 +54,33 @@ export default function Section11() {
           Looking to rebrand or get<br />
           a brand check-up?
         </h1>
-        <div className="arrow-down">↓</div>
+        <div className="arrow-down">
+          <img src={arrowIcon} alt="arrow down" className="arrow-icon" />
+        </div>
       </div>
 
-      <div className="services-grid">
-        {services.map((service) => (
+      <div className="offerings-grid">
+        {offerings.map((offering) => (
           <div 
-            key={service.id} 
-            className={`service-card ${service.featured ? 'featured' : ''} pattern-${service.bgPattern}`}
-            onClick={() => handleCardClick(service.title)}
+            key={offering.id} 
+            className={`offering-card ${offering.featured ? 'featured' : ''} pattern-${offering.bgPattern}`}
+            onClick={() => handleCardClick(offering.title)}
           >
-            <div className="service-header">
-              <h3 className="service-title">{service.title}</h3>
+            <div className="offering-header">
+              <p className="offering-subtitle text-8">A solid first step</p>
+              <h3 className="offering-title text-5">{offering.title}</h3>
+              <div className="offering-tags">
+                {offering.tags.map((tag, index) => (
+                  <span key={index} className="offering-tag text-8">{tag}</span>
+                ))}
+              </div>
             </div>
-            <p className="service-description">{service.description}</p>
-            <button className="service-link">
-              {service.linkText} <span className="arrow">→</span>
-            </button>
+            <div className="offering-content">
+              <p className="offering-description text-4">{offering.description}</p>
+              <button className="offering-link">
+                {offering.linkText} <span className="arrow">→</span>
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -78,14 +89,14 @@ export default function Section11() {
         <div className="section11-expanded">
           <div className="expanded-content">
             <div className="footer-text-section">
-              <p className="footer-line1">
+              <p className="footer-line1 text-2">
                 We are <span className="company-name">[Company Name]</span> and
               </p>
-              <p className="footer-line2">
+              <p className="footer-line2 text-2">
                 we'd love to discuss{' '}
                 <span className="dropdown-wrapper">
                   <select 
-                    className="service-dropdown"
+                    className="service-dropdown text-2"
                     value={selectedService}
                     onChange={(e) => setSelectedService(e.target.value)}
                   >
@@ -96,7 +107,7 @@ export default function Section11() {
                   <span className="dropdown-arrow">⌄</span>
                 </span>
               </p>
-              <p className="contact-text">
+              <p className="contact-text text-2">
                 Please feel free to reach us at<br />
                 <span className="contact-info">[phone number]</span> or <span className="contact-info">[email]</span>.
               </p>
