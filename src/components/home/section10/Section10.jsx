@@ -88,9 +88,9 @@ export default function Section10() {
       const scrollHeight = container.offsetHeight - window.innerHeight;
       const progress = Math.max(0, Math.min(1, -rect.top / scrollHeight));
 
-      // Text reveal progress (starts at 10% of scroll, ends at 90%)
+      // Text reveal progress (starts at 10% of scroll, ends at 60%)
       if (progress > 0.1) {
-        const revealProgress = (progress - 0.1) / 0.8;
+        const revealProgress = (progress - 0.1) / 0.5;
         setTextRevealProgress(Math.min(1, revealProgress));
       } else {
         setTextRevealProgress(0);
