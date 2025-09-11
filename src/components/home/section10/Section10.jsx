@@ -172,30 +172,32 @@ export default function Section10() {
     <div className="section10" ref={containerRef}>
       <div className="section10-sticky-wrapper" ref={stickyRef}>
         <div className="section10-content">
-          <p className="section10-label text-4">Services</p>
-          <h2 className="section10-heading text-2_100pt_medium">
-            {fullHeading.split("").map((char, index) => {
-              const charProgress = (index + 1) / fullHeading.length;
-              const isRevealed = textRevealProgress >= charProgress;
+          <div className="section10-header">
+            <p className="section10-label text-4">Services</p>
+            <h2 className="section10-heading text-2_100pt_medium">
+              {fullHeading.split("").map((char, index) => {
+                const charProgress = (index + 1) / fullHeading.length;
+                const isRevealed = textRevealProgress >= charProgress;
 
-              // Handle line breaks
-              if (char === "\n") {
-                return <br key={index} />;
-              }
+                // Handle line breaks
+                if (char === "\n") {
+                  return <br key={index} />;
+                }
 
-              return (
-                <span
-                  key={index}
-                  style={{
-                    color: isRevealed ? "#1F1F1F" : "#E0E0E0",
-                    transition: "color 0.05s ease",
-                  }}
-                >
-                  {char}
-                </span>
-              );
-            })}
-          </h2>
+                return (
+                  <span
+                    key={index}
+                    style={{
+                      color: isRevealed ? "#1F1F1F" : "#E0E0E0",
+                      transition: "color 0.05s ease",
+                    }}
+                  >
+                    {char}
+                  </span>
+                );
+              })}
+            </h2>
+          </div>
 
           <div className="services-list">
             {services.map((service) => (

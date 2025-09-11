@@ -24,6 +24,12 @@
   gap: 120px;
 }
 
+.section10-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .section10-label {
   color: #666;
   margin: 0 0 24px 0;
