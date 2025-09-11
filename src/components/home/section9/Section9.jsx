@@ -34,7 +34,7 @@ export default function Section9() {
       <div className="section9-container">
         <div className="section9-header">
           <p className="section9-label text-4">Clients</p>
-          <h2 className="section9-heading text-2_100pt_medium">
+          <h2 className="section9-heading text-2">
             We collaborate with brands that aim to stand out, scale up, and
             speak clearly in a digital-first world.
           </h2>

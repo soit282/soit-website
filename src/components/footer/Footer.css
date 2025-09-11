@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
   min-height: 800px;
-  background: rgba(31, 31, 31, 1);
+  background: #1F1F1F;
   color: white;
   position: relative;
   display: flex;
@@ -32,17 +32,13 @@
 }
 
 .footer-label {
-  font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
   margin: 0 0 8px 0;
-  font-weight: 400;
 }
 
 .footer-link {
   color: white;
   text-decoration: none;
-  font-size: 18px;
-  line-height: 1.5;
   transition: transform 0.3s ease;
   display: flex;
   align-items: center;
@@ -76,13 +72,11 @@
 }
 
 .copyright {
-  font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
 
 .privacy-link {
-  font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
   white-space: nowrap;
