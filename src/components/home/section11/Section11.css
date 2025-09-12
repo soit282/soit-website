@@ -159,6 +159,39 @@
   color: #5d5d5d;
 }
 
+.offering-arrow-button .arrow-button-icon {
+  filter: brightness(0) saturate(100%) invert(37%) sepia(0%) saturate(0%) hue-rotate(314deg) brightness(93%) contrast(93%);
+}
+
+.offering-arrow-button::after {
+  background-color: #5d5d5d;
+}
+
+/* Trigger arrow button hover effect when hovering on offering card */
+.offering-card:hover .offering-arrow-button .arrow-button-icon-1 {
+  right: -30px;
+  opacity: 0;
+  transform: translateY(-40%) translateY(-10px);
+}
+
+.offering-card:hover .offering-arrow-button .arrow-button-icon-2 {
+  left: 29px;
+  opacity: 1;
+  transform: translateY(-40%) translateY(0);
+}
+
+.offering-card:hover .offering-arrow-button .arrow-button-text {
+  transform: translateX(18px);
+}
+
+.offering-card:hover .offering-arrow-button {
+  padding: 12px 30px 12px 35px;
+}
+
+.offering-card:hover .offering-arrow-button::after {
+  width: calc(100% - 44px);
+}
+
 .section11-expanded {
   width: 100%;
   max-width: 1400px;

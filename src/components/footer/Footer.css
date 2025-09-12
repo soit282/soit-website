@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
   min-height: 800px;
-  background: #1F1F1F;
+  background: #1f1f1f;
   color: white;
   position: relative;
   display: flex;
@@ -22,18 +22,17 @@
 .footer-left {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 120px;
 }
 
 .footer-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 
 .footer-label {
   color: rgba(255, 255, 255, 0.6);
-  margin: 0 0 8px 0;
 }
 
 .footer-link {
@@ -42,12 +41,20 @@
   transition: transform 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
   transform: translateX(0);
 }
 
 .footer-link:hover {
   transform: translateX(20px);
+  color: white !important;
+}
+
+.footer-arrow {
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%)
+    hue-rotate(314deg) brightness(106%) contrast(101%);
 }
 
 .footer-logo {
@@ -60,7 +67,8 @@
   width: 1072px;
   height: auto;
   opacity: 1;
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%) hue-rotate(314deg) brightness(106%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%)
+    hue-rotate(314deg) brightness(106%) contrast(101%);
 }
 
 .footer-bottom {
@@ -111,7 +119,7 @@
   }
 
   .footer-left {
-    gap: 40px;
+    gap: 60px;
   }
 
   .footer-bottom {
