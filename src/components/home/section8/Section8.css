@@ -4,7 +4,46 @@
   background-repeat: no-repeat;
   min-height: 100vh;
   width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-left: 1.25%;
+  padding-right: 1.25%;
+}
+
+.section8-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
   padding-left: 1.25%;
   padding-right: 1.25%;
   box-sizing: border-box;
+  /* Create isolated stacking context like Mirror client */
+  isolation: isolate;
+  mix-blend-mode: difference;
+}
+
+.section8-content > div {
+  flex: 1;
+  /* Ensure transparent background for blend mode */
+  background: transparent;
+}
+
+.section8-content .text-left {
+  text-align: left;
+}
+
+.section8-content .text-center {
+  text-align: center;
+}
+
+.section8-content .text-right {
+  text-align: right;
+}
+
+.section8-content p {
+  margin: 0;
+  color: white;
 }

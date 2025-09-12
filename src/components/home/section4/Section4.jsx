@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import './Section4.css';
+import { useState, useEffect, useRef } from "react";
+import "./Section4.css";
 
 export default function Section4() {
   const [mouseY, setMouseY] = useState(50);
+  const [isVisible, setIsVisible] = useState(true);
   const sectionRef = useRef(null);
   const lastMouseY = useRef(0);
 
@@ -11,6 +12,8 @@ export default function Section4() {
       const rect = sectionRef.current.getBoundingClientRect();
       const y = ((lastMouseY.current - rect.top) / rect.height) * 100;
       setMouseY(y);
+      // Hide text when mouse is outside section
+      setIsVisible(lastMouseY.current >= rect.top && lastMouseY.current <= rect.bottom);
     }
   };
 
@@ -19,6 +22,11 @@ export default function Section4() {
     const rect = e.currentTarget.getBoundingClientRect();
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     setMouseY(y);
+    setIsVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsVisible(false);
   };
 
   useEffect(() => {
@@ -26,35 +34,38 @@ export default function Section4() {
       updatePosition();
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div 
+    <div
       ref={sectionRef}
       className="section4"
       style={{
-        backgroundImage: `url('/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg')`
+        backgroundImage: `url('/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg')`,
       }}
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      <div 
+      <div
         className="section4-content text-8"
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: `${mouseY}%`,
-          transform: 'translateY(-50%)',
+          transform: "translateY(-50%)",
           left: 0,
           right: 0,
-          padding: '0 1.25%'
+          padding: "0 1.25%",
+          opacity: isVisible ? 1 : 0,
+          transition: "opacity 0.3s ease",
         }}
       >
-        <div className="text-left">
+        <div className="text-left text-7">
           <p>TràMADE</p>
         </div>
         <div className="text-center">
-          <p>Tea mastery born in the heights of Mảng Đen</p>
+          <p>Tea mastery born in the heights of Măng Đen</p>
         </div>
         <div className="text-right">
           <p>Branding</p>
