@@ -2,7 +2,7 @@
   min-height: 100vh;
   background-color: #1f1f1f;
   color: #ffffff;
-  padding: 0px 60px 80px;
+  padding: 0px 60px 214px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,7 +160,8 @@
 }
 
 .offering-arrow-button .arrow-button-icon {
-  filter: brightness(0) saturate(100%) invert(37%) sepia(0%) saturate(0%) hue-rotate(314deg) brightness(93%) contrast(93%);
+  filter: brightness(0) saturate(100%) invert(37%) sepia(0%) saturate(0%)
+    hue-rotate(314deg) brightness(93%) contrast(93%);
 }
 
 .offering-arrow-button::after {
@@ -272,38 +273,20 @@
 }
 
 .submit-section {
-  margin-top: 40px;
+  margin-top: 183px;
 }
 
-.submit-button {
-  background-color: transparent;
+.submit-arrow-button .arrow-button-text {
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  font-weight: 400;
-  letter-spacing: 0.02em;
 }
 
-.submit-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.6);
-  gap: 12px;
+.submit-arrow-button .arrow-button-icon {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%)
+    hue-rotate(314deg) brightness(106%) contrast(101%);
 }
 
-.submit-button .arrow {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.submit-button:hover .arrow {
-  transform: translateX(4px);
+.submit-arrow-button::after {
+  background-color: #ffffff;
 }
 
 /* Each pattern card uses different background */

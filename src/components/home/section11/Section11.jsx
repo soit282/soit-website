@@ -115,9 +115,10 @@ export default function Section11() {
               </p>
             </div>
             <div className="submit-section">
-              <button className="submit-button">
-                Submit <span className="arrow">→</span>
-              </button>
+              <ArrowButton 
+                text="Submit"
+                className="submit-arrow-button"
+              />
             </div>
           </div>
         </div>
