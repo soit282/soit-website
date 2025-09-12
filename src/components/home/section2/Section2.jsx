@@ -126,14 +126,14 @@ export default function Section2() {
 
     // Initialize shuffle effects for all services
     const serviceRefs = [
-      { ref: brandStrategyRef, key: "brandStrategy" },
-      { ref: brandIdentityRef, key: "brandIdentity" },
-      { ref: packagingDesignRef, key: "packagingDesign" },
-      { ref: campaignsActivationsRef, key: "campaignsActivations" },
-      { ref: editorialDesignRef, key: "editorialDesign" },
-      { ref: webAppRef, key: "webApp" },
-      { ref: creativeDevelopmentRef, key: "creativeDevelopment" },
-      { ref: designSystemsRef, key: "designSystems" },
+      { ref: brandStrategyRef, key: "Brand Strategy" },
+      { ref: brandIdentityRef, key: "Brand Identity" },
+      { ref: packagingDesignRef, key: "Packaging Design" },
+      { ref: campaignsActivationsRef, key: "Campaigns & Activations" },
+      { ref: editorialDesignRef, key: "Editorial Design" },
+      { ref: webAppRef, key: "Web & App" },
+      { ref: creativeDevelopmentRef, key: "Creative Development" },
+      { ref: designSystemsRef, key: "Design Systems" },
     ];
 
     serviceRefs.forEach(({ ref, key }) => {
@@ -230,7 +230,7 @@ export default function Section2() {
             <span
               className="shuffle-text"
               ref={brandStrategyRef}
-              {...createHoverHandlers("brandStrategy")}
+              {...createHoverHandlers("Brand Strategy")}
             >
               Brand Strategy
             </span>
@@ -240,7 +240,7 @@ export default function Section2() {
             <span
               className="shuffle-text"
               ref={brandIdentityRef}
-              {...createHoverHandlers("brandIdentity")}
+              {...createHoverHandlers("Brand Identity")}
             >
               Brand Identity
             </span>
@@ -251,7 +251,7 @@ export default function Section2() {
             <span
               className="shuffle-text"
               ref={packagingDesignRef}
-              {...createHoverHandlers("packagingDesign")}
+              {...createHoverHandlers("Packaging Design")}
             >
               Packaging Design
             </span>
@@ -262,7 +262,7 @@ export default function Section2() {
             <span
               className="shuffle-text"
               ref={campaignsActivationsRef}
-              {...createHoverHandlers("campaignsActivations")}
+              {...createHoverHandlers("Campaigns & Activations")}
             >
               Campaigns & Activations
             </span>
@@ -273,7 +273,7 @@ export default function Section2() {
             <span
               className="shuffle-text"
               ref={editorialDesignRef}
-              {...createHoverHandlers("editorialDesign")}
+              {...createHoverHandlers("Editorial Design")}
             >
               Editorial Design
             </span>
@@ -283,7 +283,7 @@ export default function Section2() {
             <span
               className="shuffle-text"
               ref={webAppRef}
-              {...createHoverHandlers("webApp")}
+              {...createHoverHandlers("Web & App")}
             >
               Web & App
             </span>
@@ -294,7 +294,7 @@ export default function Section2() {
             <span
               className="shuffle-text"
               ref={creativeDevelopmentRef}
-              {...createHoverHandlers("creativeDevelopment")}
+              {...createHoverHandlers("Creative Development")}
             >
               Creative Development
             </span>
@@ -305,7 +305,7 @@ export default function Section2() {
             <span
               className="shuffle-text"
               ref={designSystemsRef}
-              {...createHoverHandlers("designSystems")}
+              {...createHoverHandlers("Design Systems")}
             >
               Design Systems
             </span>
