@@ -4,6 +4,48 @@ import ArrowButton from "../../common/ArrowButton";
 import img1 from "../../../../public/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_1.jpg";
 import img2 from "../../../../public/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_2.png";
 
+// Shuffle text effect class
+class SmoothShuffler {
+  constructor(element, options = {}) {
+    this.element = element;
+    this.originalText = element.textContent;
+    this.duration = options.duration || 400;
+    this.shuffleCount = options.shuffleCount || 1;
+    this.isAnimating = false;
+  }
+
+  shuffleString(str) {
+    const arr = str.split("");
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.join("");
+  }
+
+  async shuffle() {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+
+    for (let i = 0; i < this.shuffleCount; i++) {
+      const shuffled = this.shuffleString(this.originalText);
+      this.element.textContent = shuffled;
+      await this.delay(this.duration / (this.shuffleCount + 1));
+    }
+
+    this.element.textContent = this.originalText;
+    this.isAnimating = false;
+  }
+
+  delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  reset() {
+    this.element.textContent = this.originalText;
+  }
+}
+
 export default function Section2() {
   const [isVisible, setIsVisible] = useState(false);
   const [imagePositions, setImagePositions] = useState({
@@ -11,6 +53,16 @@ export default function Section2() {
     right: null,
   });
   const sectionRef = useRef(null);
+  const brandStrategyRef = useRef(null);
+  const brandIdentityRef = useRef(null);
+  const packagingDesignRef = useRef(null);
+  const campaignsActivationsRef = useRef(null);
+  const editorialDesignRef = useRef(null);
+  const webAppRef = useRef(null);
+  const creativeDevelopmentRef = useRef(null);
+  const designSystemsRef = useRef(null);
+
+  const shufflersRef = useRef({});
 
   const services = [
     "Brand Strategy",
@@ -72,6 +124,27 @@ export default function Section2() {
     // Initial calculation after a short delay to ensure DOM is ready
     const timer = setTimeout(calculateImagePositions, 100);
 
+    // Initialize shuffle effects for all services
+    const serviceRefs = [
+      { ref: brandStrategyRef, key: "brandStrategy" },
+      { ref: brandIdentityRef, key: "brandIdentity" },
+      { ref: packagingDesignRef, key: "packagingDesign" },
+      { ref: campaignsActivationsRef, key: "campaignsActivations" },
+      { ref: editorialDesignRef, key: "editorialDesign" },
+      { ref: webAppRef, key: "webApp" },
+      { ref: creativeDevelopmentRef, key: "creativeDevelopment" },
+      { ref: designSystemsRef, key: "designSystems" },
+    ];
+
+    serviceRefs.forEach(({ ref, key }) => {
+      if (ref.current) {
+        shufflersRef.current[key] = new SmoothShuffler(ref.current, {
+          duration: 400,
+          shuffleCount: 3,
+        });
+      }
+    });
+
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
@@ -80,6 +153,21 @@ export default function Section2() {
       clearTimeout(timer);
     };
   }, []);
+
+  const createHoverHandlers = (serviceKey) => ({
+    onMouseEnter: () => {
+      if (shufflersRef.current[serviceKey]) {
+        shufflersRef.current[serviceKey].shuffle();
+      }
+    },
+    onMouseLeave: () => {
+      if (shufflersRef.current[serviceKey]) {
+        setTimeout(() => {
+          shufflersRef.current[serviceKey].reset();
+        }, 100);
+      }
+    },
+  });
 
   return (
     <section ref={sectionRef} className="hero-tagline-section">
@@ -138,33 +226,107 @@ export default function Section2() {
             isVisible ? "visible" : ""
           }`}
         >
-          <span className="tagline-first-service">Brand Strategy, </span>{" "}
-          <span>Brand Identity,</span>
+          <span className="tagline-first-service">
+            <span
+              className="shuffle-text"
+              ref={brandStrategyRef}
+              {...createHoverHandlers("brandStrategy")}
+            >
+              Brand Strategy
+            </span>
+            ,
+          </span>{" "}
+          <span>
+            <span
+              className="shuffle-text"
+              ref={brandIdentityRef}
+              {...createHoverHandlers("brandIdentity")}
+            >
+              Brand Identity
+            </span>
+            ,
+          </span>
           <br />
-          <span>Packaging Design,</span>
+          <span>
+            <span
+              className="shuffle-text"
+              ref={packagingDesignRef}
+              {...createHoverHandlers("packagingDesign")}
+            >
+              Packaging Design
+            </span>
+            ,
+          </span>
           <br />
-          <span>Campaigns & Activations,</span>
+          <span>
+            <span
+              className="shuffle-text"
+              ref={campaignsActivationsRef}
+              {...createHoverHandlers("campaignsActivations")}
+            >
+              Campaigns & Activations
+            </span>
+            ,
+          </span>
           <br />
-          <span>Editorial Design, </span> <span>Web & App,</span>
+          <span>
+            <span
+              className="shuffle-text"
+              ref={editorialDesignRef}
+              {...createHoverHandlers("editorialDesign")}
+            >
+              Editorial Design
+            </span>
+            ,{" "}
+          </span>
+          <span>
+            <span
+              className="shuffle-text"
+              ref={webAppRef}
+              {...createHoverHandlers("webApp")}
+            >
+              Web & App
+            </span>
+            ,
+          </span>
           <br />
-          <span>Creative Development,</span>
+          <span>
+            <span
+              className="shuffle-text"
+              ref={creativeDevelopmentRef}
+              {...createHoverHandlers("creativeDevelopment")}
+            >
+              Creative Development
+            </span>
+            ,
+          </span>
           <br />
-          <span>Design Systems</span>
+          <span>
+            <span
+              className="shuffle-text"
+              ref={designSystemsRef}
+              {...createHoverHandlers("designSystems")}
+            >
+              Design Systems
+            </span>
+          </span>
         </div>
 
         {/* Services link */}
         <div className="services-link">
-          <ArrowButton 
-            text="Services" 
-            onClick={() => window.location.href = "#services"}
+          <ArrowButton
+            text="Services"
+            onClick={() => (window.location.href = "#services")}
           />
         </div>
 
         {/* Scrolling text */}
         <div className="scrolling-text">
-          <div className="scrolling-text-content text-7_16pt_medium">
-            Số Ít ≠ Số Nhiều. We're a design studio that believes in less - but
-            better.
+          <div className="scrolling-text-track">
+            <div className="scrolling-text-content text-7_16pt_medium">
+              Số Ít ≠ Số Nhiều. We're a design studio that believes in less -
+              but better.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
           </div>
         </div>
       </div>
