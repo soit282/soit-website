@@ -48,10 +48,6 @@ class SmoothShuffler {
 
 export default function Section2() {
   const [isVisible, setIsVisible] = useState(false);
-  const [imagePositions, setImagePositions] = useState({
-    left: null,
-    right: null,
-  });
   const sectionRef = useRef(null);
   const brandStrategyRef = useRef(null);
   const brandIdentityRef = useRef(null);
@@ -78,37 +74,11 @@ export default function Section2() {
   // Removed handleServiceHover as we'll use CSS hover directly
 
   useEffect(() => {
-    // Calculate image positions based on text content
-    const calculateImagePositions = () => {
-      const independentText = document.querySelector(".tagline-highlight-1");
-      const makersText = document.querySelector(".tagline-highlight-2");
-
-      if (independentText && makersText) {
-        const independentRect = independentText.getBoundingClientRect();
-        const makersRect = makersText.getBoundingClientRect();
-        const containerRect = sectionRef.current?.getBoundingClientRect();
-
-        if (containerRect) {
-          setImagePositions({
-            left: {
-              top: independentRect.top - containerRect.top - 20,
-              left: independentRect.left - containerRect.left - 160,
-            },
-            right: {
-              top: makersRect.top - containerRect.top - 20,
-              left: makersRect.right - containerRect.left + 20,
-            },
-          });
-        }
-      }
-    };
-
     // Intersection Observer for fade-in effect
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          calculateImagePositions();
         }
       },
       { threshold: 0.2 }
@@ -117,12 +87,6 @@ export default function Section2() {
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
-    // Recalculate on resize
-    window.addEventListener("resize", calculateImagePositions);
-
-    // Initial calculation after a short delay to ensure DOM is ready
-    const timer = setTimeout(calculateImagePositions, 100);
 
     // Initialize shuffle effects for all services
     const serviceRefs = [
@@ -149,8 +113,6 @@ export default function Section2() {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
-      window.removeEventListener("resize", calculateImagePositions);
-      clearTimeout(timer);
     };
   }, []);
 
@@ -173,30 +135,10 @@ export default function Section2() {
     <section ref={sectionRef} className="hero-tagline-section">
       <div className="hero-tagline">
         {/* Side images */}
-        <div
-          className={`tagline-image-left ${isVisible ? "visible" : ""}`}
-          style={
-            imagePositions.left
-              ? {
-                  top: `${imagePositions.left.top}px`,
-                  left: `${imagePositions.left.left}px`,
-                }
-              : {}
-          }
-        >
+        <div className={`tagline-image-left ${isVisible ? "visible" : ""}`}>
           <img src={img1} alt="Tagline image 1" />
         </div>
-        <div
-          className={`tagline-image-right ${isVisible ? "visible" : ""}`}
-          style={
-            imagePositions.right
-              ? {
-                  top: `${imagePositions.right.top}px`,
-                  left: `${imagePositions.right.left}px`,
-                }
-              : {}
-          }
-        >
+        <div className={`tagline-image-right ${isVisible ? "visible" : ""}`}>
           <img src={img2} alt="Tagline image 2" />
         </div>
 
