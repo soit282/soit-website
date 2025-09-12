@@ -5,37 +5,46 @@ export default function Section7() {
   const [mouseY, setMouseY] = useState(50);
   const [isVisible, setIsVisible] = useState(true);
   const sectionRef = useRef(null);
-  const lastMouseY = useRef(0);
+  const mouseClientY = useRef(null);
 
-  const updatePosition = () => {
-    if (sectionRef.current) {
+  const updateMousePosition = () => {
+    if (sectionRef.current && mouseClientY.current !== null) {
       const rect = sectionRef.current.getBoundingClientRect();
-      const y = ((lastMouseY.current - rect.top) / rect.height) * 100;
+      const y = ((mouseClientY.current - rect.top) / rect.height) * 100;
       setMouseY(y);
-      // Hide text when mouse is outside section
-      setIsVisible(lastMouseY.current >= rect.top && lastMouseY.current <= rect.bottom);
+      // Show text only when mouse is within section bounds
+      const isInBounds = mouseClientY.current >= rect.top && mouseClientY.current <= rect.bottom;
+      setIsVisible(isInBounds);
     }
   };
 
   const handleMouseMove = (e) => {
-    lastMouseY.current = e.clientY;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setMouseY(y);
-    setIsVisible(true);
+    mouseClientY.current = e.clientY;
+    updateMousePosition();
   };
 
   const handleMouseLeave = () => {
+    // Don't null out mouseClientY to maintain position during scroll
     setIsVisible(false);
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      updatePosition();
+      updateMousePosition();
+    };
+
+    // Track global mouse position
+    const handleGlobalMouseMove = (e) => {
+      mouseClientY.current = e.clientY;
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleGlobalMouseMove);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleGlobalMouseMove);
+    };
   }, []);
 
   return (
