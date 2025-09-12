@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Section11.css';
 import arrowIcon from '/icon/Icon/→.svg';
+import ArrowButton from '../../common/ArrowButton';
 
 export default function Section11() {
   const [showFooter, setShowFooter] = useState(false);
@@ -77,9 +78,10 @@ export default function Section11() {
             </div>
             <div className="offering-content">
               <p className="offering-description text-4">{offering.description}</p>
-              <button className="offering-link">
-                {offering.linkText} <span className="arrow">→</span>
-              </button>
+              <ArrowButton 
+                text={offering.linkText}
+                className="offering-arrow-button"
+              />
             </div>
           </div>
         ))}
