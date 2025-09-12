@@ -206,11 +206,10 @@ export default function Section10() {
                 className={`service-item ${
                   activeService === service.id ? "expanded" : ""
                 }`}
+                onClick={() => handleServiceClick(service.id)}
+                style={{ cursor: 'pointer' }}
               >
-                <div
-                  className="service-header"
-                  onClick={() => handleServiceClick(service.id)}
-                >
+                <div className="service-header">
                   <span className="service-name text-4">{service.name}</span>
                   <button
                     className={`toggle-btn ${
