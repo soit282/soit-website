@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Section11.css";
 import arrowIcon from "/icon/Icon/→.svg";
 import dropDownIcon from "/icon/Icon/drop_down.svg";
@@ -7,6 +7,7 @@ import ArrowButton from "@components/common/ArrowButton";
 export default function Section11() {
   const [showFooter, setShowFooter] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const expandedRef = useRef(null);
 
   const offerings = [
     {
@@ -50,6 +51,42 @@ export default function Section11() {
       setShowFooter(true);
     }
   };
+
+  // Custom smooth scroll function with adjustable speed
+  const smoothScroll = (element, duration = 1500) => {
+    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    const animation = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      // Easing function for smoother animation
+      const easeInOutCubic = progress < 0.5
+        ? 4 * progress * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      
+      window.scrollTo(0, startPosition + distance * easeInOutCubic);
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    };
+    
+    requestAnimationFrame(animation);
+  };
+
+  // Scroll to expanded section when it appears
+  useEffect(() => {
+    if (showFooter && expandedRef.current) {
+      setTimeout(() => {
+        smoothScroll(expandedRef.current, 1500); // 1.5 seconds duration
+      }, 100); // Small delay to ensure DOM is updated
+    }
+  }, [showFooter]);
 
   return (
     <section className="section11">
@@ -99,7 +136,7 @@ export default function Section11() {
       </div>
 
       {showFooter && (
-        <div className="section11-expanded">
+        <div className="section11-expanded" ref={expandedRef}>
           <div className="expanded-content">
             <div className="footer-text-section">
               <p className="footer-line1 text-2">
