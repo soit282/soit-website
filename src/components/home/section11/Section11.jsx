@@ -54,7 +54,8 @@ export default function Section11() {
 
   // Custom smooth scroll function with adjustable speed
   const smoothScroll = (element, duration = 1500) => {
-    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const offset = -100; // Offset để scroll cao hơn 100px
+    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset + offset;
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
     let startTime = null;
