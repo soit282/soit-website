@@ -62,16 +62,19 @@
   text-decoration: none;
   font-size: 15px;
   font-weight: 400;
-  transition: opacity 0.3s ease;
   padding: 5px 0;
   position: relative;
+  display: inline;
 }
 
-.navbar-link:hover {
-  opacity: 0.6;
+/* Shuffle text effect */
+.shuffle-text {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
 }
 
-.navbar-link::after {
+.shuffle-text::after {
   content: "";
   position: absolute;
   width: 0;
@@ -82,7 +85,7 @@
   transition: width 0.3s ease, left 0.3s ease;
 }
 
-.navbar-link:hover::after {
+.shuffle-text:hover::after {
   width: 100%;
   left: 0;
 }
