@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./Section8.css";
+import "../../../styles/grid-system.css";
 
 export default function Section8() {
   const [mouseY, setMouseY] = useState(50);
@@ -70,14 +71,18 @@ export default function Section8() {
           transition: "opacity 0.3s ease",
         }}
       >
-        <div className="text-left text-7">
-          <p>LUNE</p>
-        </div>
-        <div className="text-center">
-          <p>Modern French culinary experience in Saigon</p>
-        </div>
-        <div className="text-right">
-          <p>Branding</p>
+        {/* Grid reference layer for positioning */}
+        <div className="grid-container grid-reference" style={{ position: 'relative', height: '100%' }}>
+          {/* Text positioned based on grid but not constrained by them */}
+          <div className="text-left text-7 text-position-left">
+            <p>LUNE</p>
+          </div>
+          <div className="text-center text-position-center">
+            <p>Modern French culinary experience in Saigon</p>
+          </div>
+          <div className="text-right text-position-right">
+            <p>Branding</p>
+          </div>
         </div>
       </div>
     </div>

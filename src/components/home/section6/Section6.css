@@ -23,9 +23,6 @@
 
 .section6-content {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   color: white;
   padding-left: 1.25%;
   padding-right: 1.25%;
@@ -35,9 +32,37 @@
   mix-blend-mode: difference;
 }
 
-.section6-content > div {
-  flex: 1;
-  /* Ensure transparent background for blend mode */
+/* Grid reference layer */
+.grid-reference {
+  position: relative;
+  height: 100%;
+}
+
+/* Text positioning based on grid but not constrained */
+.text-position-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  background: transparent;
+}
+
+.text-position-center {
+  position: absolute;
+  left: calc(100% / 12 * 6); /* Start at column 7 */
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  background: transparent;
+}
+
+.text-position-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
   background: transparent;
 }
 
