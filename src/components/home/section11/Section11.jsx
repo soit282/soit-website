@@ -117,7 +117,11 @@ export default function Section11() {
                     <option value="Ultra Identity">Ultra Identity</option>
                     <option value="Full Brand Suite">Full Brand Suite</option>
                   </select>
-                  <img src={dropDownIcon} alt="dropdown" className="dropdown-arrow" />
+                  <img
+                    src={dropDownIcon}
+                    alt="dropdown"
+                    className="dropdown-arrow"
+                  />
                 </span>
               </p>
               <p className="contact-text text-2">

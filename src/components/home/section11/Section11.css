@@ -242,6 +242,7 @@
   color: rgba(255, 255, 255, 0.6);
   border: none;
   outline: none;
+  padding-right: 100px; /* Thêm khoảng trống cho arrow */
   cursor: pointer;
   min-width: 200px;
   appearance: none;
@@ -330,6 +331,7 @@
   position: absolute;
   right: 8px;
   top: 50%;
+  width: 60px;
   transform: translateY(-50%);
   pointer-events: none;
 }
