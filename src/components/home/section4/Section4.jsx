@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./Section4.css";
+import "../../../styles/grid-system.css";
 
 export default function Section4() {
   const [mouseY, setMouseY] = useState(50);
@@ -13,7 +14,8 @@ export default function Section4() {
       const y = ((mouseClientY.current - rect.top) / rect.height) * 100;
       setMouseY(y);
       // Show text only when mouse is within section bounds
-      const isInBounds = mouseClientY.current >= rect.top && mouseClientY.current <= rect.bottom;
+      const isInBounds =
+        mouseClientY.current >= rect.top && mouseClientY.current <= rect.bottom;
       setIsVisible(isInBounds);
     }
   };
@@ -40,7 +42,7 @@ export default function Section4() {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleGlobalMouseMove);
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleGlobalMouseMove);
@@ -58,25 +60,24 @@ export default function Section4() {
       onMouseLeave={handleMouseLeave}
     >
       <div
-        className="section4-content text-8"
+        className="section4-content grid-container text-8"
         style={{
           position: "absolute",
           top: `${mouseY}%`,
           transform: "translateY(-50%)",
           left: 0,
           right: 0,
-          padding: "0 1.25%",
           opacity: isVisible ? 1 : 0,
           transition: "opacity 0.3s ease",
         }}
       >
-        <div className="text-left text-7">
+        <div className="text-left text-7 col-3 col-start-1">
           <p>TràMADE</p>
         </div>
-        <div className="text-center">
+        <div className="text-center col-7 col-start-4">
           <p>Tea mastery born in the heights of Măng Đen</p>
         </div>
-        <div className="text-right">
+        <div className="text-right col-3 col-start-12">
           <p>Branding</p>
         </div>
       </div>
