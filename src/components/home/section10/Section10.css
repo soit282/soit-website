@@ -213,6 +213,12 @@
   transition: all 0.3s ease;
 }
 
+/* Default plus-icon color */
+.plus-icon {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
+    hue-rotate(314deg) brightness(106%) contrast(82%);
+}
+
 .toggle-btn.active {
   transform: rotate(0deg);
 }
@@ -261,7 +267,8 @@
 }
 
 .service-item:not(.expanded) .service-header.reset .plus-icon {
-  filter: none;
+  filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
+    hue-rotate(314deg) brightness(106%) contrast(82%);
   transition: filter 0.5s ease;
 }
 
