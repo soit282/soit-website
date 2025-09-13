@@ -112,7 +112,7 @@
 
 @media (max-width: 1200px) {
   .section9 {
-    height: 200vh;
+    height: 240vh;
   }
 
   .clients-grid {
@@ -126,7 +126,7 @@
 
 @media (max-width: 768px) {
   .section9 {
-    height: 180vh;
+    height: 216vh;
   }
 
   .section9-see-all {
@@ -158,7 +158,7 @@
 
 @media (max-width: 480px) {
   .section9 {
-    height: 160vh;
+    height: 192vh;
   }
 
   .section9-see-all {

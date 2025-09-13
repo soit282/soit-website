@@ -40,11 +40,11 @@ export default function Section9() {
       const scrollHeight = container.offsetHeight - window.innerHeight;
       const progress = Math.max(0, Math.min(1, -rect.top / scrollHeight));
 
-      // Text reveal progress (starts at 45% of scroll, ends at 80%)
-      // Điều chỉnh 0.45 = bắt đầu ở 45% scroll
-      // Điều chỉnh 0.35 = khoảng cách từ start đến end (45% -> 80% = 35% = 0.35)
-      if (progress > 0.45) {
-        const revealProgress = (progress - 0.45) / 0.35;
+      // Text reveal progress (starts at 40% of scroll, ends at 70%)
+      // Điều chỉnh 0.4 = bắt đầu ở 40% scroll
+      // Điều chỉnh 0.3 = khoảng cách từ start đến end (40% -> 70% = 30% = 0.3)
+      if (progress > 0.4) {
+        const revealProgress = (progress - 0.4) / 0.3;
         setTextRevealProgress(Math.min(1, revealProgress));
       } else {
         setTextRevealProgress(0);
