@@ -46,6 +46,7 @@ class SmoothShuffler {
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isInSection1, setIsInSection1] = useState(true);
   const worksRef = useRef(null);
   const aboutRef = useRef(null);
   const servicesRef = useRef(null);
@@ -73,6 +74,21 @@ const Navbar = () => {
         });
       }
     });
+
+    // Handle scroll to detect section position
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const section1Height = window.innerHeight;
+
+      // Hide logo when in section 1 (first viewport), show when scrolled past
+      setIsInSection1(currentScrollY < section1Height * 0.8);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const createHoverHandlers = (menuKey) => ({
@@ -94,7 +110,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="grid-container navbar-container">
         {/* Logo - positioned at column 1 */}
-        <div className="navbar-logo-wrapper">
+        <div className={`navbar-logo-wrapper ${isInSection1 ? 'hidden' : ''}`}>
           <a href="/" className="navbar-logo">
             <img src="/icon/Icon/Số Ít logo.svg" alt="Số Ít" className="navbar-logo-img" />
           </a>
