@@ -108,7 +108,7 @@
 
 /* Expanded state - apply background to entire service-item */
 .service-item.expanded {
-  background-image: url("../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png");
+  background-image: url("/1_Homepage/1_Homepage/3_Clients/Background_1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -122,7 +122,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("../../../../public/1_Homepage/1_Homepage/3_Clients/Background_1.png");
+  background-image: url("/1_Homepage/1_Homepage/3_Clients/Background_1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

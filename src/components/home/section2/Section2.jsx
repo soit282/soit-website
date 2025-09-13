@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import "./Section2.css";
-import ArrowButton from "../../common/ArrowButton";
-import img1 from "../../../../public/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_1.jpg";
-import img2 from "../../../../public/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_2.png";
+import ArrowButton from "@components/common/ArrowButton";
+import img1 from "/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_1.jpg";
+import img2 from "/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_2.png";
 
 // Shuffle text effect class
 class SmoothShuffler {
@@ -59,17 +59,6 @@ export default function Section2() {
   const designSystemsRef = useRef(null);
 
   const shufflersRef = useRef({});
-
-  const services = [
-    "Brand Strategy",
-    "Brand Identity",
-    "Packaging Design",
-    "Campaigns & Activations",
-    "Editorial Design",
-    "Web & App",
-    "Creative Development",
-    "Design Systems",
-  ];
 
   // Removed handleServiceHover as we'll use CSS hover directly
 

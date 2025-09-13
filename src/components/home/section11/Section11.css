@@ -75,7 +75,7 @@
 }
 
 .offering-card:hover {
-  background: url("../../../../public/1_Homepage/1_Homepage/3_Clients/background_5.svg");
+  background: url("/1_Homepage/1_Homepage/3_Clients/background_5.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -291,21 +291,21 @@
 
 /* Each pattern card uses different background */
 .offering-card.pattern-dots {
-  background: url("../../../../public/1_Homepage/1_Homepage/3_Clients/background_2.svg");
+  background: url("/1_Homepage/1_Homepage/3_Clients/background_2.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .offering-card.pattern-grid {
-  background: url("../../../../public/1_Homepage/1_Homepage/3_Clients/background_3.svg");
+  background: url("/1_Homepage/1_Homepage/3_Clients/background_3.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .offering-card.pattern-diagonal {
-  background: url("../../../../public/1_Homepage/1_Homepage/3_Clients/background_4.svg");
+  background: url("/1_Homepage/1_Homepage/3_Clients/background_4.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -315,7 +315,7 @@
 .offering-card.pattern-dots:hover,
 .offering-card.pattern-grid:hover,
 .offering-card.pattern-diagonal:hover {
-  background: url("../../../../public/1_Homepage/1_Homepage/3_Clients/background_5.svg");
+  background: url("/1_Homepage/1_Homepage/3_Clients/background_5.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

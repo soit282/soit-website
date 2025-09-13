@@ -1,5 +1,5 @@
 import "./Section9.css";
-import ArrowButton from "../../common/ArrowButton";
+import ArrowButton from "@components/common/ArrowButton";
 
 export default function Section9() {
   const clients = [

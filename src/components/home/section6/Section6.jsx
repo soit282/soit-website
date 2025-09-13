@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./Section6.css";
-import "../../../styles/grid-system.css";
+import "@styles/grid-system.css";
 
 export default function Section6() {
   const [mouseY, setMouseY] = useState(50);

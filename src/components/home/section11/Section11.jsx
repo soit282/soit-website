@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Section11.css';
 import arrowIcon from '/icon/Icon/→.svg';
-import ArrowButton from '../../common/ArrowButton';
+import ArrowButton from '@components/common/ArrowButton';
 
 export default function Section11() {
   const [showFooter, setShowFooter] = useState(false);
