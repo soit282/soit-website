@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import "./Section1.css";
 
 const Section1 = () => {
-  const [logoState, setLogoState] = useState('normal'); // 'normal', 'shrinking', 'shrunken', 'expanding'
+  const [logoState, setLogoState] = useState("normal"); // 'normal', 'shrinking', 'shrunken', 'expanding'
   const sectionRef = useRef(null);
   const logoRef = useRef(null);
   const lastScrollY = useRef(0);
@@ -21,110 +21,121 @@ const Section1 = () => {
 
       // Scrolling down from top - trigger shrink animation
       // Trigger when: was at top, now scrolled down, and logo is normal
-      if (currentScrollY > 50 && isAtTop.current && logoState === 'normal') {
+      if (currentScrollY > 50 && isAtTop.current && logoState === "normal") {
         isAtTop.current = false;
-        setLogoState('shrinking');
+        setLogoState("shrinking");
 
         // Disable scroll events temporarily to prevent conflicts
-        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener("scroll", handleScroll);
 
         // Auto scroll to section 2 after logo animation starts
         setTimeout(() => {
-          const section2 = document.querySelector('.hero-tagline-section');
+          const section2 = document.querySelector(".hero-tagline-section");
           if (section2) {
-            section2.scrollIntoView({ behavior: 'smooth' });
+            section2.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
 
-            // Re-enable scroll events after scroll completes
+            // Re-enable scroll events after scroll completes (much longer wait for very slow scroll)
             setTimeout(() => {
-              window.addEventListener('scroll', handleScroll);
-            }, 1000);
+              window.addEventListener("scroll", handleScroll);
+            }, 3500); // Increased to 3500ms
           }
-        }, 300); // Wait for logo to start shrinking
+        }, 1200); // Increased to 1200ms - wait much longer before starting scroll
 
         // Mark as shrunken after animation
         animationTimeout.current = setTimeout(() => {
-          setLogoState('shrunken');
+          setLogoState("shrunken");
         }, 1500);
       }
 
       // Scrolling back up - trigger expand animation
-      if (currentScrollY < section1Height * 0.8 && lastScrollY.current >= section1Height &&
-          (logoState === 'shrunken' || logoState === 'shrinking')) {
+      if (
+        currentScrollY < section1Height * 0.8 &&
+        lastScrollY.current >= section1Height &&
+        (logoState === "shrunken" || logoState === "shrinking")
+      ) {
         clearTimeout(animationTimeout.current);
-        setLogoState('expanding');
+        setLogoState("expanding");
 
         // Disable scroll events temporarily
-        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener("scroll", handleScroll);
 
         // Scroll to top
         setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: "smooth" });
 
           // Re-enable scroll events after scroll completes
           setTimeout(() => {
-            window.addEventListener('scroll', handleScroll);
+            window.addEventListener("scroll", handleScroll);
           }, 1000);
         }, 100);
 
         // Mark as normal after animation
         animationTimeout.current = setTimeout(() => {
-          setLogoState('normal');
+          setLogoState("normal");
         }, 1500);
       }
 
       // Direct reset if scrolled back to top area
-      if (currentScrollY < 10 && logoState !== 'normal') {
+      if (currentScrollY < 10 && logoState !== "normal") {
         clearTimeout(animationTimeout.current);
-        setLogoState('normal');
+        setLogoState("normal");
         isAtTop.current = true;
       }
 
       lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       clearTimeout(animationTimeout.current);
     };
   }, [logoState]);
 
   // Calculate transform for logo animation based on state
   const getLogoStyle = () => {
-    const navbarHeight = 70;
-    const targetScale = 0.02; // Very small scale
-    const targetX = window.innerWidth * 0.0125 + 10 - window.innerWidth / 2;
-    const targetY = navbarHeight / 2 - window.innerHeight * 0.95;
+    const targetScale = 0.034; // Very small scale
+
+    // Account for navbar grid-container padding (1.25% on each side) plus internal spacing
+    const containerPadding = window.innerWidth * 0.0125;
+    // Logo should be positioned with proper padding + some internal margin like navbar
+    const targetX = containerPadding + 39 - window.innerWidth / 2;
+
+    // Make logo shrink to a lower position instead of navbar
+    const targetY = window.innerHeight * 0.5 - window.innerHeight * 0.95; // 50% from top (center of screen)
 
     switch (logoState) {
-      case 'shrinking':
+      case "shrinking":
         return {
           transform: `translate(${targetX}px, ${targetY}px) scale(${targetScale})`,
-          transition: 'transform 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
-          opacity: 1
+          transition: "transform 1.5s cubic-bezier(0.4, 0, 0.2, 1)",
+          opacity: 1,
         };
 
-      case 'shrunken':
+      case "shrunken":
         return {
           transform: `translate(${targetX}px, ${targetY}px) scale(${targetScale})`,
-          transition: 'none',
-          opacity: 0
+          transition: "none",
+          opacity: 0,
         };
 
-      case 'expanding':
+      case "expanding":
         return {
-          transform: 'translate(0, 0) scale(1)',
-          transition: 'transform 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
-          opacity: 1
+          transform: "translate(0, 0) scale(1)",
+          transition: "transform 1.5s cubic-bezier(0.4, 0, 0.2, 1)",
+          opacity: 1,
         };
 
-      case 'normal':
+      case "normal":
       default:
         return {
-          transform: 'translate(0, 0) scale(1)',
-          transition: 'none',
-          opacity: 1
+          transform: "translate(0, 0) scale(1)",
+          transition: "none",
+          opacity: 1,
         };
     }
   };
