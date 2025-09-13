@@ -152,6 +152,22 @@
   position: relative;
 }
 
+/* Styling for expanded service items */
+.service-item.expanded .service-name {
+  color: #1F1F1F;
+  transition: color 0.3s ease;
+}
+
+.service-item.expanded .toggle-btn {
+  color: #1F1F1F;
+  transition: color 0.3s ease;
+}
+
+.toggle-btn.active {
+  color: #1F1F1F;
+  transition: color 0.3s ease;
+}
+
 .service-header {
   display: flex;
   align-items: center;
@@ -206,10 +222,15 @@
   box-shadow: none;
 }
 
-.plus-icon,
-.minus-icon {
+.plus-icon {
   width: 18px;
   height: 18px;
+  transition: all 0.3s ease;
+}
+
+.minus-icon {
+  width: 36px;
+  height: 36px;
   transition: all 0.3s ease;
 }
 
@@ -371,6 +392,16 @@
   .service-number {
     margin-right: 30px;
   }
+
+  .plus-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .minus-icon {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -390,5 +421,15 @@
   .service-number {
     margin-right: 20px;
     font-size: 12px;
+  }
+
+  .plus-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .minus-icon {
+    width: 24px;
+    height: 24px;
   }
 }
