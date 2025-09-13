@@ -105,8 +105,8 @@ const Section1 = () => {
     // Logo should be positioned with proper padding + some internal margin like navbar
     const targetX = containerPadding + 39 - window.innerWidth / 2;
 
-    // Make logo shrink to a lower position instead of navbar
-    const targetY = window.innerHeight * 0.5 - window.innerHeight * 0.95; // 50% from top (center of screen)
+    // Make logo shrink to a lower position
+    const targetY = window.innerHeight * 1.2 - window.innerHeight * 0.95; // Lower position
 
     switch (logoState) {
       case "shrinking":
