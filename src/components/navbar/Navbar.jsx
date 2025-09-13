@@ -106,7 +106,7 @@ const Navbar = () => {
             <li className="navbar-item">
               <a href="/works" className="navbar-link">
                 <span
-                  className="shuffle-text"
+                  className="navbar-shuffle-text text-7"
                   ref={worksRef}
                   {...createHoverHandlers("Works")}
                 >
@@ -117,7 +117,7 @@ const Navbar = () => {
             <li className="navbar-item">
               <a href="/about" className="navbar-link">
                 <span
-                  className="shuffle-text"
+                  className="navbar-shuffle-text text-7"
                   ref={aboutRef}
                   {...createHoverHandlers("About")}
                 >
@@ -128,7 +128,7 @@ const Navbar = () => {
             <li className="navbar-item">
               <a href="/services" className="navbar-link">
                 <span
-                  className="shuffle-text"
+                  className="navbar-shuffle-text text-7"
                   ref={servicesRef}
                   {...createHoverHandlers("Services")}
                 >
@@ -139,7 +139,7 @@ const Navbar = () => {
             <li className="navbar-item">
               <a href="/playground" className="navbar-link">
                 <span
-                  className="shuffle-text"
+                  className="navbar-shuffle-text text-7"
                   ref={playgroundRef}
                   {...createHoverHandlers("Playground")}
                 >
@@ -152,7 +152,7 @@ const Navbar = () => {
 
         {/* Vacation text - positioned at right column */}
         <div className="navbar-vacation-wrapper">
-          <span className="navbar-vacation">
+          <span className="navbar-vacation text-7">
             We are on vacation
             <img src="/icon/Icon/ellipse.svg" alt="" className="navbar-vacation-icon" />
           </span>

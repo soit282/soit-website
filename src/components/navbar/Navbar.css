@@ -58,34 +58,40 @@
 }
 
 .navbar-link {
-  color: #000000;
+  color: #1F1F1F;
   text-decoration: none;
-  font-size: 15px;
-  font-weight: 400;
   padding: 5px 0;
   position: relative;
   display: inline;
 }
 
-/* Shuffle text effect */
-.shuffle-text {
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
+.navbar-link:hover,
+.navbar-link:visited,
+.navbar-link:active,
+.navbar-link:focus {
+  color: #1F1F1F;
+  text-decoration: none;
 }
 
-.shuffle-text::after {
+/* Navbar shuffle text effect */
+.navbar-shuffle-text {
+  cursor: pointer;
+  position: relative;
+  display: inline;
+}
+
+.navbar-shuffle-text::after {
   content: "";
   position: absolute;
   width: 0;
   height: 1px;
   bottom: 0;
   left: 50%;
-  background-color: #000000;
+  background-color: #1F1F1F;
   transition: width 0.3s ease, left 0.3s ease;
 }
 
-.shuffle-text:hover::after {
+.navbar-shuffle-text:hover::after {
   width: 100%;
   left: 0;
 }
@@ -100,9 +106,7 @@
 }
 
 .navbar-vacation {
-  font-size: 14px;
-  color: #000000;
-  font-weight: 400;
+  color: #1F1F1F;
   display: inline-flex;
   align-items: center;
   gap: 6px;
