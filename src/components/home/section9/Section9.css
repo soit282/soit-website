@@ -1,18 +1,35 @@
 .section9 {
   width: 100%;
   background-color: #ffffff;
-  padding: 120px 1.25%;
+  padding: 0;
   box-sizing: border-box;
-}
-
-.section9-container {
-  width: 100%;
+  height: 300vh; /* Fixed height for sticky scroll effect */
+  position: relative;
 }
 
 .section9-see-all {
   display: flex;
   justify-content: center;
-  margin-bottom: 240px;
+  padding: 120px 1.25% 240px;
+  box-sizing: border-box;
+}
+
+.section9-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.25% 120px;
+  box-sizing: border-box;
+}
+
+.section9-container {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .section9-header {
@@ -20,12 +37,11 @@
 }
 
 .section9-label {
-  color: #1F1F1F;
+  color: #1f1f1f;
   margin: 0 0 24px 0;
 }
 
 .section9-heading {
-  color: #999;
   margin: 0;
   max-width: 80%;
 }
@@ -95,6 +111,10 @@
 }
 
 @media (max-width: 1200px) {
+  .section9 {
+    height: 200vh;
+  }
+
   .clients-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -106,7 +126,15 @@
 
 @media (max-width: 768px) {
   .section9 {
-    padding: 60px 2.5%;
+    height: 180vh;
+  }
+
+  .section9-see-all {
+    padding: 60px 2.5% 120px;
+  }
+
+  .section9-sticky-wrapper {
+    padding: 0 2.5% 60px;
   }
 
   .section9-heading {
@@ -130,7 +158,15 @@
 
 @media (max-width: 480px) {
   .section9 {
-    padding: 40px 3%;
+    height: 160vh;
+  }
+
+  .section9-see-all {
+    padding: 40px 3% 80px;
+  }
+
+  .section9-sticky-wrapper {
+    padding: 0 3% 40px;
   }
 
   .clients-grid {
