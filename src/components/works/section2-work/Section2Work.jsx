@@ -74,6 +74,11 @@ export default function Section2Work() {
               <span>OKKIO</span>
               <span>A culinary deep dive that will make you speechless</span>
             </div>
+            <div className="work-details-right-text">
+              <div className="work-category text-8">
+                <span>Branding</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

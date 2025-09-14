@@ -99,6 +99,17 @@
   transform: translateY(0);
 }
 
+.work-details-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.work-details-right-text {
+  text-align: right;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
   .section2-work-grid {
