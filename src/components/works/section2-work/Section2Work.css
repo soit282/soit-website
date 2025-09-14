@@ -55,7 +55,6 @@
 .work-category {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   color: #939393;
 }
 
@@ -87,7 +86,7 @@
 .work-info-right {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
