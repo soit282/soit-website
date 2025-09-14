@@ -2,9 +2,9 @@ import './Footer.css';
 import soitLogo from '/icon/Icon/Số Ít logo.svg';
 import arrowIcon from '/icon/Icon/-_.svg';
 
-export default function Footer() {
+export default function Footer({ theme = "dark" }) {
   return (
-    <footer className="footer">
+    <footer className={`footer footer-${theme}`}>
       <div className="footer-top">
         <div className="footer-left">
           <div className="footer-section">
