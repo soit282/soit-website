@@ -1,0 +1,80 @@
+.section4-about {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  color: #1f1f1f;
+  padding: 0 1.25%;
+}
+
+.section4-about .container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.section4-about .content-grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.section4-about .left-column {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #ffffff;
+}
+
+.section4-about .left-column p {
+  max-width: 616px;
+}
+
+.section4-about .right-column {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 38px;
+  background: #e0e0e0;
+}
+
+/* Text classes are defined in typography.css */
+
+@media (max-width: 768px) {
+  .section4-about {
+    padding: 0 1.25%;
+  }
+
+  .section4-about .container {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .section4-about .content-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .section4-about .left-column {
+    min-height: 50vh;
+    padding: 60px 20px;
+  }
+
+  .section4-about .left-column p {
+    max-width: 100%;
+  }
+
+  .section4-about .right-column {
+    min-height: 50vh;
+    padding: 60px 20px;
+  }
+
+  .section4-about .left-column {
+    order: 2;
+  }
+
+  .section4-about .right-column {
+    order: 1;
+  }
+}
