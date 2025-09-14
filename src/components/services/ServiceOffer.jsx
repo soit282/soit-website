@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import "./Section11.css";
+import "./ServiceOffer.css";
 import arrowIcon from "/icon/Icon/→.svg";
 import dropDownIcon from "/icon/Icon/drop_down.svg";
 import ArrowButton from "@components/common/ArrowButton";
 
-export default function Section11() {
+export default function ServiceOffer() {
   const [showFooter, setShowFooter] = useState(false);
   const [selectedService, setSelectedService] = useState("");
   const expandedRef = useRef(null);

@@ -8,7 +8,7 @@ import Section7 from "@components/home/section7/Section7";
 import Section8 from "@components/home/section8/Section8";
 import Section9 from "@components/home/section9/Section9";
 import Section10 from "@components/home/section10/Section10";
-import Section11 from "@components/services/Section11";
+import ServiceOffer from "@components/services/ServiceOffer";
 
 const HomePage = () => {
   return (
@@ -23,7 +23,7 @@ const HomePage = () => {
       <Section8 />
       <Section9 />
       <Section10 />
-      <Section11 />
+      <ServiceOffer />
     </div>
   );
 };

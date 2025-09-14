@@ -1,11 +1,11 @@
 import ServiceOffer from "@components/services/ServiceOffer";
 
-const AboutPage = () => {
+const ServicePage = () => {
   return (
-    <div className="about-page">
+    <div className="service-page">
       <ServiceOffer />
     </div>
   );
 };
 
-export default AboutPage;
+export default ServicePage;
