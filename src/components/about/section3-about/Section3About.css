@@ -4,7 +4,6 @@
   align-items: center;
   background: #ffffff;
   color: #1f1f1f;
-  padding: 0 1.25%;
 }
 
 .section3-about .container {
@@ -24,6 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding-left: 24px;
   background: #ffffff;
 }
 
@@ -35,17 +35,23 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 38px;
+  padding-right: 62px;
   background: #939393;
 }
 
 /* Text classes are defined in typography.css */
 
-@media (max-width: 768px) {
-  .section3-about {
-    padding: 0 1.25%;
+@media (max-width: 1024px) {
+  .section3-about .left-column {
+    padding-left: 20px;
   }
 
+  .section3-about .right-column {
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
   .section3-about .container {
     height: auto;
     min-height: 100vh;
@@ -58,7 +64,7 @@
 
   .section3-about .left-column {
     min-height: 50vh;
-    padding: 60px 20px;
+    padding: 60px 20px 60px 20px;
   }
 
   .section3-about .left-column p {
@@ -68,6 +74,7 @@
   .section3-about .right-column {
     min-height: 50vh;
     padding: 60px 20px;
+    justify-content: center;
   }
 
   .section3-about .left-column {
