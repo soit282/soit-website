@@ -31,32 +31,28 @@ export default function Section2Work() {
     <section ref={sectionRef} className="section2-work">
       <div className="grid-container">
         <div
-          className={`work-image-container ${isVisible ? "visible" : ""}`}
+          className={`work-left-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 8" }}
         >
-          <img
-            src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
-            alt="TraMADE Project"
-            className="work-image"
-          />
-        </div>
-
-        <div
-          className={`work-info-bottom ${isVisible ? "visible" : ""}`}
-          style={{ gridColumn: "1 / span 8", gridRow: "2" }}
-        >
-          <div className="work-category text-8">
-            <span>TraMADE</span>
-            <span>Branding Strategy Brand Identity</span>
+          <div className="work-image-container">
+            <img
+              src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
+              alt="TraMADE Project"
+              className="work-image"
+            />
           </div>
-        </div>
-
-        <div
-          className={`work-info-right ${isVisible ? "visible" : ""}`}
-          style={{ gridColumn: "1 / span 8", gridRow: "2" }}
-        >
-          <div className="work-category text-8">
-            <span>Branding Strategy, Brand Identity</span>
+          <div className="work-info-row">
+            <div className="work-info-bottom">
+              <div className="work-category text-8">
+                <span>TraMADE</span>
+                <span>Branding Strategy Brand Identity</span>
+              </div>
+            </div>
+            <div className="work-info-right">
+              <div className="work-category text-8">
+                <span>Branding Strategy, Brand Identity</span>
+              </div>
+            </div>
           </div>
         </div>
 
