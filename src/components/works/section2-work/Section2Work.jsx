@@ -52,6 +52,15 @@ export default function Section2Work() {
         </div>
 
         <div
+          className={`work-info-right ${isVisible ? "visible" : ""}`}
+          style={{ gridColumn: "1 / span 8", gridRow: "2" }}
+        >
+          <div className="work-category text-8">
+            <span>Branding Strategy, Brand Identity</span>
+          </div>
+        </div>
+
+        <div
           className={`work-details-container ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "9 / span 4" }}
         >
