@@ -90,9 +90,9 @@ export default function Section11() {
   }, [showFooter]);
 
   return (
-    <section className="section11">
-      <div className="section11-header">
-        <h1 className="section11-title text-2_100pt_medium">
+    <section className="service-offer-section">
+      <div className="service-offer-header">
+        <h1 className="service-offer-title text-2_100pt_medium">
           Hello!
           <br />
           Looking to rebrand or get
@@ -137,7 +137,7 @@ export default function Section11() {
       </div>
 
       {showFooter && (
-        <div className="section11-expanded" ref={expandedRef}>
+        <div className="service-offer-expanded" ref={expandedRef}>
           <div className="expanded-content">
             <div className="footer-text-section">
               <p className="footer-line1 text-2">

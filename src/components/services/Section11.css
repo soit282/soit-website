@@ -1,4 +1,4 @@
-.section11 {
+.service-offer-section {
   min-height: 100vh;
   background-color: #1f1f1f;
   color: #ffffff;
@@ -8,12 +8,12 @@
   align-items: center;
 }
 
-.section11-header {
+.service-offer-header {
   text-align: center;
   margin-bottom: 264px;
 }
 
-.section11-title {
+.service-offer-title {
   margin-top: 399px;
   margin-bottom: 261px;
   max-width: 1400px;
@@ -193,7 +193,7 @@
   width: calc(100% - 44px);
 }
 
-.section11-expanded {
+.service-offer-expanded {
   width: 100%;
   max-width: 1400px;
   margin: 80px auto 0;
@@ -337,7 +337,7 @@
 }
 
 @media (max-width: 1440px) {
-  .section11-title {
+  .service-offer-title {
     max-width: 1200px;
     margin-top: 320px;
     margin-bottom: 220px;
@@ -357,7 +357,7 @@
 }
 
 @media (max-width: 1024px) {
-  .section11-title {
+  .service-offer-title {
     max-width: 900px;
     margin-top: 260px;
     margin-bottom: 180px;
@@ -378,11 +378,11 @@
 
 /* Mobile responsive */
 @media (max-width: 768px) {
-  .section11 {
+  .service-offer-section {
     padding: 40px 20px;
   }
 
-  .section11-title {
+  .service-offer-title {
     max-width: 100%;
     margin-top: 200px;
     margin-bottom: 120px;
@@ -407,7 +407,7 @@
 }
 
 @media (max-width: 480px) {
-  .section11-title {
+  .service-offer-title {
     max-width: 100%;
     margin-top: 140px;
     margin-bottom: 80px;
