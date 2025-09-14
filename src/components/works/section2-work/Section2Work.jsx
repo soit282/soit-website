@@ -72,15 +72,18 @@ export default function Section2Work() {
         <div
           className={`work-details-container ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "9 / span 4" }}
-          onMouseEnter={() => setIsHoveredRight(true)}
-          onMouseLeave={() => setIsHoveredRight(false)}
         >
-          <img
-            src={isHoveredRight ? "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png" : "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"}
-            alt="OKKIO"
-            className="work-details-image"
-          />
-          <div className="work-details-text">
+          <div
+            className="work-details-hover-area"
+            onMouseEnter={() => setIsHoveredRight(true)}
+            onMouseLeave={() => setIsHoveredRight(false)}
+          >
+            <img
+              src={isHoveredRight ? "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png" : "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"}
+              alt="OKKIO"
+              className="work-details-image"
+            />
+            <div className="work-details-text">
             <div className="work-category">
               <span className="text-7" style={{ color: "#1F1F1F", display: 'flex', alignItems: 'center', gap: '6px' }}>
                 {isHoveredRight && <img src="/icon/Icon/ellipse.svg" alt="" style={{ width: '8px', height: '8px' }} />}
@@ -93,6 +96,7 @@ export default function Section2Work() {
                 <span style={{ color: isHoveredRight ? '#1F1F1F' : '#939393' }}>Branding</span>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
