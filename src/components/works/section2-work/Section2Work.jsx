@@ -31,7 +31,8 @@ export default function Section2Work() {
     <section ref={sectionRef} className="section2-work">
       <div className="grid-container">
         <div
-          className={`work-image-container col-8 ${isVisible ? "visible" : ""}`}
+          className={`work-image-container ${isVisible ? "visible" : ""}`}
+          style={{ gridColumn: "1 / span 8" }}
         >
           <img
             src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
@@ -40,7 +41,10 @@ export default function Section2Work() {
           />
         </div>
 
-        <div className={`work-info-bottom col-8 ${isVisible ? "visible" : ""}`}>
+        <div
+          className={`work-info-bottom ${isVisible ? "visible" : ""}`}
+          style={{ gridColumn: "9 / span 4" }}
+        >
           <div className="work-category text-8">
             <span>TraMADE</span>
             <span>Branding Strategy Brand Identity</span>
@@ -48,9 +52,8 @@ export default function Section2Work() {
         </div>
 
         <div
-          className={`work-details-container col-4 ${
-            isVisible ? "visible" : ""
-          }`}
+          className={`work-details-container ${isVisible ? "visible" : ""}`}
+          style={{ gridColumn: "9 / span 4" }}
         >
           <img
             src="/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
