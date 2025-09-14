@@ -43,7 +43,7 @@ export default function Section2Work() {
 
         <div
           className={`work-info-bottom ${isVisible ? "visible" : ""}`}
-          style={{ gridColumn: "9 / span 4" }}
+          style={{ gridColumn: "1 / span 8", gridRow: "2" }}
         >
           <div className="work-category text-8">
             <span>TraMADE</span>
