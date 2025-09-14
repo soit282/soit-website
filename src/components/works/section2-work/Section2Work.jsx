@@ -60,6 +60,12 @@ export default function Section2Work() {
             alt="OKKIO"
             className="work-details-image"
           />
+          <div className="work-details-text">
+            <div className="work-category text-8">
+              <span>OKKIO</span>
+              <span>A culinary deep dive that will make you speechless</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
