@@ -4,6 +4,8 @@ import "@styles/grid-system.css";
 
 export default function Section2Work() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isHoveredRight, setIsHoveredRight] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -33,24 +35,35 @@ export default function Section2Work() {
         <div
           className={`work-left-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 8" }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           <div className="work-image-container">
             <img
-              src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
+              src={
+                isHovered
+                  ? "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
+                  : "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
+              }
               alt="TraMADE Project"
               className="work-image"
             />
           </div>
           <div className="work-info-row">
             <div className="work-info-bottom">
-              <div className="work-category text-8">
-                <span>TraMADE</span>
-                <span>Branding Strategy Brand Identity</span>
+              <div className="work-category">
+                <span className="text-7" style={{ color: "#1F1F1F", display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {isHovered && <img src="/icon/Icon/ellipse.svg" alt="" style={{ width: '8px', height: '8px' }} />}
+                  TraMADE
+                </span>
+                <span className="text-8" style={{ color: isHovered ? '#1F1F1F' : '#939393' }}>
+                  Tea mastery born in the heights of Măng Đen
+                </span>
               </div>
             </div>
             <div className="work-info-right">
               <div className="work-category text-8">
-                <span>Branding Strategy, Brand Identity</span>
+                <span style={{ color: isHovered ? '#1F1F1F' : '#939393' }}>Branding Strategy, Brand Identity</span>
               </div>
             </div>
           </div>
