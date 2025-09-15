@@ -72,9 +72,12 @@ export default function Section4() {
         }}
       >
         {/* Grid reference layer for positioning */}
-        <div className="grid-container grid-reference" style={{ position: 'relative', height: '100%' }}>
+        <div
+          className="grid-container grid-reference"
+          style={{ position: "relative", height: "100%" }}
+        >
           {/* Text positioned based on grid columns but not constrained by them */}
-          <div className="text-left text-7 text-position-left">
+          <div className="text-left text-5 text-position-left">
             <p>TràMADE</p>
           </div>
           <div className="text-center text-position-center">

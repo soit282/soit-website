@@ -14,7 +14,8 @@ export default function Section8() {
       const y = ((mouseClientY.current - rect.top) / rect.height) * 100;
       setMouseY(y);
       // Show text only when mouse is within section bounds
-      const isInBounds = mouseClientY.current >= rect.top && mouseClientY.current <= rect.bottom;
+      const isInBounds =
+        mouseClientY.current >= rect.top && mouseClientY.current <= rect.bottom;
       setIsVisible(isInBounds);
     }
   };
@@ -41,7 +42,7 @@ export default function Section8() {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleGlobalMouseMove);
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleGlobalMouseMove);
@@ -72,9 +73,12 @@ export default function Section8() {
         }}
       >
         {/* Grid reference layer for positioning */}
-        <div className="grid-container grid-reference" style={{ position: 'relative', height: '100%' }}>
+        <div
+          className="grid-container grid-reference"
+          style={{ position: "relative", height: "100%" }}
+        >
           {/* Text positioned based on grid but not constrained by them */}
-          <div className="text-left text-7 text-position-left">
+          <div className="text-left text-5 text-position-left">
             <p>LUNE</p>
           </div>
           <div className="text-center text-position-center">
