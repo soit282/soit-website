@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import './Navbar.css';
 import '@styles/grid-system.css';
 
@@ -45,6 +46,7 @@ class SmoothShuffler {
 }
 
 const Navbar = () => {
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isInSection1, setIsInSection1] = useState(true);
   const worksRef = useRef(null);
@@ -80,16 +82,26 @@ const Navbar = () => {
       const currentScrollY = window.scrollY;
       const section1Height = window.innerHeight;
 
-      // Hide logo when in section 1 (first viewport), show when scrolled past
-      setIsInSection1(currentScrollY < section1Height * 0.8);
+      // Only hide logo when in HomePage Section1, show on all other pages
+      const isHomePage = location.pathname === '/';
+      if (isHomePage) {
+        setIsInSection1(currentScrollY < section1Height * 0.8);
+      } else {
+        setIsInSection1(false); // Always show logo on other pages
+      }
     };
+
+    // Initial check for non-home pages
+    if (location.pathname !== '/') {
+      setIsInSection1(false);
+    }
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [location.pathname]);
 
   const createHoverHandlers = (menuKey) => ({
     onMouseEnter: () => {

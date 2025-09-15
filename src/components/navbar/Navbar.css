@@ -44,7 +44,7 @@
 
 /* Menu positioning using grid */
 .navbar-menu-wrapper {
-  grid-column: 7 / span 6;
+  grid-column: 7 / span 3;
   display: flex;
   justify-content: flex-start;
   align-items: center;
