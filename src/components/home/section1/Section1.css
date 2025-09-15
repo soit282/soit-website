@@ -54,3 +54,19 @@
     width: calc(100% - 10%);
   }
 }
+
+/* macOS Safari font rendering fix */
+@media screen and (-webkit-min-device-pixel-ratio: 1) {
+  .section1-logo {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: scale(0.95); /* Slightly smaller on macOS */
+  }
+}
+
+/* macOS specific adjustments */
+@supports (-webkit-appearance: none) {
+  .section1 {
+    font-size: 95%; /* Reduce overall scale on WebKit browsers */
+  }
+}
