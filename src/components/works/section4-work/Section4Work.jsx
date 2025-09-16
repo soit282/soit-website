@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import LazyImage from "@components/common/LazyImage";
 import "./Section4Work.css";
 import "@styles/grid-system.css";
 
@@ -42,7 +43,7 @@ export default function Section4Work() {
             onMouseLeave={() => setIsHovered(false)}
           >
             <div className="project-image-container">
-              <img
+              <LazyImage
                 src={
                   isHovered
                     ? "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
@@ -50,6 +51,7 @@ export default function Section4Work() {
                 }
                 alt="Project Left"
                 className="project-image"
+                effect="blur"
               />
             </div>
             <div className="project-info-row">
@@ -101,7 +103,7 @@ export default function Section4Work() {
             onMouseEnter={() => setIsHoveredRight(true)}
             onMouseLeave={() => setIsHoveredRight(false)}
           >
-            <img
+            <LazyImage
               src={
                 isHoveredRight
                   ? "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
@@ -109,6 +111,7 @@ export default function Section4Work() {
               }
               alt="Right Project"
               className="project-details-image"
+              effect="blur"
             />
             <div className="project-details-text">
               <div className="project-category">

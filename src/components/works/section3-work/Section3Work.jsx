@@ -1,4 +1,7 @@
 import { useEffect, useState, useRef } from "react";
+import LazyImage from "@components/common/LazyImage";
+import LazyVideo from "@components/common/LazyVideo";
+import "@components/common/LazyMedia.css";
 import "./Section3Work.css";
 import "@styles/grid-system.css";
 
@@ -39,13 +42,14 @@ export default function Section3Work() {
         >
           <div className="work-video-container">
             {isHovered ? (
-              <img
+              <LazyImage
                 src="/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"
                 alt="TBros"
                 className="work-video"
+                effect="blur"
               />
             ) : (
-              <video
+              <LazyVideo
                 src="/1_Homepage/1_Homepage/2_Feature works/TBros_1.mov"
                 autoPlay
                 muted

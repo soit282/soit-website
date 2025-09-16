@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import LazyImage from "@components/common/LazyImage";
 import "./Section2Work.css";
 import "@styles/grid-system.css";
 
@@ -42,7 +43,7 @@ export default function Section2Work() {
           onClick={() => navigate('/works/tramade')}
         >
           <div className="work-image-container">
-            <img
+            <LazyImage
               src={
                 isHovered
                   ? "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
@@ -50,6 +51,7 @@ export default function Section2Work() {
               }
               alt="TraMADE Project"
               className="work-image"
+              effect="blur"
             />
           </div>
           <div className="work-info-row">
@@ -101,7 +103,7 @@ export default function Section2Work() {
             onMouseLeave={() => setIsHoveredRight(false)}
             onClick={() => navigate('/works/tramade')}
           >
-            <img
+            <LazyImage
               src={
                 isHoveredRight
                   ? "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
@@ -109,6 +111,7 @@ export default function Section2Work() {
               }
               alt="OKKIO"
               className="work-details-image"
+              effect="blur"
             />
             <div className="work-details-text">
               <div className="work-category">
