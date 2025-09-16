@@ -2,7 +2,6 @@
   min-height: 100vh;
   background-color: #1f1f1f;
   color: #ffffff;
-  padding: 0px 60px 214px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -274,7 +273,8 @@
 }
 
 .submit-section {
-  margin-top: 183px;
+  margin-top: 214px;
+  margin-bottom: 181px;
 }
 
 .submit-arrow-button .arrow-button-text {
@@ -355,6 +355,11 @@
     height: 558px;
     padding: 45px;
   }
+
+  .submit-section {
+    margin-top: 180px;
+    margin-bottom: 150px;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -376,14 +381,15 @@
     min-height: 450px;
     padding: 40px 30px;
   }
+
+  .submit-section {
+    margin-top: 140px;
+    margin-bottom: 120px;
+  }
 }
 
 /* Mobile responsive */
 @media (max-width: 768px) {
-  .service-offer-section {
-    padding: 40px 20px;
-  }
-
   .service-offer-title {
     max-width: 100%;
     margin-top: 200px;
@@ -408,6 +414,11 @@
   .footer-text {
     font-size: 24px;
   }
+
+  .submit-section {
+    margin-top: 100px;
+    margin-bottom: 80px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -419,5 +430,10 @@
 
   .footer-content {
     padding: 40px 20px;
+  }
+
+  .submit-section {
+    margin-top: 60px;
+    margin-bottom: 50px;
   }
 }
