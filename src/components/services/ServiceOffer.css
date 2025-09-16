@@ -283,7 +283,7 @@
     hue-rotate(314deg) brightness(106%) contrast(101%);
 }
 
-.submit-arrow-button::after {
+.submit-arrow-button .arrow-button::after {
   background-color: #ffffff;
 }
 
