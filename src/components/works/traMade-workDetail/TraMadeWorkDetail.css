@@ -3,6 +3,7 @@
   background: #1f1f1f;
   color: #ffffff;
   padding: 120px 0;
+  overflow-x: hidden;
 }
 
 .tramade-title-section,
