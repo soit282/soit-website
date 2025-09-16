@@ -90,7 +90,7 @@
 }
 
 .client-card:nth-child(4):hover .client-background {
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.svg") !important;
+  background-image: url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.png") !important;
   background-size: cover;
   background-position: center;
 }
