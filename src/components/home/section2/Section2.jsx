@@ -157,86 +157,71 @@ export default function Section2() {
             isVisible ? "visible" : ""
           }`}
         >
-          <span className="tagline-first-service">
+          <span className="tagline-first-service" {...createHoverHandlers("Brand Strategy")}>
             <span
               className="shuffle-text"
               ref={brandStrategyRef}
-              {...createHoverHandlers("Brand Strategy")}
             >
               Brand Strategy
-            </span>
-            ,
+            </span><span className="comma">,</span>
           </span>{" "}
-          <span>
+          <span className="tagline-service-text" {...createHoverHandlers("Brand Identity")}>
             <span
               className="shuffle-text"
               ref={brandIdentityRef}
-              {...createHoverHandlers("Brand Identity")}
             >
               Brand Identity
-            </span>
-            ,
+            </span><span className="comma">,</span>
           </span>
           <br />
-          <span>
+          <span className="tagline-service-text" {...createHoverHandlers("Packaging Design")}>
             <span
               className="shuffle-text"
               ref={packagingDesignRef}
-              {...createHoverHandlers("Packaging Design")}
             >
               Packaging Design
-            </span>
-            ,
+            </span><span className="comma">,</span>
           </span>
           <br />
-          <span>
+          <span className="tagline-service-text" {...createHoverHandlers("Campaigns & Activations")}>
             <span
               className="shuffle-text"
               ref={campaignsActivationsRef}
-              {...createHoverHandlers("Campaigns & Activations")}
             >
               Campaigns & Activations
-            </span>
-            ,
+            </span><span className="comma">,</span>
           </span>
           <br />
-          <span>
+          <span className="tagline-service-text" {...createHoverHandlers("Editorial Design")}>
             <span
               className="shuffle-text"
               ref={editorialDesignRef}
-              {...createHoverHandlers("Editorial Design")}
             >
               Editorial Design
-            </span>
-            ,{" "}
+            </span><span className="comma">,{" "}</span>
           </span>
-          <span>
+          <span className="tagline-service-text" {...createHoverHandlers("Web & App")}>
             <span
               className="shuffle-text"
               ref={webAppRef}
-              {...createHoverHandlers("Web & App")}
             >
               Web & App
-            </span>
-            ,
+            </span><span className="comma">,</span>
           </span>
           <br />
-          <span>
+          <span className="tagline-service-text" {...createHoverHandlers("Creative Development")}>
             <span
               className="shuffle-text"
               ref={creativeDevelopmentRef}
-              {...createHoverHandlers("Creative Development")}
             >
               Creative Development
-            </span>
-            ,
+            </span><span className="comma">,</span>
           </span>
           <br />
-          <span>
+          <span className="tagline-service-text" {...createHoverHandlers("Design Systems")}>
             <span
               className="shuffle-text"
               ref={designSystemsRef}
-              {...createHoverHandlers("Design Systems")}
             >
               Design Systems
             </span>

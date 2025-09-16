@@ -69,17 +69,32 @@
 }
 
 /* Service spans */
-.tagline-fade span,
+.tagline-fade .tagline-service-text,
 .tagline-first-service {
   cursor: pointer;
   transition: color 0.2s ease;
   color: #e5e5e5;
   display: inline;
+  background: transparent;
 }
 
-/* Only change color on hover */
-.tagline-fade span:hover,
+/* Shuffle text and comma styling */
+.shuffle-text,
+.comma {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+/* Only change color on hover for the entire service item */
+.tagline-service-text:hover,
 .tagline-first-service:hover {
+  color: #111;
+}
+
+.tagline-service-text:hover .shuffle-text,
+.tagline-service-text:hover .comma,
+.tagline-first-service:hover .shuffle-text,
+.tagline-first-service:hover .comma {
   color: #111;
 }
 
