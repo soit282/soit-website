@@ -1,0 +1,435 @@
+.section10 {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0;
+  box-sizing: border-box;
+  height: 300vh; /* Fixed height for sticky scroll effect */
+  position: relative;
+}
+
+.section10-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  padding: 120px 1.25%;
+  box-sizing: border-box;
+}
+
+.section10-content {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.section10-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.section10-label {
+  color: #666;
+  margin: 0 0 24px 0;
+}
+
+.section10-heading {
+  margin: 0;
+  max-width: 100%;
+}
+
+.heading-black {
+  color: #1a1a1a;
+}
+
+.heading-gray {
+  color: #cccccc;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@keyframes grayscale-hover {
+  20% {
+    background-color: #f0f0f0;
+  }
+  40% {
+    background-color: #eaeaea;
+  }
+  60% {
+    background-color: #dedede;
+  }
+  80% {
+    background-color: #d0d0d0;
+  }
+  100% {
+    background-color: #c4c4c4;
+  }
+}
+
+@keyframes text-color-hover {
+  0% {
+    color: #111;
+  }
+  20% {
+    color: #333;
+  }
+  40% {
+    color: #555;
+  }
+  60% {
+    color: #777;
+  }
+  80% {
+    color: #999;
+  }
+  100% {
+    color: #e0e0e0;
+  }
+}
+
+.service-item {
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+  transition: background-image 0.5s ease;
+}
+
+.service-item:first-child {
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Expanded state - apply background to entire service-item */
+.service-item.expanded {
+  background-image: url("/1_Homepage/1_Homepage/3_Clients/Background_1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #e8e8e8;
+}
+
+.service-item.expanded::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/1_Homepage/1_Homepage/3_Clients/Background_1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.service-item.expanded::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+}
+
+.service-item.expanded .service-header,
+.service-item.expanded .service-content {
+  position: relative;
+  z-index: 2;
+}
+
+.service-item.expanded .service-header * {
+  z-index: 2;
+  position: relative;
+}
+
+/* Styling for expanded service items */
+.service-item.expanded .service-name {
+  color: #1F1F1F;
+  transition: color 0.3s ease;
+}
+
+.service-item.expanded .toggle-btn {
+  color: #1F1F1F;
+  transition: color 0.3s ease;
+}
+
+.toggle-btn.active {
+  color: #1F1F1F;
+  transition: color 0.3s ease;
+}
+
+.service-header {
+  display: flex;
+  align-items: center;
+  padding: 24px 0 48px 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.service-number {
+  font-size: 14px;
+  color: #999;
+  margin-right: 60px;
+  font-weight: 400;
+  min-width: 30px;
+  transition: color 0.4s ease;
+}
+
+.service-name {
+  color: #e0e0e0;
+  transition: color 0.4s ease, transform 0.3s ease;
+  padding-left: 8px;
+  flex: 1;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #111;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.3s ease;
+  outline: none;
+  box-shadow: none;
+}
+
+.toggle-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.toggle-btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.plus-icon {
+  width: 18px;
+  height: 18px;
+  transition: all 0.3s ease;
+}
+
+.minus-icon {
+  width: 36px;
+  height: 36px;
+  transition: all 0.3s ease;
+}
+
+/* Default plus-icon color */
+.plus-icon {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
+    hue-rotate(314deg) brightness(106%) contrast(82%);
+}
+
+.toggle-btn.active {
+  transform: rotate(0deg);
+}
+
+/* Hover effects only when service is NOT expanded */
+.service-item:not(.expanded) .service-header.animate {
+  animation: grayscale-hover 0.5s steps(5) forwards;
+}
+
+.service-item:not(.expanded) .service-header.animate::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f9;
+  animation: grayscale-hover 0.5s forwards;
+  z-index: -1;
+}
+
+.service-item:not(.expanded) .service-header.animate .service-name {
+  animation: text-color-hover 0.5s steps(5) forwards;
+}
+
+.service-item:not(.expanded) .service-header.animate .service-number {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.5s ease;
+}
+
+.service-item:not(.expanded) .service-header.animate .toggle-btn {
+  color: #e0e0e0;
+  transition: color 0.5s ease;
+}
+
+.service-item:not(.expanded) .service-header.animate .plus-icon {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
+    hue-rotate(314deg) brightness(106%) contrast(82%);
+  transition: filter 0.5s ease;
+}
+
+.service-item:not(.expanded) .service-header.locked .plus-icon {
+  filter: brightness(0) saturate(100%) invert(100%);
+  opacity: 0.7;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+}
+
+.service-item:not(.expanded) .service-header.reset .plus-icon {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
+    hue-rotate(314deg) brightness(106%) contrast(82%);
+  transition: filter 0.5s ease;
+}
+
+/* Final locked state - only when not expanded */
+.service-item:not(.expanded) .service-header.locked {
+  background-color: #c4c4c4;
+  transition: background-color 0.3s ease;
+}
+
+.service-item:not(.expanded) .service-header.locked .service-name {
+  color: #e0e0e0;
+  transition: color 0.3s ease;
+}
+
+.service-item:not(.expanded) .service-header.locked .service-number {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+.service-item:not(.expanded) .service-header.locked .toggle-btn {
+  color: #e0e0e0;
+  transition: color 0.3s ease;
+}
+
+/* Reset state - back to white - only when not expanded */
+.service-item:not(.expanded) .service-header.reset {
+  background-color: #fff;
+  transition: background-color 0.5s ease;
+}
+
+.service-item:not(.expanded) .service-header.reset .service-name {
+  color: #e0e0e0;
+  transition: color 0.5s ease;
+}
+
+.service-item:not(.expanded) .service-header.reset .toggle-btn {
+  color: #111;
+  transition: color 0.5s ease;
+}
+
+/* Service Content Styles */
+.service-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+.service-content.active {
+  max-height: 500px;
+}
+
+.service-content p {
+  margin: 8px 0 8px 25.8%;
+  color: #1f1f1f;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.content-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1440px) {
+}
+
+@media (max-width: 1200px) {
+  .section10 {
+    height: 220vh;
+  }
+
+  .service-item {
+    padding: 32px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .section10 {
+    padding: 60px 2.5%;
+    height: 200vh;
+  }
+
+  .section10-sticky-wrapper {
+    padding: 0 2.5%;
+  }
+
+  .section10-label {
+    margin-bottom: 24px;
+  }
+
+  .service-item {
+    padding: 24px 0;
+  }
+
+  .service-number {
+    margin-right: 30px;
+  }
+
+  .plus-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .minus-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section10 {
+    padding: 40px 3%;
+    height: 180vh;
+  }
+
+  .section10-sticky-wrapper {
+    padding: 0 3%;
+  }
+
+  .service-item {
+    padding: 20px 0;
+  }
+
+  .service-number {
+    margin-right: 20px;
+    font-size: 12px;
+  }
+
+  .plus-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .minus-icon {
+    width: 24px;
+    height: 24px;
+  }
+}

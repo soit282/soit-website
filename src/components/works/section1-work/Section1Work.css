@@ -1,0 +1,79 @@
+.section1-work {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #e5e5e5;
+  padding: 0 1.25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section1-work-container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.section1-work-content {
+  text-align: left;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section1-work-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Work service text styling */
+.work-service-text {
+  cursor: pointer;
+  transition: color 0.2s ease;
+  color: #e5e5e5;
+  display: inline;
+  background: transparent;
+}
+
+/* Shuffle text and comma styling */
+.work-service-text .shuffle-text,
+.work-service-text .comma {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+/* Only change color on hover for the entire service item */
+.work-service-text:hover {
+  color: #1f1f1f;
+}
+
+.work-service-text:hover .shuffle-text,
+.work-service-text:hover .comma {
+  color: #1f1f1f;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .section1-work {
+    padding: 60px 1.25%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section1-work {
+    padding: 40px 1.25%;
+  }
+
+  .section1-work-content {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .section1-work {
+    padding: 40px 20px;
+  }
+}
