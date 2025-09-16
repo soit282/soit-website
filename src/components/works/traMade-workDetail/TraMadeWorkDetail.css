@@ -35,14 +35,12 @@
 .tramade-title {
   color: #ffffff;
   margin: 0;
-  line-height: 1;
 }
 
 .tramade-details-section {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding-top: 20px;
 }
 
 .detail-item {
@@ -52,25 +50,18 @@
 }
 
 .detail-label {
-  color: #939393;
+  color: #5D5D5D;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 400;
 }
 
 .detail-value {
-  color: #ffffff;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
-.tramade-description-section {
-  padding-top: 20px;
+  color: #5D5D5D;
 }
 
 .tramade-description {
   color: #ffffff;
-  line-height: 1.6;
   margin: 0;
 }
 

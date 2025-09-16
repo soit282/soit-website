@@ -41,22 +41,22 @@ export default function TraMadeWorkDetail() {
         {/* Client Section - Row 2 */}
         <div
           className={`tramade-client-section ${isVisible ? "visible" : ""}`}
-          style={{ gridColumn: "1 / span 3" }}
+          style={{ gridColumn: "1 / span 2" }}
         >
           <div className="detail-item">
-            <span className="detail-label text-8">Client</span>
-            <span className="detail-value text-7">TràMADE</span>
+            <span className="detail-label text-5">Client</span>
+            <span className="detail-value text-6">TràMADE</span>
           </div>
         </div>
 
         {/* Services Section - Row 2 */}
         <div
           className={`tramade-details-section ${isVisible ? "visible" : ""}`}
-          style={{ gridColumn: "4 / span 3" }}
+          style={{ gridColumn: "3 / span 3" }}
         >
           <div className="detail-item">
-            <span className="detail-label text-8">Scope of works</span>
-            <span className="detail-value text-7">
+            <span className="detail-label text-5">Scope of works</span>
+            <span className="detail-value text-6">
               Brand Identity Extension
               <br />
               Typography System
@@ -77,7 +77,6 @@ export default function TraMadeWorkDetail() {
         >
           <p className="tramade-description text-4">
             Tea mastery born in the heights of Măng Đen.
-            <br />
             <br />
             TràMADE is a masterful tea artisan from the fertile highlands of
             Măng Đen, embodying the rustic breath of this serene land. From the
