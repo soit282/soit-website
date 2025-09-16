@@ -1,0 +1,145 @@
+/* Wrapper with overflow hidden for clipping effect */
+.arrow-button-wrapper {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 0; /* Adjust as needed */
+}
+
+.arrow-button {
+  background: none;
+  border: none;
+  color: #1f1f1f;
+  cursor: pointer;
+  padding: 12px 35px 12px 0px;
+  position: relative;
+  overflow: visible; /* Keep visible inside wrapper */
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-block;
+  min-width: 120px;
+  outline: none;
+}
+
+.arrow-button:focus {
+  outline: none;
+}
+
+.arrow-button::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
+  width: 0;
+  height: 2px;
+  background-color: #1f1f1f;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.arrow-button-text {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.arrow-button-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-42%);
+  z-index: 1;
+  width: 18px;
+  height: 32px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(0%) saturate(3%)
+    hue-rotate(314deg) brightness(97%) contrast(86%);
+}
+
+.arrow-button-icon-1 {
+  right: 10px;
+  opacity: 1;
+}
+
+.arrow-button-icon-2 {
+  left: -30px;
+  opacity: 0;
+  transform: translateY(-40%) translateY(10px);
+}
+
+.arrow-button:hover .arrow-button-icon-1 {
+  right: -30px;
+  opacity: 0;
+  transform: translateY(-40%) translateY(-10px);
+}
+
+.arrow-button:hover .arrow-button-icon-2 {
+  left: 0px;
+  opacity: 1;
+  transform: translateY(-40%) translateY(0);
+}
+
+.arrow-button:hover .arrow-button-text {
+  transform: translateX(26px);
+}
+
+/* Remove hover padding change */
+
+.arrow-button:hover::after {
+  left: 0px;
+  width: calc(100% - 10px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .arrow-button {
+    padding: 10px 30px 10px 25px;
+    min-width: 100px;
+  }
+
+  .arrow-button-icon {
+    width: 16px;
+    height: 28px;
+  }
+
+  .arrow-button::after {
+    left: 0px;
+  }
+
+  .arrow-button:hover::after {
+    left: 0px;
+    width: calc(100% - 10px);
+  }
+
+  /* Remove hover padding change */
+}
+
+@media (max-width: 480px) {
+  .arrow-button {
+    padding: 8px 28px 8px 22px;
+    min-width: 90px;
+  }
+
+  .arrow-button-icon {
+    width: 14px;
+    height: 24px;
+  }
+
+  .arrow-button-icon-1 {
+    right: 8px;
+  }
+
+  .arrow-button::after {
+    left: 0px;
+    bottom: 8px;
+  }
+
+  .arrow-button:hover::after {
+    left: 0px;
+    width: calc(100% - 8px);
+  }
+
+  /* Remove hover padding change */
+
+  .arrow-button:hover .arrow-button-icon-2 {
+    left: 0px;
+  }
+}

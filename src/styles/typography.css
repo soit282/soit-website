@@ -2,51 +2,57 @@
 
 /* Font Face Definitions */
 @font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-book.otf') format('opentype');
+  font-family: "PP Neue Montreal";
+  src: url("../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-book.otf")
+    format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-bold.otf') format('opentype');
+  font-family: "PP Neue Montreal";
+  src: url("../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-bold.otf")
+    format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-medium.otf') format('opentype');
+  font-family: "PP Neue Montreal";
+  src: url("../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-medium.otf")
+    format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-thin.otf') format('opentype');
+  font-family: "PP Neue Montreal";
+  src: url("../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-thin.otf")
+    format("opentype");
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-italic.otf') format('opentype');
+  font-family: "PP Neue Montreal";
+  src: url("../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-italic.otf")
+    format("opentype");
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-semibolditalic.otf') format('opentype');
+  font-family: "PP Neue Montreal";
+  src: url("../assets/pp-neue-montreal-cufonfonts/ppneuemontreal-semibolditalic.otf")
+    format("opentype");
   font-weight: 600;
   font-style: italic;
 }
 
 /* Text 1 - 120pt book */
 .text-1 {
-  font-family: 'PP Neue Montreal', sans-serif;
-  font-size: 120pt;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 120px;
   font-weight: 400;
   line-height: 0.94;
   letter-spacing: -0.02em;
@@ -55,11 +61,23 @@
   padding: 0;
 }
 
-/* Text 2 - 100pt bold */
+/* Text 2 - 100pt medium */
 .text-2 {
-  font-family: 'PP Neue Montreal', sans-serif;
-  font-size: 100pt;
-  font-weight: 700;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 100px;
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Text 2_100pt_medium - 100pt medium */
+.text-2_100pt_medium {
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 100px;
+  font-weight: 500;
   line-height: 0.94;
   letter-spacing: -0.02em;
   list-style: none;
@@ -69,8 +87,8 @@
 
 /* Text 3 - 64pt book */
 .text-3 {
-  font-family: 'PP Neue Montreal', sans-serif;
-  font-size: 64pt;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 64px;
   font-weight: 400;
   line-height: 0.94;
   letter-spacing: -0.02em;
@@ -81,8 +99,8 @@
 
 /* Text 4 - 30pt book */
 .text-4 {
-  font-family: 'PP Neue Montreal', sans-serif;
-  font-size: 30pt;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 30px;
   font-weight: 400;
   line-height: 1.07;
   letter-spacing: -0.01em;
@@ -91,11 +109,11 @@
   padding: 0;
 }
 
-/* Text 5 - 20pt bold */
+/* Text 5 - 20pt medium */
 .text-5 {
-  font-family: 'PP Neue Montreal', sans-serif;
-  font-size: 20pt;
-  font-weight: 700;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
   line-height: 1.02;
   letter-spacing: -0.01em;
   list-style: none;
@@ -105,8 +123,8 @@
 
 /* Text 6 - 20pt book */
 .text-6 {
-  font-family: 'PP Neue Montreal', sans-serif;
-  font-size: 20pt;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: -0.01em;
@@ -117,9 +135,21 @@
 
 /* Text 7 - 16pt bold */
 .text-7 {
-  font-family: 'PP Neue Montreal', sans-serif;
-  font-size: 16pt;
-  font-weight: 700;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: auto;
+  letter-spacing: -0.01em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Text 7 - 16pt medium */
+.text-7_16pt_medium {
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
   line-height: auto;
   letter-spacing: -0.01em;
   list-style: none;
@@ -129,8 +159,8 @@
 
 /* Text 8 - 16pt book */
 .text-8 {
-  font-family: 'PP Neue Montreal', sans-serif;
-  font-size: 16pt;
+  font-family: "PP Neue Montreal", sans-serif;
+  font-size: 16px;
   font-weight: 400;
   line-height: auto;
   letter-spacing: -0.01em;
@@ -142,102 +172,114 @@
 /* Responsive adjustments for smaller screens */
 @media (max-width: 1024px) {
   .text-1 {
-    font-size: 90pt;
+    font-size: 90px;
   }
 
   .text-2 {
-    font-size: 75pt;
+    font-size: 75px;
+  }
+
+  .text-2_100pt_medium {
+    font-size: 75px;
   }
 
   .text-3 {
-    font-size: 48pt;
+    font-size: 48px;
   }
 
   .text-4 {
-    font-size: 24pt;
+    font-size: 24px;
   }
 
   .text-5 {
-    font-size: 18pt;
+    font-size: 18px;
   }
 
   .text-6 {
-    font-size: 18pt;
+    font-size: 18px;
   }
 
   .text-7 {
-    font-size: 14pt;
+    font-size: 14px;
   }
 
   .text-8 {
-    font-size: 14pt;
+    font-size: 14px;
   }
 }
 
 @media (max-width: 768px) {
   .text-1 {
-    font-size: 60pt;
+    font-size: 60px;
   }
 
   .text-2 {
-    font-size: 50pt;
+    font-size: 50px;
+  }
+
+  .text-2_100pt_medium {
+    font-size: 50px;
   }
 
   .text-3 {
-    font-size: 36pt;
+    font-size: 36px;
   }
 
   .text-4 {
-    font-size: 20pt;
+    font-size: 20px;
   }
 
   .text-5 {
-    font-size: 16pt;
+    font-size: 16px;
   }
 
   .text-6 {
-    font-size: 16pt;
+    font-size: 16px;
   }
 
   .text-7 {
-    font-size: 12pt;
+    font-size: 12px;
   }
 
   .text-8 {
-    font-size: 12pt;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
   .text-1 {
-    font-size: 40pt;
+    font-size: 40px;
   }
 
   .text-2 {
-    font-size: 34pt;
+    font-size: 34px;
+  }
+
+  .text-2_100pt_medium {
+    font-size: 34px;
   }
 
   .text-3 {
-    font-size: 24pt;
+    font-size: 24px;
   }
 
   .text-4 {
-    font-size: 16pt;
+    font-size: 16px;
   }
 
   .text-5 {
-    font-size: 14pt;
+    font-size: 14px;
   }
 
   .text-6 {
-    font-size: 14pt;
+    font-size: 14px;
   }
 
   .text-7 {
-    font-size: 11pt;
+    font-size: 11px;
   }
 
   .text-8 {
-    font-size: 11pt;
+    font-size: 11px;
   }
 }

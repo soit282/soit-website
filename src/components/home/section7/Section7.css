@@ -1,0 +1,74 @@
+.section7 {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-left: 1.25%;
+  padding-right: 1.25%;
+}
+
+.section7-content {
+  width: 100%;
+  color: white;
+  padding-left: 1.25%;
+  padding-right: 1.25%;
+  box-sizing: border-box;
+  /* Create isolated stacking context like Mirror client */
+  isolation: isolate;
+  mix-blend-mode: difference;
+}
+
+/* Grid reference layer */
+.grid-reference {
+  position: relative;
+  height: 100%;
+}
+
+/* Text positioning based on grid but not constrained */
+.text-position-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  background: transparent;
+}
+
+.text-position-center {
+  position: absolute;
+  left: calc(100% / 12 * 6); /* Start at column 7 */
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  background: transparent;
+}
+
+.text-position-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  background: transparent;
+}
+
+.section7-content .text-left {
+  text-align: left;
+}
+
+.section7-content .text-center {
+  text-align: center;
+}
+
+.section7-content .text-right {
+  text-align: right;
+}
+
+.section7-content p {
+  margin: 0;
+  color: white;
+}
