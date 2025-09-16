@@ -74,20 +74,20 @@ export default function Section5Work() {
                       style={{ width: "8px", height: "8px" }}
                     />
                   )}
-                  Project Name
+                  CPC
                 </span>
                 <span
                   className="text-8"
                   style={{ color: isHovered ? "#1F1F1F" : "#939393" }}
                 >
-                  Project description goes here
+                  Vietnam’s most awarded bean-to-bar chocolate
                 </span>
               </div>
             </div>
             <div className="showcase-info-right">
               <div className="showcase-category text-8">
                 <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
-                  Category
+                  Branding
                 </span>
               </div>
             </div>

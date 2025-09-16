@@ -6,6 +6,7 @@ import Section5Work from "@components/works/section5-work/Section5Work";
 import Section6Work from "@components/works/section6-work/Section6Work";
 import Section7Work from "@components/works/section7-work/Section7Work";
 import Section8Work from "@components/works/section8-work/Section8Work";
+import Section9Work from "@components/works/section9-work/Section9Work";
 
 const WorksPage = () => {
   return (
@@ -18,6 +19,7 @@ const WorksPage = () => {
       <Section6Work />
       <Section7Work />
       <Section8Work />
+      <Section9Work />
     </div>
   );
 };

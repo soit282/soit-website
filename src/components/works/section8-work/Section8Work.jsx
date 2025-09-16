@@ -84,7 +84,7 @@ export default function Section8Work() {
               <div className="feature-info-right">
                 <div className="feature-category text-8">
                   <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
-                    Category
+                    Branding
                   </span>
                 </div>
               </div>
@@ -142,7 +142,7 @@ export default function Section8Work() {
                   <span
                     style={{ color: isHoveredRight ? "#1F1F1F" : "#939393" }}
                   >
-                    Category
+                    Branding
                   </span>
                 </div>
               </div>

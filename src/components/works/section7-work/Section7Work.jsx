@@ -74,20 +74,20 @@ export default function Section7Work() {
                       style={{ width: "8px", height: "8px" }}
                     />
                   )}
-                  Project Title
+                  TBros
                 </span>
                 <span
                   className="text-8"
                   style={{ color: isHovered ? "#1F1F1F" : "#939393" }}
                 >
-                  Project subtitle and description
+                  Vietnam’s most awarded bean-to-bar chocolate
                 </span>
               </div>
             </div>
             <div className="display-info-right">
               <div className="display-category text-8">
                 <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
-                  Category Type
+                  Branding
                 </span>
               </div>
             </div>

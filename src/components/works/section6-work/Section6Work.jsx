@@ -71,20 +71,20 @@ export default function Section6Work() {
                         style={{ width: "8px", height: "8px" }}
                       />
                     )}
-                    Gallery Project
+                    Lune
                   </span>
                   <span
                     className="text-8"
                     style={{ color: isHovered ? "#1F1F1F" : "#939393" }}
                   >
-                    Gallery description
+                    Modern French culinary experience in Saigon
                   </span>
                 </div>
               </div>
               <div className="gallery-info-right">
                 <div className="gallery-category text-8">
                   <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
-                    Category
+                    Branding
                   </span>
                 </div>
               </div>
@@ -128,13 +128,13 @@ export default function Section6Work() {
                       style={{ width: "8px", height: "8px" }}
                     />
                   )}
-                  Right Gallery
+                  Okkio
                 </span>
                 <span
                   className="text-8"
                   style={{ color: isHoveredRight ? "#1F1F1F" : "#939393" }}
                 >
-                  Right gallery description
+                  A sensory deep dive into Vietnam’s specialty co
                 </span>
               </div>
               <div className="gallery-details-right-text">
@@ -142,7 +142,7 @@ export default function Section6Work() {
                   <span
                     style={{ color: isHoveredRight ? "#1F1F1F" : "#939393" }}
                   >
-                    Category
+                    Branding
                   </span>
                 </div>
               </div>
