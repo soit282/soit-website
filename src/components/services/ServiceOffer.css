@@ -164,7 +164,7 @@
     hue-rotate(314deg) brightness(93%) contrast(93%);
 }
 
-.offering-arrow-button::after {
+.offering-arrow-button .arrow-button::after {
   background-color: #5d5d5d;
 }
 
@@ -176,21 +176,18 @@
 }
 
 .offering-card:hover .offering-arrow-button .arrow-button-icon-2 {
-  left: 29px;
+  left: 0px;
   opacity: 1;
   transform: translateY(-40%) translateY(0);
 }
 
 .offering-card:hover .offering-arrow-button .arrow-button-text {
-  transform: translateX(18px);
+  transform: translateX(26px);
 }
 
-.offering-card:hover .offering-arrow-button {
-  padding: 12px 30px 12px 35px;
-}
-
-.offering-card:hover .offering-arrow-button::after {
-  width: calc(100% - 44px);
+.offering-card:hover .offering-arrow-button .arrow-button::after {
+  left: 0px;
+  width: calc(100% - 10px);
 }
 
 .service-offer-expanded {
