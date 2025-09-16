@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./TraMadeWorkDetail.css";
+import "@styles/grid-system.css";
 
 export default function TraMadeWorkDetail() {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,57 +29,63 @@ export default function TraMadeWorkDetail() {
 
   return (
     <div ref={sectionRef} className="tramade-work-detail">
-      <div className="tramade-container">
-        <div className={`tramade-hero ${isVisible ? "visible" : ""}`}>
-          <h1 className="tramade-title text-2_100pt_medium">
-            TràMADE
-          </h1>
-          <p className="tramade-subtitle text-4">
-            Tea mastery born in the heights of Măng Đen
-          </p>
+      <div className="grid-container">
+        {/* Title Section - Row 1 */}
+        <div
+          className={`tramade-title-section ${isVisible ? "visible" : ""}`}
+          style={{ gridColumn: "1 / span 12" }}
+        >
+          <h1 className="tramade-title text-2_100pt_medium">TràMADE</h1>
         </div>
 
-        <div className="tramade-content">
-          <div className="tramade-info-section">
-            <div className="tramade-description">
-              <p className="text-4">
-                A comprehensive tea brand identity project that celebrates the artistry
-                of Vietnamese tea culture from the highlands of Măng Đen.
-              </p>
-            </div>
-
-            <div className="tramade-details">
-              <div className="detail-item">
-                <span className="detail-label text-8">Client</span>
-                <span className="detail-value text-7">TràMADE</span>
-              </div>
-              <div className="detail-item">
-                <span className="detail-label text-8">Services</span>
-                <span className="detail-value text-7">Branding Strategy, Brand Identity</span>
-              </div>
-              <div className="detail-item">
-                <span className="detail-label text-8">Year</span>
-                <span className="detail-value text-7">2024</span>
-              </div>
-            </div>
+        {/* Client Section - Row 2 */}
+        <div
+          className={`tramade-client-section ${isVisible ? "visible" : ""}`}
+          style={{ gridColumn: "1 / span 3" }}
+        >
+          <div className="detail-item">
+            <span className="detail-label text-8">Client</span>
+            <span className="detail-value text-7">TràMADE</span>
           </div>
+        </div>
 
-          <div className="tramade-images">
-            <div className="tramade-image-container">
-              <img
-                src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
-                alt="TràMADE Project Image 1"
-                className="tramade-image"
-              />
-            </div>
-            <div className="tramade-image-container">
-              <img
-                src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
-                alt="TràMADE Project Image 2"
-                className="tramade-image"
-              />
-            </div>
+        {/* Services Section - Row 2 */}
+        <div
+          className={`tramade-details-section ${isVisible ? "visible" : ""}`}
+          style={{ gridColumn: "4 / span 3" }}
+        >
+          <div className="detail-item">
+            <span className="detail-label text-8">Scope of works</span>
+            <span className="detail-value text-7">
+              Brand Identity Extension
+              <br />
+              Typography System
+              <br />
+              Packaging
+              <br />
+              Brand Guideline System
+            </span>
           </div>
+        </div>
+
+        {/* Description Section - Row 2 */}
+        <div
+          className={`tramade-description-section ${
+            isVisible ? "visible" : ""
+          }`}
+          style={{ gridColumn: "7 / span 6" }}
+        >
+          <p className="tramade-description text-4">
+            Tea mastery born in the heights of Măng Đen.
+            <br />
+            <br />
+            TràMADE is a masterful tea artisan from the fertile highlands of
+            Măng Đen, embodying the rustic breath of this serene land. From the
+            TràMADE tea hills, clean tea cultivation experts collaborate with
+            the Mơ Nâm ethnic group to bring Măng Đen’s tea products to Vietnam
+            and the world. Every bit of energy absorbed by the tea leaves — from
+            both nature and humanity — infuses into the body of the tea drinker.
+          </p>
         </div>
       </div>
     </div>
