@@ -29,17 +29,30 @@
   transform: translateY(0);
 }
 
-/* Shuffle text effect */
-.shuffle-text {
+/* Work service text styling */
+.work-service-text {
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
+  transition: color 0.2s ease;
   color: #e5e5e5;
+  display: inline;
+  background: transparent;
 }
 
-.shuffle-text:hover {
+/* Shuffle text and comma styling */
+.work-service-text .shuffle-text,
+.work-service-text .comma {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+/* Only change color on hover for the entire service item */
+.work-service-text:hover {
   color: #1f1f1f;
-  transform: translateY(-2px);
+}
+
+.work-service-text:hover .shuffle-text,
+.work-service-text:hover .comma {
+  color: #1f1f1f;
 }
 
 /* Responsive Design */
