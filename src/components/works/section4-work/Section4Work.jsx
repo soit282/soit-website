@@ -35,54 +35,58 @@ export default function Section4Work() {
         <div
           className={`project-left-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 4" }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
-          <div className="project-image-container">
-            <img
-              src={
-                isHovered
-                  ? "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
-                  : "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
-              }
-              alt="Project Left"
-              className="project-image"
-            />
-          </div>
-          <div className="project-info-row">
-            <div className="project-info-bottom">
-              <div className="project-category">
-                <span
-                  className="text-7"
-                  style={{
-                    color: "#1F1F1F",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                  }}
-                >
-                  {isHovered && (
-                    <img
-                      src="/icon/Icon/ellipse.svg"
-                      alt=""
-                      style={{ width: "8px", height: "8px" }}
-                    />
-                  )}
-                  Dogma
-                </span>
-                <span
-                  className="text-8"
-                  style={{ color: isHovered ? "#1F1F1F" : "#939393" }}
-                >
-                  A private collection of archival and contemporary art
-                </span>
-              </div>
+          <div
+            className="project-left-hover-area"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="project-image-container">
+              <img
+                src={
+                  isHovered
+                    ? "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
+                    : "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
+                }
+                alt="Project Left"
+                className="project-image"
+              />
             </div>
-            <div className="project-info-right">
-              <div className="project-category text-8">
-                <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
-                  Branding
-                </span>
+            <div className="project-info-row">
+              <div className="project-info-bottom">
+                <div className="project-category">
+                  <span
+                    className="text-7"
+                    style={{
+                      color: "#1F1F1F",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    {isHovered && (
+                      <img
+                        src="/icon/Icon/ellipse.svg"
+                        alt=""
+                        style={{ width: "8px", height: "8px" }}
+                      />
+                    )}
+                    Dogma
+                  </span>
+                  <span
+                    className="text-8"
+                    style={{ color: isHovered ? "#1F1F1F" : "#939393" }}
+                  >
+                    A private collection of archival and contemporary art
+                  </span>
+                </div>
+              </div>
+              <div className="project-info-right">
+                <div className="project-category text-8">
+                  <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
+                    Branding
+                  </span>
+                </div>
               </div>
             </div>
           </div>
