@@ -11,6 +11,7 @@
   height: 100vh;
   grid-template-rows: auto auto;
   align-content: start;
+  margin-bottom: 36px;
 }
 
 .gallery-left-section {
@@ -138,6 +139,10 @@
 }
 
 @media (max-width: 768px) {
+  .section6-work .grid-container {
+    margin-bottom: 24px;
+  }
+
   .gallery-image-container {
     margin-bottom: 8px;
   }
@@ -152,6 +157,10 @@
 }
 
 @media (max-width: 480px) {
+  .section6-work .grid-container {
+    margin-bottom: 18px;
+  }
+
   .gallery-image-container {
     margin-bottom: 6px;
   }

@@ -11,6 +11,7 @@
   height: 100vh;
   grid-template-rows: auto auto;
   align-content: start;
+  margin-bottom: 36px;
 }
 
 .project-left-section {
@@ -140,6 +141,10 @@
 }
 
 @media (max-width: 768px) {
+  .section4-work .grid-container {
+    margin-bottom: 24px;
+  }
+
   .project-image-container {
     margin-bottom: 8px;
   }
@@ -154,6 +159,10 @@
 }
 
 @media (max-width: 480px) {
+  .section4-work .grid-container {
+    margin-bottom: 18px;
+  }
+
   .project-image-container {
     margin-bottom: 6px;
   }

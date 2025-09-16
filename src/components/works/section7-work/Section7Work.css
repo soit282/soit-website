@@ -7,6 +7,7 @@
 .section7-work .grid-container {
   height: auto;
   align-content: center;
+  margin-bottom: 36px;
 }
 
 .display-main-section {
@@ -66,8 +67,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .section7-work .grid-container {
+    margin-bottom: 24px;
+  }
+
   .display-video-container {
-    height: 60vh;
     margin-bottom: 8px;
   }
 
@@ -83,8 +87,11 @@
 }
 
 @media (max-width: 480px) {
+  .section7-work .grid-container {
+    margin-bottom: 18px;
+  }
+
   .display-video-container {
-    height: 50vh;
     margin-bottom: 6px;
   }
 
