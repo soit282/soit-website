@@ -219,10 +219,6 @@ const TraMadeContent = () => {
                   effect="blur"
                 />
               )}
-              <div className="tramade-media-info">
-                <h3 className="tramade-media-title text-7">{asset.title}</h3>
-                <p className="tramade-media-description text-8">{asset.description}</p>
-              </div>
             </>
           )}
         </div>
@@ -233,13 +229,6 @@ const TraMadeContent = () => {
   return (
     <section className="tramade-content">
       <div className="grid-container">
-        <div className="tramade-content-header" style={{ gridColumn: "1 / span 12" }}>
-          <h2 className="text-1">Project Gallery</h2>
-          <p className="text-4" style={{ marginTop: '20px', color: '#939393' }}>
-            A comprehensive look at the TràMADE brand identity development process
-          </p>
-        </div>
-
         <div className="tramade-media-grid" style={{ gridColumn: "1 / span 12" }}>
           {tramadeAssets.map(renderMediaItem)}
         </div>
