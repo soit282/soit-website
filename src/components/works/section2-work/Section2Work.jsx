@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Section2Work.css";
 import "@styles/grid-system.css";
 
@@ -7,6 +8,7 @@ export default function Section2Work() {
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredRight, setIsHoveredRight] = useState(false);
   const sectionRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -37,6 +39,7 @@ export default function Section2Work() {
           style={{ gridColumn: "1 / span 8" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          onClick={() => navigate('/works/tramade')}
         >
           <div className="work-image-container">
             <img
@@ -96,6 +99,7 @@ export default function Section2Work() {
             className="work-details-hover-area"
             onMouseEnter={() => setIsHoveredRight(true)}
             onMouseLeave={() => setIsHoveredRight(false)}
+            onClick={() => navigate('/works/tramade')}
           >
             <img
               src={
