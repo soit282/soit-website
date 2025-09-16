@@ -1,0 +1,163 @@
+.tramade-work-detail {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #1f1f1f;
+  padding: 0 1.25%;
+}
+
+.tramade-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+
+.tramade-hero {
+  text-align: center;
+  margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tramade-hero.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tramade-title {
+  color: #1f1f1f;
+  margin-bottom: 20px;
+}
+
+.tramade-subtitle {
+  color: #939393;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tramade-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.tramade-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.tramade-description {
+  color: #1f1f1f;
+  line-height: 1.6;
+}
+
+.tramade-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-label {
+  color: #939393;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  color: #1f1f1f;
+  font-weight: 500;
+}
+
+.tramade-images {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.tramade-image-container {
+  width: 100%;
+  aspect-ratio: 3/2;
+  background: #f5f5f5;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.tramade-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.tramade-image:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .tramade-content {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .tramade-container {
+    padding: 80px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .tramade-container {
+    padding: 60px 0;
+  }
+
+  .tramade-hero {
+    margin-bottom: 60px;
+  }
+
+  .tramade-content {
+    gap: 40px;
+  }
+
+  .tramade-info-section {
+    gap: 40px;
+  }
+
+  .tramade-images {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tramade-work-detail {
+    padding: 0 20px;
+  }
+
+  .tramade-container {
+    padding: 40px 0;
+  }
+
+  .tramade-hero {
+    margin-bottom: 40px;
+  }
+
+  .tramade-content {
+    gap: 32px;
+  }
+
+  .tramade-info-section {
+    gap: 32px;
+  }
+
+  .tramade-images {
+    gap: 20px;
+  }
+}
