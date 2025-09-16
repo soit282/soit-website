@@ -1,30 +1,15 @@
 import { useEffect, useState, useRef } from "react";
+import TraMadeContent from "./TraMadeContent";
 import "./TraMadeWorkDetail.css";
 import "@styles/grid-system.css";
 
 export default function TraMadeWorkDetail() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Set to true immediately
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    // Optional: Add smooth entry animation with delay
+    setTimeout(() => setIsVisible(true), 100);
   }, []);
 
   return (
@@ -87,6 +72,9 @@ export default function TraMadeWorkDetail() {
           </p>
         </div>
       </div>
+
+      {/* TraMADE Content Gallery */}
+      <TraMadeContent />
     </div>
   );
 }
