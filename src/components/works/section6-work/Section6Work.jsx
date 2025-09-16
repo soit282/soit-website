@@ -8,6 +8,21 @@ export default function Section6Work() {
   const [isHoveredRight, setIsHoveredRight] = useState(false);
   const sectionRef = useRef(null);
 
+  // Preload hover images
+  useEffect(() => {
+    const imagesToPreload = [
+      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
+      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
+      "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
+      "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+    ];
+
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -41,15 +56,27 @@ export default function Section6Work() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className="gallery-image-container">
+            <div className="gallery-image-container" style={{ position: 'relative' }}>
               <img
-                src={
-                  isHovered
-                    ? "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
-                    : "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
-                }
+                src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
                 alt="Gallery Left"
                 className="gallery-image"
+                style={{
+                  opacity: isHovered ? 0 : 1,
+                  transition: 'opacity 0.3s ease',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0
+                }}
+              />
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
+                alt="Gallery Left Hover"
+                className="gallery-image"
+                style={{
+                  opacity: isHovered ? 1 : 0,
+                  transition: 'opacity 0.3s ease'
+                }}
               />
             </div>
             <div className="gallery-info-row">
@@ -101,15 +128,29 @@ export default function Section6Work() {
             onMouseEnter={() => setIsHoveredRight(true)}
             onMouseLeave={() => setIsHoveredRight(false)}
           >
-            <img
-              src={
-                isHoveredRight
-                  ? "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
-                  : "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
-              }
-              alt="Gallery Right"
-              className="gallery-details-image"
-            />
+            <div style={{ position: 'relative', marginBottom: '12px' }}>
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
+                alt="Gallery Right"
+                className="gallery-details-image"
+                style={{
+                  opacity: isHoveredRight ? 0 : 1,
+                  transition: 'opacity 0.3s ease',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0
+                }}
+              />
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+                alt="Gallery Right Hover"
+                className="gallery-details-image"
+                style={{
+                  opacity: isHoveredRight ? 1 : 0,
+                  transition: 'opacity 0.3s ease'
+                }}
+              />
+            </div>
             <div className="gallery-details-text">
               <div className="gallery-category">
                 <span

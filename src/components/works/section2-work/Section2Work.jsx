@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import LazyImage from "@components/common/LazyImage";
 import "./Section2Work.css";
 import "@styles/grid-system.css";
 
@@ -10,6 +9,21 @@ export default function Section2Work() {
   const [isHoveredRight, setIsHoveredRight] = useState(false);
   const sectionRef = useRef(null);
   const navigate = useNavigate();
+
+  // Preload hover images on component mount
+  useEffect(() => {
+    const imagesToPreload = [
+      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
+      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
+      "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
+      "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+    ];
+
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,16 +56,27 @@ export default function Section2Work() {
           onMouseLeave={() => setIsHovered(false)}
           onClick={() => navigate('/works/tramade')}
         >
-          <div className="work-image-container">
-            <LazyImage
-              src={
-                isHovered
-                  ? "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
-                  : "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
-              }
+          <div className="work-image-container" style={{ position: 'relative' }}>
+            <img
+              src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
               alt="TraMADE Project"
               className="work-image"
-              effect="blur"
+              style={{
+                opacity: isHovered ? 0 : 1,
+                transition: 'opacity 0.3s ease',
+                position: 'absolute',
+                top: 0,
+                left: 0
+              }}
+            />
+            <img
+              src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
+              alt="TraMADE Project Hover"
+              className="work-image"
+              style={{
+                opacity: isHovered ? 1 : 0,
+                transition: 'opacity 0.3s ease'
+              }}
             />
           </div>
           <div className="work-info-row">
@@ -103,16 +128,29 @@ export default function Section2Work() {
             onMouseLeave={() => setIsHoveredRight(false)}
             onClick={() => navigate('/works/tramade')}
           >
-            <LazyImage
-              src={
-                isHoveredRight
-                  ? "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
-                  : "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
-              }
-              alt="OKKIO"
-              className="work-details-image"
-              effect="blur"
-            />
+            <div style={{ position: 'relative', marginBottom: '12px' }}>
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
+                alt="OKKIO"
+                className="work-details-image"
+                style={{
+                  opacity: isHoveredRight ? 0 : 1,
+                  transition: 'opacity 0.3s ease',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0
+                }}
+              />
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+                alt="OKKIO Hover"
+                className="work-details-image"
+                style={{
+                  opacity: isHoveredRight ? 1 : 0,
+                  transition: 'opacity 0.3s ease'
+                }}
+              />
+            </div>
             <div className="work-details-text">
               <div className="work-category">
                 <span

@@ -7,6 +7,12 @@ export default function Section5Work() {
   const [isHovered, setIsHovered] = useState(false);
   const sectionRef = useRef(null);
 
+  // Preload hover image
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/1_Homepage/1_Homepage/2_Feature works/TBros_2.png";
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {

@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import LazyImage from "@components/common/LazyImage";
 import "./Section4Work.css";
 import "@styles/grid-system.css";
 
@@ -8,6 +7,21 @@ export default function Section4Work() {
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredRight, setIsHoveredRight] = useState(false);
   const sectionRef = useRef(null);
+
+  // Preload hover images
+  useEffect(() => {
+    const imagesToPreload = [
+      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
+      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
+      "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
+      "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+    ];
+
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,15 +57,21 @@ export default function Section4Work() {
             onMouseLeave={() => setIsHovered(false)}
           >
             <div className="project-image-container">
-              <LazyImage
-                src={
-                  isHovered
-                    ? "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
-                    : "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
-                }
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
                 alt="Project Left"
                 className="project-image"
-                effect="blur"
+                style={{
+                  display: isHovered ? 'none' : 'block'
+                }}
+              />
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
+                alt="Project Left Hover"
+                className="project-image"
+                style={{
+                  display: isHovered ? 'block' : 'none'
+                }}
               />
             </div>
             <div className="project-info-row">
@@ -103,15 +123,21 @@ export default function Section4Work() {
             onMouseEnter={() => setIsHoveredRight(true)}
             onMouseLeave={() => setIsHoveredRight(false)}
           >
-            <LazyImage
-              src={
-                isHoveredRight
-                  ? "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
-                  : "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
-              }
+            <img
+              src="/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
               alt="Right Project"
               className="project-details-image"
-              effect="blur"
+              style={{
+                display: isHoveredRight ? 'none' : 'block'
+              }}
+            />
+            <img
+              src="/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+              alt="Right Project Hover"
+              className="project-details-image"
+              style={{
+                display: isHoveredRight ? 'block' : 'none'
+              }}
             />
             <div className="project-details-text">
               <div className="project-category">

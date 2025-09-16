@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import LazyImage from "@components/common/LazyImage";
 import LazyVideo from "@components/common/LazyVideo";
 import "@components/common/LazyMedia.css";
 import "./Section3Work.css";
@@ -9,6 +8,12 @@ export default function Section3Work() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const sectionRef = useRef(null);
+
+  // Preload hover image
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/1_Homepage/1_Homepage/2_Feature works/TBros_2.png";
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,11 +47,10 @@ export default function Section3Work() {
         >
           <div className="work-video-container">
             {isHovered ? (
-              <LazyImage
+              <img
                 src="/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"
                 alt="TBros"
                 className="work-video"
-                effect="blur"
               />
             ) : (
               <LazyVideo
