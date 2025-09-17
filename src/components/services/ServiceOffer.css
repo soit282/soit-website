@@ -5,6 +5,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  position: relative;
+}
+
+.service-offer-section::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: #1f1f1f;
+  z-index: 10;
 }
 
 .service-offer-header {
