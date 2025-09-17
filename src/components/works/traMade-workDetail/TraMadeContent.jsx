@@ -10,7 +10,7 @@ const TraMadeContent = () => {
   const observerRef = useRef(null);
   const videoPreloadQueue = useRef([]);
 
-  // Define all TraMADE assets in order with grid positions
+  // Define all TraMADE assets in order with grid positions - updated with a/b variants
   const tramadeAssets = [
     {
       id: 1,
@@ -26,7 +26,7 @@ const TraMadeContent = () => {
       type: "image",
       title: "Brand Introduction",
       description: "Tea mastery from Măng Đen highlands",
-      gridColumn: "1 / span 12",
+      gridColumn: "1 / span 6",
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ const TraMadeContent = () => {
       type: "image",
       title: "Brand Introduction - Part 2",
       description: "Tea mastery from Măng Đen highlands continued",
-      gridColumn: "1 / span 12",
+      gridColumn: "7 / span 6",
     },
     {
       id: 4,
@@ -120,19 +120,35 @@ const TraMadeContent = () => {
     },
     {
       id: 14,
-      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_13_Box anatomy.mp4",
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_13a_Box anatomy.mp4",
       type: "video",
       title: "Box Anatomy",
       description: "Packaging structure and design details",
-      gridColumn: "1 / span 12",
+      gridColumn: "1 / span 6",
     },
     {
       id: 15,
-      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_14_Tea bag flat 2d motion.mp4",
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_13b_Box anatomy.jpg",
+      type: "image",
+      title: "Box Anatomy - Part 2",
+      description: "Additional packaging structure details",
+      gridColumn: "7 / span 6",
+    },
+    {
+      id: 16,
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_14a_Tea bag flat 2d motion.mp4",
       type: "video",
-      title: "Tea Bag Animation",
+      title: "Tea Bag Animation - Part A",
       description: "2D motion graphics for tea bag design",
-      gridColumn: "1 / span 12",
+      gridColumn: "1 / span 6",
+    },
+    {
+      id: 17,
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_14b_Tea bag flat 2d motion.png",
+      type: "image",
+      title: "Tea Bag Animation - Part B",
+      description: "Additional 2D motion graphics for tea bag design",
+      gridColumn: "7 / span 6",
     },
     {
       id: 16,
@@ -152,11 +168,19 @@ const TraMadeContent = () => {
     },
     {
       id: 18,
-      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_17_close up packaging standard.png",
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_17a_close up packaging standard.png",
       type: "image",
-      title: "Packaging Close-up",
+      title: "Packaging Close-up - Part A",
       description: "Detailed packaging design elements",
-      gridColumn: "1 / span 12",
+      gridColumn: "1 / span 6",
+    },
+    {
+      id: 19,
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_17b_close up packaging standard.png",
+      type: "image",
+      title: "Packaging Close-up - Part B",
+      description: "Additional detailed packaging design elements",
+      gridColumn: "7 / span 6",
     },
     {
       id: 19,
@@ -168,14 +192,22 @@ const TraMadeContent = () => {
     },
     {
       id: 20,
-      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_19_Packaging.jpg",
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_19a_Packaging.jpg",
       type: "image",
-      title: "Packaging Variations",
+      title: "Packaging Variations - Part A",
       description: "Different packaging options",
-      gridColumn: "1 / span 12",
+      gridColumn: "1 / span 6",
     },
     {
       id: 21,
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_19b_Packaging.jpg",
+      type: "image",
+      title: "Packaging Variations - Part B",
+      description: "Additional packaging options",
+      gridColumn: "7 / span 6",
+    },
+    {
+      id: 22,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_20_Insta.jpg",
       type: "image",
       title: "Social Media",
@@ -183,7 +215,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 22,
+      id: 23,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_21.jpg",
       type: "image",
       title: "Final Showcase",
@@ -195,14 +227,14 @@ const TraMadeContent = () => {
   // Preload videos in background
   const preloadVideo = async (videoSrc) => {
     return new Promise((resolve) => {
-      const video = document.createElement('video');
-      video.preload = 'metadata'; // Load only metadata first
+      const video = document.createElement("video");
+      video.preload = "metadata"; // Load only metadata first
 
       // Load metadata first
       video.onloadedmetadata = () => {
         // Then load more data progressively
-        video.preload = 'auto';
-        setPreloadedVideos(prev => new Set([...prev, videoSrc]));
+        video.preload = "auto";
+        setPreloadedVideos((prev) => new Set([...prev, videoSrc]));
         resolve();
       };
 
@@ -213,7 +245,7 @@ const TraMadeContent = () => {
 
   // Progressive video preloading
   useEffect(() => {
-    const videos = tramadeAssets.filter(asset => asset.type === 'video');
+    const videos = tramadeAssets.filter((asset) => asset.type === "video");
 
     // Sort videos by size (heavy videos last)
     const sortedVideos = videos.sort((a, b) => {
@@ -227,7 +259,7 @@ const TraMadeContent = () => {
       for (const video of sortedVideos) {
         await preloadVideo(video.src);
         // Small delay between loads to prevent lag
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
       }
     };
 
@@ -282,7 +314,11 @@ const TraMadeContent = () => {
       >
         <div
           className="tramade-media-wrapper"
-          style={asset.customAspectRatio ? { aspectRatio: asset.customAspectRatio } : {}}
+          style={
+            asset.customAspectRatio
+              ? { aspectRatio: asset.customAspectRatio }
+              : {}
+          }
         >
           {isVisible && (
             <>
@@ -290,7 +326,11 @@ const TraMadeContent = () => {
                 <LazyVideo
                   src={asset.src}
                   className="tramade-media"
-                  style={asset.customAspectRatio ? { aspectRatio: asset.customAspectRatio } : {}}
+                  style={
+                    asset.customAspectRatio
+                      ? { aspectRatio: asset.customAspectRatio }
+                      : {}
+                  }
                   autoPlay
                   muted
                   loop
@@ -303,7 +343,11 @@ const TraMadeContent = () => {
                   src={asset.src}
                   alt={asset.title}
                   className="tramade-media"
-                  style={asset.customAspectRatio ? { aspectRatio: asset.customAspectRatio } : {}}
+                  style={
+                    asset.customAspectRatio
+                      ? { aspectRatio: asset.customAspectRatio }
+                      : {}
+                  }
                   effect="blur"
                 />
               )}
