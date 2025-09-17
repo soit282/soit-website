@@ -9,7 +9,8 @@
 }
 
 .section4-work .grid-container {
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   grid-template-rows: auto auto;
   align-content: start;
   margin-bottom: 36px;
