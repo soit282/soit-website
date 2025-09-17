@@ -6,16 +6,16 @@
 }
 
 .tramade-media-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 120px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  row-gap: 12px;
 }
 
 .tramade-media-item {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tramade-media-item[data-visible="true"] {
@@ -27,17 +27,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
 .tramade-media {
   width: 100%;
   height: auto;
-  border-radius: 8px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
-
 
 /* Video specific styles */
 video.tramade-media {
@@ -49,10 +46,6 @@ video.tramade-media {
   .tramade-content {
     padding: 100px 1.25%;
   }
-
-  .tramade-media-grid {
-    gap: 100px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -60,8 +53,9 @@ video.tramade-media {
     padding: 80px 1.25%;
   }
 
-  .tramade-media-grid {
-    gap: 80px;
+  /* Make items span full width on tablet */
+  .tramade-media-item {
+    grid-column: 1 / span 12 !important;
   }
 }
 
@@ -70,8 +64,9 @@ video.tramade-media {
     padding: 60px 20px;
   }
 
-  .tramade-media-grid {
-    gap: 60px;
+  /* Make items span full width on mobile */
+  .tramade-media-item {
+    grid-column: 1 / span 12 !important;
   }
 }
 
@@ -82,22 +77,22 @@ video.tramade-media {
   align-items: center;
   justify-content: center;
   background: #2a2a2a;
-  border-radius: 8px;
 }
 
 .tramade-media-item:not([data-visible="true"]) .tramade-media-wrapper::before {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
-  border: 3px solid #444;
-  border-top: 3px solid #fff;
-  border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Staggered animation for items */
