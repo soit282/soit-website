@@ -22,7 +22,7 @@ const TraMadeContent = () => {
     },
     {
       id: 2,
-      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_2_introduce.jpg",
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_2a_introduce.jpg",
       type: "image",
       title: "Brand Introduction",
       description: "Tea mastery from Măng Đen highlands",
@@ -30,6 +30,14 @@ const TraMadeContent = () => {
     },
     {
       id: 3,
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_2b_introduce.jpg",
+      type: "image",
+      title: "Brand Introduction - Part 2",
+      description: "Tea mastery from Măng Đen highlands continued",
+      gridColumn: "1 / span 12",
+    },
+    {
+      id: 4,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_3_Colors.mp4",
       type: "video",
       title: "Color Palette",
@@ -37,7 +45,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 4,
+      id: 5,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_4_Typo.jpg",
       type: "image",
       title: "Typography",
@@ -45,7 +53,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 5,
+      id: 6,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_5_Typeface_2.mp4",
       type: "video",
       title: "Typeface Animation",
@@ -53,7 +61,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 6,
+      id: 7,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_6_Typeface 3.mp4",
       type: "video",
       title: "Typeface Variants",
@@ -61,7 +69,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 7,
+      id: 8,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_7_Layout.png",
       type: "image",
       title: "Layout System",
@@ -69,7 +77,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 8,
+      id: 9,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_8_Businesscard.png",
       type: "image",
       title: "Business Cards",
@@ -77,7 +85,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 9,
+      id: 10,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_9_Thank you card.png",
       type: "image",
       title: "Thank You Card",
@@ -86,7 +94,7 @@ const TraMadeContent = () => {
       customAspectRatio: "16/9",
     },
     {
-      id: 10,
+      id: 11,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_10_Introduction&Thank u card.png",
       type: "image",
       title: "Introduction & Thank You Cards",
@@ -94,7 +102,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 11,
+      id: 12,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_11_Logo.jpg",
       type: "image",
       title: "Logo Design",
@@ -103,7 +111,7 @@ const TraMadeContent = () => {
       customAspectRatio: "936/437",
     },
     {
-      id: 12,
+      id: 13,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_12_Stationery overview.png",
       type: "image",
       title: "Stationery Overview",
@@ -111,7 +119,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 13,
+      id: 14,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_13_Box anatomy.mp4",
       type: "video",
       title: "Box Anatomy",
@@ -119,7 +127,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 14,
+      id: 15,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_14_Tea bag flat 2d motion.mp4",
       type: "video",
       title: "Tea Bag Animation",
@@ -127,7 +135,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 15,
+      id: 16,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_15_standard packaging.png",
       type: "image",
       title: "Standard Packaging",
@@ -135,7 +143,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 16,
+      id: 17,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_16_container packaging.png",
       type: "image",
       title: "Container Packaging",
@@ -143,7 +151,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 17,
+      id: 18,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_17_close up packaging standard.png",
       type: "image",
       title: "Packaging Close-up",
@@ -151,7 +159,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 18,
+      id: 19,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_18_Packaging.jpg",
       type: "image",
       title: "Packaging System",
@@ -159,7 +167,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 19,
+      id: 20,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_19_Packaging.jpg",
       type: "image",
       title: "Packaging Variations",
@@ -167,7 +175,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 20,
+      id: 21,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_20_Insta.jpg",
       type: "image",
       title: "Social Media",
@@ -175,7 +183,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 21,
+      id: 22,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_21.jpg",
       type: "image",
       title: "Final Showcase",
