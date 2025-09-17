@@ -27,6 +27,7 @@ const TraMadeContent = () => {
       title: "Brand Introduction",
       description: "Tea mastery from Măng Đen highlands",
       gridColumn: "1 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 3,
@@ -35,6 +36,7 @@ const TraMadeContent = () => {
       title: "Brand Introduction - Part 2",
       description: "Tea mastery from Măng Đen highlands continued",
       gridColumn: "7 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 4,
@@ -125,6 +127,7 @@ const TraMadeContent = () => {
       title: "Box Anatomy",
       description: "Packaging structure and design details",
       gridColumn: "1 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 15,
@@ -133,6 +136,7 @@ const TraMadeContent = () => {
       title: "Box Anatomy - Part 2",
       description: "Additional packaging structure details",
       gridColumn: "7 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 16,
@@ -141,6 +145,7 @@ const TraMadeContent = () => {
       title: "Tea Bag Animation - Part A",
       description: "2D motion graphics for tea bag design",
       gridColumn: "1 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 17,
@@ -149,6 +154,7 @@ const TraMadeContent = () => {
       title: "Tea Bag Animation - Part B",
       description: "Additional 2D motion graphics for tea bag design",
       gridColumn: "7 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 16,
@@ -173,6 +179,7 @@ const TraMadeContent = () => {
       title: "Packaging Close-up - Part A",
       description: "Detailed packaging design elements",
       gridColumn: "1 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 19,
@@ -181,6 +188,7 @@ const TraMadeContent = () => {
       title: "Packaging Close-up - Part B",
       description: "Additional detailed packaging design elements",
       gridColumn: "7 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 19,
@@ -192,11 +200,12 @@ const TraMadeContent = () => {
     },
     {
       id: 20,
-      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_19a_Packaging.jpg",
+      src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_19a_Packaging.png",
       type: "image",
       title: "Packaging Variations - Part A",
       description: "Different packaging options",
       gridColumn: "1 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 21,
@@ -205,6 +214,7 @@ const TraMadeContent = () => {
       title: "Packaging Variations - Part B",
       description: "Additional packaging options",
       gridColumn: "7 / span 6",
+      customAspectRatio: "155/208",
     },
     {
       id: 22,
