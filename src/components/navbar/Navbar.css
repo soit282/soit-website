@@ -7,6 +7,7 @@
   z-index: 1000;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+  mix-blend-mode: difference;
 }
 
 .navbar-container {
@@ -25,6 +26,11 @@
   transition: opacity 0.3s ease;
 }
 
+/* Ensure all navbar content has proper contrast */
+.navbar * {
+  color: white;
+}
+
 .navbar-logo-wrapper.hidden {
   opacity: 0;
   pointer-events: none;
@@ -40,6 +46,7 @@
   height: 20px;
   width: auto;
   display: block;
+  filter: invert(1); /* Make logo white for mix-blend-mode */
 }
 
 /* Menu positioning using grid */
@@ -112,7 +119,7 @@
 }
 
 .navbar-vacation {
-  color: #1f1f1f;
+  color: white; /* Changed to white for mix-blend-mode */
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -122,6 +129,7 @@
   width: 8px;
   height: 8px;
   display: inline-block;
+  filter: invert(1); /* Make icon white for mix-blend-mode */
 }
 
 .mobile-menu-toggle {
