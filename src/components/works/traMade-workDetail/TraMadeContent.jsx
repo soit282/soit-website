@@ -157,7 +157,7 @@ const TraMadeContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 16,
+      id: 18,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_15_standard packaging.png",
       type: "image",
       title: "Standard Packaging",
@@ -165,7 +165,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 17,
+      id: 19,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_16_container packaging.png",
       type: "image",
       title: "Container Packaging",
@@ -173,7 +173,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 18,
+      id: 20,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_17a_close up packaging standard.png",
       type: "image",
       title: "Packaging Close-up - Part A",
@@ -182,7 +182,7 @@ const TraMadeContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 19,
+      id: 21,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TraMADE_17b_close up packaging standard.png",
       type: "image",
       title: "Packaging Close-up - Part B",
@@ -191,7 +191,7 @@ const TraMadeContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 19,
+      id: 22,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_18_Packaging.jpg",
       type: "image",
       title: "Packaging System",
@@ -199,7 +199,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 20,
+      id: 23,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_19a_Packaging.png",
       type: "image",
       title: "Packaging Variations - Part A",
@@ -208,7 +208,7 @@ const TraMadeContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 21,
+      id: 24,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_19b_Packaging.jpg",
       type: "image",
       title: "Packaging Variations - Part B",
@@ -217,7 +217,7 @@ const TraMadeContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 22,
+      id: 25,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_20_Insta.jpg",
       type: "image",
       title: "Social Media",
@@ -225,7 +225,7 @@ const TraMadeContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 23,
+      id: 26,
       src: "/2_Workspage/2_Works page/traMade/3. Final upload/TràMADE_21.jpg",
       type: "image",
       title: "Final Showcase",
