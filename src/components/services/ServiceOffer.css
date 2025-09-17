@@ -12,7 +12,7 @@
 }
 
 .service-offer-section::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -415,7 +415,6 @@
     grid-template-columns: 1fr;
     gap: 20px;
     max-width: 100%;
-    padding: 0 20px;
   }
 
   .offering-card {
