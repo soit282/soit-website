@@ -6,7 +6,9 @@ import "@styles/grid-system.css";
 
 const TraMadeContent = () => {
   const [visibleItems, setVisibleItems] = useState(new Set());
+  const [preloadedVideos, setPreloadedVideos] = useState(new Set());
   const observerRef = useRef(null);
+  const videoPreloadQueue = useRef([]);
 
   // Define all TraMADE assets in order with grid positions
   const tramadeAssets = [
@@ -81,6 +83,7 @@ const TraMadeContent = () => {
       title: "Thank You Card",
       description: "Customer appreciation materials",
       gridColumn: "1 / span 12",
+      customAspectRatio: "16/9",
     },
     {
       id: 10,
@@ -97,6 +100,7 @@ const TraMadeContent = () => {
       title: "Logo Design",
       description: "Brand mark and logomark system",
       gridColumn: "1 / span 12",
+      customAspectRatio: "936/437",
     },
     {
       id: 12,
@@ -180,6 +184,53 @@ const TraMadeContent = () => {
     },
   ];
 
+  // Preload videos in background
+  const preloadVideo = async (videoSrc) => {
+    return new Promise((resolve) => {
+      const video = document.createElement('video');
+      video.preload = 'metadata'; // Load only metadata first
+
+      // Load metadata first
+      video.onloadedmetadata = () => {
+        // Then load more data progressively
+        video.preload = 'auto';
+        setPreloadedVideos(prev => new Set([...prev, videoSrc]));
+        resolve();
+      };
+
+      video.onerror = () => resolve(); // Continue even if error
+      video.src = videoSrc;
+    });
+  };
+
+  // Progressive video preloading
+  useEffect(() => {
+    const videos = tramadeAssets.filter(asset => asset.type === 'video');
+
+    // Sort videos by size (heavy videos last)
+    const sortedVideos = videos.sort((a, b) => {
+      if (a.id === 6) return 1; // Heavy video (id: 6) loads last
+      if (b.id === 6) return -1;
+      return a.id - b.id;
+    });
+
+    // Preload videos one by one to avoid bandwidth congestion
+    const loadVideosSequentially = async () => {
+      for (const video of sortedVideos) {
+        await preloadVideo(video.src);
+        // Small delay between loads to prevent lag
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+    };
+
+    // Start preloading after initial page load
+    const timer = setTimeout(() => {
+      loadVideosSequentially();
+    }, 2000); // Wait 2 seconds after mount
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // Set up intersection observer for lazy loading
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -191,7 +242,7 @@ const TraMadeContent = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "100px" }
+      { threshold: 0.1, rootMargin: "300px" } // Increased for earlier loading
     );
 
     return () => {
@@ -221,23 +272,30 @@ const TraMadeContent = () => {
         data-visible={isVisible}
         style={{ gridColumn: asset.gridColumn }}
       >
-        <div className="tramade-media-wrapper">
+        <div
+          className="tramade-media-wrapper"
+          style={asset.customAspectRatio ? { aspectRatio: asset.customAspectRatio } : {}}
+        >
           {isVisible && (
             <>
               {asset.type === "video" ? (
                 <LazyVideo
                   src={asset.src}
                   className="tramade-media"
+                  style={asset.customAspectRatio ? { aspectRatio: asset.customAspectRatio } : {}}
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload={preloadedVideos.has(asset.src) ? "auto" : "metadata"}
+                  loading="lazy"
                 />
               ) : (
                 <LazyImage
                   src={asset.src}
                   alt={asset.title}
                   className="tramade-media"
+                  style={asset.customAspectRatio ? { aspectRatio: asset.customAspectRatio } : {}}
                   effect="blur"
                 />
               )}
