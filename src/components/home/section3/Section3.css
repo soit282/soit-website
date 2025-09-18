@@ -1,12 +1,22 @@
 .section3 {
   width: 100%;
-  max-height: 792px;
   background-color: #fff;
-  padding: 240px 1.25% 120px 1.25%;
+  padding: 0;
   box-sizing: border-box;
+  height: 200vh; /* Fixed height for sticky scroll effect */
+  position: relative;
+}
+
+.section3-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding: 240px 1.25% 120px 1.25%;
+  box-sizing: border-box;
 }
 
 .section3-content {
@@ -27,12 +37,16 @@
 
 @media (max-width: 1920px) {
   .section3 {
-    max-height: 792px;
+    height: 200vh;
   }
 }
 
 @media (max-width: 1440px) {
   .section3 {
+    height: 180vh;
+  }
+
+  .section3-sticky-wrapper {
     padding: 180px 40px 100px 40px;
   }
 
@@ -43,8 +57,11 @@
 
 @media (max-width: 1024px) {
   .section3 {
+    height: 160vh;
+  }
+
+  .section3-sticky-wrapper {
     padding: 140px 40px 80px 40px;
-    max-height: auto;
   }
 
   .section3-content {
@@ -54,8 +71,11 @@
 
 @media (max-width: 768px) {
   .section3 {
+    height: 140vh;
+  }
+
+  .section3-sticky-wrapper {
     padding: 100px 30px 60px 30px;
-    max-height: auto;
   }
 
   .section3-heading {
@@ -73,6 +93,10 @@
 
 @media (max-width: 480px) {
   .section3 {
+    height: 120vh;
+  }
+
+  .section3-sticky-wrapper {
     padding: 80px 20px 50px 20px;
   }
 
