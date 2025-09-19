@@ -81,10 +81,6 @@
   .tramade-description-section {
     grid-column: 7 / span 6 !important;
   }
-
-  .tramade-work-detail {
-    padding: 100px 1.25%;
-  }
 }
 
 @media (max-width: 768px) {
@@ -105,17 +101,9 @@
   .tramade-details-section {
     gap: 32px;
   }
-
-  .tramade-work-detail {
-    padding: 80px 1.25%;
-  }
 }
 
 @media (max-width: 480px) {
-  .tramade-work-detail {
-    padding: 60px 20px;
-  }
-
   .tramade-details-section {
     gap: 24px;
   }

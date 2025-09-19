@@ -1,8 +1,9 @@
 .tramade-content {
   background: #1f1f1f;
   color: #ffffff;
-  padding: 120px 0;
+  padding: 120px 0 0 0;
   overflow-x: hidden;
+  margin-bottom: -1px; /* Fix for subpixel rendering gap */
 }
 
 .tramade-media-grid {
@@ -58,16 +59,9 @@ video.tramade-media {
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-  .tramade-content {
-    padding: 100px 1.25%;
-  }
 }
 
 @media (max-width: 768px) {
-  .tramade-content {
-    padding: 80px 1.25%;
-  }
-
   /* Make items span full width on tablet */
   .tramade-media-item {
     grid-column: 1 / span 12 !important;
@@ -75,10 +69,6 @@ video.tramade-media {
 }
 
 @media (max-width: 480px) {
-  .tramade-content {
-    padding: 60px 20px;
-  }
-
   /* Make items span full width on mobile */
   .tramade-media-item {
     grid-column: 1 / span 12 !important;
