@@ -112,8 +112,8 @@ export default function Section9() {
 
           <div className="clients-carousel-wrapper">
             <div className="clients-carousel-track">
-              {/* Duplicate clients array for seamless loop */}
-              {[...clients, ...clients].map((client, index) => (
+              {/* Show only first 4 items initially, duplicate for seamless loop */}
+              {clients.slice(0, 4).concat(clients.slice(0, 4)).map((client, index) => (
                 <div key={`${client.id}-${index}`} className="client-card">
                   <div
                     className="client-background"

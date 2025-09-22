@@ -55,7 +55,7 @@
 .clients-carousel-track {
   display: flex;
   gap: 0.625%;
-  animation: carousel-slide 40s linear infinite;
+  animation: carousel-slide 20s linear infinite;
 }
 
 @keyframes carousel-slide {
@@ -63,11 +63,13 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-50% - 0.3125%));
+    /* Move exactly 100% to show next set */
+    transform: translateX(calc(-100% - 0.625%));
   }
 }
 
 .client-card {
+  /* 4 cards visible: 100% / 4 = 25%, minus gap */
   width: calc(25% - 0.46875%);
   flex-shrink: 0;
   height: 571px;
