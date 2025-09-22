@@ -82,8 +82,17 @@ export default function Section9() {
 
   // Dynamic hover detection for carousel
   useEffect(() => {
+    let lastMouseX = null;
+    let lastMouseY = null;
+
     const checkHover = () => {
-      if (!carouselRef.current || mousePositionRef.current.x === null) return;
+      if (!carouselRef.current) return;
+
+      // Use last known mouse position if available
+      const mouseX = mousePositionRef.current.x !== null ? mousePositionRef.current.x : lastMouseX;
+      const mouseY = mousePositionRef.current.y !== null ? mousePositionRef.current.y : lastMouseY;
+
+      if (mouseX === null || mouseY === null) return;
 
       const cards = carouselRef.current.querySelectorAll('.client-card');
       let foundHover = false;
@@ -91,10 +100,10 @@ export default function Section9() {
       cards.forEach((card, index) => {
         const rect = card.getBoundingClientRect();
         if (
-          mousePositionRef.current.x >= rect.left &&
-          mousePositionRef.current.x <= rect.right &&
-          mousePositionRef.current.y >= rect.top &&
-          mousePositionRef.current.y <= rect.bottom
+          mouseX >= rect.left &&
+          mouseX <= rect.right &&
+          mouseY >= rect.top &&
+          mouseY <= rect.bottom
         ) {
           setHoveredCardIndex(index);
           foundHover = true;
@@ -108,24 +117,53 @@ export default function Section9() {
 
     const handleMouseMove = (e) => {
       mousePositionRef.current = { x: e.clientX, y: e.clientY };
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+      checkHover();
+    };
+
+    const handleMouseEnter = (e) => {
+      mousePositionRef.current = { x: e.clientX, y: e.clientY };
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
       checkHover();
     };
 
     const handleMouseLeave = () => {
       mousePositionRef.current = { x: null, y: null };
+      lastMouseX = null;
+      lastMouseY = null;
       setHoveredCardIndex(null);
+    };
+
+    const handleScroll = () => {
+      // Use last known mouse position during scroll
+      if (lastMouseX !== null && lastMouseY !== null) {
+        mousePositionRef.current = { x: lastMouseX, y: lastMouseY };
+      }
+      checkHover();
     };
 
     // Check hover continuously for carousel movement
     const interval = setInterval(checkHover, 100);
 
+    // Add event listeners
     window.addEventListener('mousemove', handleMouseMove);
-    carouselRef.current?.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('scroll', handleScroll);
+
+    if (carouselRef.current) {
+      carouselRef.current.addEventListener('mouseenter', handleMouseEnter);
+      carouselRef.current.addEventListener('mouseleave', handleMouseLeave);
+    }
 
     return () => {
       clearInterval(interval);
       window.removeEventListener('mousemove', handleMouseMove);
-      carouselRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('scroll', handleScroll);
+      if (carouselRef.current) {
+        carouselRef.current.removeEventListener('mouseenter', handleMouseEnter);
+        carouselRef.current.removeEventListener('mouseleave', handleMouseLeave);
+      }
     };
   }, []);
 
