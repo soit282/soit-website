@@ -4,8 +4,11 @@ import ArrowButton from "@components/common/ArrowButton";
 
 export default function Section9() {
   const [textRevealProgress, setTextRevealProgress] = useState(0);
+  const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
   const containerRef = useRef(null);
   const stickyRef = useRef(null);
+  const carouselRef = useRef(null);
+  const mousePositionRef = useRef({ x: null, y: null });
 
   const clients = [
     {
@@ -77,6 +80,74 @@ export default function Section9() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Dynamic hover detection for carousel
+  useEffect(() => {
+    const checkHover = () => {
+      if (!carouselRef.current || mousePositionRef.current.x === null) return;
+
+      const cards = carouselRef.current.querySelectorAll('.client-card');
+      let foundHover = false;
+
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        if (
+          mousePositionRef.current.x >= rect.left &&
+          mousePositionRef.current.x <= rect.right &&
+          mousePositionRef.current.y >= rect.top &&
+          mousePositionRef.current.y <= rect.bottom
+        ) {
+          setHoveredCardIndex(index);
+          foundHover = true;
+        }
+      });
+
+      if (!foundHover) {
+        setHoveredCardIndex(null);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      mousePositionRef.current = { x: e.clientX, y: e.clientY };
+      checkHover();
+    };
+
+    const handleMouseLeave = () => {
+      mousePositionRef.current = { x: null, y: null };
+      setHoveredCardIndex(null);
+    };
+
+    // Check hover continuously for carousel movement
+    const interval = setInterval(checkHover, 100);
+
+    window.addEventListener('mousemove', handleMouseMove);
+    carouselRef.current?.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('mousemove', handleMouseMove);
+      carouselRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  // Helper functions for hover styles
+  const getHoverBackground = (index) => {
+    switch (index) {
+      case 0: return 'none';
+      case 1: return 'none';
+      case 2: return `url("/1_Homepage/1_Homepage/3_Clients/soit_recent_work.svg")`;
+      case 3: return `url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.png")`;
+      default: return `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`;
+    }
+  };
+
+  const getHoverColor = (index) => {
+    switch (index) {
+      case 0: return 'white';
+      case 1: return 'rgba(246, 194, 7, 1)';
+      default: return 'transparent';
+    }
+  };
+
   // Split heading text for character-by-character reveal
   const headingText = "We collaborate with brands that aim to stand out, scale up, and speak clearly in a digital-first world.";
 
@@ -110,15 +181,24 @@ export default function Section9() {
             </h2>
           </div>
 
-          <div className="clients-carousel-wrapper">
+          <div className="clients-carousel-wrapper" ref={carouselRef}>
             <div className="clients-carousel-track">
               {/* Show only first 4 items initially, duplicate for seamless loop */}
               {clients.slice(0, 4).concat(clients.slice(0, 4)).map((client, index) => (
-                <div key={`${client.id}-${index}`} className="client-card">
+                <div
+                  key={`${client.id}-${index}`}
+                  className={`client-card ${hoveredCardIndex === index ? 'hovered' : ''}`}
+                  data-index={index % 4}
+                >
                   <div
                     className="client-background"
                     style={{
-                      backgroundImage: `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`,
+                      backgroundImage: hoveredCardIndex === index
+                        ? getHoverBackground(index % 4)
+                        : `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`,
+                      backgroundColor: hoveredCardIndex === index
+                        ? getHoverColor(index % 4)
+                        : 'transparent',
                     }}
                   >
                     <img

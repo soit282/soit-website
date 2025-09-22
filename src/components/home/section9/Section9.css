@@ -90,48 +90,9 @@
   transition: all 0.3s ease;
 }
 
-.client-card:nth-child(8n+1):hover .client-background {
-  background-color: white;
-  background-image: none !important;
-}
-
-.client-card:nth-child(8n+2):hover .client-background {
-  background-color: rgba(246, 194, 7, 1);
-  background-image: none !important;
-}
-
-.client-card:nth-child(8n+3):hover .client-background {
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/soit_recent_work.svg") !important;
-  background-size: cover;
-  background-position: center;
-}
-
-.client-card:nth-child(8n+4):hover .client-background {
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.png") !important;
-  background-size: cover;
-  background-position: center;
-}
-
-.client-card:nth-child(8n+5):hover .client-background {
-  background-color: white;
-  background-image: none !important;
-}
-
-.client-card:nth-child(8n+6):hover .client-background {
-  background-color: rgba(246, 194, 7, 1);
-  background-image: none !important;
-}
-
-.client-card:nth-child(8n+7):hover .client-background {
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/soit_recent_work.svg") !important;
-  background-size: cover;
-  background-position: center;
-}
-
-.client-card:nth-child(8n+8):hover .client-background {
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.png") !important;
-  background-size: cover;
-  background-position: center;
+/* Hover state controlled by JavaScript for better carousel detection */
+.client-card.hovered .client-background {
+  transform: scale(1.02);
 }
 
 .client-logo {
