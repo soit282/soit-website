@@ -172,43 +172,43 @@
 /* Responsive adjustments for smaller screens */
 @media (max-width: 1024px) {
   .text-1 {
-    font-size: 90px;
+    font-size: 120px;
   }
 
   .text-2 {
-    font-size: 75px;
+    font-size: 100px;
   }
 
   .text-2_100pt_medium {
-    font-size: 75px;
+    font-size: 100px;
   }
 
   .text-3 {
-    font-size: 48px;
+    font-size: 64px;
   }
 
   .text-4 {
-    font-size: 24px;
+    font-size: 30px;
   }
 
   .text-5 {
-    font-size: 18px;
+    font-size: 30px;
   }
 
   .text-6 {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .text-7 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .text-8 {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .text-1 {
     font-size: 60px;
   }
@@ -244,23 +244,23 @@
   .text-8 {
     font-size: 12px;
   }
-}
+} */
 
-@media (max-width: 480px) {
+@media (max-width: 425px) {
   .text-1 {
-    font-size: 40px;
+    font-size: 36px;
   }
 
   .text-2 {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .text-2_100pt_medium {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .text-3 {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .text-4 {
@@ -268,7 +268,7 @@
   }
 
   .text-5 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .text-6 {
@@ -276,10 +276,10 @@
   }
 
   .text-7 {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .text-8 {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
