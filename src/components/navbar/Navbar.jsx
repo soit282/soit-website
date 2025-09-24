@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import ParticleExplosion from '../effects/ParticleExplosion';
 import './Navbar.css';
 import '@styles/grid-system.css';
 
@@ -49,6 +50,8 @@ const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isInSection1, setIsInSection1] = useState(true);
+  const [explosionTrigger, setExplosionTrigger] = useState(0);
+  const [explosionPosition, setExplosionPosition] = useState({ x: 0, y: 0 });
   const worksRef = useRef(null);
   const aboutRef = useRef(null);
   const servicesRef = useRef(null);
@@ -180,7 +183,17 @@ const Navbar = () => {
 
         {/* Vacation text - positioned at right column */}
         <div className="navbar-vacation-wrapper">
-          <span className="navbar-vacation text-7">
+          <span
+            className="navbar-vacation text-7"
+            onClick={() => {
+              setExplosionPosition({
+                x: window.innerWidth / 2,
+                y: window.innerHeight / 2
+              });
+              setExplosionTrigger(prev => prev + 1);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
             We are on vacation
             <img src="/icon/Icon/ellipse.svg" alt="" className="navbar-vacation-icon" />
           </span>
@@ -196,6 +209,7 @@ const Navbar = () => {
           <span className="hamburger-line"></span>
         </button>
       </div>
+      <ParticleExplosion trigger={explosionTrigger} position={explosionPosition} />
     </nav>
   );
 };
