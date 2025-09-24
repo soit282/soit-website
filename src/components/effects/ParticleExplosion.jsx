@@ -13,7 +13,7 @@ class Particle {
     this.vx = Math.cos(angle) * velocity;
     this.vy = Math.sin(angle) * velocity - 10; // Start with upward velocity
 
-    this.size = options.size || Math.random() * 30 + 20;
+    this.size = options.size || Math.random() * 50 + 40;
     this.initialSize = this.size;
     this.rotation = Math.random() * Math.PI * 2;
     this.rotationSpeed = (Math.random() - 0.5) * 0.1;
@@ -54,7 +54,8 @@ class Particle {
 
     const elapsed = Date.now() - this.createdTime;
     if (elapsed > this.fadeDelay) {
-      this.life -= 0.015;
+      // Smooth fade out without flickering
+      this.life = Math.max(0, this.life - 0.015);
     }
 
     // Keep size constant - no scaling
@@ -81,7 +82,7 @@ class Particle {
   }
 
   isDead() {
-    return this.life <= 0 || this.size <= 0.5;
+    return this.life <= 0;
   }
 }
 
