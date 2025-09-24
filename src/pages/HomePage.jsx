@@ -13,7 +13,7 @@ import ServiceOffer from "@components/services/ServiceOffer";
 const HomePage = () => {
   return (
     <div className="home-page">
-      <Section1 />
+      {/* <Section1 /> */}
       <Section2 />
       <Section3 />
       <Section4 />

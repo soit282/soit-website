@@ -23,17 +23,13 @@
   align-items: center;
   height: 70px;
   opacity: 1;
-  transition: opacity 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 /* Ensure all navbar content has proper contrast */
 .navbar * {
   color: white;
-}
-
-.navbar-logo-wrapper.hidden {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .navbar-logo {
@@ -47,6 +43,11 @@
   width: auto;
   display: block;
   filter: invert(1); /* Make logo white for mix-blend-mode */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* Force GPU acceleration */
 }
 
 /* Menu positioning using grid */

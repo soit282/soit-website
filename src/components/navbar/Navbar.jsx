@@ -49,7 +49,8 @@ class SmoothShuffler {
 const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isInSection1, setIsInSection1] = useState(true);
+  const [logoScale, setLogoScale] = useState(1);
+  const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0 });
   const [explosionTrigger, setExplosionTrigger] = useState(0);
   const [explosionPosition, setExplosionPosition] = useState({ x: 0, y: 0 });
   const worksRef = useRef(null);
@@ -63,6 +64,19 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    // Use requestAnimationFrame for smoother scroll updates
+    let ticking = false;
+
+    const updateLogoOnScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     // Initialize shuffle effects for all menu items
     const menuRefs = [
       { ref: worksRef, key: "Works" },
@@ -80,29 +94,76 @@ const Navbar = () => {
       }
     });
 
-    // Handle scroll to detect section position
+    // Calculate initial scale based on viewport width
+    const calculateMaxScale = () => {
+      // Logo SVG viewBox width is 1404px, height 442px
+      // At normal size (height: 20px), width is approximately 63px
+      // We want it to fill about 90% of viewport width
+      const targetWidth = window.innerWidth * 0.9;
+      const logoBaseWidth = 63;
+      const maxScale = targetWidth / logoBaseWidth;
+      // Cap the scale to prevent extreme pixelation
+      return Math.min(maxScale, 25);
+    };
+
+    // Handle scroll to scale and move logo
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const section1Height = window.innerHeight;
-
-      // Only hide logo when in HomePage Section1, show on all other pages
       const isHomePage = location.pathname === '/';
+      const maxScale = calculateMaxScale();
+
       if (isHomePage) {
-        setIsInSection1(currentScrollY < section1Height * 0.8);
+        // Use smoother easing function for scroll progress
+        const scrollRange = section1Height * 0.6; // Slightly longer scroll range
+        const rawProgress = Math.min(currentScrollY / scrollRange, 1);
+
+        // Apply easing function (ease-out cubic) for smoother animation
+        const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
+
+        // Calculate scale with smoother interpolation
+        const newScale = maxScale - (scrollProgress * (maxScale - 1));
+        setLogoScale(Math.max(1, newScale));
+
+        // Calculate position with same easing
+        const targetX = -(window.innerWidth / 2 - 40);
+        const targetY = -(window.innerHeight / 2 - 35);
+
+        setLogoPosition({
+          x: targetX * scrollProgress,
+          y: targetY * scrollProgress
+        });
       } else {
-        setIsInSection1(false); // Always show logo on other pages
+        setLogoScale(1);
+        setLogoPosition({ x: 0, y: 0 });
       }
     };
 
-    // Initial check for non-home pages
-    if (location.pathname !== '/') {
-      setIsInSection1(false);
+    // Initial setup based on page
+    if (location.pathname === '/') {
+      // Check if at top of page
+      if (window.scrollY === 0) {
+        setLogoScale(calculateMaxScale()); // Start with calculated scale
+      } else {
+        handleScroll(); // Calculate based on current scroll
+      }
+    } else {
+      setLogoScale(1); // Normal size on other pages
     }
 
-    window.addEventListener("scroll", handleScroll);
+    // Handle window resize
+    const handleResize = () => {
+      if (location.pathname === '/' && window.scrollY < 100) {
+        handleScroll();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener("scroll", updateLogoOnScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", updateLogoOnScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, [location.pathname]);
 
@@ -125,9 +186,29 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="grid-container navbar-container">
         {/* Logo - positioned at column 1 */}
-        <div className={`navbar-logo-wrapper ${isInSection1 ? 'hidden' : ''}`}>
+        <div className="navbar-logo-wrapper" style={{
+          transform: logoScale > 1.5
+            ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
+            : `scale(${logoScale})`,
+          position: logoScale > 1.5 ? 'fixed' : 'relative',
+          left: logoScale > 1.5 ? '50%' : 'auto',
+          top: logoScale > 1.5 ? '50%' : 'auto',
+          zIndex: logoScale > 1.5 ? 10000 : 'auto',
+          transformOrigin: 'center center',
+          willChange: 'transform',
+          transition: 'none' // Remove transition for real-time smooth scroll
+        }}>
           <a href="/" className="navbar-logo">
-            <img src="/icon/Icon/Số Ít logo.svg" alt="Số Ít" className="navbar-logo-img" />
+            <img
+              src="/icon/Icon/Số Ít logo.svg"
+              alt="Số Ít"
+              className="navbar-logo-img"
+              style={{
+                // Use vector-effect to maintain crisp edges when scaled
+                vectorEffect: 'non-scaling-stroke',
+                shapeRendering: 'geometricPrecision'
+              }}
+            />
           </a>
         </div>
 
