@@ -7,61 +7,37 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  padding-left: 1.25%;
-  padding-right: 1.25%;
 }
 
 .section5-content {
   width: 100%;
   color: white;
-  padding-left: 1.25%;
-  padding-right: 1.25%;
   box-sizing: border-box;
-  /* Create isolated stacking context like Mirror client */
+  /* Create isolated stacking context */
   isolation: isolate;
   mix-blend-mode: difference;
 }
 
-/* Grid reference layer */
-.grid-reference {
-  position: relative;
-  height: 100%;
+/* Grid positioning for desktop - like section4 */
+.section5-text-left {
+  grid-column: 1 / span 6;
 }
 
-/* Text positioning based on grid but not constrained */
-.text-position-left {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-  background: transparent;
+.section5-text-center {
+  grid-column: 7 / span 4;
 }
 
-.text-position-center {
-  position: absolute;
-  left: calc(100% / 12 * 6); /* Start at column 7 */
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-  background: transparent;
+.section5-text-right {
+  grid-column: 12 / span 2;
 }
 
-.text-position-right {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-  background: transparent;
-}
-
+/* Text alignment styles */
 .section5-content .text-left {
   text-align: left;
 }
 
-.section5-content .text-center {
-  text-align: center;
+.section5-content .text-center-item {
+  text-align: left; /* Align left by default */
 }
 
 .section5-content .text-right {
@@ -71,4 +47,66 @@
 .section5-content p {
   margin: 0;
   color: white;
+}
+
+/* Responsive Design */
+/* Tablet breakpoint */
+@media (max-width: 1023px) {
+  .section5 {
+    min-height: 80vh;
+  }
+
+  /* Adjust grid positioning for tablet */
+  .section5-text-left {
+    grid-column: 1 / span 9;
+    grid-row: 1 / span 2; /* Span 2 rows to align with stacked items */
+  }
+
+  /* Text-right at column 10, first row */
+  .section5-text-right {
+    grid-column: 10 / span 3;
+    grid-row: 1;
+  }
+
+  /* Text-center at column 10, second row */
+  .section5-text-center {
+    grid-column: 10 / span 3;
+    grid-row: 2;
+    margin-top: 12px;
+  }
+
+  .section5-content .text-right {
+    text-align: left;
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 425px) {
+  .section5 {
+    min-height: 60vh;
+  }
+
+  /* Similar to tablet but with adjusted spacing */
+  .section5-text-left {
+    grid-column: 1 / span 9;
+    grid-row: 1 / span 2;
+  }
+
+  /* Text-right at column 10, first row */
+  .section5-text-right {
+    grid-column: 10 / span 3;
+    grid-row: 1;
+  }
+
+  /* Text-center at column 10, second row */
+  .section5-text-center {
+    grid-column: 10 / span 3;
+    grid-row: 2;
+    margin-top: 24px;
+  }
+
+  /* Align all text to left on mobile */
+  .section5-content .text-right {
+    text-align: left;
+  }
 }
