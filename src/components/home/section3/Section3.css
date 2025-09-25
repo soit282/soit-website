@@ -46,10 +46,6 @@
     height: 180vh;
   }
 
-  .section3-sticky-wrapper {
-    padding: 180px 40px 100px 40px;
-  }
-
   .section3-content {
     max-width: 1200px;
   }
@@ -60,10 +56,6 @@
     height: 160vh;
   }
 
-  .section3-sticky-wrapper {
-    padding: 140px 40px 80px 40px;
-  }
-
   .section3-content {
     max-width: 900px;
   }
@@ -72,10 +64,6 @@
 @media (max-width: 768px) {
   .section3 {
     height: 140vh;
-  }
-
-  .section3-sticky-wrapper {
-    padding: 100px 30px 60px 30px;
   }
 
   .section3-heading {
@@ -94,10 +82,6 @@
 @media (max-width: 480px) {
   .section3 {
     height: 120vh;
-  }
-
-  .section3-sticky-wrapper {
-    padding: 80px 20px 50px 20px;
   }
 
   .section3-label {

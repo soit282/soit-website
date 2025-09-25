@@ -60,7 +60,7 @@ export default function Section4() {
       onMouseLeave={handleMouseLeave}
     >
       <div
-        className="section4-content text-8"
+        className="section4-content"
         style={{
           position: "absolute",
           top: `${mouseY}%`,
@@ -71,19 +71,18 @@ export default function Section4() {
           transition: "opacity 0.3s ease",
         }}
       >
-        {/* Grid reference layer for positioning */}
-        <div
-          className="grid-container grid-reference"
-          style={{ position: "relative", height: "100%" }}
-        >
-          {/* Text positioned based on grid columns but not constrained by them */}
-          <div className="text-left text-5 text-position-left">
+        {/* Using proper grid system */}
+        <div className="grid-container">
+          {/* Text left */}
+          <div className="section4-text-left text-left text-5">
             <p>TràMADE</p>
           </div>
-          <div className="text-center text-position-center">
+          {/* Text center */}
+          <div className="section4-text-center text-center-item text-8">
             <p>Tea mastery born in the heights of Măng Đen</p>
           </div>
-          <div className="text-right text-position-right">
+          {/* Text right */}
+          <div className="section4-text-right text-right text-8">
             <p>Branding</p>
           </div>
         </div>
