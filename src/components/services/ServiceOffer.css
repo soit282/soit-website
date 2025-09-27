@@ -246,7 +246,6 @@
 .company-name,
 .contact-info {
   color: rgba(255, 255, 255, 0.6);
-  font-weight: 400;
 }
 
 .service-dropdown {
@@ -283,7 +282,6 @@
 
 .contact-info {
   color: #ffffff;
-  font-weight: 500;
 }
 
 .submit-section {
@@ -423,10 +421,6 @@
     height: auto;
     min-height: 400px;
     padding: 30px 25px;
-  }
-
-  .footer-text {
-    font-size: 24px;
   }
 
   .submit-section {
