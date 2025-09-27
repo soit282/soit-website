@@ -72,7 +72,8 @@
   /* 4 cards visible: 100% / 4 = 25%, minus gap */
   width: calc(25% - 0.46875%);
   flex-shrink: 0;
-  height: 571px;
+  aspect-ratio: 459/571;
+  height: auto;
   position: relative;
   overflow: hidden;
 }
@@ -104,52 +105,19 @@
 
 /* Button styles moved to ArrowButton component */
 
-@media (max-width: 1440px) {
-  .client-card {
-    height: 428px;
-  }
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 1023px) {
   .section9 {
     height: 240vh;
   }
 
   .client-card {
-    width: calc(33.333% - 0.417%);
-    height: 380px;
-  }
-}
-
-@media (max-width: 768px) {
-  .section9 {
-    height: 216vh;
-  }
-
-  .section9-see-all {
-    padding: 60px 2.5% 120px;
-  }
-
-  .section9-sticky-wrapper {
-    padding: 0 2.5% 60px;
-  }
-
-  .section9-heading {
-    font-size: 32px;
-    max-width: 100%;
-  }
-
-  .section9-header {
-    margin-bottom: 40px;
-  }
-
-  .client-card {
     width: calc(50% - 0.3125%);
-    height: 280px;
+    aspect-ratio: 387/481;
+    height: auto;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 425px) {
   .section9 {
     height: 192vh;
   }
@@ -160,6 +128,15 @@
 
   .section9-sticky-wrapper {
     padding: 0 3% 40px;
+  }
+
+  .section9-heading {
+    font-size: 32px;
+    max-width: 100%;
+  }
+
+  .section9-header {
+    margin-bottom: 40px;
   }
 
   .client-card {
