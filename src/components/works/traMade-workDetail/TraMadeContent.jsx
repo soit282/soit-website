@@ -253,33 +253,20 @@ const TraMadeContent = () => {
     });
   };
 
-  // Progressive video preloading
+  // Progressive video preloading - only preload visible videos
   useEffect(() => {
-    const videos = tramadeAssets.filter((asset) => asset.type === "video");
-
-    // Sort videos by size (heavy videos last)
-    const sortedVideos = videos.sort((a, b) => {
-      if (a.id === 6) return 1; // Heavy video (id: 6) loads last
-      if (b.id === 6) return -1;
-      return a.id - b.id;
-    });
-
-    // Preload videos one by one to avoid bandwidth congestion
-    const loadVideosSequentially = async () => {
-      for (const video of sortedVideos) {
-        await preloadVideo(video.src);
-        // Small delay between loads to prevent lag
-        await new Promise((resolve) => setTimeout(resolve, 500));
-      }
+    const preloadVisibleVideos = () => {
+      tramadeAssets
+        .filter(asset => asset.type === "video" && visibleItems.has(asset.id))
+        .forEach(video => {
+          if (!preloadedVideos.has(video.src)) {
+            preloadVideo(video.src);
+          }
+        });
     };
 
-    // Start preloading after initial page load
-    const timer = setTimeout(() => {
-      loadVideosSequentially();
-    }, 2000); // Wait 2 seconds after mount
-
-    return () => clearTimeout(timer);
-  }, []);
+    preloadVisibleVideos();
+  }, [visibleItems]);
 
   // Set up intersection observer for lazy loading
   useEffect(() => {
@@ -292,7 +279,7 @@ const TraMadeContent = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "300px" } // Increased for earlier loading
+      { threshold: 0.01, rootMargin: "100px" } // Optimized for smoother loading
     );
 
     return () => {
@@ -327,20 +314,15 @@ const TraMadeContent = () => {
           style={
             asset.customAspectRatio
               ? { aspectRatio: asset.customAspectRatio }
-              : {}
+              : { aspectRatio: "3/2" }
           }
         >
-          {isVisible && (
+          {isVisible ? (
             <>
               {asset.type === "video" ? (
                 <LazyVideo
                   src={asset.src}
                   className="tramade-media"
-                  style={
-                    asset.customAspectRatio
-                      ? { aspectRatio: asset.customAspectRatio }
-                      : {}
-                  }
                   autoPlay
                   muted
                   loop
@@ -353,15 +335,12 @@ const TraMadeContent = () => {
                   src={asset.src}
                   alt={asset.title}
                   className="tramade-media"
-                  style={
-                    asset.customAspectRatio
-                      ? { aspectRatio: asset.customAspectRatio }
-                      : {}
-                  }
                   effect="blur"
                 />
               )}
             </>
+          ) : (
+            <div className="tramade-media-placeholder" />
           )}
         </div>
       </div>
