@@ -5,6 +5,7 @@ import ArrowButton from "@components/common/ArrowButton";
 export default function Section9() {
   const [textRevealProgress, setTextRevealProgress] = useState(0);
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef(null);
   const stickyRef = useRef(null);
   const carouselRef = useRef(null);
@@ -53,6 +54,18 @@ export default function Section9() {
     },
   ];
 
+  // Check if mobile view
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 425);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Scroll reveal effect for sticky heading
   useEffect(() => {
     const handleScroll = () => {
@@ -80,8 +93,10 @@ export default function Section9() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Dynamic hover detection for carousel
+  // Dynamic hover detection for carousel (skip on mobile)
   useEffect(() => {
+    if (isMobile) return;
+
     let lastMouseX = null;
     let lastMouseY = null;
 
@@ -165,7 +180,7 @@ export default function Section9() {
         carouselRef.current.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   // Helper functions for hover styles
   const getHoverBackground = (index) => {
@@ -219,10 +234,10 @@ export default function Section9() {
             </h2>
           </div>
 
-          <div className="clients-carousel-wrapper" ref={carouselRef}>
+          <div className={`clients-carousel-wrapper ${isMobile ? 'mobile-grid' : ''}`} ref={carouselRef}>
             <div className="clients-carousel-track">
-              {/* Show only first 4 items initially, duplicate for seamless loop */}
-              {clients.slice(0, 4).concat(clients.slice(0, 4)).map((client, index) => (
+              {/* On mobile: show all 4 unique items in grid, Desktop: show duplicated for carousel */}
+              {(isMobile ? clients.slice(0, 4) : clients.slice(0, 4).concat(clients.slice(0, 4))).map((client, index) => (
                 <div
                   key={`${client.id}-${index}`}
                   className={`client-card ${hoveredCardIndex === index ? 'hovered' : ''}`}
