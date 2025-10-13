@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import Section1 from "@components/home/section1/Section1";
 import Section2 from "@components/home/section2/Section2";
 import Section3 from "@components/home/section3/Section3";
@@ -12,29 +11,8 @@ import Section10 from "@components/home/section10/Section10";
 import ServiceOffer from "@components/services/ServiceOffer";
 import Footer from "@components/footer/Footer";
 import Navbar from "@components/navbar/Navbar";
-import SmoothScroll from "@/utils/smooth-scroll";
 
 const HomePage = () => {
-  const smoothScrollRef = useRef(null);
-
-  useEffect(() => {
-    // Initialize SmoothScroll
-    smoothScrollRef.current = new SmoothScroll({
-      ease: 0.075, // Adjust for smoother/faster scroll (0.05-0.1)
-    });
-
-    // Make it accessible globally for other components
-    window.smoothScrollInstance = smoothScrollRef.current;
-
-    // Cleanup on unmount
-    return () => {
-      if (smoothScrollRef.current) {
-        smoothScrollRef.current.destroy();
-      }
-      delete window.smoothScrollInstance;
-    };
-  }, []);
-
   return (
     <>
       <Navbar />
