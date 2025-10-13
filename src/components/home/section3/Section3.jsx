@@ -12,7 +12,7 @@ export default function Section3() {
             speed={60}
             maxIterations={15}
             sequential={true}
-            useOriginalCharsOnly={false}
+            useOriginalCharsOnly={true}
             animateOn="view"
           />
         </h2>

@@ -138,68 +138,68 @@ export default function Section10() {
   return (
     <div className="section10">
       <div className="section10-content">
-          <div className="section10-header">
-            <p className="section10-label text-4">Services</p>
-            <h2 className="section10-heading text-2_100pt_medium">
-              <DecryptedText
-                text="Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers."
-                speed={60}
-                maxIterations={15}
-                sequential={true}
-                useOriginalCharsOnly={false}
-                animateOn="view"
-              />
-            </h2>
-          </div>
+        <div className="section10-header">
+          <p className="section10-label text-4">Services</p>
+          <h2 className="section10-heading text-2_100pt_medium">
+            <DecryptedText
+              text="Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers."
+              speed={60}
+              maxIterations={15}
+              sequential={true}
+              useOriginalCharsOnly={true}
+              animateOn="view"
+            />
+          </h2>
+        </div>
 
-          <div className="services-list">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className={`service-item ${
-                  activeService === service.id ? "expanded" : ""
-                }`}
-                onClick={() => handleServiceClick(service.id)}
-                style={{ cursor: 'pointer' }}
-              >
-                <div className="service-header">
-                  <span className="service-name text-4">{service.name}</span>
-                  <button
-                    className={`toggle-btn ${
-                      activeService === service.id ? "active" : ""
-                    }`}
-                  >
-                    {activeService === service.id ? (
-                      <img
-                        src={minusIcon}
-                        alt="collapse"
-                        className="minus-icon"
-                      />
-                    ) : (
-                      <img src={plusIcon} alt="expand" className="plus-icon" />
-                    )}
-                  </button>
-                </div>
-                <div
-                  className={`service-content ${
+        <div className="services-list">
+          {services.map((service) => (
+            <div
+              key={service.id}
+              className={`service-item ${
+                activeService === service.id ? "expanded" : ""
+              }`}
+              onClick={() => handleServiceClick(service.id)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className="service-header">
+                <span className="service-name text-4">{service.name}</span>
+                <button
+                  className={`toggle-btn ${
                     activeService === service.id ? "active" : ""
                   }`}
                 >
-                  {service.content.map((item, index) => (
-                    <p key={index} className="text-6">
-                      <img
-                        src={arrowIcon}
-                        alt="arrow"
-                        className="content-arrow"
-                      />
-                      {item}
-                    </p>
-                  ))}
-                </div>
+                  {activeService === service.id ? (
+                    <img
+                      src={minusIcon}
+                      alt="collapse"
+                      className="minus-icon"
+                    />
+                  ) : (
+                    <img src={plusIcon} alt="expand" className="plus-icon" />
+                  )}
+                </button>
               </div>
-            ))}
-          </div>
+              <div
+                className={`service-content ${
+                  activeService === service.id ? "active" : ""
+                }`}
+              >
+                {service.content.map((item, index) => (
+                  <p key={index} className="text-6">
+                    <img
+                      src={arrowIcon}
+                      alt="arrow"
+                      className="content-arrow"
+                    />
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
     </div>
   );
 }

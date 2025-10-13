@@ -59,9 +59,9 @@ export default function Section9() {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
 
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Dynamic hover detection for carousel (skip on mobile)
@@ -75,12 +75,18 @@ export default function Section9() {
       if (!carouselRef.current) return;
 
       // Use last known mouse position if available
-      const mouseX = mousePositionRef.current.x !== null ? mousePositionRef.current.x : lastMouseX;
-      const mouseY = mousePositionRef.current.y !== null ? mousePositionRef.current.y : lastMouseY;
+      const mouseX =
+        mousePositionRef.current.x !== null
+          ? mousePositionRef.current.x
+          : lastMouseX;
+      const mouseY =
+        mousePositionRef.current.y !== null
+          ? mousePositionRef.current.y
+          : lastMouseY;
 
       if (mouseX === null || mouseY === null) return;
 
-      const cards = carouselRef.current.querySelectorAll('.client-card');
+      const cards = carouselRef.current.querySelectorAll(".client-card");
       let foundHover = false;
 
       cards.forEach((card, index) => {
@@ -134,21 +140,21 @@ export default function Section9() {
     const interval = setInterval(checkHover, 100);
 
     // Add event listeners
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
 
     if (carouselRef.current) {
-      carouselRef.current.addEventListener('mouseenter', handleMouseEnter);
-      carouselRef.current.addEventListener('mouseleave', handleMouseLeave);
+      carouselRef.current.addEventListener("mouseenter", handleMouseEnter);
+      carouselRef.current.addEventListener("mouseleave", handleMouseLeave);
     }
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
       if (carouselRef.current) {
-        carouselRef.current.removeEventListener('mouseenter', handleMouseEnter);
-        carouselRef.current.removeEventListener('mouseleave', handleMouseLeave);
+        carouselRef.current.removeEventListener("mouseenter", handleMouseEnter);
+        carouselRef.current.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
   }, [isMobile]);
@@ -156,19 +162,27 @@ export default function Section9() {
   // Helper functions for hover styles
   const getHoverBackground = (index) => {
     switch (index) {
-      case 0: return 'none';
-      case 1: return 'none';
-      case 2: return `url("/1_Homepage/1_Homepage/3_Clients/soit_recent_work.svg")`;
-      case 3: return `url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.png")`;
-      default: return `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`;
+      case 0:
+        return "none";
+      case 1:
+        return "none";
+      case 2:
+        return `url("/1_Homepage/1_Homepage/3_Clients/soit_recent_work.svg")`;
+      case 3:
+        return `url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.png")`;
+      default:
+        return `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`;
     }
   };
 
   const getHoverColor = (index) => {
     switch (index) {
-      case 0: return 'white';
-      case 1: return 'rgba(246, 194, 7, 1)';
-      default: return 'transparent';
+      case 0:
+        return "white";
+      case 1:
+        return "rgba(246, 194, 7, 1)";
+      default:
+        return "transparent";
     }
   };
 
@@ -179,51 +193,63 @@ export default function Section9() {
       </div>
 
       <div className="section9-container">
-          <div className="section9-header">
-            <p className="section9-label text-4">Clients</p>
-            <h2 className="section9-heading text-2">
-              <DecryptedText
-                text="We collaborate with brands that aim to stand out, scale up, and speak clearly in a digital-first world."
-                speed={60}
-                maxIterations={15}
-                sequential={true}
-                useOriginalCharsOnly={false}
-                animateOn="view"
-              />
-            </h2>
-          </div>
+        <div className="section9-header">
+          <p className="section9-label text-4">Clients</p>
+          <h2 className="section9-heading text-2">
+            <DecryptedText
+              text="We collaborate with brands that aim to stand out, scale up, and speak clearly in a digital-first world."
+              speed={60}
+              maxIterations={15}
+              sequential={true}
+              useOriginalCharsOnly={true}
+              animateOn="view"
+            />
+          </h2>
+        </div>
 
-          <div className={`clients-carousel-wrapper ${isMobile ? 'mobile-grid' : ''}`} ref={carouselRef}>
-            <div className="clients-carousel-track">
-              {/* On mobile: show all 4 unique items in grid, Desktop: show duplicated for carousel */}
-              {(isMobile ? clients.slice(0, 4) : clients.slice(0, 4).concat(clients.slice(0, 4))).map((client, index) => (
+        <div
+          className={`clients-carousel-wrapper ${
+            isMobile ? "mobile-grid" : ""
+          }`}
+          ref={carouselRef}
+        >
+          <div className="clients-carousel-track">
+            {/* On mobile: show all 4 unique items in grid, Desktop: show duplicated for carousel */}
+            {(isMobile
+              ? clients.slice(0, 4)
+              : clients.slice(0, 4).concat(clients.slice(0, 4))
+            ).map((client, index) => (
+              <div
+                key={`${client.id}-${index}`}
+                className={`client-card ${
+                  hoveredCardIndex === index ? "hovered" : ""
+                }`}
+                data-index={index % 4}
+              >
                 <div
-                  key={`${client.id}-${index}`}
-                  className={`client-card ${hoveredCardIndex === index ? 'hovered' : ''}`}
-                  data-index={index % 4}
-                >
-                  <div
-                    className="client-background"
-                    style={{
-                      backgroundImage: hoveredCardIndex === index
+                  className="client-background"
+                  style={{
+                    backgroundImage:
+                      hoveredCardIndex === index
                         ? getHoverBackground(index % 4)
                         : `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`,
-                      backgroundColor: hoveredCardIndex === index
+                    backgroundColor:
+                      hoveredCardIndex === index
                         ? getHoverColor(index % 4)
-                        : 'transparent',
-                    }}
-                  >
-                    <img
-                      src={client.logo}
-                      alt={client.name}
-                      className="client-logo"
-                    />
-                  </div>
+                        : "transparent",
+                  }}
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="client-logo"
+                  />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
+      </div>
     </div>
   );
 }
