@@ -8,6 +8,7 @@ export default function ServiceOffer() {
   const [showFooter, setShowFooter] = useState(false);
   const [selectedService, setSelectedService] = useState("");
   const expandedRef = useRef(null);
+  const smoothScrollInstance = useRef(null);
 
   const offerings = [
     {
@@ -52,40 +53,37 @@ export default function ServiceOffer() {
     }
   };
 
-  // Custom smooth scroll function with adjustable speed
-  const smoothScroll = (element, duration = 1500) => {
-    const offset = -100; // Offset để scroll cao hơn 100px
-    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset + offset;
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
-
-    const animation = (currentTime) => {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const progress = Math.min(timeElapsed / duration, 1);
-      
-      // Easing function for smoother animation
-      const easeInOutCubic = progress < 0.5
-        ? 4 * progress * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-      
-      window.scrollTo(0, startPosition + distance * easeInOutCubic);
-      
-      if (timeElapsed < duration) {
-        requestAnimationFrame(animation);
+  // Get global smooth scroll instance
+  useEffect(() => {
+    // Access the global smooth scroll instance from window if available
+    const checkForSmoothScroll = () => {
+      if (window.smoothScrollInstance) {
+        smoothScrollInstance.current = window.smoothScrollInstance;
       }
     };
-    
-    requestAnimationFrame(animation);
-  };
+
+    checkForSmoothScroll();
+    // Check again after a delay in case it's not ready yet
+    const timer = setTimeout(checkForSmoothScroll, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Scroll to expanded section when it appears
   useEffect(() => {
     if (showFooter && expandedRef.current) {
       setTimeout(() => {
-        smoothScroll(expandedRef.current, 1500); // 1.5 seconds duration
-      }, 100); // Small delay to ensure DOM is updated
+        const offset = -100;
+        const targetPosition = expandedRef.current.getBoundingClientRect().top + window.pageYOffset + offset;
+
+        // Use global smooth scroll if available
+        if (smoothScrollInstance.current && smoothScrollInstance.current.scrollTo) {
+          smoothScrollInstance.current.scrollTo(targetPosition);
+        } else {
+          // Fallback to instant scroll
+          window.scrollTo(0, targetPosition);
+        }
+      }, 100);
     }
   }, [showFooter]);
 

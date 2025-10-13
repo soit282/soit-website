@@ -74,6 +74,12 @@ export class SmoothScroll {
     this.targetScroll = Math.max(0, Math.min(this.targetScroll, maxScroll));
   }
 
+  // Public method to scroll to a specific position
+  scrollTo(targetY) {
+    this.targetScroll = targetY;
+    this.clampTarget();
+  }
+
   start() {
     if (this.isRunning) return;
     this.isRunning = true;

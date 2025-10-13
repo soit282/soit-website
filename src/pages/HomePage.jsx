@@ -23,11 +23,15 @@ const HomePage = () => {
       ease: 0.075, // Adjust for smoother/faster scroll (0.05-0.1)
     });
 
+    // Make it accessible globally for other components
+    window.smoothScrollInstance = smoothScrollRef.current;
+
     // Cleanup on unmount
     return () => {
       if (smoothScrollRef.current) {
         smoothScrollRef.current.destroy();
       }
+      delete window.smoothScrollInstance;
     };
   }, []);
 
