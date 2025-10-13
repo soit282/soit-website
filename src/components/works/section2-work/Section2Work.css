@@ -89,7 +89,7 @@
   width: 100%;
   aspect-ratio: 3/2;
   object-fit: cover;
-  margin-bottom: 12px;
+  display: block;
 }
 
 .work-info-right {
@@ -144,10 +144,6 @@
     margin-bottom: 8px;
   }
 
-  .work-details-image {
-    margin-bottom: 8px;
-  }
-
   .work-info-row {
     padding: 30px 20px;
   }
@@ -159,10 +155,6 @@
   }
 
   .work-image-container {
-    margin-bottom: 6px;
-  }
-
-  .work-details-image {
     margin-bottom: 6px;
   }
 

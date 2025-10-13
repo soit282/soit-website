@@ -88,7 +88,7 @@
   width: 100%;
   aspect-ratio: 3/2;
   object-fit: cover;
-  margin-bottom: 12px;
+  display: block;
 }
 
 .gallery-info-right {
@@ -149,10 +149,6 @@
     margin-bottom: 8px;
   }
 
-  .gallery-details-image {
-    margin-bottom: 8px;
-  }
-
   .gallery-info-row {
     padding: 30px 20px;
   }
@@ -164,10 +160,6 @@
   }
 
   .gallery-image-container {
-    margin-bottom: 6px;
-  }
-
-  .gallery-details-image {
     margin-bottom: 6px;
   }
 
