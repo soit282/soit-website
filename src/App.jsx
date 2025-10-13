@@ -8,11 +8,14 @@ function AppContent() {
   const location = useLocation();
   const footerTheme = location.pathname === "/works" ? "light" : "dark";
 
+  // HomePage includes its own Navbar and Footer
+  const isHomePage = location.pathname === "/";
+
   return (
     <>
-      <Navbar />
+      {!isHomePage && <Navbar />}
       <AppRoutes />
-      <Footer theme={footerTheme} />
+      {!isHomePage && <Footer theme={footerTheme} />}
     </>
   );
 }
