@@ -45,7 +45,7 @@
 .display-info-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .display-info-bottom {
@@ -57,7 +57,7 @@
 .display-info-right {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .display-category {

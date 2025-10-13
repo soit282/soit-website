@@ -45,7 +45,7 @@
 .work-info-row-section3 {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .work-info-bottom {
@@ -57,7 +57,7 @@
 .work-info-right {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .work-category {

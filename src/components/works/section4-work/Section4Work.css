@@ -50,7 +50,7 @@
 .project-info-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .project-info-bottom {
@@ -94,7 +94,7 @@
 .project-info-right {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .project-left-hover-area {
@@ -116,7 +116,7 @@
 .project-details-text {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
 }
 
