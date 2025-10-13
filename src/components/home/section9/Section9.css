@@ -3,37 +3,26 @@
   background-color: #ffffff;
   padding: 0;
   box-sizing: border-box;
-  height: 300vh; /* Fixed height for sticky scroll effect */
   position: relative;
 }
 
 .section9-see-all {
   display: flex;
   justify-content: center;
-  padding: 120px 1.25% 240px;
+  padding: 120px 1.25% 80px;
   box-sizing: border-box;
 }
 
-.section9-sticky-wrapper {
-  position: sticky;
-  top: 0;
+.section9-container {
   width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 0 1.25% 120px;
   box-sizing: border-box;
 }
 
-.section9-container {
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
 .section9-header {
-  margin-bottom: 240px;
+  margin-bottom: 120px;
 }
 
 .section9-label {
@@ -106,10 +95,6 @@
 /* Button styles moved to ArrowButton component */
 
 @media (max-width: 1023px) {
-  .section9 {
-    height: 240vh;
-  }
-
   .client-card {
     width: calc(50% - 0.3125%);
     aspect-ratio: 387/481;
@@ -118,20 +103,12 @@
 }
 
 @media (max-width: 425px) {
-  .section9 {
-    height: auto;
-    min-height: 100vh;
-  }
-
   .section9-see-all {
     padding: 40px 3% 80px;
   }
 
-  .section9-sticky-wrapper {
-    position: relative;
-    top: auto;
-    min-height: auto;
-    padding: 120px 18px 60px;
+  .section9-container {
+    padding: 0 18px 60px;
   }
 
   .section9-heading {

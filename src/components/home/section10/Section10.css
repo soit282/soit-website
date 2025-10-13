@@ -1,19 +1,9 @@
 .section10 {
   width: 100%;
   background-color: #ffffff;
-  padding: 0;
-  box-sizing: border-box;
-  height: 300vh; /* Fixed height for sticky scroll effect */
-  position: relative;
-}
-
-.section10-sticky-wrapper {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  display: flex;
   padding: 120px 1.25%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .section10-content {
@@ -380,10 +370,6 @@
 }
 
 @media (max-width: 1200px) {
-  .section10 {
-    height: 220vh;
-  }
-
   .service-item {
     padding: 32px 0;
   }
@@ -392,11 +378,6 @@
 @media (max-width: 768px) {
   .section10 {
     padding: 60px 2.5%;
-    height: 200vh;
-  }
-
-  .section10-sticky-wrapper {
-    padding: 0 2.5%;
   }
 
   .section10-label {
@@ -425,11 +406,6 @@
 @media (max-width: 480px) {
   .section10 {
     padding: 40px 3%;
-    height: 180vh;
-  }
-
-  .section10-sticky-wrapper {
-    padding: 0 3%;
   }
 
   .service-item {

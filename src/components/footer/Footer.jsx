@@ -47,7 +47,7 @@ export default function Footer({ theme = "dark" }) {
               rel="noopener noreferrer"
             >
               <img src={arrowIcon} alt="arrow" className="footer-arrow" />
-              FB Sô It
+              FB Số It
             </a>
             <a
               href="https://www.behance.net/soitstudio"
