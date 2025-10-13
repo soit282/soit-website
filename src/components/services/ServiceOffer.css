@@ -284,6 +284,39 @@
   color: #ffffff;
 }
 
+.footer-line1 .contact-input,
+.footer-line2 .contact-input,
+.contact-text .contact-input,
+.contact-input {
+  color: #ffffff !important;
+  outline: none;
+  display: inline;
+  min-width: 20px;
+  cursor: text;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.footer-line1 .contact-input.text-2,
+.footer-line2 .contact-input.text-2,
+.contact-text .contact-input.text-2,
+.contact-input.text-2 {
+  color: #ffffff !important;
+}
+
+.contact-input:empty:before {
+  content: attr(data-placeholder);
+  color: #ffffff;
+}
+
+.contact-input:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.contact-input:focus {
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
 .submit-section {
   margin-top: 214px;
   margin-bottom: 181px;

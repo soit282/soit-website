@@ -7,6 +7,9 @@ import ArrowButton from "@components/common/ArrowButton";
 export default function ServiceOffer() {
   const [showFooter, setShowFooter] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
   const expandedRef = useRef(null);
   const smoothScrollInstance = useRef(null);
 
@@ -139,7 +142,17 @@ export default function ServiceOffer() {
           <div className="expanded-content">
             <div className="footer-text-section">
               <p className="footer-line1 text-2">
-                We are <span className="contact-info">[Company Name]</span> and
+                We are{" "}
+                <span
+                  className="contact-input text-2"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onInput={(e) => setCompanyName(e.target.textContent)}
+                  data-placeholder="[Company Name]"
+                >
+                  {companyName}
+                </span>{" "}
+                and
               </p>
               <p className="footer-line2 text-2">
                 we'd love to discuss{" "}
@@ -163,8 +176,26 @@ export default function ServiceOffer() {
               <p className="contact-text text-2">
                 Please feel free to reach us at
                 <br />
-                <span className="contact-info">[phone number]</span> or{" "}
-                <span className="contact-info">[email]</span>.
+                <span
+                  className="contact-input text-2"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onInput={(e) => setPhoneNumber(e.target.textContent)}
+                  data-placeholder="[phone number]"
+                >
+                  {phoneNumber}
+                </span>{" "}
+                or{" "}
+                <span
+                  className="contact-input text-2"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onInput={(e) => setEmail(e.target.textContent)}
+                  data-placeholder="[email]"
+                >
+                  {email}
+                </span>
+                .
               </p>
             </div>
             <div className="submit-section">
