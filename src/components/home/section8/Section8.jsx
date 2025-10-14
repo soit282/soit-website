@@ -5,6 +5,7 @@ import "@styles/grid-system.css";
 export default function Section8() {
   const [mouseY, setMouseY] = useState(50);
   const [isVisible, setIsVisible] = useState(true);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
   const sectionRef = useRef(null);
   const mouseClientY = useRef(null);
 
@@ -33,6 +34,15 @@ export default function Section8() {
   useEffect(() => {
     const handleScroll = () => {
       updateMousePosition();
+
+      // Calculate parallax offset
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollProgress = -rect.top;
+        // Parallax speed: 0.5 means background moves at half speed
+        const parallaxSpeed = 0.5;
+        setParallaxOffset(scrollProgress * parallaxSpeed);
+      }
     };
 
     // Track global mouse position
@@ -42,6 +52,9 @@ export default function Section8() {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleGlobalMouseMove);
+
+    // Initial parallax calculation
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -53,12 +66,25 @@ export default function Section8() {
     <div
       ref={sectionRef}
       className="section8"
-      style={{
-        backgroundImage: `url('/1_Homepage/1_Homepage/2_Feature works/comming_soon.png')`,
-      }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Parallax Background */}
+      <div
+        className="section8-background"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url('/1_Homepage/1_Homepage/2_Feature works/comming_soon.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          transform: `translateY(${parallaxOffset}px)`,
+          willChange: "transform",
+        }}
+      />
       <div
         className="section8-content"
         style={{
