@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { preloadImages } from "@utils/imagePreloader";
 import "./Section4Work.css";
 import "@styles/grid-system.css";
 
@@ -10,26 +11,12 @@ export default function Section4Work() {
 
   // Defer image preloading until after page is interactive
   useEffect(() => {
-    const preloadImages = () => {
-      const imagesToPreload = [
-        "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
-        "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
-        "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
-        "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
-      ];
-
-      imagesToPreload.forEach(src => {
-        const img = new Image();
-        img.src = src;
-      });
-    };
-
-    // Use requestIdleCallback if available, otherwise setTimeout
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(preloadImages);
-    } else {
-      setTimeout(preloadImages, 1500);
-    }
+    preloadImages([
+      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
+      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
+      "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
+      "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+    ], 1500);
   }, []);
 
   useEffect(() => {
@@ -42,14 +29,16 @@ export default function Section4Work() {
       { threshold: 0.2 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const element = sectionRef.current;
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (element) {
+        observer.unobserve(element);
       }
+      observer.disconnect();
     };
   }, []);
 
@@ -76,7 +65,7 @@ export default function Section4Work() {
                   position: 'absolute',
                   top: 0,
                   left: 0,
-                  willChange: 'opacity',
+                  willChange: isHovered || isHoveredRight ? 'opacity' : 'auto',
                   transform: 'translateZ(0)',
                   backfaceVisibility: 'hidden'
                 }}
@@ -88,7 +77,7 @@ export default function Section4Work() {
                 style={{
                   opacity: isHovered ? 1 : 0,
                   transition: 'opacity 0.3s ease',
-                  willChange: 'opacity',
+                  willChange: isHovered || isHoveredRight ? 'opacity' : 'auto',
                   transform: 'translateZ(0)',
                   backfaceVisibility: 'hidden'
                 }}
@@ -154,7 +143,7 @@ export default function Section4Work() {
                   position: 'absolute',
                   top: 0,
                   left: 0,
-                  willChange: 'opacity',
+                  willChange: isHovered || isHoveredRight ? 'opacity' : 'auto',
                   transform: 'translateZ(0)',
                   backfaceVisibility: 'hidden'
                 }}
@@ -166,7 +155,7 @@ export default function Section4Work() {
                 style={{
                   opacity: isHoveredRight ? 1 : 0,
                   transition: 'opacity 0.3s ease',
-                  willChange: 'opacity',
+                  willChange: isHovered || isHoveredRight ? 'opacity' : 'auto',
                   transform: 'translateZ(0)',
                   backfaceVisibility: 'hidden'
                 }}

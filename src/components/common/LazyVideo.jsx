@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, forwardRef } from 'react';
 
-const LazyVideo = ({
+const LazyVideo = forwardRef(({
   src,
   className = '',
   autoPlay = true,
@@ -9,8 +9,9 @@ const LazyVideo = ({
   playsInline = true,
   poster = null,
   ...props
-}) => {
-  const videoRef = useRef(null);
+}, ref) => {
+  const internalRef = useRef(null);
+  const videoRef = ref || internalRef;
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
 
@@ -56,6 +57,8 @@ const LazyVideo = ({
       {isInView && <source src={src} />}
     </video>
   );
-};
+});
+
+LazyVideo.displayName = 'LazyVideo';
 
 export default LazyVideo;

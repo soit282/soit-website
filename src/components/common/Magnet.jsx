@@ -16,23 +16,41 @@ const Magnet = ({
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const magnetRef = useRef(null);
 
+  // Use refs to access latest values in mousemove handler without re-creating listener
+  const disabledRef = useRef(disabled);
+  const parentHoveredRef = useRef(parentHovered);
+  const magnetStrengthRef = useRef(magnetStrength);
+
+  // Update refs when props change
+  useEffect(() => {
+    disabledRef.current = disabled;
+    parentHoveredRef.current = parentHovered;
+    magnetStrengthRef.current = magnetStrength;
+  }, [disabled, parentHovered, magnetStrength]);
+
+  // Reset position when disabled or parent not hovered
   useEffect(() => {
     if (disabled || !parentHovered) {
       setPosition({ x: 0, y: 0 });
       setIsActive(false);
-      return;
     }
+  }, [disabled, parentHovered]);
 
+  // Single mousemove listener that never re-creates
+  useEffect(() => {
     const handleMouseMove = e => {
-      if (!magnetRef.current) return;
+      // Access latest values from refs
+      if (disabledRef.current || !parentHoveredRef.current || !magnetRef.current) {
+        return;
+      }
 
       const { left, top, width, height } = magnetRef.current.getBoundingClientRect();
       const centerX = left + width / 2;
       const centerY = top + height / 2;
 
       setIsActive(true);
-      const offsetX = (e.clientX - centerX) / magnetStrength;
-      const offsetY = (e.clientY - centerY) / magnetStrength;
+      const offsetX = (e.clientX - centerX) / magnetStrengthRef.current;
+      const offsetY = (e.clientY - centerY) / magnetStrengthRef.current;
       setPosition({ x: offsetX, y: offsetY });
     };
 
@@ -40,7 +58,7 @@ const Magnet = ({
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [disabled, magnetStrength, parentHovered]);
+  }, []); // Empty deps - listener created once and never re-created
 
   const transitionStyle = isActive ? activeTransition : inactiveTransition;
 

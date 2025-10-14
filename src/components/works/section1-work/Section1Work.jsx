@@ -70,8 +70,9 @@ export default function Section1Work() {
       { threshold: 0.2 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const element = sectionRef.current;
+    if (element) {
+      observer.observe(element);
     }
 
     // Initialize shuffle effects for all services
@@ -96,9 +97,10 @@ export default function Section1Work() {
     });
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (element) {
+        observer.unobserve(element);
       }
+      observer.disconnect();
     };
   }, []);
 
