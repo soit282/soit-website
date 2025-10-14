@@ -5,10 +5,10 @@ import "@styles/grid-system.css";
 
 export default function Section7Work() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
+  const hoverTimeoutRef = useRef(null);
 
   // Defer image preload until after page is interactive
   useEffect(() => {
@@ -39,18 +39,32 @@ export default function Section7Work() {
     };
   }, []);
 
-  // Pause/play video based on hover state
-  useEffect(() => {
-    if (videoRef.current) {
-      if (isHovered) {
+  // Debounced video pause on hover (300ms delay to avoid interrupting scroll)
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (videoRef.current) {
         videoRef.current.pause();
-      } else {
-        videoRef.current.play().catch(() => {
-          // Ignore play errors
-        });
       }
-    }
-  }, [isHovered]);
+    }, 300);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(() => {});
+      }
+    }, 300);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section ref={sectionRef} className="section7-work">
@@ -58,10 +72,10 @@ export default function Section7Work() {
         <div
           className={`display-main-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 12" }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <div className="display-video-container" style={{ position: 'relative' }}>
+          <div className="display-video-container">
             {shouldLoadVideo ? (
               <>
                 <video
@@ -71,70 +85,37 @@ export default function Section7Work() {
                   muted
                   loop
                   playsInline
-                  className="display-video"
-                  style={{
-                    opacity: isHovered ? 0 : 1,
-                    transition: 'opacity 0.3s ease',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    transform: 'translateZ(0)',
-                    backfaceVisibility: 'hidden'
-                  }}
+                  className="display-video display-video-default"
                 />
                 <img
                   src="/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"
                   alt="Display Project"
-                  className="display-video"
-                  style={{
-                    opacity: isHovered ? 1 : 0,
-                    transition: 'opacity 0.3s ease',
-                    transform: 'translateZ(0)',
-                    backfaceVisibility: 'hidden',
-                    willChange: isHovered ? 'opacity' : 'auto'
-                  }}
+                  className="display-video display-video-hover"
                 />
               </>
             ) : (
-              <div className="display-video" style={{ backgroundColor: '#f0f0f0', transform: 'translateZ(0)' }} />
+              <div className="display-video display-video-placeholder" />
             )}
           </div>
           <div className="display-info-row">
             <div className="display-info-bottom">
               <div className="display-category">
-                <span
-                  className="text-7"
-                  style={{
-                    color: "#1F1F1F",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                  }}
-                >
-                  {isHovered && (
-                    <img
-                      src="/icon/Icon/ellipse.svg"
-                      alt=""
-                      style={{ width: "8px", height: "8px" }}
-                    />
-                  )}
+                <span className="text-7 display-title">
+                  <img
+                    src="/icon/Icon/ellipse.svg"
+                    alt=""
+                    className="display-ellipse"
+                  />
                   TBros
                 </span>
-                <span
-                  className="text-8"
-                  style={{ color: isHovered ? "#1F1F1F" : "#939393" }}
-                >
-                  Vietnam’s most awarded bean-to-bar chocolate
+                <span className="text-8 display-description">
+                  Vietnam's most awarded bean-to-bar chocolate
                 </span>
               </div>
             </div>
             <div className="display-info-right">
               <div className="display-category text-8">
-                <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
-                  Branding
-                </span>
+                <span className="display-description">Branding</span>
               </div>
             </div>
           </div>

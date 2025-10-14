@@ -18,6 +18,7 @@
   transform: scale(0.95);
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  contain: layout style paint;
 }
 
 .showcase-main-section.visible {
@@ -34,12 +35,77 @@
   aspect-ratio: 3/2;
   overflow: hidden;
   margin-bottom: 12px;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .showcase-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* CSS-only hover transitions for video/image swap */
+.showcase-video-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  transform: translate3d(0, 0, 0);
+  backfaceVisibility: hidden;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.showcase-video-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transform: translate3d(0, 0, 0);
+  backfaceVisibility: hidden;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.showcase-video-placeholder {
+  background-color: #f0f0f0;
+  transform: translateZ(0);
+}
+
+.showcase-main-section:hover .showcase-video-default {
+  opacity: 0;
+}
+
+.showcase-main-section:hover .showcase-video-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions */
+.showcase-title {
+  color: #1F1F1F;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.showcase-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.showcase-ellipse {
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.showcase-main-section:hover .showcase-description {
+  color: #1F1F1F;
+}
+
+.showcase-main-section:hover .showcase-ellipse {
+  opacity: 1;
 }
 
 .showcase-info-row {

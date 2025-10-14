@@ -5,10 +5,10 @@ import "@styles/grid-system.css";
 
 export default function Section5Work() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
+  const hoverTimeoutRef = useRef(null);
 
   // Defer image preload until after page is interactive
   useEffect(() => {
@@ -39,18 +39,32 @@ export default function Section5Work() {
     };
   }, []);
 
-  // Pause/play video based on hover state
-  useEffect(() => {
-    if (videoRef.current) {
-      if (isHovered) {
+  // Debounced video pause on hover (300ms delay to avoid interrupting scroll)
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (videoRef.current) {
         videoRef.current.pause();
-      } else {
-        videoRef.current.play().catch(() => {
-          // Ignore play errors
-        });
       }
-    }
-  }, [isHovered]);
+    }, 300);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(() => {});
+      }
+    }, 300);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section ref={sectionRef} className="section5-work">
@@ -58,10 +72,10 @@ export default function Section5Work() {
         <div
           className={`showcase-main-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 12" }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <div className="showcase-video-container" style={{ position: 'relative' }}>
+          <div className="showcase-video-container">
             {shouldLoadVideo ? (
               <>
                 <video
@@ -71,70 +85,37 @@ export default function Section5Work() {
                   muted
                   loop
                   playsInline
-                  className="showcase-video"
-                  style={{
-                    opacity: isHovered ? 0 : 1,
-                    transition: 'opacity 0.3s ease',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    transform: 'translateZ(0)',
-                    backfaceVisibility: 'hidden'
-                  }}
+                  className="showcase-video showcase-video-default"
                 />
                 <img
                   src="/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"
                   alt="Project Showcase"
-                  className="showcase-video"
-                  style={{
-                    opacity: isHovered ? 1 : 0,
-                    transition: 'opacity 0.3s ease',
-                    transform: 'translateZ(0)',
-                    backfaceVisibility: 'hidden',
-                    willChange: isHovered ? 'opacity' : 'auto'
-                  }}
+                  className="showcase-video showcase-video-hover"
                 />
               </>
             ) : (
-              <div className="showcase-video" style={{ backgroundColor: '#f0f0f0', transform: 'translateZ(0)' }} />
+              <div className="showcase-video showcase-video-placeholder" />
             )}
           </div>
           <div className="showcase-info-row">
             <div className="showcase-info-bottom">
               <div className="showcase-category">
-                <span
-                  className="text-7"
-                  style={{
-                    color: "#1F1F1F",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                  }}
-                >
-                  {isHovered && (
-                    <img
-                      src="/icon/Icon/ellipse.svg"
-                      alt=""
-                      style={{ width: "8px", height: "8px" }}
-                    />
-                  )}
+                <span className="text-7 showcase-title">
+                  <img
+                    src="/icon/Icon/ellipse.svg"
+                    alt=""
+                    className="showcase-ellipse"
+                  />
                   CPC
                 </span>
-                <span
-                  className="text-8"
-                  style={{ color: isHovered ? "#1F1F1F" : "#939393" }}
-                >
-                  Vietnam’s most awarded bean-to-bar chocolate
+                <span className="text-8 showcase-description">
+                  Vietnam's most awarded bean-to-bar chocolate
                 </span>
               </div>
             </div>
             <div className="showcase-info-right">
               <div className="showcase-category text-8">
-                <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
-                  Branding
-                </span>
+                <span className="showcase-description">Branding</span>
               </div>
             </div>
           </div>

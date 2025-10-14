@@ -44,6 +44,8 @@
   margin-bottom: 12px;
   aspect-ratio: 3/2;
   overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .work-image {
@@ -52,6 +54,60 @@
   object-fit: cover;
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
+}
+
+/* CSS-only hover transitions for image swap */
+.work-image-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.work-image-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.work-left-section:hover .work-image-default {
+  opacity: 0;
+}
+
+.work-left-section:hover .work-image-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions */
+.work-title {
+  color: #1F1F1F;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.work-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.work-ellipse {
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.work-left-section:hover .work-description {
+  color: #1F1F1F;
+}
+
+.work-left-section:hover .work-ellipse {
+  opacity: 1;
 }
 
 .work-info-row {
@@ -91,11 +147,74 @@
   transform: translateX(0);
 }
 
+.work-details-image-container {
+  position: relative;
+  margin-bottom: 12px;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
 .work-details-image {
   width: 100%;
   aspect-ratio: 3/2;
   object-fit: cover;
   display: block;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* CSS-only hover transitions for details image swap */
+.work-details-image-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.work-details-image-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.work-details-hover-area:hover .work-details-image-default {
+  opacity: 0;
+}
+
+.work-details-hover-area:hover .work-details-image-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions for details */
+.work-details-title {
+  color: #1F1F1F;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.work-details-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.work-details-ellipse {
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.work-details-hover-area:hover .work-details-description {
+  color: #1F1F1F;
+}
+
+.work-details-hover-area:hover .work-details-ellipse {
+  opacity: 1;
 }
 
 .work-info-right {

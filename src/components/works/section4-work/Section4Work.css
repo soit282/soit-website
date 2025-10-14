@@ -39,12 +39,70 @@
   margin-bottom: 12px;
   aspect-ratio: 3/2;
   overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* CSS-only hover transitions - faster 0.2s */
+.project-image-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.project-image-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.project-left-hover-area:hover .project-image-default {
+  opacity: 0;
+}
+
+.project-left-hover-area:hover .project-image-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions */
+.project-title {
+  color: #1F1F1F;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.project-ellipse {
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.project-left-hover-area:hover .project-description {
+  color: #1F1F1F;
+}
+
+.project-left-hover-area:hover .project-ellipse {
+  opacity: 1;
 }
 
 .project-info-row {
@@ -84,11 +142,73 @@
   transform: translateX(0);
 }
 
+.project-details-image-container {
+  position: relative;
+  margin-bottom: 12px;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
 .project-details-image {
   width: 100%;
   aspect-ratio: 3/2;
   object-fit: cover;
-  margin-bottom: 12px;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* CSS-only hover transitions for details - faster 0.2s */
+.project-details-image-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.project-details-image-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.project-details-hover-area:hover .project-details-image-default {
+  opacity: 0;
+}
+
+.project-details-hover-area:hover .project-details-image-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions for details */
+.project-details-title {
+  color: #1F1F1F;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-details-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.project-details-ellipse {
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.project-details-hover-area:hover .project-details-description {
+  color: #1F1F1F;
+}
+
+.project-details-hover-area:hover .project-details-ellipse {
+  opacity: 1;
 }
 
 .project-info-right {
