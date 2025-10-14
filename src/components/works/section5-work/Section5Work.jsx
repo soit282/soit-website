@@ -5,12 +5,22 @@ import "@styles/grid-system.css";
 export default function Section5Work() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const sectionRef = useRef(null);
 
-  // Preload hover image
+  // Defer image preload until after page is interactive
   useEffect(() => {
-    const img = new Image();
-    img.src = "/1_Homepage/1_Homepage/2_Feature works/TBros_2.png";
+    const preloadImage = () => {
+      const img = new Image();
+      img.src = "/1_Homepage/1_Homepage/2_Feature works/TBros_2.png";
+    };
+
+    // Use requestIdleCallback if available, otherwise setTimeout
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(preloadImage);
+    } else {
+      setTimeout(preloadImage, 1000);
+    }
   }, []);
 
   useEffect(() => {
@@ -18,9 +28,10 @@ export default function Section5Work() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          setShouldLoadVideo(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1, rootMargin: '200px' } // Load slightly before entering viewport
     );
 
     if (sectionRef.current) {
@@ -43,22 +54,43 @@ export default function Section5Work() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <div className="showcase-video-container">
-            {isHovered ? (
-              <img
-                src="/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"
-                alt="Project Showcase"
-                className="showcase-video"
-              />
+          <div className="showcase-video-container" style={{ position: 'relative' }}>
+            {shouldLoadVideo ? (
+              <>
+                <video
+                  src="/1_Homepage/1_Homepage/2_Feature works/TBros_1.mov"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="showcase-video"
+                  style={{
+                    opacity: isHovered ? 0 : 1,
+                    transition: 'opacity 0.3s ease',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: 'hidden'
+                  }}
+                />
+                <img
+                  src="/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"
+                  alt="Project Showcase"
+                  className="showcase-video"
+                  style={{
+                    opacity: isHovered ? 1 : 0,
+                    transition: 'opacity 0.3s ease',
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: 'hidden',
+                    willChange: 'opacity'
+                  }}
+                />
+              </>
             ) : (
-              <video
-                src="/1_Homepage/1_Homepage/2_Feature works/TBros_1.mov"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="showcase-video"
-              />
+              <div className="showcase-video" style={{ backgroundColor: '#f0f0f0', transform: 'translateZ(0)' }} />
             )}
           </div>
           <div className="showcase-info-row">

@@ -8,19 +8,28 @@ export default function Section6Work() {
   const [isHoveredRight, setIsHoveredRight] = useState(false);
   const sectionRef = useRef(null);
 
-  // Preload hover images
+  // Defer image preloading until after page is interactive
   useEffect(() => {
-    const imagesToPreload = [
-      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
-      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
-      "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
-      "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
-    ];
+    const preloadImages = () => {
+      const imagesToPreload = [
+        "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
+        "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
+        "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
+        "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+      ];
 
-    imagesToPreload.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
+      imagesToPreload.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+
+    // Use requestIdleCallback if available, otherwise setTimeout
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(preloadImages);
+    } else {
+      setTimeout(preloadImages, 2000);
+    }
   }, []);
 
   useEffect(() => {
@@ -66,7 +75,10 @@ export default function Section6Work() {
                   transition: 'opacity 0.3s ease',
                   position: 'absolute',
                   top: 0,
-                  left: 0
+                  left: 0,
+                  willChange: 'opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
                 }}
               />
               <img
@@ -75,7 +87,10 @@ export default function Section6Work() {
                 className="gallery-image"
                 style={{
                   opacity: isHovered ? 1 : 0,
-                  transition: 'opacity 0.3s ease'
+                  transition: 'opacity 0.3s ease',
+                  willChange: 'opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
                 }}
               />
             </div>
@@ -138,7 +153,10 @@ export default function Section6Work() {
                   transition: 'opacity 0.3s ease',
                   position: 'absolute',
                   top: 0,
-                  left: 0
+                  left: 0,
+                  willChange: 'opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
                 }}
               />
               <img
@@ -147,7 +165,10 @@ export default function Section6Work() {
                 className="gallery-details-image"
                 style={{
                   opacity: isHoveredRight ? 1 : 0,
-                  transition: 'opacity 0.3s ease'
+                  transition: 'opacity 0.3s ease',
+                  willChange: 'opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
                 }}
               />
             </div>

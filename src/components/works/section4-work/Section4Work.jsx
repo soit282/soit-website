@@ -8,19 +8,28 @@ export default function Section4Work() {
   const [isHoveredRight, setIsHoveredRight] = useState(false);
   const sectionRef = useRef(null);
 
-  // Preload hover images
+  // Defer image preloading until after page is interactive
   useEffect(() => {
-    const imagesToPreload = [
-      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
-      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
-      "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
-      "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
-    ];
+    const preloadImages = () => {
+      const imagesToPreload = [
+        "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
+        "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
+        "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
+        "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+      ];
 
-    imagesToPreload.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
+      imagesToPreload.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+
+    // Use requestIdleCallback if available, otherwise setTimeout
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(preloadImages);
+    } else {
+      setTimeout(preloadImages, 1500);
+    }
   }, []);
 
   useEffect(() => {
@@ -56,13 +65,20 @@ export default function Section4Work() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className="project-image-container">
+            <div className="project-image-container" style={{ position: 'relative' }}>
               <img
                 src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
                 alt="Project Left"
                 className="project-image"
                 style={{
-                  display: isHovered ? 'none' : 'block'
+                  opacity: isHovered ? 0 : 1,
+                  transition: 'opacity 0.3s ease',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  willChange: 'opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
                 }}
               />
               <img
@@ -70,7 +86,11 @@ export default function Section4Work() {
                 alt="Project Left Hover"
                 className="project-image"
                 style={{
-                  display: isHovered ? 'block' : 'none'
+                  opacity: isHovered ? 1 : 0,
+                  transition: 'opacity 0.3s ease',
+                  willChange: 'opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
                 }}
               />
             </div>
@@ -123,22 +143,35 @@ export default function Section4Work() {
             onMouseEnter={() => setIsHoveredRight(true)}
             onMouseLeave={() => setIsHoveredRight(false)}
           >
-            <img
-              src="/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
-              alt="Right Project"
-              className="project-details-image"
-              style={{
-                display: isHoveredRight ? 'none' : 'block'
-              }}
-            />
-            <img
-              src="/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
-              alt="Right Project Hover"
-              className="project-details-image"
-              style={{
-                display: isHoveredRight ? 'block' : 'none'
-              }}
-            />
+            <div style={{ position: 'relative' }}>
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png"
+                alt="Right Project"
+                className="project-details-image"
+                style={{
+                  opacity: isHoveredRight ? 0 : 1,
+                  transition: 'opacity 0.3s ease',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  willChange: 'opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
+                }}
+              />
+              <img
+                src="/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
+                alt="Right Project Hover"
+                className="project-details-image"
+                style={{
+                  opacity: isHoveredRight ? 1 : 0,
+                  transition: 'opacity 0.3s ease',
+                  willChange: 'opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
+                }}
+              />
+            </div>
             <div className="project-details-text">
               <div className="project-category">
                 <span
