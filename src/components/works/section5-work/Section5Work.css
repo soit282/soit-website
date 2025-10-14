@@ -85,7 +85,8 @@
   color: #1F1F1F;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
+  transition: gap 0.2s ease;
 }
 
 .showcase-description {
@@ -94,17 +95,23 @@
 }
 
 .showcase-ellipse {
-  width: 8px;
+  width: 0;
   height: 8px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
 }
 
 .showcase-main-section:hover .showcase-description {
   color: #1F1F1F;
 }
 
+.showcase-main-section:hover .showcase-title {
+  gap: 6px;
+}
+
 .showcase-main-section:hover .showcase-ellipse {
+  width: 8px;
   opacity: 1;
 }
 

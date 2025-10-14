@@ -85,7 +85,8 @@
   color: #1F1F1F;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
+  transition: gap 0.2s ease;
 }
 
 .display-description {
@@ -94,17 +95,23 @@
 }
 
 .display-ellipse {
-  width: 8px;
+  width: 0;
   height: 8px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
 }
 
 .display-main-section:hover .display-description {
   color: #1F1F1F;
 }
 
+.display-main-section:hover .display-title {
+  gap: 6px;
+}
+
 .display-main-section:hover .display-ellipse {
+  width: 8px;
   opacity: 1;
 }
 

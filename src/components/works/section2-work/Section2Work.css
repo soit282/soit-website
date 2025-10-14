@@ -87,7 +87,8 @@
   color: #1F1F1F;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
+  transition: gap 0.2s ease;
 }
 
 .work-description {
@@ -96,17 +97,23 @@
 }
 
 .work-ellipse {
-  width: 8px;
+  width: 0;
   height: 8px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
 }
 
 .work-left-section:hover .work-description {
   color: #1F1F1F;
 }
 
+.work-left-section:hover .work-title {
+  gap: 6px;
+}
+
 .work-left-section:hover .work-ellipse {
+  width: 8px;
   opacity: 1;
 }
 
@@ -194,7 +201,8 @@
   color: #1F1F1F;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
+  transition: gap 0.2s ease;
 }
 
 .work-details-description {
@@ -203,17 +211,23 @@
 }
 
 .work-details-ellipse {
-  width: 8px;
+  width: 0;
   height: 8px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
 }
 
 .work-details-hover-area:hover .work-details-description {
   color: #1F1F1F;
 }
 
+.work-details-hover-area:hover .work-details-title {
+  gap: 6px;
+}
+
 .work-details-hover-area:hover .work-details-ellipse {
+  width: 8px;
   opacity: 1;
 }
 
