@@ -498,14 +498,18 @@
 
   .service-offer-title {
     max-width: 100%;
-    margin-top: 200px;
-    margin-bottom: 120px;
+    margin-top: 360px;
+    margin-bottom: 36px;
+  }
+  .service-offer-header {
+    margin-bottom: 240px;
   }
 
   .offerings-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     max-width: 100%;
+    margin-bottom: 120px;
   }
 
   .offering-card {
@@ -527,8 +531,8 @@
   }
 
   .submit-section {
-    margin-top: 100px;
-    margin-bottom: 80px;
+    margin-top: 48px;
+    margin-bottom: 0px;
   }
   .offering-description {
     margin: 0 0 60px 0;
@@ -542,18 +546,31 @@
   .offering-tags {
     margin: 0 0 36px 0;
   }
+  .service-offer-expanded {
+    padding: 120px 0;
+  }
 }
 
 @media (max-width: 576px) {
   .service-offer-section {
-    padding: 0 24px;
+    padding: 0 16px;
+  }
+
+  .offerings-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .offering-card {
     width: auto;
     max-width: 100%;
     height: auto;
-    padding: 18px;
+    padding: 24px 16px;
     margin: 0;
+  }
+
+  .offering-card:last-child:nth-child(odd) {
+    grid-column: 1;
+    width: 100%;
   }
 }
