@@ -56,6 +56,18 @@
     min-height: 80vh;
   }
 
+  /* Disable parallax on tablet */
+  .section7-background {
+    transform: translateY(0) !important;
+  }
+
+  /* Fixed position at center on tablet */
+  .section7-content {
+    top: 50% !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
   /* Adjust grid positioning for tablet (8 columns) */
   .section7-text-left {
     grid-column: 1 / span 6;
@@ -84,6 +96,18 @@
 @media (max-width: 576px) {
   .section7 {
     min-height: 60vh;
+  }
+
+  /* Disable parallax on mobile */
+  .section7-background {
+    transform: translateY(0) !important;
+  }
+
+  /* Fixed position at center on mobile */
+  .section7-content {
+    top: 50% !important;
+    opacity: 1 !important;
+    transition: none !important;
   }
 
   /* Mobile (4 columns) - 2 rows */
