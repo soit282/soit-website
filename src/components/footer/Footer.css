@@ -196,4 +196,8 @@
     padding: 40px 16px;
     min-height: auto;
   }
+  .footer-left {
+    gap: 36px;
+    margin-bottom: 120px;
+  }
 }
