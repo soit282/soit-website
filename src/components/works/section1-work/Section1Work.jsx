@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import ArrowButton from "@components/common/ArrowButton";
+import ListView from "@components/works/list-view/ListView";
 import "./Section1Work.css";
 
 // Shuffle text effect class (copied from Section2)
@@ -76,27 +77,6 @@ export default function Section1Work({ viewMode, setViewMode }) {
       observer.observe(element);
     }
 
-    // Initialize shuffle effects for all services
-    const serviceRefs = [
-      { ref: brandStrategyRef, key: "Brand Strategy" },
-      { ref: brandIdentityRef, key: "Brand Identity" },
-      { ref: packagingDesignRef, key: "Packaging Design" },
-      { ref: editorialDesignRef, key: "Editorial Design" },
-      { ref: campaignsActivationsRef, key: "Campaigns & Activations" },
-      { ref: webAppRef, key: "Web & App" },
-      { ref: creativeDevelopmentRef, key: "Creative Development" },
-      { ref: designSystemsRef, key: "Design Systems" },
-    ];
-
-    serviceRefs.forEach(({ ref, key }) => {
-      if (ref.current) {
-        shufflersRef.current[key] = new SmoothShuffler(ref.current, {
-          duration: 400,
-          shuffleCount: 3,
-        });
-      }
-    });
-
     return () => {
       if (element) {
         observer.unobserve(element);
@@ -104,6 +84,34 @@ export default function Section1Work({ viewMode, setViewMode }) {
       observer.disconnect();
     };
   }, []);
+
+  // Initialize shuffle effects when in gallery mode
+  useEffect(() => {
+    if (viewMode === 'gallery') {
+      // Use setTimeout to ensure DOM is ready after render
+      setTimeout(() => {
+        const serviceRefs = [
+          { ref: brandStrategyRef, key: "Brand Strategy" },
+          { ref: brandIdentityRef, key: "Brand Identity" },
+          { ref: packagingDesignRef, key: "Packaging Design" },
+          { ref: editorialDesignRef, key: "Editorial Design" },
+          { ref: campaignsActivationsRef, key: "Campaigns & Activations" },
+          { ref: webAppRef, key: "Web & App" },
+          { ref: creativeDevelopmentRef, key: "Creative Development" },
+          { ref: designSystemsRef, key: "Design Systems" },
+        ];
+
+        serviceRefs.forEach(({ ref, key }) => {
+          if (ref.current) {
+            shufflersRef.current[key] = new SmoothShuffler(ref.current, {
+              duration: 400,
+              shuffleCount: 3,
+            });
+          }
+        });
+      }, 0);
+    }
+  }, [viewMode]);
 
   const createHoverHandlers = (serviceKey) => ({
     onMouseEnter: () => {
@@ -121,7 +129,7 @@ export default function Section1Work({ viewMode, setViewMode }) {
   });
 
   return (
-    <section ref={sectionRef} className="section1-work">
+    <section ref={sectionRef} className={`section1-work ${viewMode === 'gallery' ? 'gallery-mode' : 'list-mode'}`}>
       <div className="section1-work-container">
         {/* View Toggle Buttons */}
         <div className="view-toggle-buttons">
@@ -137,76 +145,80 @@ export default function Section1Work({ viewMode, setViewMode }) {
           />
         </div>
 
-        <div
-          className={`section1-work-content text-2 ${
-            isVisible ? "visible" : ""
-          }`}
-        >
-          <span className="work-service-text" {...createHoverHandlers("Brand Strategy")}>
-            <span
-              className="shuffle-text"
-              ref={brandStrategyRef}
-            >
-              Brand Strategy
-            </span><span className="comma">,</span>
-          </span>{" "}
-          <span className="work-service-text" {...createHoverHandlers("Brand Identity")}>
-            <span
-              className="shuffle-text"
-              ref={brandIdentityRef}
-            >
-              Brand Identity
-            </span><span className="comma">,</span>
-          </span><br />
-          <span className="work-service-text" {...createHoverHandlers("Packaging Design")}>
-            <span
-              className="shuffle-text"
-              ref={packagingDesignRef}
-            >
-              Packaging Design
-            </span><span className="comma">,</span>
-          </span>{" "}
-          <span className="work-service-text" {...createHoverHandlers("Editorial Design")}>
-            <span
-              className="shuffle-text"
-              ref={editorialDesignRef}
-            >
-              Editorial Design
-            </span><span className="comma">,</span>
-          </span><br />
-          <span className="work-service-text" {...createHoverHandlers("Campaigns & Activations")}>
-            <span
-              className="shuffle-text"
-              ref={campaignsActivationsRef}
-            >
-              Campaigns & Activations
-            </span><span className="comma">,</span>
-          </span><br />
-          <span className="work-service-text" {...createHoverHandlers("Web & App")}>
-            <span
-              className="shuffle-text"
-              ref={webAppRef}
-            >
-              Web & App
-            </span><span className="comma">,</span>
-          </span>{" "}
-          <span className="work-service-text" {...createHoverHandlers("Creative Development")}>
-            <span
-              className="shuffle-text"
-              ref={creativeDevelopmentRef}
-            >
-              Creative Development
-            </span><span className="comma">,</span>
-          </span><br />
-          <span className="work-service-text" {...createHoverHandlers("Design Systems")}>
-            <span
-              className="shuffle-text"
-              ref={designSystemsRef}
-            >
-              Design Systems
+{viewMode === 'gallery' ? (
+          <div
+            className={`section1-work-content text-2 ${
+              isVisible ? "visible" : ""
+            }`}
+          >
+            <span className="work-service-text" {...createHoverHandlers("Brand Strategy")}>
+              <span
+                className="shuffle-text"
+                ref={brandStrategyRef}
+              >
+                Brand Strategy
+              </span><span className="comma">,</span>
+            </span>{" "}
+            <span className="work-service-text" {...createHoverHandlers("Brand Identity")}>
+              <span
+                className="shuffle-text"
+                ref={brandIdentityRef}
+              >
+                Brand Identity
+              </span><span className="comma">,</span>
+            </span><br />
+            <span className="work-service-text" {...createHoverHandlers("Packaging Design")}>
+              <span
+                className="shuffle-text"
+                ref={packagingDesignRef}
+              >
+                Packaging Design
+              </span><span className="comma">,</span>
+            </span>{" "}
+            <span className="work-service-text" {...createHoverHandlers("Editorial Design")}>
+              <span
+                className="shuffle-text"
+                ref={editorialDesignRef}
+              >
+                Editorial Design
+              </span><span className="comma">,</span>
+            </span><br />
+            <span className="work-service-text" {...createHoverHandlers("Campaigns & Activations")}>
+              <span
+                className="shuffle-text"
+                ref={campaignsActivationsRef}
+              >
+                Campaigns & Activations
+              </span><span className="comma">,</span>
+            </span><br />
+            <span className="work-service-text" {...createHoverHandlers("Web & App")}>
+              <span
+                className="shuffle-text"
+                ref={webAppRef}
+              >
+                Web & App
+              </span><span className="comma">,</span>
+            </span>{" "}
+            <span className="work-service-text" {...createHoverHandlers("Creative Development")}>
+              <span
+                className="shuffle-text"
+                ref={creativeDevelopmentRef}
+              >
+                Creative Development
+              </span><span className="comma">,</span>
+            </span><br />
+            <span className="work-service-text" {...createHoverHandlers("Design Systems")}>
+              <span
+                className="shuffle-text"
+                ref={designSystemsRef}
+              >
+                Design Systems
+              </span>
             </span>
-          </span>
-        </div>
+          </div>
+        ) : (
+          <ListView />
+        )}
       </div>
     </section>
   );

@@ -10,7 +10,6 @@ const Section6Work = lazy(() => import("@components/works/section6-work/Section6
 const Section7Work = lazy(() => import("@components/works/section7-work/Section7Work"));
 const Section8Work = lazy(() => import("@components/works/section8-work/Section8Work"));
 const Section9Work = lazy(() => import("@components/works/section9-work/Section9Work"));
-const ListView = lazy(() => import("@components/works/list-view/ListView"));
 
 const WorksPage = () => {
   const [viewMode, setViewMode] = useState('gallery');
@@ -21,7 +20,7 @@ const WorksPage = () => {
         <Section1Work viewMode={viewMode} setViewMode={setViewMode} />
       </Suspense>
 
-      {viewMode === 'gallery' ? (
+      {viewMode === 'gallery' && (
         <>
           <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
             <Section2Work />
@@ -48,10 +47,6 @@ const WorksPage = () => {
             <Section9Work />
           </Suspense>
         </>
-      ) : (
-        <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
-          <ListView />
-        </Suspense>
       )}
     </div>
   );

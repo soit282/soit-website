@@ -1,6 +1,6 @@
 .list-view {
   width: 100%;
-  padding: 80px 0;
+  padding: 0;
   background: #ffffff;
 }
 
@@ -74,7 +74,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .list-view {
-    padding: 60px 0;
+    padding: 0;
   }
 
   .projects-table th,
@@ -96,7 +96,7 @@
 /* Mobile */
 @media (max-width: 576px) {
   .list-view {
-    padding: 40px 0;
+    padding: 0;
   }
 
   .projects-table {
