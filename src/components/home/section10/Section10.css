@@ -376,7 +376,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .section10 {
-    padding: 60px 2.5%;
+    padding: 60px 24px;
   }
 
   .section10-label {
@@ -411,7 +411,7 @@
 /* Mobile */
 @media (max-width: 576px) {
   .section10 {
-    padding: 40px 3%;
+    padding: 40px 16px;
   }
 
   .service-item {

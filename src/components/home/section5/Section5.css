@@ -56,21 +56,21 @@
     min-height: 80vh;
   }
 
-  /* Adjust grid positioning for tablet */
+  /* Adjust grid positioning for tablet (8 columns) */
   .section5-text-left {
-    grid-column: 1 / span 9;
-    grid-row: 1 / span 2; /* Span 2 rows to align with stacked items */
+    grid-column: 1 / span 6;
+    grid-row: 1 / span 2;
   }
 
-  /* Text-right at column 10, first row */
+  /* Text-right at column 7, first row */
   .section5-text-right {
-    grid-column: 10 / span 3;
+    grid-column: 7 / span 2;
     grid-row: 1;
   }
 
-  /* Text-center at column 10, second row */
+  /* Text-center at column 7, second row */
   .section5-text-center {
-    grid-column: 10 / span 3;
+    grid-column: 7 / span 2;
     grid-row: 2;
     margin-top: 12px;
   }
@@ -86,23 +86,23 @@
     min-height: 60vh;
   }
 
-  /* Similar to tablet but with adjusted spacing */
+  /* Mobile (4 columns) - 2 rows */
   .section5-text-left {
-    grid-column: 1 / span 9;
-    grid-row: 1 / span 2;
-  }
-
-  /* Text-right at column 10, first row */
-  .section5-text-right {
-    grid-column: 10 / span 3;
+    grid-column: 1 / span 2;
     grid-row: 1;
   }
 
-  /* Text-center at column 10, second row */
+  /* Text-right, same row as left - column 3, span 2 */
+  .section5-text-right {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+  }
+
+  /* Text-center, second row - column 3, span 2 */
   .section5-text-center {
-    grid-column: 10 / span 3;
+    grid-column: 3 / span 2;
     grid-row: 2;
-    margin-top: 24px;
+    margin-top: 12px;
   }
 
   /* Align all text to left on mobile */
