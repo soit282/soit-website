@@ -1,0 +1,137 @@
+.list-view {
+  width: 100%;
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.projects-table thead {
+  border-bottom: 1px solid #1f1f1f;
+}
+
+.projects-table th {
+  text-align: left;
+  padding: 16px 24px;
+  color: #1f1f1f;
+  font-weight: normal;
+}
+
+.projects-table th:first-child {
+  padding-left: 0;
+}
+
+.projects-table th:last-child {
+  padding-right: 0;
+  text-align: right;
+}
+
+.project-row {
+  border-bottom: 1px solid #e5e5e5;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.project-row:hover {
+  background-color: #f5f5f5;
+}
+
+.project-row td {
+  padding: 20px 24px;
+  color: #1f1f1f;
+}
+
+.project-row td:first-child {
+  padding-left: 0;
+}
+
+.project-row td:last-child {
+  padding-right: 0;
+  text-align: right;
+}
+
+.project-name {
+  font-weight: 500;
+}
+
+.project-category {
+  color: #666666;
+}
+
+.project-type {
+  color: #666666;
+}
+
+.project-year {
+  color: #1f1f1f;
+}
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 1024px) {
+  .list-view {
+    padding: 60px 0;
+  }
+
+  .projects-table th,
+  .project-row td {
+    padding: 16px 12px;
+  }
+
+  .projects-table th:first-child,
+  .project-row td:first-child {
+    padding-left: 0;
+  }
+
+  .projects-table th:last-child,
+  .project-row td:last-child {
+    padding-right: 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .list-view {
+    padding: 40px 0;
+  }
+
+  .projects-table {
+    display: block;
+  }
+
+  .projects-table thead {
+    display: none;
+  }
+
+  .projects-table tbody {
+    display: block;
+  }
+
+  .project-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .project-row td {
+    padding: 0;
+    text-align: left !important;
+  }
+
+  .project-name {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .project-category,
+  .project-type,
+  .project-year {
+    font-size: 14px;
+  }
+}

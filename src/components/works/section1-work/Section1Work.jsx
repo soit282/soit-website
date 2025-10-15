@@ -43,7 +43,7 @@ class SmoothShuffler {
   }
 }
 
-export default function Section1Work() {
+export default function Section1Work({ viewMode, setViewMode }) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -122,6 +122,22 @@ export default function Section1Work() {
   return (
     <section ref={sectionRef} className="section1-work">
       <div className="section1-work-container">
+        {/* View Toggle Buttons */}
+        <div className="view-toggle-buttons">
+          <button
+            className={`view-toggle-btn text-6 ${viewMode === 'gallery' ? 'active' : ''}`}
+            onClick={() => setViewMode('gallery')}
+          >
+            ↗ Gallery view
+          </button>
+          <button
+            className={`view-toggle-btn text-6 ${viewMode === 'list' ? 'active' : ''}`}
+            onClick={() => setViewMode('list')}
+          >
+            List view ↗
+          </button>
+        </div>
+
         <div
           className={`section1-work-content text-2 ${
             isVisible ? "visible" : ""
