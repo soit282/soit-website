@@ -64,10 +64,10 @@
 
 @keyframes text-color-hover {
   0% {
-    color: #E0E0E0;
+    color: #e0e0e0;
   }
   20% {
-    color: #B8B8B8;
+    color: #b8b8b8;
   }
   40% {
     color: #909090;
@@ -76,7 +76,7 @@
     color: #686868;
   }
   80% {
-    color: #4C4C4C;
+    color: #4c4c4c;
   }
   100% {
     color: #303030;
@@ -85,22 +85,28 @@
 
 @keyframes icon-color-hover {
   0% {
-    filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%) hue-rotate(314deg) brightness(106%) contrast(82%);
+    filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
+      hue-rotate(314deg) brightness(106%) contrast(82%);
   }
   20% {
-    filter: brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(90%);
+    filter: brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(0%)
+      hue-rotate(0deg) brightness(100%) contrast(90%);
   }
   40% {
-    filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(90%);
+    filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%)
+      hue-rotate(0deg) brightness(100%) contrast(90%);
   }
   60% {
-    filter: brightness(0) saturate(100%) invert(42%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(98%) contrast(92%);
+    filter: brightness(0) saturate(100%) invert(42%) sepia(0%) saturate(0%)
+      hue-rotate(0deg) brightness(98%) contrast(92%);
   }
   80% {
-    filter: brightness(0) saturate(100%) invert(30%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(96%) contrast(91%);
+    filter: brightness(0) saturate(100%) invert(30%) sepia(0%) saturate(0%)
+      hue-rotate(0deg) brightness(96%) contrast(91%);
   }
   100% {
-    filter: brightness(0) saturate(100%) invert(17%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(91%);
+    filter: brightness(0) saturate(100%) invert(17%) sepia(0%) saturate(0%)
+      hue-rotate(0deg) brightness(95%) contrast(91%);
   }
 }
 
@@ -165,17 +171,17 @@
 
 /* Styling for expanded service items */
 .service-item.expanded .service-name {
-  color: #1F1F1F;
+  color: #1f1f1f;
   transition: color 0.3s ease;
 }
 
 .service-item.expanded .toggle-btn {
-  color: #1F1F1F;
+  color: #1f1f1f;
   transition: color 0.3s ease;
 }
 
 .toggle-btn.active {
-  color: #1F1F1F;
+  color: #1f1f1f;
   transition: color 0.3s ease;
 }
 
@@ -291,7 +297,8 @@
 }
 
 .service-item:not(.expanded) .service-header.locked .plus-icon {
-  filter: brightness(0) saturate(100%) invert(17%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(91%);
+  filter: brightness(0) saturate(100%) invert(17%) sepia(0%) saturate(0%)
+    hue-rotate(0deg) brightness(95%) contrast(91%);
   transition: filter 0.5s ease;
 }
 
@@ -393,6 +400,12 @@
     width: 30px;
     height: 30px;
   }
+  .service-header {
+    padding: 0;
+  }
+  .service-name {
+    padding-left: 0;
+  }
 }
 
 /* Mobile */
@@ -418,5 +431,8 @@
   .minus-icon {
     width: 24px;
     height: 24px;
+  }
+  .service-header {
+    padding: 0 0 24px;
   }
 }
