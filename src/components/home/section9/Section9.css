@@ -9,7 +9,7 @@
 .section9-see-all {
   display: flex;
   justify-content: center;
-  padding: 120px 0 80px;
+  padding: 60px 0 160px;
   box-sizing: border-box;
 }
 
@@ -102,7 +102,7 @@
     height: auto;
   }
   .section9-see-all {
-    padding: 60px 0 240px;
+    padding: 60px 0 120px;
   }
   .section9-container {
     padding: 0 24px 60px;
