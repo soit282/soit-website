@@ -253,8 +253,8 @@
   color: rgba(255, 255, 255, 0.6);
   border: none;
   outline: none;
-  padding-right: 70px;
-  padding-left: 20px;
+  padding-right: 96px;
+  padding-left: 0;
   cursor: pointer;
   min-width: 200px;
   text-align: center;
@@ -273,11 +273,10 @@
 .dropdown-wrapper.open::before {
   content: "";
   position: absolute;
-  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% + 80px);
-  height: calc(100% + 40px);
+  height: calc(100%);
   background-color: #ffffff;
   z-index: 999;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
