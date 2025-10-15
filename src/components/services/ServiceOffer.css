@@ -258,23 +258,62 @@
   min-width: 200px;
   text-align: center;
   display: inline-block;
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .service-dropdown:hover {
   color: rgba(255, 255, 255, 0.8);
 }
 
+/* Dropdown wrapper */
+.dropdown-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  text-align: center;
+  vertical-align: baseline;
+  overflow: hidden;
+  max-height: 120px;
+  padding: 0;
+  box-sizing: border-box;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Dropdown wrapper when open */
 .dropdown-wrapper.open {
   position: relative;
-  background-color: #ffffff;
   padding: 0 37px;
   box-sizing: border-box;
   display: inline-flex;
   align-items: flex-start;
   justify-content: center;
   gap: 36px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              padding 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+              overflow 0s linear 0.6s;
+}
+
+.dropdown-wrapper.open::before {
+  opacity: 1;
 }
 
 .dropdown-services-container {
@@ -283,6 +322,12 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-wrapper .service-dropdown {
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dropdown-wrapper.open .service-dropdown {
@@ -302,6 +347,19 @@
   border-radius: 0;
   margin-top: 0;
   padding: 0;
+  animation: dropdownSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform-origin: top center;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .custom-dropdown-option {
@@ -413,23 +471,16 @@
   background-repeat: no-repeat;
 }
 
-/* Dropdown styling */
-.dropdown-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 36px;
-  text-align: center;
-  vertical-align: baseline;
-}
+/* Dropdown styling removed - moved to top */
 
 .dropdown-arrow {
   width: 60px;
   height: auto;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
+  transform: rotate(0deg);
+  filter: none;
 }
 
 .dropdown-wrapper.open .dropdown-arrow {
