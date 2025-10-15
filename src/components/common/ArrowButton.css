@@ -92,7 +92,6 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .arrow-button {
-    padding: 10px 30px 10px 25px;
     min-width: 100px;
   }
 
@@ -114,7 +113,7 @@
 /* Mobile */
 @media (max-width: 576px) {
   .arrow-button {
-    padding: 8px 28px 8px 22px;
+    padding: 12px 20px 11px 0px;
     min-width: 90px;
   }
 
@@ -134,7 +133,7 @@
 
   .arrow-button:hover::after {
     left: 0px;
-    width: calc(100% - 8px);
+    width: calc(100%);
   }
 
   .arrow-button:hover .arrow-button-icon-2 {
