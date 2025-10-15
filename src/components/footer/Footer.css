@@ -140,7 +140,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: 22px;
+  padding-top: 24px;
   width: 100%;
 }
 
@@ -156,13 +156,13 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .footer {
-    padding: 40px 24px 24px;
+    padding: 24px 24px;
     min-height: auto;
   }
 
   .footer-top {
     flex-direction: column;
-    gap: 60px;
+    /* gap: 60px; */
   }
 
   .footer-logo {
@@ -172,13 +172,14 @@
   }
 
   .footer-left {
-    gap: 60px;
+    gap: 48px;
+    margin-bottom: 240px;
   }
 
   .footer-bottom {
-    flex-direction: column;
     gap: 16px;
     align-items: flex-start;
+    margin-top: 24px;
   }
 
   .footer-logo-img {
