@@ -91,10 +91,6 @@
 /* Responsive styles */
 /* Tablet */
 @media (max-width: 1024px) {
-  .arrow-button {
-    min-width: 100px;
-  }
-
   .arrow-button-icon {
     width: 16px;
     height: 28px;
@@ -113,8 +109,8 @@
 /* Mobile */
 @media (max-width: 576px) {
   .arrow-button {
-    padding: 12px 20px 11px 0px;
-    min-width: 90px;
+    padding: 12px 32px 10px 0px;
+    min-width: 100px;
   }
 
   .arrow-button-icon {
@@ -123,7 +119,7 @@
   }
 
   .arrow-button-icon-1 {
-    right: 8px;
+    /* right: 8px; */
   }
 
   .arrow-button::after {
