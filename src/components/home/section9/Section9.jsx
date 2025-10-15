@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./Section9.css";
+import "@styles/grid-system.css";
 import ArrowButton from "@components/common/ArrowButton";
 import DecryptedText from "../../DecryptedText";
 
@@ -30,32 +31,12 @@ export default function Section9() {
       name: "TBros",
       logo: "/1_Homepage/1_Homepage/3_Clients/tra-made.svg",
     },
-    {
-      id: 5,
-      name: "OKKIO",
-      logo: "/1_Homepage/1_Homepage/3_Clients/OKKIO_Logo.svg",
-    },
-    {
-      id: 6,
-      name: "Lêla",
-      logo: "/1_Homepage/1_Homepage/3_Clients/Lêla_logo.svg",
-    },
-    {
-      id: 7,
-      name: "CTY",
-      logo: "/1_Homepage/1_Homepage/3_Clients/CTY_logo.svg",
-    },
-    {
-      id: 8,
-      name: "TBros",
-      logo: "/1_Homepage/1_Homepage/3_Clients/tra-made.svg",
-    },
   ];
 
-  // Check if mobile view
+  // Check if mobile/tablet view
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 425);
+      setIsMobile(window.innerWidth <= 1024);
     };
 
     checkMobile();
@@ -207,48 +188,57 @@ export default function Section9() {
           </h2>
         </div>
 
-        <div
-          className={`clients-carousel-wrapper ${
-            isMobile ? "mobile-grid" : ""
-          }`}
-          ref={carouselRef}
-        >
-          <div className="clients-carousel-track">
-            {/* On mobile: show all 4 unique items in grid, Desktop: show duplicated for carousel */}
-            {(isMobile
-              ? clients.slice(0, 4)
-              : clients.slice(0, 4).concat(clients.slice(0, 4))
-            ).map((client, index) => (
-              <div
-                key={`${client.id}-${index}`}
-                className={`client-card ${
-                  hoveredCardIndex === index ? "hovered" : ""
-                }`}
-                data-index={index % 4}
-              >
-                <div
-                  className="client-background"
-                  style={{
-                    backgroundImage:
-                      hoveredCardIndex === index
-                        ? getHoverBackground(index % 4)
-                        : `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`,
-                    backgroundColor:
-                      hoveredCardIndex === index
-                        ? getHoverColor(index % 4)
-                        : "transparent",
-                  }}
-                >
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    className="client-logo"
-                  />
+        {isMobile ? (
+          <div className="grid-container clients-grid">
+            {clients.concat(clients, clients).map((client, index) => (
+              <div key={`${client.id}-${index}`} className="col-2 col-sm-2">
+                <div className="client-card">
+                  <div className="client-background">
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="client-logo"
+                    />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        ) : (
+          <div className="clients-carousel-wrapper" ref={carouselRef}>
+            <div className="clients-carousel-track">
+              {clients.concat(clients).map((client, index) => (
+                <div
+                  key={`${client.id}-${index}`}
+                  className={`client-card ${
+                    hoveredCardIndex === index ? "hovered" : ""
+                  }`}
+                  data-index={index % 4}
+                >
+                  <div
+                    className="client-background"
+                    style={{
+                      backgroundImage:
+                        hoveredCardIndex === index
+                          ? getHoverBackground(index % 4)
+                          : `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`,
+                      backgroundColor:
+                        hoveredCardIndex === index
+                          ? getHoverColor(index % 4)
+                          : "transparent",
+                    }}
+                  >
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="client-logo"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
