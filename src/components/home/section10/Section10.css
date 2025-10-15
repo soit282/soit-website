@@ -116,7 +116,39 @@
   position: relative;
   overflow: visible;
   margin-bottom: 0;
-  transition: background-image 0.5s ease;
+  transition: background-image 0.5s ease, background-color 0.5s ease,
+    padding 0.5s ease;
+}
+
+.service-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/1_Homepage/1_Homepage/3_Clients/Background_1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.service-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
 }
 
 .service-item:first-child {
@@ -158,43 +190,15 @@
 .service-item.expanded .service-content {
   grid-column: 7 / span 4;
   grid-row: 1;
+  position: static;
 }
 
 .service-item.expanded::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/Background_1.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0.8;
-  z-index: 0;
 }
 
 .service-item.expanded::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.1);
-  z-index: 0;
-}
-
-.service-item.expanded .service-header,
-.service-item.expanded .service-content {
-  position: relative;
-  z-index: 2;
-}
-
-.service-item.expanded .service-header * {
-  z-index: 2;
-  position: relative;
+  opacity: 1;
 }
 
 /* Styling for expanded service items */
@@ -222,6 +226,8 @@
   overflow: visible;
   justify-content: flex-start;
   margin-bottom: 0;
+  z-index: 2;
+  transition: padding 0.5s ease;
 }
 
 .service-number {
@@ -235,7 +241,7 @@
 
 .service-name {
   color: #e0e0e0;
-  transition: color 0.4s ease, transform 0.3s ease;
+  transition: color 0.5s ease, transform 0.5s ease, padding 0.5s ease;
   flex: 1;
 }
 
@@ -256,7 +262,6 @@
   box-shadow: none;
   position: absolute;
   right: 0;
-  top: 24px;
 }
 
 .toggle-btn:focus {
@@ -278,6 +283,7 @@
 .minus-icon {
   width: 36px;
   height: 36px;
+  margin-top: 24px;
   transition: all 0.3s ease;
 }
 
@@ -380,12 +386,21 @@
   max-height: 0;
   overflow: hidden;
   padding: 0;
-  transition: max-height 0.5s ease, padding 0.5s ease;
+  transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.5s ease,
+    transform 0.5s ease;
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
 }
 
 .service-content.active {
   max-height: 500px;
   padding: 24px 0;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .service-content p {
