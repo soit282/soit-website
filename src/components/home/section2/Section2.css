@@ -4,8 +4,8 @@
   z-index: 2;
   background: #fff;
   margin-bottom: 0;
-  padding-left: 1.25%;
-  padding-right: 1.25%;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .hero-tagline {
@@ -220,8 +220,6 @@
 @media (max-width: 768px) {
   .hero-tagline {
     padding-top: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
   }
 
   .tagline-image-left,
@@ -233,7 +231,6 @@
   .services-link a {
     font-size: 1.2rem;
   }
-
   .scrolling-text {
     padding: 20px 0;
   }
@@ -259,8 +256,8 @@
     font-size: 1rem;
   }
 
-  .scrolling-text {
-    padding: 15px 0;
-    height: 1.2rem;
+  .hero-tagline-section {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }

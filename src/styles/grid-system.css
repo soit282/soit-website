@@ -149,11 +149,10 @@
   }
 }
 
-@media (max-width: 480px) {
-  .col-xs-12 {
-    grid-column: span 12;
-  }
-  .col-xs-start-1 {
-    grid-column-start: 1;
+@media (max-width: 576px) {
+  .grid-container {
+    padding-left: 16px;
+    padding-right: 16px;
+    column-gap: 8px;
   }
 }
