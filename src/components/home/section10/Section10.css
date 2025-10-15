@@ -1,7 +1,7 @@
 .section10 {
   width: 100%;
   background-color: #ffffff;
-  padding: 120px 1.25%;
+  padding: 120px 24px;
   box-sizing: border-box;
   position: relative;
 }
@@ -130,6 +130,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: #e8e8e8;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .service-item.expanded .service-header {
@@ -151,12 +153,10 @@
   grid-column: 12 / span 1; /* Place at column 12 */
   justify-self: end;
   align-self: start;
-  margin-right: -24px;
 }
 
 .service-item.expanded .service-content {
   grid-column: 7 / span 4;
-  padding-top: 24px;
   grid-row: 1;
 }
 
@@ -236,7 +236,6 @@
 .service-name {
   color: #e0e0e0;
   transition: color 0.4s ease, transform 0.3s ease;
-  padding-left: 8px;
   flex: 1;
 }
 
@@ -471,7 +470,6 @@
 
   .service-item.expanded .service-content {
     grid-column: 1 / span 4;
-    padding-top: 48px;
     grid-row: 2;
   }
 
