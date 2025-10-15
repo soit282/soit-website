@@ -89,7 +89,8 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .arrow-button {
     padding: 10px 30px 10px 25px;
     min-width: 100px;
@@ -108,11 +109,10 @@
     left: 0px;
     width: calc(100% - 10px);
   }
-
-  /* Remove hover padding change */
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
   .arrow-button {
     padding: 8px 28px 8px 22px;
     min-width: 90px;
@@ -136,8 +136,6 @@
     left: 0px;
     width: calc(100% - 8px);
   }
-
-  /* Remove hover padding change */
 
   .arrow-button:hover .arrow-button-icon-2 {
     left: 0px;

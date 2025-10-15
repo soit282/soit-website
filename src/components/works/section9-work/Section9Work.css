@@ -40,13 +40,15 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .section9-work {
     padding: 60px 20px;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
   .section9-work {
     padding: 40px 20px;
   }

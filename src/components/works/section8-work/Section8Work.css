@@ -258,24 +258,8 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-  .section6-work-grid {
-    grid-template-columns: 1fr 300px;
-  }
-}
-
-@media (max-width: 992px) {
-  .section6-work-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: 70% 30%;
-  }
-
-  .feature-details {
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .section6-work .grid-container {
     margin-bottom: 24px;
   }
@@ -289,7 +273,8 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
   .section6-work .grid-container {
     margin-bottom: 18px;
   }

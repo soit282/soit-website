@@ -50,8 +50,8 @@
 }
 
 /* Responsive Design */
-/* Tablet breakpoint */
-@media (max-width: 1023px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .section4 {
     min-height: 80vh;
   }
@@ -79,8 +79,8 @@
   }
 }
 
-/* Mobile breakpoint */
-@media (max-width: 425px) {
+/* Mobile */
+@media (max-width: 576px) {
   .section4 {
     min-height: 60vh;
   }

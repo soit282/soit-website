@@ -91,7 +91,7 @@
 }
 
 /* Responsive Breakpoints */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .col-sm-1 {
     grid-column: span 1;
   }

@@ -94,7 +94,8 @@
 
 /* Button styles moved to ArrowButton component */
 
-@media (max-width: 1023px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .client-card {
     width: calc(50% - 0.3125%);
     aspect-ratio: 387/481;
@@ -102,7 +103,8 @@
   }
 }
 
-@media (max-width: 425px) {
+/* Mobile */
+@media (max-width: 576px) {
   .section9-see-all {
     padding: 40px 3% 80px;
   }

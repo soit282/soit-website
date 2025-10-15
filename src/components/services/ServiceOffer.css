@@ -492,7 +492,7 @@
     hue-rotate(314deg) brightness(98%) contrast(94%);
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .service-offer-title {
     max-width: 100%;
     margin-top: 200px;
@@ -519,7 +519,8 @@
     margin-bottom: 80px;
   }
 }
-@media (max-width: 425px) {
+
+@media (max-width: 576px) {
   .offering-card {
     width: auto;
     max-width: 100%;

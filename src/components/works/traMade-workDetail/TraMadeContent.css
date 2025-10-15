@@ -65,21 +65,17 @@ video.tramade-media {
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-}
-
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   /* Make items span full width on tablet */
   .tramade-media-item {
     grid-column: 1 / span 12 !important;
   }
 }
 
-@media (max-width: 480px) {
-  /* Make items span full width on mobile */
-  .tramade-media-item {
-    grid-column: 1 / span 12 !important;
-  }
+/* Mobile */
+@media (max-width: 576px) {
+  /* Make items span full width on mobile - inherits tablet styles */
 }
 
 /* Loading state - skeleton loader */

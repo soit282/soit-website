@@ -153,17 +153,8 @@
   white-space: nowrap;
 }
 
-@media (max-width: 1200px) {
-  .logo-text {
-    font-size: 200px;
-  }
-
-  .footer-logo-img {
-    max-width: 800px;
-  }
-}
-
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .footer {
     padding: 40px 24px 24px;
     min-height: auto;
@@ -178,10 +169,6 @@
     position: static;
     transform: none;
     align-self: flex-end;
-  }
-
-  .logo-text {
-    font-size: 120px;
   }
 
   .footer-left {
@@ -199,7 +186,8 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
   .footer-logo-img {
     max-width: 100%;
   }

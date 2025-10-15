@@ -151,8 +151,8 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Mobile Responsive */
-@media (max-width: 968px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .navbar-container {
     height: 60px;
     display: flex;
@@ -236,7 +236,8 @@
   }
 }
 
-@media (max-width: 640px) {
+/* Mobile */
+@media (max-width: 576px) {
   .navbar-logo-img {
     height: 18px;
   }

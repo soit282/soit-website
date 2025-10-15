@@ -140,7 +140,8 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .section7-work .grid-container {
     margin-bottom: 24px;
   }
@@ -160,7 +161,8 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
   .section7-work .grid-container {
     margin-bottom: 18px;
   }
