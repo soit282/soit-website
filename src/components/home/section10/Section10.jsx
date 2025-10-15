@@ -157,7 +157,7 @@ export default function Section10() {
             <div
               key={service.id}
               className={`service-item ${
-                activeService === service.id ? "expanded" : ""
+                activeService === service.id ? "expanded grid-container" : ""
               }`}
               onClick={() => handleServiceClick(service.id)}
               style={{ cursor: "pointer" }}

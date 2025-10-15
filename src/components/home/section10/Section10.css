@@ -114,7 +114,7 @@
   border-bottom: 1px solid #e5e5e5;
   background-color: #fff;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   margin-bottom: 0;
   transition: background-image 0.5s ease;
 }
@@ -130,6 +130,34 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: #e8e8e8;
+}
+
+.service-item.expanded .service-header {
+  grid-column: 1 / -1;
+  border-bottom: none;
+  display: contents;
+}
+
+.service-item.expanded .service-name {
+  grid-column: 1 / span 3;
+  padding-left: 0;
+  padding-top: 24px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.service-item.expanded .toggle-btn {
+  position: static; /* Remove absolute positioning */
+  grid-column: 12 / span 1; /* Place at column 12 */
+  justify-self: end;
+  align-self: start;
+  margin-right: -24px;
+}
+
+.service-item.expanded .service-content {
+  grid-column: 7 / span 4;
+  padding-top: 24px;
+  grid-row: 1;
 }
 
 .service-item.expanded::before {
@@ -191,8 +219,8 @@
   padding: 24px 0 48px 0;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
-  justify-content: space-between;
+  overflow: visible;
+  justify-content: flex-start;
   margin-bottom: 0;
 }
 
@@ -218,8 +246,8 @@
   font-size: 24px;
   color: #111;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,6 +255,9 @@
   transition: transform 0.3s ease;
   outline: none;
   box-shadow: none;
+  position: absolute;
+  right: 0;
+  top: 24px;
 }
 
 .toggle-btn:focus {
@@ -355,16 +386,19 @@
 
 .service-content.active {
   max-height: 500px;
+  padding: 24px 0;
 }
 
 .service-content p {
-  margin: 8px 0 8px 25.8%;
   color: #1f1f1f;
-  padding: 8px 12px;
   border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.service-item:not(.expanded) .service-content p {
+  margin: 8px 0 8px 25.8%;
 }
 
 .content-arrow {
@@ -385,6 +419,18 @@
 
   .service-item {
     padding: 24px 0;
+  }
+
+  .service-item.expanded .service-name {
+    grid-column: 1 / span 2;
+  }
+
+  .service-item.expanded .service-content {
+    grid-column: 3 / span 5;
+  }
+
+  .service-item.expanded .toggle-btn {
+    grid-column: 8 / span 1;
   }
 
   .service-number {
@@ -416,6 +462,22 @@
 
   .service-item {
     padding: 20px 0;
+  }
+
+  .service-item.expanded .service-name {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  .service-item.expanded .service-content {
+    grid-column: 1 / span 4;
+    padding-top: 48px;
+    grid-row: 2;
+  }
+
+  .service-item.expanded .toggle-btn {
+    grid-column: 4 / span 1;
+    grid-row: 1;
   }
 
   .service-number {
