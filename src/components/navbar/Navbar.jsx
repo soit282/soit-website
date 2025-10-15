@@ -53,6 +53,7 @@ const Navbar = () => {
   const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0 });
   const [explosionTrigger, setExplosionTrigger] = useState(0);
   const [explosionPosition, setExplosionPosition] = useState({ x: 0, y: 0 });
+  const homeRef = useRef(null);
   const worksRef = useRef(null);
   const aboutRef = useRef(null);
   const servicesRef = useRef(null);
@@ -62,6 +63,19 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     // Use requestAnimationFrame for smoother scroll updates
@@ -79,6 +93,7 @@ const Navbar = () => {
 
     // Initialize shuffle effects for all menu items
     const menuRefs = [
+      { ref: homeRef, key: "Home" },
       { ref: worksRef, key: "Works" },
       { ref: aboutRef, key: "About" },
       { ref: servicesRef, key: "Services" },
@@ -217,12 +232,32 @@ const Navbar = () => {
         </div>
 
         {/* Menu - positioned at center columns */}
-        <div className="navbar-menu-wrapper">
-          <ul className={`navbar-menu ${mobileMenuOpen ? "mobile-open" : ""}`}>
+        <div className={`navbar-menu-wrapper ${mobileMenuOpen ? "mobile-open" : ""}`}>
+          <div className="mobile-menu-header">
+            <button
+              className="mobile-menu-close text-6"
+              onClick={toggleMobileMenu}
+              aria-label="Close mobile menu"
+            >
+              Close
+            </button>
+          </div>
+          <ul className="navbar-menu">
             <li className="navbar-item">
-              <a href="/works" className="navbar-link">
+              <a href="/" className="navbar-link" onClick={toggleMobileMenu}>
                 <span
-                  className="navbar-shuffle-text text-6"
+                  className="navbar-shuffle-text text-6 mobile-text-2"
+                  ref={homeRef}
+                  {...createHoverHandlers("Home")}
+                >
+                  Home
+                </span>
+              </a>
+            </li>
+            <li className="navbar-item">
+              <a href="/works" className="navbar-link" onClick={toggleMobileMenu}>
+                <span
+                  className="navbar-shuffle-text text-6 mobile-text-2"
                   ref={worksRef}
                   {...createHoverHandlers("Works")}
                 >
@@ -231,9 +266,9 @@ const Navbar = () => {
               </a>
             </li>
             <li className="navbar-item">
-              <a href="/about" className="navbar-link">
+              <a href="/about" className="navbar-link" onClick={toggleMobileMenu}>
                 <span
-                  className="navbar-shuffle-text text-6"
+                  className="navbar-shuffle-text text-6 mobile-text-2"
                   ref={aboutRef}
                   {...createHoverHandlers("About")}
                 >
@@ -242,9 +277,9 @@ const Navbar = () => {
               </a>
             </li>
             <li className="navbar-item">
-              <a href="/services" className="navbar-link">
+              <a href="/services" className="navbar-link" onClick={toggleMobileMenu}>
                 <span
-                  className="navbar-shuffle-text text-6"
+                  className="navbar-shuffle-text text-6 mobile-text-2"
                   ref={servicesRef}
                   {...createHoverHandlers("Services")}
                 >
@@ -253,9 +288,9 @@ const Navbar = () => {
               </a>
             </li>
             <li className="navbar-item">
-              <a href="/playground" className="navbar-link">
+              <a href="/playground" className="navbar-link" onClick={toggleMobileMenu}>
                 <span
-                  className="navbar-shuffle-text text-6"
+                  className="navbar-shuffle-text text-6 mobile-text-2"
                   ref={playgroundRef}
                   {...createHoverHandlers("Playground")}
                 >
@@ -264,6 +299,11 @@ const Navbar = () => {
               </a>
             </li>
           </ul>
+          <div className="mobile-menu-footer">
+            <a href="/contact" className="mobile-connect-link text-2" onClick={toggleMobileMenu}>
+              Let's connect
+            </a>
+          </div>
         </div>
 
         {/* Vacation text - positioned at right column */}
@@ -289,13 +329,11 @@ const Navbar = () => {
         </div>
 
         <button
-          className="mobile-menu-toggle"
+          className="mobile-menu-toggle text-6"
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
         >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
+          Menu
         </button>
       </div>
       <ParticleExplosion
