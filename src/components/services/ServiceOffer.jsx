@@ -188,36 +188,36 @@ export default function ServiceOffer() {
                   className={`dropdown-wrapper ${isDropdownOpen ? 'open' : ''}`}
                   ref={dropdownRef}
                 >
-                  <span className="dropdown-current-selection">
-                    <span
+                  <div className="dropdown-services-container">
+                    <div
                       className="service-dropdown contact-info text-2"
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     >
                       {selectedService}
-                    </span>
-                    <img
-                      src={dropDownIcon}
-                      alt="dropdown"
-                      className="dropdown-arrow"
-                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    />
-                  </span>
-                  {isDropdownOpen && (
-                    <div className="custom-dropdown-menu">
-                      {getAvailableServices().map((service) => (
-                        <div
-                          key={service}
-                          className="custom-dropdown-option text-2"
-                          onClick={() => {
-                            setSelectedService(service);
-                            setIsDropdownOpen(false);
-                          }}
-                        >
-                          {service}
-                        </div>
-                      ))}
                     </div>
-                  )}
+                    {isDropdownOpen && (
+                      <div className="custom-dropdown-menu">
+                        {getAvailableServices().map((service) => (
+                          <div
+                            key={service}
+                            className="custom-dropdown-option text-2"
+                            onClick={() => {
+                              setSelectedService(service);
+                              setIsDropdownOpen(false);
+                            }}
+                          >
+                            {service}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <img
+                    src={dropDownIcon}
+                    alt="dropdown"
+                    className="dropdown-arrow"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  />
                 </span>
               </p>
               <p className="contact-text text-2">
