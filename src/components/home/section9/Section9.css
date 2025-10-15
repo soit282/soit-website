@@ -9,7 +9,7 @@
 .section9-see-all {
   display: flex;
   justify-content: center;
-  padding: 120px 1.25% 80px;
+  padding: 120px 0 80px;
   box-sizing: border-box;
 }
 
@@ -17,7 +17,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 1.25% 120px;
+  padding: 0 24px 120px;
   box-sizing: border-box;
 }
 
@@ -101,6 +101,18 @@
     aspect-ratio: 387/481;
     height: auto;
   }
+  .section9-see-all {
+    padding: 60px 0 240px;
+  }
+  .section9-container {
+    padding: 0 18px 60px;
+  }
+  .section9-label {
+    margin: 0 0 12px 0;
+  }
+  .section9-header {
+    margin-bottom: 60px;
+  }
 }
 
 /* Mobile */
@@ -118,7 +130,7 @@
   }
 
   .section9-header {
-    margin-bottom: 36px;
+    margin-bottom: 48px;
   }
 
   /* Mobile grid layout - no carousel */

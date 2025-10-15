@@ -19,14 +19,14 @@
 }
 
 .section3-heading {
-  color: #1F1F1F;
+  color: #1f1f1f;
   margin: 0;
   max-width: 100%;
 }
 
 @media (max-width: 1024px) {
   .section3 {
-    padding: 180px 1.25% 100px 1.25%;
+    padding: 240px 24px 60px 24px;
   }
 
   .section3-content {
@@ -36,7 +36,7 @@
 
 @media (max-width: 576px) {
   .section3 {
-    padding: 80px 1.25% 60px 1.25%;
+    padding: 120px 16px 48px 16px;
   }
 
   .section3-heading {
