@@ -286,11 +286,7 @@ const Navbar = () => {
           </a>
         </li>
         <li className="navbar-item">
-          <a
-            href="/contact"
-            className="navbar-link"
-            onClick={toggleMobileMenu}
-          >
+          <a href="/contact" className="navbar-link" onClick={toggleMobileMenu}>
             <span className="navbar-shuffle-text text-2 mobile-text-2">
               Let's connect
             </span>
@@ -300,41 +296,45 @@ const Navbar = () => {
     </div>
   );
 
+  const logoElement = (
+    <div
+      className="navbar-logo-wrapper"
+      style={{
+        position: "fixed",
+        transform:
+          logoScale > 1.5
+            ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
+            : `scale(1)`,
+        left:
+          logoScale > 1.5 ? "50%" : window.innerWidth <= 576 ? "16px" : "24px",
+        top: logoScale > 1.5 ? "50%" : "0px",
+        zIndex: 100011,
+        transformOrigin: "center center",
+        willChange: "transform",
+        transition: "none",
+      }}
+    >
+      <a href="/" className="navbar-logo">
+        <img
+          src="/icon/Icon/Số Ít logo.svg"
+          alt="Số Ít"
+          className="navbar-logo-img"
+          style={{
+            vectorEffect: "non-scaling-stroke",
+            shapeRendering: "geometricPrecision",
+          }}
+        />
+      </a>
+    </div>
+  );
+
   return (
     <>
+      {/* Render logo via Portal */}
+      {createPortal(logoElement, document.body)}
+
       <nav className="navbar">
         <div className="grid-container navbar-container">
-          {/* Logo - positioned at column 1 */}
-          <div
-            className="navbar-logo-wrapper"
-            style={{
-              transform:
-                logoScale > 1.5
-                  ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
-                  : `scale(${logoScale})`,
-              position: logoScale > 1.5 ? "fixed" : "relative",
-              left: logoScale > 1.5 ? "50%" : "auto",
-              top: logoScale > 1.5 ? "50%" : "auto",
-              zIndex: logoScale > 1.5 ? 10000 : "auto",
-              transformOrigin: "center center",
-              willChange: "transform",
-              transition: "none", // Remove transition for real-time smooth scroll
-            }}
-          >
-            <a href="/" className="navbar-logo">
-              <img
-                src="/icon/Icon/Số Ít logo.svg"
-                alt="Số Ít"
-                className="navbar-logo-img"
-                style={{
-                  // Use vector-effect to maintain crisp edges when scaled
-                  vectorEffect: "non-scaling-stroke",
-                  shapeRendering: "geometricPrecision",
-                }}
-              />
-            </a>
-          </div>
-
           {/* Desktop Menu - positioned at center columns */}
           <div className="navbar-menu-wrapper-desktop">
             <ul className="navbar-menu">

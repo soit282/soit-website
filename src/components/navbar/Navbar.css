@@ -172,12 +172,7 @@
   }
 
   .navbar-logo-wrapper {
-    flex: 0 0 auto;
-    position: relative !important;
-    transform: scale(1) !important;
-    left: auto !important;
-    top: auto !important;
-    z-index: 100003;
+    mix-blend-mode: difference;
   }
 
   .navbar-logo-img {
@@ -205,8 +200,6 @@
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     overflow: hidden;
-    mix-blend-mode: normal;
-    isolation: isolate;
   }
 
   .navbar-menu-wrapper.mobile-open {
@@ -303,10 +296,12 @@
 
   .mobile-menu-toggle {
     display: block;
-    position: absolute;
+    position: fixed;
     right: 24px;
-    z-index: 100003;
+    top: 15px;
+    z-index: 100011;
     color: white;
+    mix-blend-mode: difference;
   }
 }
 
@@ -322,6 +317,10 @@
 
   .navbar-container {
     padding: 0 16px;
+  }
+
+  .mobile-menu-toggle {
+    right: 16px;
   }
 
   .mobile-menu-close {
