@@ -179,11 +179,9 @@ export default function ServiceOffer() {
                 >
                   {companyName}
                 </span>{" "}
-                , and
+                , and we'd love to discuss
               </p>
               <p className="footer-line2 text-2">
-                we'd love to discuss
-                <br />
                 <span
                   className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}
                   ref={dropdownRef}
@@ -221,8 +219,7 @@ export default function ServiceOffer() {
                 </span>
               </p>
               <p className="contact-text text-2">
-                Please feel free to reach us at
-                <br />
+                Please feel free to reach us at{" "}
                 <span
                   className="contact-input text-2"
                   contentEditable
