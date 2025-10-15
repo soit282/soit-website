@@ -179,13 +179,13 @@ export default function ServiceOffer() {
                 >
                   {companyName}
                 </span>{" "}
-                and
+                , and
               </p>
               <p className="footer-line2 text-2">
                 we'd love to discuss
                 <br />
                 <span
-                  className={`dropdown-wrapper ${isDropdownOpen ? 'open' : ''}`}
+                  className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}
                   ref={dropdownRef}
                 >
                   <div className="dropdown-services-container">
