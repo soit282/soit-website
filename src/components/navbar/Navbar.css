@@ -50,13 +50,18 @@
   transform: translateZ(0); /* Force GPU acceleration */
 }
 
-/* Menu positioning using grid */
-.navbar-menu-wrapper {
+/* Desktop Menu positioning using grid */
+.navbar-menu-wrapper-desktop {
   grid-column: 7 / span 3;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 70px;
+}
+
+/* Mobile menu wrapper - hidden on desktop */
+.navbar-menu-wrapper {
+  display: none;
 }
 
 /* Hide mobile menu elements on desktop */
@@ -151,13 +156,12 @@
   cursor: pointer;
   padding: 0;
   color: white;
-  font-family: inherit;
 }
 
 /* Tablet */
 @media (max-width: 1024px) {
   .navbar {
-    mix-blend-mode: normal;
+    mix-blend-mode: difference;
   }
 
   .navbar-container {
@@ -173,11 +177,16 @@
     transform: scale(1) !important;
     left: auto !important;
     top: auto !important;
-    z-index: 100001;
+    z-index: 100003;
   }
 
   .navbar-logo-img {
-    filter: invert(0);
+    filter: invert(1);
+  }
+
+  /* Hide desktop menu on mobile/tablet */
+  .navbar-menu-wrapper-desktop {
+    display: none;
   }
 
   /* Full screen mobile menu overlay */
@@ -190,7 +199,7 @@
     background-color: #ffffff;
     display: none;
     grid-column: unset;
-    z-index: 99999;
+    z-index: 100002;
     padding: 0;
     opacity: 0;
     visibility: hidden;
@@ -224,7 +233,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 20px 0;
     height: 60px;
   }
 
@@ -234,15 +242,14 @@
     color: #1f1f1f;
     cursor: pointer;
     padding: 0;
-    font-family: inherit;
     margin-right: 24px;
   }
 
-  /* Menu items positioned on the right */
+  /* Menu items positioned on the right - all in one group */
   .navbar-menu {
     flex-direction: column;
-    padding: 0;
-    gap: 0;
+    padding: 0 0 40px 0;
+    gap: 12px;
     align-items: flex-end;
     flex: 1;
     justify-content: center;
@@ -257,12 +264,17 @@
     width: auto;
   }
 
+  /* Special gap before Let's connect */
+  .navbar-item:last-child {
+    margin-top: 108px; /* 120px - 12px (existing gap) = 108px */
+  }
+
   .navbar-link {
     display: inline-block;
-    padding: 8px 0;
     color: #1f1f1f;
     text-align: right;
     width: auto;
+    padding: 0;
   }
 
   .navbar-link:hover,
@@ -280,49 +292,9 @@
     background-color: #1f1f1f;
   }
 
-  /* Override text size for mobile menu */
-  .mobile-text-2 {
-    font-size: inherit !important;
-    line-height: inherit !important;
-    letter-spacing: inherit !important;
-    font-weight: inherit !important;
-  }
-
-  .navbar-shuffle-text.mobile-text-2 {
-    font-size: var(--text-2-font-size, 3rem) !important;
-    line-height: var(--text-2-line-height, 1.1) !important;
-    letter-spacing: var(--text-2-letter-spacing, -0.02em) !important;
-    font-weight: var(--text-2-font-weight, 500) !important;
-  }
-
-  /* Mobile menu footer */
+  /* Hide mobile menu footer since we moved content to menu */
   .mobile-menu-footer {
-    padding: 0 0 40px;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .mobile-connect-link {
-    color: #1f1f1f;
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    margin-right: 24px;
-  }
-
-  .mobile-connect-link::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: -2px;
-    left: 0;
-    background-color: #1f1f1f;
-    transition: width 0.3s ease;
-  }
-
-  .mobile-connect-link:hover::after {
-    width: 100%;
+    display: none;
   }
 
   .navbar-vacation-wrapper {
@@ -333,8 +305,8 @@
     display: block;
     position: absolute;
     right: 24px;
-    z-index: 100000;
-    color: #1f1f1f;
+    z-index: 100003;
+    color: white;
   }
 }
 
@@ -352,31 +324,15 @@
     padding: 0 16px;
   }
 
-  .mobile-menu-header {
-    padding: 20px 0;
-  }
-
   .mobile-menu-close {
     margin-right: 16px;
   }
 
   .navbar-menu {
-    padding: 0;
+    padding: 0 0 40px 0;
   }
 
   .navbar-item {
-    margin-right: 16px;
-  }
-
-  .navbar-link {
-    padding: 8px 0;
-  }
-
-  .mobile-menu-footer {
-    padding: 0 0 40px;
-  }
-
-  .mobile-connect-link {
     margin-right: 16px;
   }
 

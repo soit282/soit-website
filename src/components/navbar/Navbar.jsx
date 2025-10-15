@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { createPortal } from "react-dom";
 import ParticleExplosion from "../effects/ParticleExplosion";
 import "./Navbar.css";
 import "@styles/grid-system.css";
@@ -58,6 +59,11 @@ const Navbar = () => {
   const aboutRef = useRef(null);
   const servicesRef = useRef(null);
   const playgroundRef = useRef(null);
+  const mobileHomeRef = useRef(null);
+  const mobileWorksRef = useRef(null);
+  const mobileAboutRef = useRef(null);
+  const mobileServicesRef = useRef(null);
+  const mobilePlaygroundRef = useRef(null);
   const shufflersRef = useRef({});
 
   const toggleMobileMenu = () => {
@@ -98,6 +104,11 @@ const Navbar = () => {
       { ref: aboutRef, key: "About" },
       { ref: servicesRef, key: "Services" },
       { ref: playgroundRef, key: "Playground" },
+      { ref: mobileHomeRef, key: "MobileHome" },
+      { ref: mobileWorksRef, key: "MobileWorks" },
+      { ref: mobileAboutRef, key: "MobileAbout" },
+      { ref: mobileServicesRef, key: "MobileServices" },
+      { ref: mobilePlaygroundRef, key: "MobilePlayground" },
     ];
 
     menuRefs.forEach(({ ref, key }) => {
@@ -197,150 +208,232 @@ const Navbar = () => {
     },
   });
 
-  return (
-    <nav className="navbar">
-      <div className="grid-container navbar-container">
-        {/* Logo - positioned at column 1 */}
-        <div
-          className="navbar-logo-wrapper"
-          style={{
-            transform:
-              logoScale > 1.5
-                ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
-                : `scale(${logoScale})`,
-            position: logoScale > 1.5 ? "fixed" : "relative",
-            left: logoScale > 1.5 ? "50%" : "auto",
-            top: logoScale > 1.5 ? "50%" : "auto",
-            zIndex: logoScale > 1.5 ? 10000 : "auto",
-            transformOrigin: "center center",
-            willChange: "transform",
-            transition: "none", // Remove transition for real-time smooth scroll
-          }}
-        >
-          <a href="/" className="navbar-logo">
-            <img
-              src="/icon/Icon/Số Ít logo.svg"
-              alt="Số Ít"
-              className="navbar-logo-img"
-              style={{
-                // Use vector-effect to maintain crisp edges when scaled
-                vectorEffect: "non-scaling-stroke",
-                shapeRendering: "geometricPrecision",
-              }}
-            />
-          </a>
-        </div>
-
-        {/* Menu - positioned at center columns */}
-        <div className={`navbar-menu-wrapper ${mobileMenuOpen ? "mobile-open" : ""}`}>
-          <div className="mobile-menu-header">
-            <button
-              className="mobile-menu-close text-6"
-              onClick={toggleMobileMenu}
-              aria-label="Close mobile menu"
-            >
-              Close
-            </button>
-          </div>
-          <ul className="navbar-menu">
-            <li className="navbar-item">
-              <a href="/" className="navbar-link" onClick={toggleMobileMenu}>
-                <span
-                  className="navbar-shuffle-text text-6 mobile-text-2"
-                  ref={homeRef}
-                  {...createHoverHandlers("Home")}
-                >
-                  Home
-                </span>
-              </a>
-            </li>
-            <li className="navbar-item">
-              <a href="/works" className="navbar-link" onClick={toggleMobileMenu}>
-                <span
-                  className="navbar-shuffle-text text-6 mobile-text-2"
-                  ref={worksRef}
-                  {...createHoverHandlers("Works")}
-                >
-                  Works
-                </span>
-              </a>
-            </li>
-            <li className="navbar-item">
-              <a href="/about" className="navbar-link" onClick={toggleMobileMenu}>
-                <span
-                  className="navbar-shuffle-text text-6 mobile-text-2"
-                  ref={aboutRef}
-                  {...createHoverHandlers("About")}
-                >
-                  About
-                </span>
-              </a>
-            </li>
-            <li className="navbar-item">
-              <a href="/services" className="navbar-link" onClick={toggleMobileMenu}>
-                <span
-                  className="navbar-shuffle-text text-6 mobile-text-2"
-                  ref={servicesRef}
-                  {...createHoverHandlers("Services")}
-                >
-                  Services
-                </span>
-              </a>
-            </li>
-            <li className="navbar-item">
-              <a href="/playground" className="navbar-link" onClick={toggleMobileMenu}>
-                <span
-                  className="navbar-shuffle-text text-6 mobile-text-2"
-                  ref={playgroundRef}
-                  {...createHoverHandlers("Playground")}
-                >
-                  Playground
-                </span>
-              </a>
-            </li>
-          </ul>
-          <div className="mobile-menu-footer">
-            <a href="/contact" className="mobile-connect-link text-2" onClick={toggleMobileMenu}>
-              Let's connect
-            </a>
-          </div>
-        </div>
-
-        {/* Vacation text - positioned at right column */}
-        <div className="navbar-vacation-wrapper">
-          <span
-            className="navbar-vacation text-6"
-            onClick={() => {
-              setExplosionPosition({
-                x: window.innerWidth / 2,
-                y: window.innerHeight / 2,
-              });
-              setExplosionTrigger((prev) => prev + 1);
-            }}
-            style={{ cursor: "pointer" }}
-          >
-            We are on vacation
-            <img
-              src="/icon/Icon/ellipse.svg"
-              alt=""
-              className="navbar-vacation-icon"
-            />
-          </span>
-        </div>
-
+  const mobileMenu = (
+    <div
+      className={`navbar-menu-wrapper ${mobileMenuOpen ? "mobile-open" : ""}`}
+    >
+      <div className="mobile-menu-header">
         <button
-          className="mobile-menu-toggle text-6"
+          className="mobile-menu-close text-2"
           onClick={toggleMobileMenu}
-          aria-label="Toggle mobile menu"
+          aria-label="Close mobile menu"
         >
-          Menu
+          Close
         </button>
       </div>
-      <ParticleExplosion
-        trigger={explosionTrigger}
-        position={explosionPosition}
-      />
-    </nav>
+      <ul className="navbar-menu">
+        <li className="navbar-item">
+          <a href="/" className="navbar-link" onClick={toggleMobileMenu}>
+            <span
+              className="navbar-shuffle-text text-2 mobile-text-2"
+              ref={mobileHomeRef}
+              {...createHoverHandlers("MobileHome")}
+            >
+              Home
+            </span>
+          </a>
+        </li>
+        <li className="navbar-item">
+          <a href="/works" className="navbar-link" onClick={toggleMobileMenu}>
+            <span
+              className="navbar-shuffle-text text-2 mobile-text-2"
+              ref={mobileWorksRef}
+              {...createHoverHandlers("MobileWorks")}
+            >
+              Works
+            </span>
+          </a>
+        </li>
+        <li className="navbar-item">
+          <a href="/about" className="navbar-link" onClick={toggleMobileMenu}>
+            <span
+              className="navbar-shuffle-text text-2 mobile-text-2"
+              ref={mobileAboutRef}
+              {...createHoverHandlers("MobileAbout")}
+            >
+              About
+            </span>
+          </a>
+        </li>
+        <li className="navbar-item">
+          <a
+            href="/services"
+            className="navbar-link"
+            onClick={toggleMobileMenu}
+          >
+            <span
+              className="navbar-shuffle-text text-2 mobile-text-2"
+              ref={mobileServicesRef}
+              {...createHoverHandlers("MobileServices")}
+            >
+              Services
+            </span>
+          </a>
+        </li>
+        <li className="navbar-item">
+          <a
+            href="/playground"
+            className="navbar-link"
+            onClick={toggleMobileMenu}
+          >
+            <span
+              className="navbar-shuffle-text text-2 mobile-text-2"
+              ref={mobilePlaygroundRef}
+              {...createHoverHandlers("MobilePlayground")}
+            >
+              Playground
+            </span>
+          </a>
+        </li>
+        <li className="navbar-item">
+          <a
+            href="/contact"
+            className="navbar-link"
+            onClick={toggleMobileMenu}
+          >
+            <span className="navbar-shuffle-text text-2 mobile-text-2">
+              Let's connect
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  );
+
+  return (
+    <>
+      <nav className="navbar">
+        <div className="grid-container navbar-container">
+          {/* Logo - positioned at column 1 */}
+          <div
+            className="navbar-logo-wrapper"
+            style={{
+              transform:
+                logoScale > 1.5
+                  ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
+                  : `scale(${logoScale})`,
+              position: logoScale > 1.5 ? "fixed" : "relative",
+              left: logoScale > 1.5 ? "50%" : "auto",
+              top: logoScale > 1.5 ? "50%" : "auto",
+              zIndex: logoScale > 1.5 ? 10000 : "auto",
+              transformOrigin: "center center",
+              willChange: "transform",
+              transition: "none", // Remove transition for real-time smooth scroll
+            }}
+          >
+            <a href="/" className="navbar-logo">
+              <img
+                src="/icon/Icon/Số Ít logo.svg"
+                alt="Số Ít"
+                className="navbar-logo-img"
+                style={{
+                  // Use vector-effect to maintain crisp edges when scaled
+                  vectorEffect: "non-scaling-stroke",
+                  shapeRendering: "geometricPrecision",
+                }}
+              />
+            </a>
+          </div>
+
+          {/* Desktop Menu - positioned at center columns */}
+          <div className="navbar-menu-wrapper-desktop">
+            <ul className="navbar-menu">
+              <li className="navbar-item">
+                <a href="/" className="navbar-link">
+                  <span
+                    className="navbar-shuffle-text text-6"
+                    ref={homeRef}
+                    {...createHoverHandlers("Home")}
+                  >
+                    Home
+                  </span>
+                </a>
+              </li>
+              <li className="navbar-item">
+                <a href="/works" className="navbar-link">
+                  <span
+                    className="navbar-shuffle-text text-6"
+                    ref={worksRef}
+                    {...createHoverHandlers("Works")}
+                  >
+                    Works
+                  </span>
+                </a>
+              </li>
+              <li className="navbar-item">
+                <a href="/about" className="navbar-link">
+                  <span
+                    className="navbar-shuffle-text text-6"
+                    ref={aboutRef}
+                    {...createHoverHandlers("About")}
+                  >
+                    About
+                  </span>
+                </a>
+              </li>
+              <li className="navbar-item">
+                <a href="/services" className="navbar-link">
+                  <span
+                    className="navbar-shuffle-text text-6"
+                    ref={servicesRef}
+                    {...createHoverHandlers("Services")}
+                  >
+                    Services
+                  </span>
+                </a>
+              </li>
+              <li className="navbar-item">
+                <a href="/playground" className="navbar-link">
+                  <span
+                    className="navbar-shuffle-text text-6"
+                    ref={playgroundRef}
+                    {...createHoverHandlers("Playground")}
+                  >
+                    Playground
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Vacation text - positioned at right column */}
+          <div className="navbar-vacation-wrapper">
+            <span
+              className="navbar-vacation text-6"
+              onClick={() => {
+                setExplosionPosition({
+                  x: window.innerWidth / 2,
+                  y: window.innerHeight / 2,
+                });
+                setExplosionTrigger((prev) => prev + 1);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              We are on vacation
+              <img
+                src="/icon/Icon/ellipse.svg"
+                alt=""
+                className="navbar-vacation-icon"
+              />
+            </span>
+          </div>
+
+          <button
+            className="mobile-menu-toggle text-2"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            Menu
+          </button>
+        </div>
+        <ParticleExplosion
+          trigger={explosionTrigger}
+          position={explosionPosition}
+        />
+      </nav>
+      {/* Render mobile menu via Portal to avoid mix-blend-mode inheritance */}
+      {createPortal(mobileMenu, document.body)}
+    </>
   );
 };
 
