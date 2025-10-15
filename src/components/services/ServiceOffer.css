@@ -253,26 +253,72 @@
   color: rgba(255, 255, 255, 0.6);
   border: none;
   outline: none;
-  padding-right: 70px; /* Khoảng trống cho arrow */
-  padding-left: 20px; /* Padding left để căn giữa */
+  padding-right: 70px;
+  padding-left: 20px;
   cursor: pointer;
   min-width: 200px;
   text-align: center;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
+  display: inline-block;
 }
 
-.service-dropdown:hover,
-.service-dropdown:focus {
-  border-color: rgba(255, 255, 255, 0.6);
-  outline: none;
+.service-dropdown:hover {
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.service-dropdown option {
-  background-color: #1a1a1a;
-  color: #ffffff;
+/* Dropdown wrapper when open */
+.dropdown-wrapper.open {
+  position: relative;
+}
+
+.dropdown-wrapper.open::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 80px);
+  height: calc(100% + 40px);
+  background-color: #ffffff;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-wrapper.open .service-dropdown {
+  position: relative;
+  z-index: 1001;
+  color: #b3b3b3;
+}
+
+.dropdown-wrapper.open .dropdown-arrow {
+  z-index: 1001;
+}
+
+/* Custom dropdown menu */
+.custom-dropdown-menu {
+  position: relative;
+  z-index: 1000;
+  background-color: #ffffff;
+  border-radius: 0;
+  margin-top: 0;
+  min-width: max-content;
+  padding: 0;
+}
+
+.custom-dropdown-option {
+  background-color: #ffffff;
+  color: #b3b3b3;
+  padding: 20px 40px;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1001;
+}
+
+.custom-dropdown-option:hover {
+  color: #808080;
+  background-color: #f5f5f5;
 }
 
 .contact-text {
@@ -372,6 +418,13 @@
   position: relative;
   display: inline-block;
   text-align: center;
+  vertical-align: baseline;
+}
+
+.dropdown-current-selection {
+  position: relative;
+  display: inline-block;
+  text-align: center;
 }
 
 .dropdown-arrow {
@@ -380,7 +433,14 @@
   top: 50%;
   width: 60px;
   transform: translateY(-50%);
-  pointer-events: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-wrapper.open .dropdown-arrow {
+  transform: translateY(-50%) rotate(180deg);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(0%) saturate(0%)
+    hue-rotate(314deg) brightness(98%) contrast(94%);
 }
 
 @media (max-width: 1023px) {

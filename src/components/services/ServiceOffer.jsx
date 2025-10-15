@@ -10,8 +10,10 @@ export default function ServiceOffer() {
   const [companyName, setCompanyName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const expandedRef = useRef(null);
   const smoothScrollInstance = useRef(null);
+  const dropdownRef = useRef(null);
 
   const offerings = [
     {
@@ -96,6 +98,25 @@ export default function ServiceOffer() {
     }
   }, [showFooter]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Get available services (exclude selected one)
+  const getAvailableServices = () => {
+    return offerings
+      .map((o) => o.title)
+      .filter((title) => title !== selectedService);
+  };
+
   return (
     <section className="service-offer-section">
       <div className="service-offer-header">
@@ -161,22 +182,42 @@ export default function ServiceOffer() {
                 and
               </p>
               <p className="footer-line2 text-2">
-                we'd love to discuss{" "}
-                <span className="dropdown-wrapper">
-                  <select
-                    className="service-dropdown contact-info text-2"
-                    value={selectedService}
-                    onChange={(e) => setSelectedService(e.target.value)}
-                  >
-                    <option value="Brand Check-up">Brand Check-up</option>
-                    <option value="Ultra Identity">Ultra Identity</option>
-                    <option value="Full Brand Suite">Full Brand Suite</option>
-                  </select>
-                  <img
-                    src={dropDownIcon}
-                    alt="dropdown"
-                    className="dropdown-arrow"
-                  />
+                we'd love to discuss
+                <br />
+                <span
+                  className={`dropdown-wrapper ${isDropdownOpen ? 'open' : ''}`}
+                  ref={dropdownRef}
+                >
+                  <span className="dropdown-current-selection">
+                    <span
+                      className="service-dropdown contact-info text-2"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    >
+                      {selectedService}
+                    </span>
+                    <img
+                      src={dropDownIcon}
+                      alt="dropdown"
+                      className="dropdown-arrow"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    />
+                  </span>
+                  {isDropdownOpen && (
+                    <div className="custom-dropdown-menu">
+                      {getAvailableServices().map((service) => (
+                        <div
+                          key={service}
+                          className="custom-dropdown-option text-2"
+                          onClick={() => {
+                            setSelectedService(service);
+                            setIsDropdownOpen(false);
+                          }}
+                        >
+                          {service}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </span>
               </p>
               <p className="contact-text text-2">
