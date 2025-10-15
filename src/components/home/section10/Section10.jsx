@@ -163,7 +163,7 @@ export default function Section10() {
               style={{ cursor: "pointer" }}
             >
               <div className="service-header">
-                <span className="service-name text-4">{service.name}</span>
+                <span className="service-name text-5">{service.name}</span>
                 <button
                   className={`toggle-btn ${
                     activeService === service.id ? "active" : ""

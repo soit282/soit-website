@@ -77,10 +77,16 @@ export default function ServiceOffer() {
     if (showFooter && expandedRef.current) {
       setTimeout(() => {
         const offset = -100;
-        const targetPosition = expandedRef.current.getBoundingClientRect().top + window.pageYOffset + offset;
+        const targetPosition =
+          expandedRef.current.getBoundingClientRect().top +
+          window.pageYOffset +
+          offset;
 
         // Use global smooth scroll if available
-        if (smoothScrollInstance.current && smoothScrollInstance.current.scrollTo) {
+        if (
+          smoothScrollInstance.current &&
+          smoothScrollInstance.current.scrollTo
+        ) {
           smoothScrollInstance.current.scrollTo(targetPosition);
         } else {
           // Fallback to instant scroll
@@ -114,7 +120,7 @@ export default function ServiceOffer() {
             onClick={() => handleCardClick(offering.title)}
           >
             <div className="offering-header">
-              <p className="offering-subtitle text-8">A solid first step</p>
+              <p className="offering-subtitle text-3">A solid first step</p>
               <h3 className="offering-title text-5">{offering.title}</h3>
               <div className="offering-tags">
                 {offering.tags.map((tag, index) => (
@@ -125,7 +131,7 @@ export default function ServiceOffer() {
               </div>
             </div>
             <div className="offering-content">
-              <p className="offering-description text-4">
+              <p className="offering-description text-6">
                 {offering.description}
               </p>
               <ArrowButton

@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import ParticleExplosion from '../effects/ParticleExplosion';
-import './Navbar.css';
-import '@styles/grid-system.css';
+import React, { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import ParticleExplosion from "../effects/ParticleExplosion";
+import "./Navbar.css";
+import "@styles/grid-system.css";
 
 // Shuffle text effect class
 class SmoothShuffler {
@@ -110,7 +110,7 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const section1Height = window.innerHeight;
-      const isHomePage = location.pathname === '/';
+      const isHomePage = location.pathname === "/";
       const maxScale = calculateMaxScale();
 
       if (isHomePage) {
@@ -122,7 +122,7 @@ const Navbar = () => {
         const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
 
         // Calculate scale with smoother interpolation
-        const newScale = maxScale - (scrollProgress * (maxScale - 1));
+        const newScale = maxScale - scrollProgress * (maxScale - 1);
         setLogoScale(Math.max(1, newScale));
 
         // Calculate position with same easing
@@ -131,7 +131,7 @@ const Navbar = () => {
 
         setLogoPosition({
           x: targetX * scrollProgress,
-          y: targetY * scrollProgress
+          y: targetY * scrollProgress,
         });
       } else {
         setLogoScale(1);
@@ -140,7 +140,7 @@ const Navbar = () => {
     };
 
     // Initial setup based on page
-    if (location.pathname === '/') {
+    if (location.pathname === "/") {
       // Check if at top of page
       if (window.scrollY === 0) {
         setLogoScale(calculateMaxScale()); // Start with calculated scale
@@ -153,12 +153,12 @@ const Navbar = () => {
 
     // Handle window resize
     const handleResize = () => {
-      if (location.pathname === '/' && window.scrollY < 100) {
+      if (location.pathname === "/" && window.scrollY < 100) {
         handleScroll();
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", updateLogoOnScroll, { passive: true });
 
     return () => {
@@ -186,18 +186,22 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="grid-container navbar-container">
         {/* Logo - positioned at column 1 */}
-        <div className="navbar-logo-wrapper" style={{
-          transform: logoScale > 1.5
-            ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
-            : `scale(${logoScale})`,
-          position: logoScale > 1.5 ? 'fixed' : 'relative',
-          left: logoScale > 1.5 ? '50%' : 'auto',
-          top: logoScale > 1.5 ? '50%' : 'auto',
-          zIndex: logoScale > 1.5 ? 10000 : 'auto',
-          transformOrigin: 'center center',
-          willChange: 'transform',
-          transition: 'none' // Remove transition for real-time smooth scroll
-        }}>
+        <div
+          className="navbar-logo-wrapper"
+          style={{
+            transform:
+              logoScale > 1.5
+                ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
+                : `scale(${logoScale})`,
+            position: logoScale > 1.5 ? "fixed" : "relative",
+            left: logoScale > 1.5 ? "50%" : "auto",
+            top: logoScale > 1.5 ? "50%" : "auto",
+            zIndex: logoScale > 1.5 ? 10000 : "auto",
+            transformOrigin: "center center",
+            willChange: "transform",
+            transition: "none", // Remove transition for real-time smooth scroll
+          }}
+        >
           <a href="/" className="navbar-logo">
             <img
               src="/icon/Icon/Số Ít logo.svg"
@@ -205,8 +209,8 @@ const Navbar = () => {
               className="navbar-logo-img"
               style={{
                 // Use vector-effect to maintain crisp edges when scaled
-                vectorEffect: 'non-scaling-stroke',
-                shapeRendering: 'geometricPrecision'
+                vectorEffect: "non-scaling-stroke",
+                shapeRendering: "geometricPrecision",
               }}
             />
           </a>
@@ -214,11 +218,11 @@ const Navbar = () => {
 
         {/* Menu - positioned at center columns */}
         <div className="navbar-menu-wrapper">
-          <ul className={`navbar-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+          <ul className={`navbar-menu ${mobileMenuOpen ? "mobile-open" : ""}`}>
             <li className="navbar-item">
               <a href="/works" className="navbar-link">
                 <span
-                  className="navbar-shuffle-text text-7"
+                  className="navbar-shuffle-text text-6"
                   ref={worksRef}
                   {...createHoverHandlers("Works")}
                 >
@@ -229,7 +233,7 @@ const Navbar = () => {
             <li className="navbar-item">
               <a href="/about" className="navbar-link">
                 <span
-                  className="navbar-shuffle-text text-7"
+                  className="navbar-shuffle-text text-6"
                   ref={aboutRef}
                   {...createHoverHandlers("About")}
                 >
@@ -240,7 +244,7 @@ const Navbar = () => {
             <li className="navbar-item">
               <a href="/services" className="navbar-link">
                 <span
-                  className="navbar-shuffle-text text-7"
+                  className="navbar-shuffle-text text-6"
                   ref={servicesRef}
                   {...createHoverHandlers("Services")}
                 >
@@ -251,7 +255,7 @@ const Navbar = () => {
             <li className="navbar-item">
               <a href="/playground" className="navbar-link">
                 <span
-                  className="navbar-shuffle-text text-7"
+                  className="navbar-shuffle-text text-6"
                   ref={playgroundRef}
                   {...createHoverHandlers("Playground")}
                 >
@@ -265,18 +269,22 @@ const Navbar = () => {
         {/* Vacation text - positioned at right column */}
         <div className="navbar-vacation-wrapper">
           <span
-            className="navbar-vacation text-7"
+            className="navbar-vacation text-6"
             onClick={() => {
               setExplosionPosition({
                 x: window.innerWidth / 2,
-                y: window.innerHeight / 2
+                y: window.innerHeight / 2,
               });
-              setExplosionTrigger(prev => prev + 1);
+              setExplosionTrigger((prev) => prev + 1);
             }}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           >
             We are on vacation
-            <img src="/icon/Icon/ellipse.svg" alt="" className="navbar-vacation-icon" />
+            <img
+              src="/icon/Icon/ellipse.svg"
+              alt=""
+              className="navbar-vacation-icon"
+            />
           </span>
         </div>
 
@@ -290,7 +298,10 @@ const Navbar = () => {
           <span className="hamburger-line"></span>
         </button>
       </div>
-      <ParticleExplosion trigger={explosionTrigger} position={explosionPosition} />
+      <ParticleExplosion
+        trigger={explosionTrigger}
+        position={explosionPosition}
+      />
     </nav>
   );
 };
