@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import ArrowButton from "@components/common/ArrowButton";
 import "./Section1Work.css";
 
 // Shuffle text effect class (copied from Section2)
@@ -124,18 +125,16 @@ export default function Section1Work({ viewMode, setViewMode }) {
       <div className="section1-work-container">
         {/* View Toggle Buttons */}
         <div className="view-toggle-buttons">
-          <button
-            className={`view-toggle-btn text-6 ${viewMode === 'gallery' ? 'active' : ''}`}
+          <ArrowButton
+            text="Gallery view"
             onClick={() => setViewMode('gallery')}
-          >
-            ↗ Gallery view
-          </button>
-          <button
-            className={`view-toggle-btn text-6 ${viewMode === 'list' ? 'active' : ''}`}
+            className={viewMode === 'gallery' ? 'active' : ''}
+          />
+          <ArrowButton
+            text="List view"
             onClick={() => setViewMode('list')}
-          >
-            List view ↗
-          </button>
+            className={viewMode === 'list' ? 'active' : ''}
+          />
         </div>
 
         <div
