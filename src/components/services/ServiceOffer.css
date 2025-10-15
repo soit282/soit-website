@@ -508,25 +508,39 @@
     max-width: 100%;
   }
 
-  /* Center the last card if odd number of cards */
-  .offering-card:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-    max-width: 542px;
-    margin: 0 auto;
-  }
-
   .offering-card {
     width: auto;
     max-width: 100%;
     height: auto;
     min-height: 400px;
-    padding: 24px;
-    margin: 24px 0 0px 0;
+    padding: 24px 16px;
+  }
+
+  /* Center the last card if odd number of cards */
+  .offering-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: none;
+    width: calc(50% - 6px);
+    height: auto;
+    min-height: 400px;
+    margin: 0 auto;
   }
 
   .submit-section {
     margin-top: 100px;
     margin-bottom: 80px;
+  }
+  .offering-description {
+    margin: 0 0 60px 0;
+  }
+  .offering-subtitle {
+    margin: 0 0 6px 0;
+  }
+  .offering-title {
+    margin: 0 0 16px 0;
+  }
+  .offering-tags {
+    margin: 0 0 36px 0;
   }
 }
 
