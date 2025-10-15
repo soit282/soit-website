@@ -332,7 +332,7 @@
 
 .dropdown-wrapper.open .service-dropdown {
   position: relative;
-  color: #b3b3b3;
+  color: #939393;
   padding: 0;
 }
 
@@ -364,7 +364,7 @@
 
 .custom-dropdown-option {
   background-color: transparent;
-  color: #b3b3b3;
+  color: #939393;
   padding: 0;
   cursor: pointer;
   text-align: center;
@@ -376,7 +376,7 @@
 }
 
 .custom-dropdown-option:hover {
-  color: #808080;
+  color: #707070;
 }
 
 .contact-text {
