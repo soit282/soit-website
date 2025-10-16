@@ -157,7 +157,7 @@
   .work-info-row-section3 {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 0px;
   }
 
   .work-info-right {
@@ -180,6 +180,6 @@
   }
 
   .work-info-row-section3 {
-    gap: 10px;
+    gap: 0px;
   }
 }

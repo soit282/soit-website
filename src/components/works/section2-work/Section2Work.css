@@ -281,7 +281,7 @@
   .work-info-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 0px;
   }
 
   .work-info-right {
@@ -290,7 +290,7 @@
 
   .work-details-text {
     flex-direction: column;
-    gap: 15px;
+    gap: 0;
   }
 
   .work-details-right-text {
@@ -323,7 +323,6 @@
   .work-info-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
   }
 
   .work-info-right {
@@ -332,7 +331,6 @@
 
   .work-details-text {
     flex-direction: column;
-    gap: 10px;
   }
 
   .work-details-right-text {
