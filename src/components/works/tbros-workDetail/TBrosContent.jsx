@@ -271,6 +271,8 @@ const TBrosContent = () => {
       type: "video",
       title: "TBROS 28",
       gridColumn: "1 / span 12",
+      videoAspectRatio: "1/1",
+      wrapperBackgroundColor: "#EE5234",
     },
   ];
 
@@ -389,11 +391,10 @@ const TBrosContent = () => {
       >
         <div
           className="tbros-media-wrapper"
-          style={
-            asset.customAspectRatio
-              ? { aspectRatio: asset.customAspectRatio }
-              : { aspectRatio: "3/2" }
-          }
+          style={{
+            aspectRatio: asset.customAspectRatio || "3/2",
+            ...(asset.wrapperBackgroundColor && { background: asset.wrapperBackgroundColor }),
+          }}
         >
           {isVisible ? (
             <>
@@ -410,6 +411,11 @@ const TBrosContent = () => {
                     preloadedVideos.has(asset.src) ? "auto" : "metadata"
                   }
                   loading="lazy"
+                  style={
+                    asset.videoAspectRatio
+                      ? { aspectRatio: asset.videoAspectRatio, width: "auto", height: "100%", objectFit: "contain", background: "transparent" }
+                      : {}
+                  }
                 />
               ) : (
                 <LazyImage
