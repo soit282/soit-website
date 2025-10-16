@@ -47,6 +47,23 @@
   gap: 40px;
 }
 
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-label {
+  color: #5d5d5d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+.detail-value {
+  color: #5d5d5d;
+}
+
 .dogma-description {
   color: #ffffff;
   margin: 0;
