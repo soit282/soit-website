@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
-import LazyImage from "@components/common/LazyImage";
 import "./UnAvailableContent.css";
 import "@styles/grid-system.css";
 
 const UnAvailableContent = () => {
-  const [visibleItems, setVisibleItems] = useState(new Set());
+  // Initialize with first 3 items visible to avoid IntersectionObserver issues on production
+  const [visibleItems, setVisibleItems] = useState(new Set([1, 2, 3]));
   const observerRef = useRef(null);
 
   // Define all UnAvailable assets in order with grid positions
@@ -162,11 +162,11 @@ const UnAvailableContent = () => {
           {isVisible ? (
             <>
               {/* Default media */}
-              <LazyImage
+              <img
                 src={asset.src}
                 alt={asset.title}
                 className={`unavailable-media ${hasHover ? 'unavailable-media-default' : ''}`}
-                effect="blur"
+                
               />
 
               {/* Hover media */}

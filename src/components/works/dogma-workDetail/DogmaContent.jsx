@@ -1,11 +1,10 @@
 import { useEffect, useState, useRef } from "react";
-import LazyImage from "@components/common/LazyImage";
-import LazyVideo from "@components/common/LazyVideo";
 import "./DogmaContent.css";
 import "@styles/grid-system.css";
 
 const DogmaContent = () => {
-  const [visibleItems, setVisibleItems] = useState(new Set());
+  // Initialize with first 3 items visible to avoid IntersectionObserver issues on production
+  const [visibleItems, setVisibleItems] = useState(new Set([1, 2, 3]));
   const [preloadedVideos, setPreloadedVideos] = useState(new Set());
   const observerRef = useRef(null);
 
@@ -314,7 +313,7 @@ const DogmaContent = () => {
             <>
               {/* Default media */}
               {asset.type === "video" ? (
-                <LazyVideo
+                <video
                   src={asset.src}
                   className={`dogma-media ${hasHover ? 'dogma-media-default' : ''}`}
                   autoPlay
@@ -325,11 +324,11 @@ const DogmaContent = () => {
                   loading="lazy"
                 />
               ) : (
-                <LazyImage
+                <img
                   src={asset.src}
                   alt={asset.title}
                   className={`dogma-media ${hasHover ? 'dogma-media-default' : ''}`}
-                  effect="blur"
+                  
                 />
               )}
 
@@ -337,7 +336,7 @@ const DogmaContent = () => {
               {hasHover && (
                 <>
                   {asset.hoverType === "video" ? (
-                    <LazyVideo
+                    <video
                       src={asset.hoverSrc}
                       className="dogma-media dogma-media-hover"
                       autoPlay
@@ -348,11 +347,11 @@ const DogmaContent = () => {
                       loading="lazy"
                     />
                   ) : (
-                    <LazyImage
+                    <img
                       src={asset.hoverSrc}
                       alt={`${asset.title} Hover`}
                       className="dogma-media dogma-media-hover"
-                      effect="blur"
+                      
                     />
                   )}
                 </>

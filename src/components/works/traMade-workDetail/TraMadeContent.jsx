@@ -1,14 +1,12 @@
 import { useEffect, useState, useRef } from "react";
-import LazyImage from "@components/common/LazyImage";
-import LazyVideo from "@components/common/LazyVideo";
 import "./TraMadeContent.css";
 import "@styles/grid-system.css";
 
 const TraMadeContent = () => {
-  const [visibleItems, setVisibleItems] = useState(new Set());
+  // Initialize with first 3 items visible to avoid IntersectionObserver issues on production
+  const [visibleItems, setVisibleItems] = useState(new Set([1, 2, 3]));
   const [preloadedVideos, setPreloadedVideos] = useState(new Set());
   const observerRef = useRef(null);
-  const videoPreloadQueue = useRef([]);
 
   // Define all TraMADE assets in order with grid positions - updated with a/b variants
   const tramadeAssets = [
@@ -320,7 +318,7 @@ const TraMadeContent = () => {
           {isVisible ? (
             <>
               {asset.type === "video" ? (
-                <LazyVideo
+                <video
                   src={asset.src}
                   className="tramade-media"
                   autoPlay
@@ -328,14 +326,13 @@ const TraMadeContent = () => {
                   loop
                   playsInline
                   preload={preloadedVideos.has(asset.src) ? "auto" : "metadata"}
-                  loading="lazy"
                 />
               ) : (
-                <LazyImage
+                <img
                   src={asset.src}
                   alt={asset.title}
                   className="tramade-media"
-                  effect="blur"
+                  loading="lazy"
                 />
               )}
             </>
