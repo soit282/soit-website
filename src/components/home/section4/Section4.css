@@ -7,62 +7,38 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  padding-left: 1.25%;
-  padding-right: 1.25%;
 }
 
 .section4-content {
   width: 100%;
   color: white;
-  padding-left: 1.25%;
-  padding-right: 1.25%;
   box-sizing: border-box;
-  /* Create isolated stacking context like Mirror client */
+  /* Create isolated stacking context */
   isolation: isolate;
   mix-blend-mode: difference;
 }
 
-/* Grid reference layer */
-.grid-reference {
-  position: relative;
-  height: 100%;
+/* Grid positioning for desktop - like navbar */
+.section4-text-left {
+  grid-column: 1 / span 6;
 }
 
-/* Text positioning based on grid but not constrained */
-.text-position-left {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-  background: transparent;
+.section4-text-center {
+  grid-column: 7 / span 4;
 }
 
-.text-position-center {
-  position: absolute;
-  left: calc(100% / 12 * 6); /* Start at column 7 */
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-  background: transparent;
+.section4-text-right {
+  grid-column: 12 / span 2;
 }
 
-.text-position-right {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-  background: transparent;
-}
-
+/* Text alignment styles */
 .section4-content .text-left {
   text-align: left;
 }
 
-/* .section4-content .text-center {
-  text-align: center;
-} */
+.section4-content .text-center-item {
+  text-align: left; /* Align left by default */
+}
 
 .section4-content .text-right {
   text-align: right;
@@ -71,4 +47,90 @@
 .section4-content p {
   margin: 0;
   color: white;
+}
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 1024px) {
+  .section4 {
+    min-height: 80vh;
+  }
+
+  /* Disable parallax on tablet */
+  .section4-background {
+    transform: translateY(0) !important;
+  }
+
+  /* Fixed position at center on tablet */
+  .section4-content {
+    top: 50% !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  /* Adjust grid positioning for tablet (8 columns) */
+  .section4-text-left {
+    grid-column: 1 / span 6;
+    grid-row: 1 / span 2;
+  }
+
+  /* Text-right at column 7, first row */
+  .section4-text-right {
+    grid-column: 7 / span 2;
+    grid-row: 1;
+  }
+
+  /* Text-center at column 7, second row */
+  .section4-text-center {
+    grid-column: 7 / span 2;
+    grid-row: 2;
+    margin-top: 12px;
+  }
+
+  .section4-content .text-right {
+    text-align: left;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .section4 {
+    min-height: 60vh;
+  }
+
+  /* Disable parallax on mobile */
+  .section4-background {
+    transform: translateY(0) !important;
+  }
+
+  /* Fixed position at center on mobile */
+  .section4-content {
+    top: 50% !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  /* Mobile (4 columns) - 2 rows */
+  .section4-text-left {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  /* Text-right, same row as left - column 3, span 2 */
+  .section4-text-right {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+  }
+
+  /* Text-center, second row - column 3, span 2 */
+  .section4-text-center {
+    grid-column: 3 / span 2;
+    grid-row: 2;
+    margin-top: 12px;
+  }
+
+  /* Align all text to left on mobile */
+  .section4-content .text-right {
+    text-align: left;
+  }
 }

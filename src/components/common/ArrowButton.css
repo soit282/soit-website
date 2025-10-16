@@ -89,12 +89,8 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
-  .arrow-button {
-    padding: 10px 30px 10px 25px;
-    min-width: 100px;
-  }
-
+/* Tablet */
+@media (max-width: 1024px) {
   .arrow-button-icon {
     width: 16px;
     height: 28px;
@@ -108,14 +104,13 @@
     left: 0px;
     width: calc(100% - 10px);
   }
-
-  /* Remove hover padding change */
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
   .arrow-button {
-    padding: 8px 28px 8px 22px;
-    min-width: 90px;
+    padding: 12px 32px 10px 0px;
+    min-width: 100px;
   }
 
   .arrow-button-icon {
@@ -124,7 +119,7 @@
   }
 
   .arrow-button-icon-1 {
-    right: 8px;
+    /* right: 8px; */
   }
 
   .arrow-button::after {
@@ -134,10 +129,8 @@
 
   .arrow-button:hover::after {
     left: 0px;
-    width: calc(100% - 8px);
+    width: calc(100%);
   }
-
-  /* Remove hover padding change */
 
   .arrow-button:hover .arrow-button-icon-2 {
     left: 0px;

@@ -1,30 +1,15 @@
 import { useEffect, useState, useRef } from "react";
+import TraMadeContent from "./TraMadeContent";
 import "./TraMadeWorkDetail.css";
 import "@styles/grid-system.css";
 
 export default function TraMadeWorkDetail() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Set to true immediately
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    // Optional: Add smooth entry animation with delay
+    setTimeout(() => setIsVisible(true), 100);
   }, []);
 
   return (
@@ -76,17 +61,23 @@ export default function TraMadeWorkDetail() {
           style={{ gridColumn: "7 / span 6" }}
         >
           <p className="tramade-description text-4">
-            Tea mastery born in the heights of Măng Đen.
-            <br />
-            TràMADE is a masterful tea artisan from the fertile highlands of
-            Măng Đen, embodying the rustic breath of this serene land. From the
-            TràMADE tea hills, clean tea cultivation experts collaborate with
-            the Mơ Nâm ethnic group to bring Măng Đen’s tea products to Vietnam
-            and the world. Every bit of energy absorbed by the tea leaves — from
-            both nature and humanity — infuses into the body of the tea drinker.
+            <span className="description-line">
+              Tea mastery born in the heights of Măng Đen.
+            </span>
+            <span className="description-line">
+              TràMADE is a masterful tea artisan from the fertile highlands of
+              Măng Đen, embodying the rustic breath of this serene land. From the
+              TràMADE tea hills, clean tea cultivation experts collaborate with
+              the Mơ Nâm ethnic group to bring Măng Đen's tea products to Vietnam
+              and the world. Every bit of energy absorbed by the tea leaves — from
+              both nature and humanity — infuses into the body of the tea drinker.
+            </span>
           </p>
         </div>
       </div>
+
+      {/* TraMADE Content Gallery */}
+      <TraMadeContent />
     </div>
   );
 }

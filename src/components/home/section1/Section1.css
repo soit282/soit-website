@@ -29,7 +29,8 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .section1 {
     padding: 2.5%;
   }
@@ -42,7 +43,8 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
   .section1 {
     padding: 5%;
   }

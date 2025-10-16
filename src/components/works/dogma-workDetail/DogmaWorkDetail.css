@@ -1,0 +1,124 @@
+.dogma-work-detail {
+  min-height: 100vh;
+  background: #1f1f1f;
+  color: #ffffff;
+  padding: 121px 0;
+  margin-bottom: -1px;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dogma-title-section,
+.dogma-client-section,
+.dogma-details-section,
+.dogma-description-section {
+  opacity: 1; /* Always visible as fallback */
+  transform: translateY(0);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dogma-title-section.visible,
+.dogma-client-section.visible,
+.dogma-details-section.visible,
+.dogma-description-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dogma-title-section {
+  margin-bottom: 60px;
+}
+
+.dogma-client-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.dogma-title {
+  color: #ffffff;
+  margin: 0;
+}
+
+.dogma-details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-label {
+  color: #5d5d5d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+.detail-value {
+  color: #5d5d5d;
+}
+
+.dogma-description {
+  color: #ffffff;
+  margin: 0;
+}
+
+.dogma-description .description-line {
+  display: block;
+}
+
+.dogma-description .description-line:not(:last-child) {
+  margin-bottom: 48px;
+}
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 1024px) {
+  .dogma-title-section {
+    grid-column: 1 / span 8 !important;
+  }
+
+  .dogma-client-section {
+    grid-column: 1 / span 4 !important;
+  }
+
+  .dogma-details-section {
+    grid-column: 5 / span 4 !important;
+    margin-bottom: 60px;
+  }
+
+  .dogma-description-section {
+    grid-column: 1 / span 8 !important;
+  }
+
+  .dogma-details-section {
+    gap: 32px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .dogma-title-section {
+    grid-column: 1 / span 4 !important;
+  }
+
+  .dogma-client-section {
+    grid-column: 1 / span 2 !important;
+  }
+
+  .dogma-details-section {
+    grid-column: 3 / span 2 !important;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .dogma-description-section {
+    grid-column: 1 / span 4 !important;
+  }
+}

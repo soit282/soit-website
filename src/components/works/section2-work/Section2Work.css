@@ -1,14 +1,16 @@
 .section2-work {
-  min-height: 100vh;
   background: #ffffff;
   color: #1f1f1f;
   display: flex;
   align-items: center;
   padding: 0;
+  overflow-x: hidden;
+  contain: layout style paint;
+  transform: translate3d(0, 0, 0);
 }
 
 .section2-work .grid-container {
-  height: 100vh;
+  height: auto;
   grid-template-rows: auto auto;
   align-content: start;
   margin-bottom: 36px;
@@ -22,11 +24,13 @@
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  will-change: opacity, transform;
 }
 
 .work-left-section.visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
 }
 
 .work-image-container {
@@ -38,18 +42,83 @@
   margin-bottom: 12px;
   aspect-ratio: 3/2;
   overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .work-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* CSS-only hover transitions for image swap */
+.work-image-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.work-image-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.work-left-section:hover .work-image-default {
+  opacity: 0;
+}
+
+.work-left-section:hover .work-image-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions */
+.work-title {
+  color: #1f1f1f;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  transition: gap 0.2s ease;
+}
+
+.work-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.work-ellipse {
+  width: 0;
+  height: 8px;
+  opacity: 0;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.work-left-section:hover .work-description {
+  color: #1f1f1f;
+}
+
+.work-left-section:hover .work-title {
+  gap: 6px;
+}
+
+.work-left-section:hover .work-ellipse {
+  width: 8px;
+  opacity: 1;
 }
 
 .work-info-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .work-info-bottom {
@@ -83,17 +152,87 @@
   transform: translateX(0);
 }
 
+.work-details-image-container {
+  position: relative;
+  margin-bottom: 12px;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
 .work-details-image {
   width: 100%;
   aspect-ratio: 3/2;
   object-fit: cover;
-  margin-bottom: 12px;
+  display: block;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* CSS-only hover transitions for details image swap */
+.work-details-image-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.work-details-image-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.work-details-hover-area:hover .work-details-image-default {
+  opacity: 0;
+}
+
+.work-details-hover-area:hover .work-details-image-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions for details */
+.work-details-title {
+  color: #1f1f1f;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  transition: gap 0.2s ease;
+}
+
+.work-details-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.work-details-ellipse {
+  width: 0;
+  height: 8px;
+  opacity: 0;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.work-details-hover-area:hover .work-details-description {
+  color: #1f1f1f;
+}
+
+.work-details-hover-area:hover .work-details-title {
+  gap: 6px;
+}
+
+.work-details-hover-area:hover .work-details-ellipse {
+  width: 8px;
+  opacity: 1;
 }
 
 .work-info-right {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .work-details-hover-area {
@@ -107,7 +246,7 @@
 .work-details-text {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -116,62 +255,95 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-  .section2-work-grid {
-    grid-template-columns: 1fr 300px;
-  }
-}
-
-@media (max-width: 992px) {
-  .section2-work-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: 70% 30%;
+/* Tablet */
+@media (max-width: 1024px) {
+  .section2-work {
+    min-height: 0;
   }
 
-  .work-details {
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
   .section2-work .grid-container {
+    min-height: 0;
     margin-bottom: 24px;
   }
 
-  .work-image-container {
-    margin-bottom: 8px;
+  .work-left-section {
+    grid-column: 1 / span 4 !important;
   }
 
-  .work-details-image {
-    margin-bottom: 8px;
+  .work-details-container {
+    grid-column: 5 / span 4 !important;
+  }
+
+  .work-image-container {
+    margin-bottom: 12px;
   }
 
   .work-info-row {
-    padding: 30px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+  }
+
+  .work-info-right {
+    justify-content: flex-start;
+  }
+
+  .work-details-text {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .work-details-right-text {
+    text-align: left;
+  }
+
+  .work-info-bottom .work-description,
+  .work-category .work-details-description:not(.work-info-right .work-details-description):not(.work-details-right-text .work-details-description) {
+    display: none;
   }
 }
 
-@media (max-width: 480px) {
-  .section2-work .grid-container {
-    margin-bottom: 18px;
+/* Mobile */
+@media (max-width: 576px) {
+  .section2-work {
+    min-height: 0;
+  }
+
+  .work-left-section {
+    grid-column: 1 / span 2 !important;
+  }
+
+  .work-details-container {
+    grid-column: 3 / span 2 !important;
   }
 
   .work-image-container {
     margin-bottom: 6px;
   }
 
-  .work-details-image {
+  .work-details-image-container {
     margin-bottom: 6px;
   }
 
   .work-info-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
-    padding: 20px;
   }
 
   .work-info-right {
     justify-content: flex-start;
+  }
+
+  .work-details-text {
+    flex-direction: column;
+  }
+
+  .work-details-right-text {
+    text-align: left;
+  }
+
+  .work-info-bottom .work-description,
+  .work-category .work-details-description:not(.work-info-right .work-details-description):not(.work-details-right-text .work-details-description) {
+    display: none;
   }
 }

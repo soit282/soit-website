@@ -9,22 +9,28 @@ import Section8 from "@components/home/section8/Section8";
 import Section9 from "@components/home/section9/Section9";
 import Section10 from "@components/home/section10/Section10";
 import ServiceOffer from "@components/services/ServiceOffer";
+import Footer from "@components/footer/Footer";
+import Navbar from "@components/navbar/Navbar";
 
 const HomePage = () => {
   return (
-    <div className="home-page">
-      <Section1 />
-      <Section2 />
-      <Section3 />
-      <Section4 />
-      <Section5 />
-      <Section6 />
-      <Section7 />
-      <Section8 />
-      <Section9 />
-      <Section10 />
-      <ServiceOffer />
-    </div>
+    <>
+      <Navbar />
+      <div className="home-page">
+        {/* <Section1 /> */}
+        <Section2 />
+        <Section3 />
+        <Section4 />
+        <Section5 />
+        <Section6 />
+        <Section7 />
+        <Section8 />
+        <Section9 />
+        <Section10 />
+        <ServiceOffer />
+      </div>
+      <Footer theme="dark" />
+    </>
   );
 };
 

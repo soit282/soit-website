@@ -3,37 +3,26 @@
   background-color: #ffffff;
   padding: 0;
   box-sizing: border-box;
-  height: 300vh; /* Fixed height for sticky scroll effect */
   position: relative;
 }
 
 .section9-see-all {
   display: flex;
   justify-content: center;
-  padding: 120px 1.25% 240px;
-  box-sizing: border-box;
-}
-
-.section9-sticky-wrapper {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 0 1.25% 120px;
+  padding: 60px 0 160px;
   box-sizing: border-box;
 }
 
 .section9-container {
   width: 100%;
-  flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .section9-header {
-  margin-bottom: 240px;
+  margin-bottom: 120px;
 }
 
 .section9-label {
@@ -46,16 +35,34 @@
   max-width: 80%;
 }
 
-.clients-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.625%;
+.clients-carousel-wrapper {
   width: 100%;
-  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.clients-carousel-track {
+  display: flex;
+  gap: 0.625%;
+  animation: carousel-slide 20s linear infinite;
+}
+
+@keyframes carousel-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Move exactly 100% to show next set */
+    transform: translateX(calc(-100% - 0.625%));
+  }
 }
 
 .client-card {
-  height: 571px;
+  /* 4 cards visible: 100% / 4 = 25%, minus gap */
+  width: calc(25% - 0.46875%);
+  flex-shrink: 0;
+  aspect-ratio: 459/571;
+  height: auto;
   position: relative;
   overflow: hidden;
 }
@@ -73,26 +80,9 @@
   transition: all 0.3s ease;
 }
 
-.client-card:nth-child(1):hover .client-background {
-  background-color: white;
-  background-image: none !important;
-}
-
-.client-card:nth-child(2):hover .client-background {
-  background-color: rgba(246, 194, 7, 1);
-  background-image: none !important;
-}
-
-.client-card:nth-child(3):hover .client-background {
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/soit_recent_work.svg") !important;
-  background-size: cover;
-  background-position: center;
-}
-
-.client-card:nth-child(4):hover .client-background {
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.png") !important;
-  background-size: cover;
-  background-position: center;
+/* Hover state controlled by JavaScript for better carousel detection */
+.client-card.hovered .client-background {
+  transform: scale(1.02);
 }
 
 .client-logo {
@@ -104,76 +94,88 @@
 
 /* Button styles moved to ArrowButton component */
 
-@media (max-width: 1440px) {
-  .client-card {
-    height: 428px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .section9 {
-    height: 240vh;
-  }
-
-  .clients-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .client-card {
-    height: 380px;
-  }
-}
-
-@media (max-width: 768px) {
-  .section9 {
-    height: 216vh;
-  }
-
+/* Tablet */
+@media (max-width: 1024px) {
   .section9-see-all {
-    padding: 60px 2.5% 120px;
+    padding: 60px 0 120px;
   }
-
-  .section9-sticky-wrapper {
-    padding: 0 2.5% 60px;
+  .section9-container {
+    padding: 0 0 60px;
+  }
+  .section9-label {
+    margin: 0 0 12px 0;
+  }
+  .section9-header {
+    margin-bottom: 60px;
+    padding: 0 24px;
   }
 
   .section9-heading {
-    font-size: 32px;
     max-width: 100%;
   }
 
+  /* Grid layout for mobile/tablet */
   .clients-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.625%;
+    row-gap: 12px;
   }
 
-  .section9-header {
-    margin-bottom: 40px;
+  .clients-grid .client-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
   }
 
-  .client-card {
-    height: 280px;
+  .clients-grid .client-background {
+    background-image: none !important;
+  }
+
+  .clients-grid .client-logo {
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+
+  .clients-grid .client-card:hover .client-logo {
+    filter: grayscale(0%);
+    opacity: 1;
   }
 }
 
-@media (max-width: 480px) {
-  .section9 {
-    height: 192vh;
-  }
-
+/* Mobile */
+@media (max-width: 576px) {
   .section9-see-all {
-    padding: 40px 3% 80px;
+    padding: 40px 0 80px;
   }
 
-  .section9-sticky-wrapper {
-    padding: 0 3% 40px;
+  .section9-container {
+    padding: 0 0 60px;
+  }
+
+  .section9-heading {
+    max-width: 100%;
+  }
+
+  .section9-header {
+    margin-bottom: 48px;
+    padding: 0 16px;
   }
 
   .clients-grid {
-    grid-template-columns: 1fr;
+    row-gap: 12px;
   }
 
-  .client-card {
-    height: 320px;
+  .clients-grid .client-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .clients-grid .client-background {
+    height: 100%;
+  }
+
+  .clients-grid .client-logo {
+    max-width: 60%;
+    max-height: 60%;
   }
 }

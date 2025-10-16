@@ -1,6 +1,5 @@
 .section3 {
   width: 100%;
-  max-height: 792px;
   background-color: #fff;
   padding: 240px 1.25% 120px 1.25%;
   box-sizing: border-box;
@@ -20,31 +19,14 @@
 }
 
 .section3-heading {
-  color: #1a1a1a;
+  color: #1f1f1f;
   margin: 0;
   max-width: 100%;
 }
 
-@media (max-width: 1920px) {
-  .section3 {
-    max-height: 792px;
-  }
-}
-
-@media (max-width: 1440px) {
-  .section3 {
-    padding: 180px 40px 100px 40px;
-  }
-
-  .section3-content {
-    max-width: 1200px;
-  }
-}
-
 @media (max-width: 1024px) {
   .section3 {
-    padding: 140px 40px 80px 40px;
-    max-height: auto;
+    padding: 240px 24px 60px 24px;
   }
 
   .section3-content {
@@ -52,10 +34,9 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
   .section3 {
-    padding: 100px 30px 60px 30px;
-    max-height: auto;
+    padding: 120px 16px 48px 16px;
   }
 
   .section3-heading {
@@ -63,20 +44,10 @@
   }
 
   .section3-label {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .section3-content {
     max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .section3 {
-    padding: 80px 20px 50px 20px;
-  }
-
-  .section3-label {
-    margin-bottom: 16px;
   }
 }

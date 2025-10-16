@@ -21,8 +21,13 @@
 
 /* Text-2 class is defined in typography.css */
 
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .section1-about {
     padding: 0px 1.25%;
   }
+}
+
+/* Mobile - inherits tablet styles */
+@media (max-width: 576px) {
 }

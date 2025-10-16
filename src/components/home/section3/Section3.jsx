@@ -1,4 +1,5 @@
 import "./Section3.css";
+import DecryptedText from "../../DecryptedText";
 
 export default function Section3() {
   return (
@@ -6,8 +7,14 @@ export default function Section3() {
       <div className="section3-content">
         <p className="section3-label text-4">Feature works</p>
         <h2 className="section3-heading text-2_100pt_medium">
-          We collaborate with brands that aim to stand out, scale up, and speak
-          clearly in a digital-first world.
+          <DecryptedText
+            text="We collaborate with brands that aim to stand out, scale up, and speak clearly in a digital-first world."
+            speed={60}
+            maxIterations={15}
+            sequential={true}
+            useOriginalCharsOnly={true}
+            animateOn="view"
+          />
         </h2>
       </div>
     </div>

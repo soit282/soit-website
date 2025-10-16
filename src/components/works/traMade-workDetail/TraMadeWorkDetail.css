@@ -2,15 +2,19 @@
   min-height: 100vh;
   background: #1f1f1f;
   color: #ffffff;
-  padding: 120px 0;
+  padding: 121px 0;
+  margin-bottom: -1px;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tramade-title-section,
 .tramade-client-section,
 .tramade-details-section,
 .tramade-description-section {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1; /* Always visible as fallback */
+  transform: translateY(0);
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -24,7 +28,7 @@
 }
 
 .tramade-title-section {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .tramade-client-section {
@@ -50,14 +54,14 @@
 }
 
 .detail-label {
-  color: #5D5D5D;
+  color: #5d5d5d;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 400;
 }
 
 .detail-value {
-  color: #5D5D5D;
+  color: #5d5d5d;
 }
 
 .tramade-description {
@@ -65,61 +69,56 @@
   margin: 0;
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-  .tramade-title-section {
-    grid-column: 1 / span 12 !important;
-    margin-bottom: 40px;
-  }
-
-  .tramade-details-section {
-    grid-column: 1 / span 6 !important;
-    margin-bottom: 40px;
-  }
-
-  .tramade-description-section {
-    grid-column: 7 / span 6 !important;
-  }
-
-  .tramade-work-detail {
-    padding: 100px 1.25%;
-  }
+.tramade-description .description-line {
+  display: block;
 }
 
-@media (max-width: 768px) {
+.tramade-description .description-line:not(:last-child) {
+  margin-bottom: 48px;
+}
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 1024px) {
   .tramade-title-section {
-    grid-column: 1 / span 12 !important;
-    margin-bottom: 32px;
+    grid-column: 1 / span 8 !important;
+  }
+
+  .tramade-client-section {
+    grid-column: 1 / span 4 !important;
   }
 
   .tramade-details-section {
-    grid-column: 1 / span 12 !important;
-    margin-bottom: 32px;
+    grid-column: 5 / span 4 !important;
+    margin-bottom: 60px;
   }
 
   .tramade-description-section {
-    grid-column: 1 / span 12 !important;
+    grid-column: 1 / span 8 !important;
   }
 
   .tramade-details-section {
     gap: 32px;
   }
-
-  .tramade-work-detail {
-    padding: 80px 1.25%;
-  }
 }
 
-@media (max-width: 480px) {
-  .tramade-work-detail {
-    padding: 60px 20px;
+/* Mobile */
+@media (max-width: 576px) {
+  .tramade-title-section {
+    grid-column: 1 / span 4 !important;
+  }
+
+  .tramade-client-section {
+    grid-column: 1 / span 2 !important;
   }
 
   .tramade-details-section {
+    grid-column: 3 / span 2 !important;
     gap: 24px;
+    margin-bottom: 48px;
   }
 
-  .detail-item {
-    gap: 8px;
+  .tramade-description-section {
+    grid-column: 1 / span 4 !important;
   }
 }

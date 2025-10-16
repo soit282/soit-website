@@ -2,6 +2,7 @@
   background: #ffffff;
   color: #1f1f1f;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .section7-work .grid-container {
@@ -17,6 +18,7 @@
   transform: scale(0.95);
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  contain: layout style paint;
 }
 
 .display-main-section.visible {
@@ -33,6 +35,8 @@
   aspect-ratio: 3/2;
   overflow: hidden;
   margin-bottom: 12px;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .display-video {
@@ -41,10 +45,80 @@
   object-fit: cover;
 }
 
+/* CSS-only hover transitions for video/image swap */
+.display-video-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  transform: translate3d(0, 0, 0);
+  backfaceVisibility: hidden;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.display-video-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transform: translate3d(0, 0, 0);
+  backfaceVisibility: hidden;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.display-video-placeholder {
+  background-color: #f0f0f0;
+  transform: translateZ(0);
+}
+
+.display-main-section:hover .display-video-default {
+  opacity: 0;
+}
+
+.display-main-section:hover .display-video-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions */
+.display-title {
+  color: #1F1F1F;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  transition: gap 0.2s ease;
+}
+
+.display-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.display-ellipse {
+  width: 0;
+  height: 8px;
+  opacity: 0;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.display-main-section:hover .display-description {
+  color: #1F1F1F;
+}
+
+.display-main-section:hover .display-title {
+  gap: 6px;
+}
+
+.display-main-section:hover .display-ellipse {
+  width: 8px;
+  opacity: 1;
+}
+
 .display-info-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .display-info-bottom {
@@ -56,7 +130,7 @@
 .display-info-right {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .display-category {
@@ -66,29 +140,43 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .section7-work .grid-container {
     margin-bottom: 24px;
   }
 
+  .display-main-section {
+    grid-column: 1 / span 8 !important;
+  }
+
   .display-video-container {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .display-info-row {
     flex-direction: column;
     align-items: flex-start;
-    padding: 30px 20px;
+    gap: 0px;
   }
 
   .display-info-right {
     justify-content: flex-start;
   }
+
+  .display-info-bottom .display-description {
+    display: none;
+  }
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
   .section7-work .grid-container {
     margin-bottom: 18px;
+  }
+
+  .display-main-section {
+    grid-column: 1 / span 4 !important;
   }
 
   .display-video-container {
@@ -96,7 +184,10 @@
   }
 
   .display-info-row {
-    padding: 20px;
-    gap: 15px;
+    gap: 0px;
+  }
+
+  .display-info-bottom .display-description {
+    display: none;
   }
 }

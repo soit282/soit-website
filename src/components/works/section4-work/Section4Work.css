@@ -1,14 +1,14 @@
 .section4-work {
-  min-height: 100vh;
   background: #ffffff;
   color: #1f1f1f;
   display: flex;
   align-items: center;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .section4-work .grid-container {
-  height: 100vh;
+  height: auto;
   grid-template-rows: auto auto;
   align-content: start;
   margin-bottom: 36px;
@@ -37,18 +37,83 @@
   margin-bottom: 12px;
   aspect-ratio: 3/2;
   overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
 .project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* CSS-only hover transitions - faster 0.2s */
+.project-image-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.project-image-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.project-left-hover-area:hover .project-image-default {
+  opacity: 0;
+}
+
+.project-left-hover-area:hover .project-image-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions */
+.project-title {
+  color: #1F1F1F;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  transition: gap 0.2s ease;
+}
+
+.project-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.project-ellipse {
+  width: 0;
+  height: 8px;
+  opacity: 0;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.project-left-hover-area:hover .project-description {
+  color: #1F1F1F;
+}
+
+.project-left-hover-area:hover .project-title {
+  gap: 6px;
+}
+
+.project-left-hover-area:hover .project-ellipse {
+  width: 8px;
+  opacity: 1;
 }
 
 .project-info-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .project-info-bottom {
@@ -82,17 +147,86 @@
   transform: translateX(0);
 }
 
+.project-details-image-container {
+  position: relative;
+  margin-bottom: 12px;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
 .project-details-image {
   width: 100%;
   aspect-ratio: 3/2;
   object-fit: cover;
-  margin-bottom: 12px;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* CSS-only hover transitions for details - faster 0.2s */
+.project-details-image-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.project-details-image-hover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: opacity;
+  isolation: isolate;
+}
+
+.project-details-hover-area:hover .project-details-image-default {
+  opacity: 0;
+}
+
+.project-details-hover-area:hover .project-details-image-hover {
+  opacity: 1;
+}
+
+/* CSS-only text and icon transitions for details */
+.project-details-title {
+  color: #1F1F1F;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  transition: gap 0.2s ease;
+}
+
+.project-details-description {
+  color: #939393;
+  transition: color 0.2s ease;
+}
+
+.project-details-ellipse {
+  width: 0;
+  height: 8px;
+  opacity: 0;
+  transition: width 0.2s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.project-details-hover-area:hover .project-details-description {
+  color: #1F1F1F;
+}
+
+.project-details-hover-area:hover .project-details-title {
+  gap: 6px;
+}
+
+.project-details-hover-area:hover .project-details-ellipse {
+  width: 8px;
+  opacity: 1;
 }
 
 .project-info-right {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .project-left-hover-area {
@@ -114,7 +248,7 @@
 .project-details-text {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -123,62 +257,104 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-  .section4-work-grid {
-    grid-template-columns: 1fr 300px;
-  }
-}
-
-@media (max-width: 992px) {
-  .section4-work-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: 70% 30%;
+/* Tablet */
+@media (max-width: 1024px) {
+  .section4-work {
+    min-height: 0;
   }
 
-  .project-details {
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
   .section4-work .grid-container {
+    min-height: 0;
     margin-bottom: 24px;
   }
 
-  .project-image-container {
-    margin-bottom: 8px;
+  .project-left-section {
+    grid-column: 1 / span 4 !important;
   }
 
-  .project-details-image {
-    margin-bottom: 8px;
+  .project-details-container {
+    grid-column: 5 / span 4 !important;
+  }
+
+  .project-image-container {
+    margin-bottom: 12px;
+  }
+
+  .project-details-image-container {
+    margin-bottom: 12px;
   }
 
   .project-info-row {
-    padding: 30px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+  }
+
+  .project-info-right {
+    justify-content: flex-start;
+  }
+
+  .project-details-text {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .project-details-right-text {
+    text-align: left;
+  }
+
+  .project-info-bottom .project-description,
+  .project-category .project-details-description:not(.project-info-right .project-details-description):not(.project-details-right-text .project-details-description) {
+    display: none;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 576px) {
+  .section4-work {
+    min-height: 0;
+  }
+
   .section4-work .grid-container {
+    min-height: 0;
     margin-bottom: 18px;
+  }
+
+  .project-left-section {
+    grid-column: 1 / span 2 !important;
+  }
+
+  .project-details-container {
+    grid-column: 3 / span 2 !important;
   }
 
   .project-image-container {
     margin-bottom: 6px;
   }
 
-  .project-details-image {
+  .project-details-image-container {
     margin-bottom: 6px;
   }
 
   .project-info-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
-    padding: 20px;
   }
 
   .project-info-right {
     justify-content: flex-start;
+  }
+
+  .project-details-text {
+    flex-direction: column;
+  }
+
+  .project-details-right-text {
+    text-align: left;
+  }
+
+  .project-info-bottom .project-description,
+  .project-category .project-details-description:not(.project-info-right .project-details-description):not(.project-details-right-text .project-details-description) {
+    display: none;
   }
 }

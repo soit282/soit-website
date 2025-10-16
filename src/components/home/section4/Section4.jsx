@@ -5,6 +5,7 @@ import "@styles/grid-system.css";
 export default function Section4() {
   const [mouseY, setMouseY] = useState(50);
   const [isVisible, setIsVisible] = useState(true);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
   const sectionRef = useRef(null);
   const mouseClientY = useRef(null);
 
@@ -33,6 +34,15 @@ export default function Section4() {
   useEffect(() => {
     const handleScroll = () => {
       updateMousePosition();
+
+      // Calculate parallax offset
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollProgress = -rect.top;
+        // Parallax speed: 0.5 means background moves at half speed
+        const parallaxSpeed = 0.5;
+        setParallaxOffset(scrollProgress * parallaxSpeed);
+      }
     };
 
     // Track global mouse position
@@ -42,6 +52,9 @@ export default function Section4() {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleGlobalMouseMove);
+
+    // Initial parallax calculation
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -53,14 +66,27 @@ export default function Section4() {
     <div
       ref={sectionRef}
       className="section4"
-      style={{
-        backgroundImage: `url('/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg')`,
-      }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Parallax Background */}
       <div
-        className="section4-content text-8"
+        className="section4-background"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url('/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          transform: `translateY(${parallaxOffset}px)`,
+          willChange: "transform",
+        }}
+      />
+      <div
+        className="section4-content"
         style={{
           position: "absolute",
           top: `${mouseY}%`,
@@ -71,19 +97,18 @@ export default function Section4() {
           transition: "opacity 0.3s ease",
         }}
       >
-        {/* Grid reference layer for positioning */}
-        <div
-          className="grid-container grid-reference"
-          style={{ position: "relative", height: "100%" }}
-        >
-          {/* Text positioned based on grid columns but not constrained by them */}
-          <div className="text-left text-5 text-position-left">
+        {/* Using proper grid system */}
+        <div className="grid-container">
+          {/* Text left */}
+          <div className="section4-text-left text-left text-5">
             <p>TràMADE</p>
           </div>
-          <div className="text-center text-position-center">
+          {/* Text center */}
+          <div className="section4-text-center text-center-item text-8">
             <p>Tea mastery born in the heights of Măng Đen</p>
           </div>
-          <div className="text-right text-position-right">
+          {/* Text right */}
+          <div className="section4-text-right text-right text-8">
             <p>Branding</p>
           </div>
         </div>

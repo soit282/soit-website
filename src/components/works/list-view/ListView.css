@@ -1,0 +1,248 @@
+.list-view {
+  width: 100%;
+  background: #ffffff;
+}
+
+.list-view .grid-container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.projects-table {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 12px;
+}
+
+.table-header-row,
+.project-row {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  position: relative;
+  margin: 0 -24px;
+  padding: 0 24px;
+}
+
+.table-header {
+  text-align: left;
+  padding: 16px 0;
+  color: #1f1f1f;
+}
+
+/* Column positioning */
+.table-col-client {
+  grid-column: 1 / span 6;
+}
+
+.table-col-category {
+  grid-column: 7 / span 3;
+}
+
+.table-col-type {
+  grid-column: 10 / span 2;
+}
+
+.table-col-year {
+  grid-column: 12 / span 1;
+  text-align: right;
+}
+
+/* Full-width underline */
+.row-underline {
+  grid-column: 1 / -1;
+  height: 1px;
+  background-color: #e5e5e5;
+}
+
+.table-header-row .row-underline {
+  background-color: #303030;
+}
+
+.project-row {
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.project-row > div:not(.row-underline) {
+  padding: 20px 0;
+  color: #303030;
+  transition: color 0.5s ease;
+}
+
+/* Animation keyframes */
+@keyframes grayscale-hover {
+  20% {
+    background-color: #f0f0f0;
+  }
+  40% {
+    background-color: #eaeaea;
+  }
+  60% {
+    background-color: #dedede;
+  }
+  80% {
+    background-color: #d0d0d0;
+  }
+  100% {
+    background-color: #c4c4c4;
+  }
+}
+
+@keyframes text-color-hover {
+  0% {
+    color: #303030;
+  }
+  20% {
+    color: #2a2a2a;
+  }
+  40% {
+    color: #242424;
+  }
+  60% {
+    color: #1e1e1e;
+  }
+  80% {
+    color: #181818;
+  }
+  100% {
+    color: #1f1f1f;
+  }
+}
+
+/* Animate state */
+.project-row.animate {
+  animation: grayscale-hover 0.5s steps(5) forwards;
+}
+
+.project-row.animate .project-name,
+.project-row.animate .project-category,
+.project-row.animate .project-type,
+.project-row.animate .project-year {
+  animation: text-color-hover 0.5s steps(5) forwards;
+}
+
+/* Locked state */
+.project-row.locked {
+  background-color: #c4c4c4;
+  transition: background-color 0.3s ease;
+}
+
+.project-row.locked .project-name,
+.project-row.locked .project-year {
+  color: #1f1f1f;
+  transition: color 0.3s ease;
+}
+
+.project-row.locked .project-category,
+.project-row.locked .project-type {
+  color: #303030;
+  transition: color 0.3s ease;
+}
+
+/* Reset state */
+.project-row.reset {
+  background-color: #fff;
+  transition: background-color 0.5s ease;
+}
+
+.project-row.reset .project-name,
+.project-row.reset .project-year {
+  color: #303030;
+  transition: color 0.5s ease;
+}
+
+.project-row.reset .project-category,
+.project-row.reset .project-type {
+  color: #666666;
+  transition: color 0.5s ease;
+}
+
+.project-category {
+  color: #666666;
+}
+
+.project-type {
+  color: #666666;
+}
+
+.project-year {
+  color: #1f1f1f;
+}
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 1024px) {
+  .projects-table {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  .table-header-row,
+  .project-row {
+    margin: 0 -24px;
+    padding: 0 24px;
+  }
+
+  /* Hide Category and Type columns */
+  .table-col-category,
+  .table-col-type {
+    display: none;
+  }
+
+  /* Column positioning for tablet - 8 columns, split in half */
+  .table-col-client {
+    grid-column: 1 / span 4;
+  }
+
+  .table-col-year {
+    grid-column: 5 / span 4;
+    text-align: right;
+  }
+
+  .table-header {
+    padding: 0 0 16px 0;
+  }
+
+  .project-row > div:not(.row-underline) {
+    padding: 16px 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .projects-table {
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 8px;
+  }
+
+  .table-header-row,
+  .project-row {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  /* Hide Category and Type columns */
+  .table-col-category,
+  .table-col-type {
+    display: none;
+  }
+
+  /* Column positioning for mobile - 4 columns, split in half */
+  .table-col-client {
+    grid-column: 1 / span 2;
+  }
+
+  .table-col-year {
+    grid-column: 3 / span 2;
+    text-align: right;
+  }
+
+  .table-header {
+    padding: 0 0 16px 0;
+  }
+
+  .project-row > div:not(.row-underline) {
+    padding: 16px 0;
+  }
+}

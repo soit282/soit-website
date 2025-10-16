@@ -5,6 +5,7 @@ import "@styles/grid-system.css";
 export default function Section6() {
   const [mouseY, setMouseY] = useState(50);
   const [isVisible, setIsVisible] = useState(true);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
   const sectionRef = useRef(null);
   const mouseClientY = useRef(null);
 
@@ -33,6 +34,15 @@ export default function Section6() {
   useEffect(() => {
     const handleScroll = () => {
       updateMousePosition();
+
+      // Calculate parallax offset
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollProgress = -rect.top;
+        // Parallax speed: 0.5 means background moves at half speed
+        const parallaxSpeed = 0.5;
+        setParallaxOffset(scrollProgress * parallaxSpeed);
+      }
     };
 
     // Track global mouse position
@@ -42,6 +52,9 @@ export default function Section6() {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleGlobalMouseMove);
+
+    // Initial parallax calculation
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -56,39 +69,51 @@ export default function Section6() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <video autoPlay loop muted playsInline>
-        <source
-          src="/1_Homepage/1_Homepage/2_Feature works/Dogma_2.mp4"
-          type="video/mp4"
-        />
-      </video>
+      {/* Parallax Video Background */}
       <div
-        className="section6-content text-8"
+        className="section6-background"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          transform: `translateY(${parallaxOffset}px)`,
+          willChange: "transform",
+        }}
+      >
+        <video autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }}>
+          <source
+            src="/1_Homepage/1_Homepage/2_Feature works/Dogma_2.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
+      <div
+        className="section6-content"
         style={{
           position: "absolute",
           top: `${mouseY}%`,
           transform: "translateY(-50%)",
           left: 0,
           right: 0,
-          padding: "0 1.25%",
           zIndex: 2,
           opacity: isVisible ? 1 : 0,
           transition: "opacity 0.3s ease",
         }}
       >
-        {/* Grid reference layer for positioning */}
-        <div
-          className="grid-container grid-reference"
-          style={{ position: "relative", height: "100%" }}
-        >
-          {/* Text positioned based on grid but not constrained by them */}
-          <div className="text-left text-5 text-position-left">
+        {/* Using proper grid system */}
+        <div className="grid-container">
+          {/* Text left */}
+          <div className="section6-text-left text-left text-5">
             <p>Dogma</p>
           </div>
-          <div className="text-center text-position-center">
+          {/* Text center */}
+          <div className="section6-text-center text-center-item text-8">
             <p>A private collection of archival and contemporary art</p>
           </div>
-          <div className="text-right text-position-right">
+          {/* Text right */}
+          <div className="section6-text-right text-right text-8">
             <p>Branding</p>
           </div>
         </div>

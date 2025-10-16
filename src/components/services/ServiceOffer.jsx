@@ -7,7 +7,13 @@ import ArrowButton from "@components/common/ArrowButton";
 export default function ServiceOffer() {
   const [showFooter, setShowFooter] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const expandedRef = useRef(null);
+  const smoothScrollInstance = useRef(null);
+  const dropdownRef = useRef(null);
 
   const offerings = [
     {
@@ -52,42 +58,64 @@ export default function ServiceOffer() {
     }
   };
 
-  // Custom smooth scroll function with adjustable speed
-  const smoothScroll = (element, duration = 1500) => {
-    const offset = -100; // Offset để scroll cao hơn 100px
-    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset + offset;
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
-
-    const animation = (currentTime) => {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const progress = Math.min(timeElapsed / duration, 1);
-      
-      // Easing function for smoother animation
-      const easeInOutCubic = progress < 0.5
-        ? 4 * progress * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-      
-      window.scrollTo(0, startPosition + distance * easeInOutCubic);
-      
-      if (timeElapsed < duration) {
-        requestAnimationFrame(animation);
+  // Get global smooth scroll instance
+  useEffect(() => {
+    // Access the global smooth scroll instance from window if available
+    const checkForSmoothScroll = () => {
+      if (window.smoothScrollInstance) {
+        smoothScrollInstance.current = window.smoothScrollInstance;
       }
     };
-    
-    requestAnimationFrame(animation);
-  };
+
+    checkForSmoothScroll();
+    // Check again after a delay in case it's not ready yet
+    const timer = setTimeout(checkForSmoothScroll, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Scroll to expanded section when it appears
   useEffect(() => {
     if (showFooter && expandedRef.current) {
       setTimeout(() => {
-        smoothScroll(expandedRef.current, 1500); // 1.5 seconds duration
-      }, 100); // Small delay to ensure DOM is updated
+        const offset = -100;
+        const targetPosition =
+          expandedRef.current.getBoundingClientRect().top +
+          window.pageYOffset +
+          offset;
+
+        // Use global smooth scroll if available
+        if (
+          smoothScrollInstance.current &&
+          smoothScrollInstance.current.scrollTo
+        ) {
+          smoothScrollInstance.current.scrollTo(targetPosition);
+        } else {
+          // Fallback to instant scroll
+          window.scrollTo(0, targetPosition);
+        }
+      }, 100);
     }
   }, [showFooter]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Get available services (exclude selected one)
+  const getAvailableServices = () => {
+    return offerings
+      .map((o) => o.title)
+      .filter((title) => title !== selectedService);
+  };
 
   return (
     <section className="service-offer-section">
@@ -113,7 +141,7 @@ export default function ServiceOffer() {
             onClick={() => handleCardClick(offering.title)}
           >
             <div className="offering-header">
-              <p className="offering-subtitle text-8">A solid first step</p>
+              <p className="offering-subtitle text-3">A solid first step</p>
               <h3 className="offering-title text-5">{offering.title}</h3>
               <div className="offering-tags">
                 {offering.tags.map((tag, index) => (
@@ -124,7 +152,7 @@ export default function ServiceOffer() {
               </div>
             </div>
             <div className="offering-content">
-              <p className="offering-description text-4">
+              <p className="offering-description text-6">
                 {offering.description}
               </p>
               <ArrowButton
@@ -141,32 +169,77 @@ export default function ServiceOffer() {
           <div className="expanded-content">
             <div className="footer-text-section">
               <p className="footer-line1 text-2">
-                We are <span className="contact-info">[Company Name]</span> and
+                We are{" "}
+                <span
+                  className="contact-input text-2"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onInput={(e) => setCompanyName(e.target.textContent)}
+                  data-placeholder="[Company Name]"
+                >
+                  {companyName}
+                </span>{" "}
+                , and we'd love to discuss
               </p>
               <p className="footer-line2 text-2">
-                we'd love to discuss{" "}
-                <span className="dropdown-wrapper">
-                  <select
-                    className="service-dropdown contact-info text-2"
-                    value={selectedService}
-                    onChange={(e) => setSelectedService(e.target.value)}
-                  >
-                    <option value="Brand Check-up">Brand Check-up</option>
-                    <option value="Ultra Identity">Ultra Identity</option>
-                    <option value="Full Brand Suite">Full Brand Suite</option>
-                  </select>
+                <span
+                  className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}
+                  ref={dropdownRef}
+                >
+                  <div className="dropdown-services-container">
+                    <div
+                      className="service-dropdown contact-info text-2"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    >
+                      {selectedService}
+                    </div>
+                    {isDropdownOpen && (
+                      <div className="custom-dropdown-menu">
+                        {getAvailableServices().map((service) => (
+                          <div
+                            key={service}
+                            className="custom-dropdown-option text-2"
+                            onClick={() => {
+                              setSelectedService(service);
+                              setIsDropdownOpen(false);
+                            }}
+                          >
+                            {service}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <img
                     src={dropDownIcon}
                     alt="dropdown"
                     className="dropdown-arrow"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   />
                 </span>
               </p>
               <p className="contact-text text-2">
-                Please feel free to reach us at
-                <br />
-                <span className="contact-info">[phone number]</span> or{" "}
-                <span className="contact-info">[email]</span>.
+                Please feel free to reach us at{" "}
+                <span
+                  className="contact-input text-2"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onInput={(e) => setPhoneNumber(e.target.textContent)}
+                  data-placeholder="[phone number]"
+                >
+                  {phoneNumber}
+                </span>{" "}
+                or{" "}
+                <span
+                  className="contact-input text-2"
+                  contentEditable
+                  suppressContentEditableWarning
+                  onInput={(e) => setEmail(e.target.textContent)}
+                  data-placeholder="[email]"
+                >
+                  {email}
+                </span>
+                .
               </p>
             </div>
             <div className="submit-section">

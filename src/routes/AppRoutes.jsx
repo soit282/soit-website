@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 // Lazy-load pages
@@ -9,7 +9,6 @@ const WorksPage = lazy(() => import("@pages/WorksPage"));
 const WorkDetailPage = lazy(() => import("@pages/WorkDetailPage"));
 
 export default function AppRoutes() {
-  const location = useLocation();
 
   return (
     <>

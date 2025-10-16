@@ -1,29 +1,69 @@
 import { useEffect, useState, useRef } from "react";
+import LazyVideo from "@components/common/LazyVideo";
+import { preloadImages } from "@utils/imagePreloader";
+import "@components/common/LazyMedia.css";
 import "./Section3Work.css";
 import "@styles/grid-system.css";
 
 export default function Section3Work() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+  const hoverTimeoutRef = useRef(null);
+
+  // Defer image preload until after page is interactive
+  useEffect(() => {
+    preloadImages(["/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"], 1000);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          setShouldLoadVideo(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1, rootMargin: '200px' } // Load slightly before entering viewport
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const element = sectionRef.current;
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (element) {
+        observer.unobserve(element);
+      }
+      observer.disconnect();
+    };
+  }, []);
+
+  // Debounced video pause on hover (300ms delay to avoid interrupting scroll)
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+    }, 300);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(() => {});
+      }
+    }, 300);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
       }
     };
   }, []);
@@ -34,61 +74,50 @@ export default function Section3Work() {
         <div
           className={`work-main-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 12" }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <div className="work-video-container">
-            {isHovered ? (
-              <img
-                src="/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"
-                alt="TBros"
-                className="work-video"
-              />
+            {shouldLoadVideo ? (
+              <>
+                <LazyVideo
+                  ref={videoRef}
+                  src="/1_Homepage/1_Homepage/2_Feature works/TBros_1.mov"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="work-video work-video-default"
+                />
+                <img
+                  src="/1_Homepage/1_Homepage/2_Feature works/TBros_2.png"
+                  alt="TBros"
+                  className="work-video work-video-hover"
+                />
+              </>
             ) : (
-              <video
-                src="/1_Homepage/1_Homepage/2_Feature works/TBros_1.mov"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="work-video"
-              />
+              <div className="work-video work-video-placeholder" />
             )}
           </div>
           <div className="work-info-row-section3">
             <div className="work-info-bottom">
               <div className="work-category">
-                <span
-                  className="text-7"
-                  style={{
-                    color: "#1F1F1F",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                  }}
-                >
-                  {isHovered && (
-                    <img
-                      src="/icon/Icon/ellipse.svg"
-                      alt=""
-                      style={{ width: "8px", height: "8px" }}
-                    />
-                  )}
+                <span className="text-7 work-title">
+                  <img
+                    src="/icon/Icon/ellipse.svg"
+                    alt=""
+                    className="work-ellipse"
+                  />
                   TBros
                 </span>
-                <span
-                  className="text-8"
-                  style={{ color: isHovered ? "#1F1F1F" : "#939393" }}
-                >
-                  Vietnam’s most awarded bean-to-bar chocolate
+                <span className="text-8 work-description">
+                  Vietnam's most awarded bean-to-bar chocolate
                 </span>
               </div>
             </div>
             <div className="work-info-right">
               <div className="work-category text-8">
-                <span style={{ color: isHovered ? "#1F1F1F" : "#939393" }}>
-                  Branding
-                </span>
+                <span className="work-description">Branding</span>
               </div>
             </div>
           </div>

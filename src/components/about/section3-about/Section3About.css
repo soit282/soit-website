@@ -41,6 +41,7 @@
 
 /* Text classes are defined in typography.css */
 
+/* Tablet */
 @media (max-width: 1024px) {
   .section3-about .left-column {
     padding-left: 20px;
@@ -49,9 +50,7 @@
   .section3-about .right-column {
     padding-right: 40px;
   }
-}
 
-@media (max-width: 768px) {
   .section3-about .container {
     height: auto;
     min-height: 100vh;
@@ -84,4 +83,8 @@
   .section3-about .right-column {
     order: 1;
   }
+}
+
+/* Mobile - inherits tablet styles */
+@media (max-width: 576px) {
 }

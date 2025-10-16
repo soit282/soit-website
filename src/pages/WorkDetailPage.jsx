@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
 import TraMadeWorkDetail from "@components/works/traMade-workDetail/TraMadeWorkDetail";
+import DogmaWorkDetail from "@components/works/dogma-workDetail/DogmaWorkDetail";
+import UnAvailableWorkDetail from "@components/works/unavailable-workDetail/UnAvailableWorkDetail";
+import TBrosWorkDetail from "@components/works/tbros-workDetail/TBrosWorkDetail";
 
 const WorkDetailPage = () => {
   const { workId } = useParams();
@@ -9,6 +12,12 @@ const WorkDetailPage = () => {
     switch (workId) {
       case "tramade":
         return <TraMadeWorkDetail />;
+      case "dogma":
+        return <DogmaWorkDetail />;
+      case "unavailable":
+        return <UnAvailableWorkDetail />;
+      case "tbros":
+        return <TBrosWorkDetail />;
       default:
         return (
           <div style={{ padding: "100px 20px", textAlign: "center" }}>
