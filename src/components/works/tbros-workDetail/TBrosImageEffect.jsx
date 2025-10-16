@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import LazyImage from "@components/common/LazyImage";
 import controllIcon from "@assets/icon/controll.svg";
 import "./TBrosImageEffect.css";
@@ -13,10 +13,41 @@ const TBrosImageEffect = ({
   className = ""
 }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
+  const sliderRef = useRef(null);
+  const isDraggingRef = useRef(false);
 
-  const handleSliderChange = (e) => {
-    setSliderPosition(e.target.value);
+  const updatePosition = (e) => {
+    if (!sliderRef.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
   };
+
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    isDraggingRef.current = true;
+    updatePosition(e);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isDraggingRef.current) return;
+      updatePosition(e);
+    };
+
+    const handleMouseUp = () => {
+      isDraggingRef.current = false;
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
 
   // If beforeColor and afterColor are provided, use color slider effect
   if (beforeColor && afterColor) {
@@ -39,21 +70,14 @@ const TBrosImageEffect = ({
           />
 
           {/* Slider Control */}
-          <div className="tbros-slider-control">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              step="0.1"
-              value={sliderPosition}
-              onChange={handleSliderChange}
-              className="tbros-slider-input"
-            />
+          <div className="tbros-slider-control" ref={sliderRef}>
+            <div className="tbros-slider-track" />
             <img
               src={controllIcon}
               alt="Slider control"
               className="tbros-slider-thumb"
               style={{ left: `${sliderPosition}%` }}
+              onMouseDown={handleMouseDown}
             />
           </div>
         </div>
@@ -90,21 +114,14 @@ const TBrosImageEffect = ({
           </div>
 
           {/* Slider Control */}
-          <div className="tbros-slider-control">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              step="0.1"
-              value={sliderPosition}
-              onChange={handleSliderChange}
-              className="tbros-slider-input"
-            />
+          <div className="tbros-slider-control" ref={sliderRef}>
+            <div className="tbros-slider-track" />
             <img
               src={controllIcon}
               alt="Slider control"
               className="tbros-slider-thumb"
               style={{ left: `${sliderPosition}%` }}
+              onMouseDown={handleMouseDown}
             />
           </div>
         </div>
