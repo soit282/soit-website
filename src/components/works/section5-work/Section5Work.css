@@ -163,6 +163,10 @@
   .showcase-info-right {
     justify-content: flex-start;
   }
+
+  .showcase-info-bottom .showcase-description {
+    display: none;
+  }
 }
 
 /* Mobile */
@@ -181,5 +185,9 @@
 
   .showcase-info-row {
     gap: 0px;
+  }
+
+  .showcase-info-bottom .showcase-description {
+    display: none;
   }
 }

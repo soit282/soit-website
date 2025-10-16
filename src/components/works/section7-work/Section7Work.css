@@ -163,6 +163,10 @@
   .display-info-right {
     justify-content: flex-start;
   }
+
+  .display-info-bottom .display-description {
+    display: none;
+  }
 }
 
 /* Mobile */
@@ -181,5 +185,9 @@
 
   .display-info-row {
     gap: 0px;
+  }
+
+  .display-info-bottom .display-description {
+    display: none;
   }
 }

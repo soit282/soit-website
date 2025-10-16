@@ -163,6 +163,10 @@
   .work-info-right {
     justify-content: flex-start;
   }
+
+  .work-info-bottom .work-description {
+    display: none;
+  }
 }
 
 /* Mobile */
@@ -181,5 +185,9 @@
 
   .work-info-row-section3 {
     gap: 0px;
+  }
+
+  .work-info-bottom .work-description {
+    display: none;
   }
 }

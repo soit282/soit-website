@@ -296,6 +296,11 @@
   .work-details-right-text {
     text-align: left;
   }
+
+  .work-info-bottom .work-description,
+  .work-category .work-details-description:not(.work-info-right .work-details-description):not(.work-details-right-text .work-details-description) {
+    display: none;
+  }
 }
 
 /* Mobile */
@@ -335,5 +340,10 @@
 
   .work-details-right-text {
     text-align: left;
+  }
+
+  .work-info-bottom .work-description,
+  .work-category .work-details-description:not(.work-info-right .work-details-description):not(.work-details-right-text .work-details-description) {
+    display: none;
   }
 }

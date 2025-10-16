@@ -302,6 +302,11 @@
   .project-details-right-text {
     text-align: left;
   }
+
+  .project-info-bottom .project-description,
+  .project-category .project-details-description:not(.project-info-right .project-details-description):not(.project-details-right-text .project-details-description) {
+    display: none;
+  }
 }
 
 /* Mobile */
@@ -346,5 +351,10 @@
 
   .project-details-right-text {
     text-align: left;
+  }
+
+  .project-info-bottom .project-description,
+  .project-category .project-details-description:not(.project-info-right .project-details-description):not(.project-details-right-text .project-details-description) {
+    display: none;
   }
 }

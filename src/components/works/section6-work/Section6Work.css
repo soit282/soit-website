@@ -301,6 +301,11 @@
   .gallery-details-right-text {
     text-align: left;
   }
+
+  .gallery-info-bottom .gallery-description,
+  .gallery-category .gallery-details-description:not(.gallery-info-right .gallery-details-description):not(.gallery-details-right-text .gallery-details-description) {
+    display: none;
+  }
 }
 
 /* Mobile */
@@ -345,5 +350,10 @@
 
   .gallery-details-right-text {
     text-align: left;
+  }
+
+  .gallery-info-bottom .gallery-description,
+  .gallery-category .gallery-details-description:not(.gallery-info-right .gallery-details-description):not(.gallery-details-right-text .gallery-details-description) {
+    display: none;
   }
 }
