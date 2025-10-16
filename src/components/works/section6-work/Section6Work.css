@@ -77,7 +77,7 @@
 
 /* CSS-only text and icon transitions */
 .gallery-title {
-  color: #1F1F1F;
+  color: #1f1f1f;
   display: flex;
   align-items: center;
   gap: 0;
@@ -98,7 +98,7 @@
 }
 
 .gallery-left-hover-area:hover .gallery-description {
-  color: #1F1F1F;
+  color: #1f1f1f;
 }
 
 .gallery-left-hover-area:hover .gallery-title {
@@ -191,7 +191,7 @@
 
 /* CSS-only text and icon transitions for details */
 .gallery-details-title {
-  color: #1F1F1F;
+  color: #1f1f1f;
   display: flex;
   align-items: center;
   gap: 0;
@@ -212,7 +212,7 @@
 }
 
 .gallery-details-hover-area:hover .gallery-details-description {
-  color: #1F1F1F;
+  color: #1f1f1f;
 }
 
 .gallery-details-hover-area:hover .gallery-details-title {
@@ -276,7 +276,7 @@
   }
 
   .gallery-image-container {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .gallery-details-image-container {

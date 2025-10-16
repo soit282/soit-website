@@ -82,7 +82,7 @@
 
 /* CSS-only text and icon transitions */
 .work-title {
-  color: #1F1F1F;
+  color: #1f1f1f;
   display: flex;
   align-items: center;
   gap: 0;
@@ -103,7 +103,7 @@
 }
 
 .work-left-section:hover .work-description {
-  color: #1F1F1F;
+  color: #1f1f1f;
 }
 
 .work-left-section:hover .work-title {
@@ -196,7 +196,7 @@
 
 /* CSS-only text and icon transitions for details */
 .work-details-title {
-  color: #1F1F1F;
+  color: #1f1f1f;
   display: flex;
   align-items: center;
   gap: 0;
@@ -217,7 +217,7 @@
 }
 
 .work-details-hover-area:hover .work-details-description {
-  color: #1F1F1F;
+  color: #1f1f1f;
 }
 
 .work-details-hover-area:hover .work-details-title {
@@ -275,7 +275,7 @@
   }
 
   .work-image-container {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .work-info-row {
@@ -302,11 +302,6 @@
 @media (max-width: 576px) {
   .section2-work {
     min-height: 0;
-  }
-
-  .section2-work .grid-container {
-    min-height: 0;
-    margin-bottom: 18px;
   }
 
   .work-left-section {
