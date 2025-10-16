@@ -276,17 +276,17 @@
   }
 
   .feature-image-container {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .feature-details-image-container {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .feature-info-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 0px;
   }
 
   .feature-info-right {
@@ -295,7 +295,7 @@
 
   .feature-details-text {
     flex-direction: column;
-    gap: 15px;
+    gap: 0;
   }
 
   .feature-details-right-text {
@@ -333,7 +333,6 @@
   .feature-info-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
   }
 
   .feature-info-right {
@@ -342,7 +341,6 @@
 
   .feature-details-text {
     flex-direction: column;
-    gap: 10px;
   }
 
   .feature-details-right-text {

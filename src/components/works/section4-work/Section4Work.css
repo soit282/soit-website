@@ -277,17 +277,17 @@
   }
 
   .project-image-container {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .project-details-image-container {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .project-info-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 0px;
   }
 
   .project-info-right {
@@ -296,7 +296,7 @@
 
   .project-details-text {
     flex-direction: column;
-    gap: 15px;
+    gap: 0;
   }
 
   .project-details-right-text {
@@ -334,7 +334,6 @@
   .project-info-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
   }
 
   .project-info-right {
@@ -343,7 +342,6 @@
 
   .project-details-text {
     flex-direction: column;
-    gap: 10px;
   }
 
   .project-details-right-text {

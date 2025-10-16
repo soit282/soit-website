@@ -146,14 +146,18 @@
     margin-bottom: 24px;
   }
 
+  .showcase-main-section {
+    grid-column: 1 / span 8 !important;
+  }
+
   .showcase-video-container {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   .showcase-info-row {
     flex-direction: column;
     align-items: flex-start;
-    padding: 30px 20px;
+    gap: 0px;
   }
 
   .showcase-info-right {
@@ -167,12 +171,15 @@
     margin-bottom: 18px;
   }
 
+  .showcase-main-section {
+    grid-column: 1 / span 4 !important;
+  }
+
   .showcase-video-container {
     margin-bottom: 6px;
   }
 
   .showcase-info-row {
-    padding: 20px;
-    gap: 15px;
+    gap: 0px;
   }
 }
