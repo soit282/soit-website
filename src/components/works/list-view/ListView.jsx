@@ -1,8 +1,66 @@
+import { useEffect } from "react";
 import { projects } from "@data/projects";
 import "./ListView.css";
 import "@styles/grid-system.css";
 
 export default function ListView() {
+  // Hover effects for project rows
+  useEffect(() => {
+    const projectRows = document.querySelectorAll(".projects-table .project-row");
+
+    projectRows.forEach((row) => {
+      let animationTimeout;
+      let resetTimeout;
+      let isHovering = false;
+      let isOnRepeat = false;
+
+      function startAnimation() {
+        // Clear any existing timeouts
+        clearTimeout(animationTimeout);
+        clearTimeout(resetTimeout);
+
+        // Remove previous states and start animation
+        if (!isOnRepeat) {
+          row.classList.remove("locked");
+          row.classList.remove("reset");
+          row.classList.add("animate");
+        }
+
+        // After animation completes
+        animationTimeout = setTimeout(() => {
+          row.classList.remove("animate");
+          row.classList.add("locked");
+          // After being locked for a moment
+          resetTimeout = setTimeout(() => {
+            // If still hovering, do nothing
+            if (isHovering) {
+              isOnRepeat = true;
+            } else {
+              // Otherwise reset to white
+              row.classList.remove("locked");
+              row.classList.add("reset");
+              isOnRepeat = false;
+            }
+          }, 250);
+        }, 500);
+      }
+
+      row.addEventListener("mouseenter", () => {
+        isHovering = true;
+        startAnimation();
+      });
+
+      row.addEventListener("mouseleave", () => {
+        isHovering = false;
+        isOnRepeat = false;
+        row.classList.remove("locked");
+        row.classList.add("reset");
+        // Animation will complete and then reset to white
+        // based on the isHovering flag in the timeout function
+      });
+    });
+  }, []);
+
   return (
     <div className="list-view">
       <div className="grid-container">

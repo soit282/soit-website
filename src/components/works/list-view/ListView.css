@@ -21,6 +21,8 @@
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
   position: relative;
+  margin: 0 -24px;
+  padding: 0 24px;
 }
 
 .table-header {
@@ -58,14 +60,103 @@
   background-color: #303030;
 }
 
+.project-row {
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
 .project-row > div:not(.row-underline) {
   padding: 20px 0;
   color: #303030;
-  cursor: pointer;
+  transition: color 0.5s ease;
 }
 
-.project-row:hover > div:not(.row-underline) {
-  background-color: #f5f5f5;
+/* Animation keyframes */
+@keyframes grayscale-hover {
+  20% {
+    background-color: #f0f0f0;
+  }
+  40% {
+    background-color: #eaeaea;
+  }
+  60% {
+    background-color: #dedede;
+  }
+  80% {
+    background-color: #d0d0d0;
+  }
+  100% {
+    background-color: #c4c4c4;
+  }
+}
+
+@keyframes text-color-hover {
+  0% {
+    color: #303030;
+  }
+  20% {
+    color: #2a2a2a;
+  }
+  40% {
+    color: #242424;
+  }
+  60% {
+    color: #1e1e1e;
+  }
+  80% {
+    color: #181818;
+  }
+  100% {
+    color: #1f1f1f;
+  }
+}
+
+/* Animate state */
+.project-row.animate {
+  animation: grayscale-hover 0.5s steps(5) forwards;
+}
+
+.project-row.animate .project-name,
+.project-row.animate .project-category,
+.project-row.animate .project-type,
+.project-row.animate .project-year {
+  animation: text-color-hover 0.5s steps(5) forwards;
+}
+
+/* Locked state */
+.project-row.locked {
+  background-color: #c4c4c4;
+  transition: background-color 0.3s ease;
+}
+
+.project-row.locked .project-name,
+.project-row.locked .project-year {
+  color: #1f1f1f;
+  transition: color 0.3s ease;
+}
+
+.project-row.locked .project-category,
+.project-row.locked .project-type {
+  color: #303030;
+  transition: color 0.3s ease;
+}
+
+/* Reset state */
+.project-row.reset {
+  background-color: #fff;
+  transition: background-color 0.5s ease;
+}
+
+.project-row.reset .project-name,
+.project-row.reset .project-year {
+  color: #303030;
+  transition: color 0.5s ease;
+}
+
+.project-row.reset .project-category,
+.project-row.reset .project-type {
+  color: #666666;
+  transition: color 0.5s ease;
 }
 
 .project-category {
@@ -85,6 +176,12 @@
 @media (max-width: 1024px) {
   .projects-table {
     grid-template-columns: repeat(8, 1fr);
+  }
+
+  .table-header-row,
+  .project-row {
+    margin: 0 -24px;
+    padding: 0 24px;
   }
 
   /* Column positioning for tablet */
@@ -127,7 +224,8 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 20px 0;
+    padding: 20px 16px;
+    margin: 0 -16px;
     border-bottom: 1px solid #e5e5e5;
   }
 
