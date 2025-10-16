@@ -49,10 +49,15 @@ const TBrosContent = () => {
     },
     {
       id: 5,
-      src: "/2_Workspage/2_Works page/TBROS/TBROS_5.png",
-      type: "image",
+      type: "text-section",
       title: "TBROS 5",
       gridColumn: "1 / span 12",
+      textContent: {
+        heading: "Old vs. New Logotype",
+        paragraphs: [
+          "The logotype is a refined evolution of the original, preserving familiarity while improving modernity and readability."
+        ]
+      }
     },
     {
       id: 6,
@@ -93,10 +98,16 @@ const TBrosContent = () => {
     },
     {
       id: 11,
-      src: "/2_Workspage/2_Works page/TBROS/TBROS_10.png",
-      type: "image",
+      type: "text-section",
       title: "TBROS 10",
       gridColumn: "1 / span 12",
+      backgroundColor: "#6E3526",
+      textContent: {
+        heading: "Design Idea: Chocoscope",
+        paragraphs: [
+          "Inspired by a kaleidoscope, the Chocoscope graphic system reflects the diverse, experimental flavors of T*Bros chocolates. It incorporates cultural elements like vintage Vietnamese window patterns and architectural motifs, adding depth and a sense of place to the designs."
+        ]
+      }
     },
     {
       id: 12,
@@ -348,7 +359,10 @@ const TBrosContent = () => {
           ref={(el) => setupObserver(el, asset.id)}
           data-id={asset.id}
           data-visible={isVisible}
-          style={{ gridColumn: asset.gridColumn }}
+          style={{
+            gridColumn: asset.gridColumn,
+            ...(asset.backgroundColor && { background: asset.backgroundColor }),
+          }}
         >
           <h2 className="tbros-text-heading text-4">
             {asset.textContent.heading}

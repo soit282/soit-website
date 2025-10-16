@@ -98,9 +98,8 @@ video.tbros-media {
 
 /* Text Section Styles */
 .tbros-text-section {
-  background: #99702C;
+  background: #99702c;
   padding: 80px 0;
-  min-height: 400px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   display: grid;
   grid-template-columns: subgrid;
@@ -112,6 +111,7 @@ video.tbros-media {
   color: #ffffff;
   margin: 0 0 40px 0;
   text-align: left;
+  width: fit-content;
 }
 
 .tbros-text-content {
