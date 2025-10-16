@@ -1,5 +1,4 @@
 .section8-work {
-  min-height: 100vh;
   background: #ffffff;
   color: #1f1f1f;
   display: flex;
@@ -8,9 +7,8 @@
   overflow-x: hidden;
 }
 
-.section6-work .grid-container {
+.section8-work .grid-container {
   height: auto;
-  min-height: 100vh;
   grid-template-rows: auto auto;
   align-content: start;
   margin-bottom: 36px;
@@ -260,37 +258,94 @@
 /* Responsive Design */
 /* Tablet */
 @media (max-width: 1024px) {
-  .section6-work .grid-container {
+  .section8-work {
+    min-height: 0;
+  }
+
+  .section8-work .grid-container {
+    min-height: 0;
     margin-bottom: 24px;
+  }
+
+  .feature-left-section {
+    grid-column: 1 / span 4 !important;
+  }
+
+  .feature-details-container {
+    grid-column: 5 / span 4 !important;
   }
 
   .feature-image-container {
     margin-bottom: 8px;
   }
 
-  .feature-info-row {
-    padding: 30px 20px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 576px) {
-  .section6-work .grid-container {
-    margin-bottom: 18px;
-  }
-
-  .feature-image-container {
-    margin-bottom: 6px;
+  .feature-details-image-container {
+    margin-bottom: 8px;
   }
 
   .feature-info-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
-    padding: 20px;
   }
 
   .feature-info-right {
     justify-content: flex-start;
+  }
+
+  .feature-details-text {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .feature-details-right-text {
+    text-align: left;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .section8-work {
+    min-height: 0;
+  }
+
+  .section8-work .grid-container {
+    min-height: 0;
+    margin-bottom: 18px;
+  }
+
+  .feature-left-section {
+    grid-column: 1 / span 2 !important;
+  }
+
+  .feature-details-container {
+    grid-column: 3 / span 2 !important;
+  }
+
+  .feature-image-container {
+    margin-bottom: 6px;
+  }
+
+  .feature-details-image-container {
+    margin-bottom: 6px;
+  }
+
+  .feature-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .feature-info-right {
+    justify-content: flex-start;
+  }
+
+  .feature-details-text {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feature-details-right-text {
+    text-align: left;
   }
 }

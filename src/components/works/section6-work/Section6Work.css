@@ -1,5 +1,4 @@
 .section6-work {
-  min-height: 100vh;
   background: #ffffff;
   color: #1f1f1f;
   display: flex;
@@ -10,7 +9,6 @@
 
 .section6-work .grid-container {
   height: auto;
-  min-height: 100vh;
   grid-template-rows: auto auto;
   align-content: start;
   margin-bottom: 36px;
@@ -260,37 +258,94 @@
 /* Responsive Design */
 /* Tablet */
 @media (max-width: 1024px) {
+  .section6-work {
+    min-height: 0;
+  }
+
   .section6-work .grid-container {
+    min-height: 0;
     margin-bottom: 24px;
+  }
+
+  .gallery-left-section {
+    grid-column: 1 / span 4 !important;
+  }
+
+  .gallery-details-container {
+    grid-column: 5 / span 4 !important;
   }
 
   .gallery-image-container {
     margin-bottom: 8px;
   }
 
-  .gallery-info-row {
-    padding: 30px 20px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 576px) {
-  .section6-work .grid-container {
-    margin-bottom: 18px;
-  }
-
-  .gallery-image-container {
-    margin-bottom: 6px;
+  .gallery-details-image-container {
+    margin-bottom: 8px;
   }
 
   .gallery-info-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
-    padding: 20px;
   }
 
   .gallery-info-right {
     justify-content: flex-start;
+  }
+
+  .gallery-details-text {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .gallery-details-right-text {
+    text-align: left;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .section6-work {
+    min-height: 0;
+  }
+
+  .section6-work .grid-container {
+    min-height: 0;
+    margin-bottom: 18px;
+  }
+
+  .gallery-left-section {
+    grid-column: 1 / span 2 !important;
+  }
+
+  .gallery-details-container {
+    grid-column: 3 / span 2 !important;
+  }
+
+  .gallery-image-container {
+    margin-bottom: 6px;
+  }
+
+  .gallery-details-image-container {
+    margin-bottom: 6px;
+  }
+
+  .gallery-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .gallery-info-right {
+    justify-content: flex-start;
+  }
+
+  .gallery-details-text {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gallery-details-right-text {
+    text-align: left;
   }
 }
