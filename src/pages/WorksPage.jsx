@@ -20,7 +20,7 @@ const WorksPage = () => {
         <Section1Work viewMode={viewMode} setViewMode={setViewMode} />
       </Suspense>
 
-      {viewMode === 'gallery' && (
+      {viewMode === 'gallery' ? (
         <>
           <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
             <Section2Work />
@@ -47,6 +47,10 @@ const WorksPage = () => {
             <Section9Work />
           </Suspense>
         </>
+      ) : (
+        <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+          <Section9Work />
+        </Suspense>
       )}
     </div>
   );

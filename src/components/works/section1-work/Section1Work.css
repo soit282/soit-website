@@ -88,7 +88,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .section1-work {
-    padding: 60px 1.25%;
+    padding: 60px 24px;
   }
 
   .section1-work-content {
@@ -99,6 +99,6 @@
 /* Mobile */
 @media (max-width: 576px) {
   .section1-work {
-    padding: 40px 20px;
+    padding: 40px 16px;
   }
 }
