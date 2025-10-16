@@ -302,10 +302,14 @@
     display: block;
     position: fixed;
     right: 24px;
-    top: 15px;
+    top: 24px;
     z-index: 100011;
     color: white;
     mix-blend-mode: difference;
+  }
+  .mobile-menu-close {
+    margin-top: 24px;
+    margin-right: 24px;
   }
 }
 
@@ -324,10 +328,12 @@
   }
 
   .mobile-menu-toggle {
+    top: 12px;
     right: 16px;
   }
 
   .mobile-menu-close {
+    margin-top: 12px;
     margin-right: 16px;
   }
 
