@@ -8,6 +8,7 @@ export const ROUTES = {
   SERVICES: "/services",
   WORKS: "/works",
   CONTACT: "/contact",
+  PLAYGROUND: "/playground",
 
   // Work detail pages
   WORKS_TBROS: "/works/tbros",

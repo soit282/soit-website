@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { preloadImages } from "@utils/imagePreloader";
+import { ROUTES } from "@constants/routes";
 import "./Section2Work.css";
 import "@styles/grid-system.css";
 
@@ -48,7 +49,7 @@ export default function Section2Work() {
         <div
           className={`work-left-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 8" }}
-          onClick={() => navigate('/works/tramade')}
+          onClick={() => navigate(ROUTES.WORKS_TRAMADE)}
         >
           <div className="work-image-container">
             <img
@@ -94,7 +95,7 @@ export default function Section2Work() {
         >
           <div
             className="work-details-hover-area"
-            onClick={() => navigate('/works/tramade')}
+            onClick={() => navigate(ROUTES.WORKS_TRAMADE)}
           >
             <div className="work-details-image-container">
               <img

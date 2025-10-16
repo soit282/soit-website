@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { ROUTES } from "@constants/routes";
 
 // Lazy-load pages
 const HomePage = lazy(() => import("@pages/HomePage"));
@@ -18,10 +19,10 @@ export default function AppRoutes() {
         }
       >
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicePage />} />
-          <Route path="/works" element={<WorksPage />} />
+          <Route path={ROUTES.HOME} element={<HomePage />} />
+          <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+          <Route path={ROUTES.SERVICES} element={<ServicePage />} />
+          <Route path={ROUTES.WORKS} element={<WorksPage />} />
           <Route path="/works/:workId" element={<WorkDetailPage />} />
 
           {/* 404 - Catch all route
