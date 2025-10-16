@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from "react";
+import LazyImage from "@components/common/LazyImage";
+import LazyVideo from "@components/common/LazyVideo";
 import "./TraMadeContent.css";
 import "@styles/grid-system.css";
 
@@ -318,21 +320,19 @@ const TraMadeContent = () => {
           {isVisible ? (
             <>
               {asset.type === "video" ? (
-                <video
+                <LazyVideo
                   src={asset.src}
                   className="tramade-media"
                   autoPlay
                   muted
                   loop
                   playsInline
-                  preload={preloadedVideos.has(asset.src) ? "auto" : "metadata"}
                 />
               ) : (
-                <img
+                <LazyImage
                   src={asset.src}
                   alt={asset.title}
                   className="tramade-media"
-                  loading="lazy"
                 />
               )}
             </>

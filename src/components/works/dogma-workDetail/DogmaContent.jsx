@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from "react";
+import LazyImage from "@components/common/LazyImage";
+import LazyVideo from "@components/common/LazyVideo";
 import "./DogmaContent.css";
 import "@styles/grid-system.css";
 
@@ -313,22 +315,19 @@ const DogmaContent = () => {
             <>
               {/* Default media */}
               {asset.type === "video" ? (
-                <video
+                <LazyVideo
                   src={asset.src}
                   className={`dogma-media ${hasHover ? 'dogma-media-default' : ''}`}
                   autoPlay
                   muted
                   loop
                   playsInline
-                  preload={preloadedVideos.has(asset.src) ? "auto" : "metadata"}
-                  loading="lazy"
                 />
               ) : (
-                <img
+                <LazyImage
                   src={asset.src}
                   alt={asset.title}
                   className={`dogma-media ${hasHover ? 'dogma-media-default' : ''}`}
-                  
                 />
               )}
 
@@ -336,22 +335,19 @@ const DogmaContent = () => {
               {hasHover && (
                 <>
                   {asset.hoverType === "video" ? (
-                    <video
+                    <LazyVideo
                       src={asset.hoverSrc}
                       className="dogma-media dogma-media-hover"
                       autoPlay
                       muted
                       loop
                       playsInline
-                      preload={preloadedVideos.has(asset.hoverSrc) ? "auto" : "metadata"}
-                      loading="lazy"
                     />
                   ) : (
-                    <img
+                    <LazyImage
                       src={asset.hoverSrc}
                       alt={`${asset.title} Hover`}
                       className="dogma-media dogma-media-hover"
-                      
                     />
                   )}
                 </>

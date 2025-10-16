@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from "react";
+import LazyImage from "@components/common/LazyImage";
+import LazyVideo from "@components/common/LazyVideo";
 import TBrosImageEffect from "./TBrosImageEffect";
 import TBros8HoverEffect from "./TBros8HoverEffect";
 import "./TBrosContent.css";
@@ -476,17 +478,13 @@ const TBrosContent = () => {
             <>
               {/* Default media */}
               {asset.type === "video" ? (
-                <video
+                <LazyVideo
                   src={asset.src}
                   className={`tbros-media ${hasHover ? "tbros-media-default" : ""}`}
                   autoPlay
                   muted
                   loop
                   playsInline
-                  preload={
-                    preloadedVideos.has(asset.src) ? "auto" : "metadata"
-                  }
-                  loading="lazy"
                   style={
                     asset.videoAspectRatio
                       ? { aspectRatio: asset.videoAspectRatio, width: "auto", height: "100%", objectFit: "contain", background: "transparent" }
@@ -494,11 +492,10 @@ const TBrosContent = () => {
                   }
                 />
               ) : (
-                <img
+                <LazyImage
                   src={asset.src}
                   alt={asset.title}
                   className={`tbros-media ${hasHover ? "tbros-media-default" : ""}`}
-                  
                 />
               )}
 
@@ -506,26 +503,19 @@ const TBrosContent = () => {
               {hasHover && (
                 <>
                   {asset.hoverType === "video" ? (
-                    <video
+                    <LazyVideo
                       src={asset.hoverSrc}
                       className="tbros-media tbros-media-hover"
                       autoPlay
                       muted
                       loop
                       playsInline
-                      preload={
-                        preloadedVideos.has(asset.hoverSrc)
-                          ? "auto"
-                          : "metadata"
-                      }
-                      loading="lazy"
                     />
                   ) : (
-                    <img
+                    <LazyImage
                       src={asset.hoverSrc}
                       alt={`${asset.title} Hover`}
                       className="tbros-media tbros-media-hover"
-                      loading="lazy"
                     />
                   )}
                 </>

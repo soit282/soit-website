@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import LazyImage from "@components/common/LazyImage";
 import "./UnAvailableContent.css";
 import "@styles/grid-system.css";
 
@@ -162,20 +163,18 @@ const UnAvailableContent = () => {
           {isVisible ? (
             <>
               {/* Default media */}
-              <img
+              <LazyImage
                 src={asset.src}
                 alt={asset.title}
                 className={`unavailable-media ${hasHover ? 'unavailable-media-default' : ''}`}
-                
               />
 
               {/* Hover media */}
               {hasHover && (
-                <img
+                <LazyImage
                   src={asset.hoverSrc}
                   alt={`${asset.title} Hover`}
                   className="unavailable-media unavailable-media-hover"
-                  loading="lazy"
                 />
               )}
             </>
