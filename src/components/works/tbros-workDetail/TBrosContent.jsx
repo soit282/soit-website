@@ -22,10 +22,16 @@ const TBrosContent = () => {
     },
     {
       id: 2,
-      src: "/2_Workspage/2_Works page/TBROS/TBROS_2.png",
-      type: "image",
-      title: "TBROS 2",
+      type: "text-section",
+      title: "Brand Concept",
       gridColumn: "1 / span 12",
+      textContent: {
+        heading: "100% Gốc Việt",
+        paragraphs: [
+          "Rooted in Vietnamese heritage, TBros defines itself as \"Anh Em Cacao\" (Cacao Brothers), embracing ethical, locally sourced cocoa production.",
+          "The brand concept, 100% Gốc Việt (100% Vietnamese Origin), reflects a commitment to authenticity, innovation, and cultural pride."
+        ]
+      }
     },
     {
       id: 3,
@@ -332,6 +338,31 @@ const TBrosContent = () => {
   const renderMediaItem = (asset) => {
     const isVisible = visibleItems.has(asset.id);
     const hasHover = asset.hoverSrc && asset.hoverType;
+
+    // Handle text section separately
+    if (asset.type === "text-section") {
+      return (
+        <div
+          key={asset.id}
+          className="tbros-media-item tbros-text-section"
+          ref={(el) => setupObserver(el, asset.id)}
+          data-id={asset.id}
+          data-visible={isVisible}
+          style={{ gridColumn: asset.gridColumn }}
+        >
+          <h2 className="tbros-text-heading text-4">
+            {asset.textContent.heading}
+          </h2>
+          <div className="tbros-text-content">
+            {asset.textContent.paragraphs.map((paragraph, index) => (
+              <p key={index} className="text-4">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div
