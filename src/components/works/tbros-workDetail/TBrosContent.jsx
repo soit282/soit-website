@@ -50,6 +50,8 @@ const TBrosContent = () => {
       afterColor: "#113758",
       beforeLogo: "/2_Workspage/2_Works page/TBROS/effect/new_logo.png",
       afterLogo: "/2_Workspage/2_Works page/TBROS/effect/old_logo.png",
+      beforeText: "NEW LOGO",
+      afterText: "OLD LOGO",
     },
     {
       id: 5,
@@ -383,6 +385,8 @@ const TBrosContent = () => {
                 afterColor={asset.afterColor}
                 beforeLogo={asset.beforeLogo}
                 afterLogo={asset.afterLogo}
+                beforeText={asset.beforeText}
+                afterText={asset.afterText}
               />
             )}
           </div>

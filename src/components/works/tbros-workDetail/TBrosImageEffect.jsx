@@ -12,7 +12,9 @@ const TBrosImageEffect = ({
   afterColor,
   beforeLogo,
   afterLogo,
-  className = ""
+  beforeText,
+  afterText,
+  className = "",
 }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const sliderRef = useRef(null);
@@ -42,12 +44,12 @@ const TBrosImageEffect = ({
       isDraggingRef.current = false;
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
     };
   }, []);
 
@@ -61,13 +63,18 @@ const TBrosImageEffect = ({
             className="tbros-before-layer"
             style={{ backgroundColor: beforeColor }}
           >
-            {beforeLogo && (
-              <img
-                src={beforeLogo}
-                alt="Before logo"
-                className="tbros-layer-logo"
-              />
-            )}
+            <div className="tbros-layer-content">
+              {beforeLogo && (
+                <img
+                  src={beforeLogo}
+                  alt="Before logo"
+                  className="tbros-layer-logo"
+                />
+              )}
+              {beforeText && (
+                <p className="tbros-layer-text text-8">{beforeText}</p>
+              )}
+            </div>
           </div>
 
           {/* After Color (Overlay) */}
@@ -75,16 +82,21 @@ const TBrosImageEffect = ({
             className="tbros-after-layer"
             style={{
               backgroundColor: afterColor,
-              clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`
+              clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
             }}
           >
-            {afterLogo && (
-              <img
-                src={afterLogo}
-                alt="After logo"
-                className="tbros-layer-logo"
-              />
-            )}
+            <div className="tbros-layer-content">
+              {afterLogo && (
+                <img
+                  src={afterLogo}
+                  alt="After logo"
+                  className="tbros-layer-logo"
+                />
+              )}
+              {afterText && (
+                <p className="tbros-layer-text text-8">{afterText}</p>
+              )}
+            </div>
           </div>
 
           {/* Slider Control */}
