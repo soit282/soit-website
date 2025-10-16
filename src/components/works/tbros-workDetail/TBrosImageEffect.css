@@ -99,11 +99,23 @@
 }
 
 .tbros-layer-text {
-  color: #ffffff;
   margin: 0;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  font-family: Labrada;
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 42.8px;
+}
+
+.tbros-before-text {
+  color: #113758;
+}
+
+.tbros-after-text {
+  color: #99702C;
 }
 
 /* Responsive Design */

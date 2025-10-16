@@ -72,7 +72,7 @@ const TBrosImageEffect = ({
                 />
               )}
               {beforeText && (
-                <p className="tbros-layer-text text-8">{beforeText}</p>
+                <p className="tbros-layer-text tbros-before-text">{beforeText}</p>
               )}
             </div>
           </div>
@@ -94,7 +94,7 @@ const TBrosImageEffect = ({
                 />
               )}
               {afterText && (
-                <p className="tbros-layer-text text-8">{afterText}</p>
+                <p className="tbros-layer-text tbros-after-text">{afterText}</p>
               )}
             </div>
           </div>
