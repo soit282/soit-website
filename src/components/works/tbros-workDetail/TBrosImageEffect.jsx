@@ -70,8 +70,7 @@ const TBrosImageEffect = ({
           />
 
           {/* Slider Control */}
-          <div className="tbros-slider-control" ref={sliderRef}>
-            <div className="tbros-slider-track" />
+          <div className="tbros-slider-track" ref={sliderRef}>
             <img
               src={controllIcon}
               alt="Slider control"
@@ -114,8 +113,7 @@ const TBrosImageEffect = ({
           </div>
 
           {/* Slider Control */}
-          <div className="tbros-slider-control" ref={sliderRef}>
-            <div className="tbros-slider-track" />
+          <div className="tbros-slider-track" ref={sliderRef}>
             <img
               src={controllIcon}
               alt="Slider control"
