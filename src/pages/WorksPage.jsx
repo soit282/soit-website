@@ -1,4 +1,5 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 // Lazy load all sections for better performance
 const Section1Work = lazy(() => import("@components/works/section1-work/Section1Work"));
@@ -12,7 +13,33 @@ const Section8Work = lazy(() => import("@components/works/section8-work/Section8
 const Section9Work = lazy(() => import("@components/works/section9-work/Section9Work"));
 
 const WorksPage = () => {
-  const [viewMode, setViewMode] = useState('gallery');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Initialize viewMode from URL query param or localStorage, fallback to 'gallery'
+  const getInitialViewMode = () => {
+    // First check URL query param
+    const urlViewMode = searchParams.get('view');
+    if (urlViewMode === 'list' || urlViewMode === 'gallery') {
+      return urlViewMode;
+    }
+
+    // Then check localStorage
+    const savedViewMode = localStorage.getItem('worksViewMode');
+    if (savedViewMode === 'list' || savedViewMode === 'gallery') {
+      return savedViewMode;
+    }
+
+    // Default to gallery
+    return 'gallery';
+  };
+
+  const [viewMode, setViewMode] = useState(getInitialViewMode);
+
+  // Save viewMode to localStorage and update URL when it changes
+  useEffect(() => {
+    localStorage.setItem('worksViewMode', viewMode);
+    setSearchParams({ view: viewMode }, { replace: true });
+  }, [viewMode, setSearchParams]);
 
   return (
     <div className="works-page">
