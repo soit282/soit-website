@@ -88,17 +88,19 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .section1-work {
-    padding: 60px 24px;
+    padding: 120px 24px 60px;
   }
-
   .section1-work-content {
-    text-align: center;
+    padding-bottom: 0;
+  }
+  .section1-work-container {
+    gap: 12px;
   }
 }
 
 /* Mobile */
 @media (max-width: 576px) {
   .section1-work {
-    padding: 40px 16px;
+    padding: 120px 16px 60px;
   }
 }

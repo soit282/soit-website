@@ -43,13 +43,13 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .section9-work {
-    padding: 60px 20px;
+    padding: 60px 24px;
   }
 }
 
 /* Mobile */
 @media (max-width: 576px) {
   .section9-work {
-    padding: 40px 20px;
+    padding: 42px 16px 16px;
   }
 }
