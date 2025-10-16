@@ -191,7 +191,6 @@ const TBrosContent = () => {
       type: "image",
       title: "TBROS 23A",
       gridColumn: "1 / span 6",
-      customAspectRatio: "155/208",
     },
     {
       id: 26,
@@ -199,7 +198,6 @@ const TBrosContent = () => {
       type: "image",
       title: "TBROS 23B",
       gridColumn: "7 / span 6",
-      customAspectRatio: "155/208",
     },
     {
       id: 27,
