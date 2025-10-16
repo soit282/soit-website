@@ -28,7 +28,7 @@
 }
 
 .dogma-title-section {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .dogma-client-section {
@@ -69,12 +69,19 @@
   margin: 0;
 }
 
+.dogma-description .description-line {
+  display: block;
+}
+
+.dogma-description .description-line:not(:last-child) {
+  margin-bottom: 24px;
+}
+
 /* Responsive Design */
 /* Tablet */
 @media (max-width: 1024px) {
   .dogma-title-section {
     grid-column: 1 / span 8 !important;
-    margin-bottom: 32px;
   }
 
   .dogma-client-section {

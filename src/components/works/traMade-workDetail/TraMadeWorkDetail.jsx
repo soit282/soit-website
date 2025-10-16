@@ -61,14 +61,17 @@ export default function TraMadeWorkDetail() {
           style={{ gridColumn: "7 / span 6" }}
         >
           <p className="tramade-description text-4">
-            Tea mastery born in the heights of Măng Đen.
-            <br />
-            TràMADE is a masterful tea artisan from the fertile highlands of
-            Măng Đen, embodying the rustic breath of this serene land. From the
-            TràMADE tea hills, clean tea cultivation experts collaborate with
-            the Mơ Nâm ethnic group to bring Măng Đen’s tea products to Vietnam
-            and the world. Every bit of energy absorbed by the tea leaves — from
-            both nature and humanity — infuses into the body of the tea drinker.
+            <span className="description-line">
+              Tea mastery born in the heights of Măng Đen.
+            </span>
+            <span className="description-line">
+              TràMADE is a masterful tea artisan from the fertile highlands of
+              Măng Đen, embodying the rustic breath of this serene land. From the
+              TràMADE tea hills, clean tea cultivation experts collaborate with
+              the Mơ Nâm ethnic group to bring Măng Đen's tea products to Vietnam
+              and the world. Every bit of energy absorbed by the tea leaves — from
+              both nature and humanity — infuses into the body of the tea drinker.
+            </span>
           </p>
         </div>
       </div>

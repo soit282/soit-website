@@ -63,13 +63,16 @@ export default function UnAvailableWorkDetail() {
           style={{ gridColumn: "7 / span 6" }}
         >
           <p className="unavailable-description text-4">
-            UnAvailable is a manufacturer specializing in high quality street &
-            fashion garment based in HCMC, Vietnam.
-            <br />
-            The brand identity and tools were stripped back to UnAvailable’s
-            essence “Creating an impact that matters”, leaving a bold yet simple
-            color palette and a refined typographic system across all
-            applications.
+            <span className="description-line">
+              UnAvailable is a manufacturer specializing in high quality street &
+              fashion garment based in HCMC, Vietnam.
+            </span>
+            <span className="description-line">
+              The brand identity and tools were stripped back to UnAvailable's
+              essence "Creating an impact that matters", leaving a bold yet simple
+              color palette and a refined typographic system across all
+              applications.
+            </span>
           </p>
         </div>
       </div>
