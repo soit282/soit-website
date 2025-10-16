@@ -1,0 +1,48 @@
+.tbros8-hover-effect {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.tbros8-hover-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #99702C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tbros8-media {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.tbros8-media-default {
+  opacity: 1;
+  will-change: opacity;
+}
+
+.tbros8-media-default.hidden {
+  opacity: 0;
+}
+
+.tbros8-media-hover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.tbros8-media-hover.visible {
+  opacity: 1;
+}

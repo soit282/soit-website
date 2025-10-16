@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import LazyImage from "@components/common/LazyImage";
 import LazyVideo from "@components/common/LazyVideo";
 import TBrosImageEffect from "./TBrosImageEffect";
+import TBros8HoverEffect from "./TBros8HoverEffect";
 import "./TBrosContent.css";
 import "@styles/grid-system.css";
 
@@ -90,10 +91,13 @@ const TBrosContent = () => {
     },
     {
       id: 9,
-      src: "/2_Workspage/2_Works page/TBROS/TBROS_8.png",
-      type: "image",
+      src: "/2_Workspage/2_Works page/TBROS/effect/hover_effect1.png",
+      type: "tbros8-hover",
       title: "TBROS 8",
       gridColumn: "1 / span 12",
+      defaultType: "image",
+      hoverSrc: "/2_Workspage/2_Works page/TBROS/effect/hover_effect2.png",
+      hoverType: "image",
     },
     {
       id: 10,
@@ -357,6 +361,37 @@ const TBrosContent = () => {
   const renderMediaItem = (asset) => {
     const isVisible = visibleItems.has(asset.id);
     const hasHover = asset.hoverSrc && asset.hoverType;
+
+    // Handle TBROS 8 hover effect
+    if (asset.type === "tbros8-hover") {
+      return (
+        <div
+          key={asset.id}
+          className="tbros-media-item"
+          ref={(el) => setupObserver(el, asset.id)}
+          data-id={asset.id}
+          data-visible={isVisible}
+          style={{ gridColumn: asset.gridColumn }}
+        >
+          <div
+            className="tbros-media-wrapper"
+            style={{
+              aspectRatio: asset.customAspectRatio || "3/2",
+            }}
+          >
+            {isVisible && (
+              <TBros8HoverEffect
+                defaultSrc={asset.src}
+                defaultType={asset.defaultType}
+                hoverSrc={asset.hoverSrc}
+                hoverType={asset.hoverType}
+                alt={asset.title}
+              />
+            )}
+          </div>
+        </div>
+      );
+    }
 
     // Handle image effect separately
     if (asset.type === "image-effect") {
