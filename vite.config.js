@@ -49,6 +49,7 @@ export default defineConfig(({ mode }) => {
         '@context': path.resolve(__dirname, 'src/context'),
         '@routes': path.resolve(__dirname, 'src/routes'),
         '@data': path.resolve(__dirname, 'src/data'),
+        '@constants': path.resolve(__dirname, 'src/constants'),
       },
     },
   }

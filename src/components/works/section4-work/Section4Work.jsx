@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { preloadImages } from "@utils/imagePreloader";
+import { ROUTES } from "@constants/routes";
 import "./Section4Work.css";
 import "@styles/grid-system.css";
 
@@ -49,7 +50,7 @@ export default function Section4Work() {
           className={`project-left-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 4" }}
         >
-          <div className="project-left-hover-area" onClick={() => navigate('/works/dogma')}>
+          <div className="project-left-hover-area" onClick={() => navigate(ROUTES.WORKS_DOGMA)}>
             <div className="project-image-container">
               <img
                 src="/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_2_Logo.jpg"
