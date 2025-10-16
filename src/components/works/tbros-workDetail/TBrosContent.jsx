@@ -48,6 +48,8 @@ const TBrosContent = () => {
       gridColumn: "1 / span 12",
       beforeColor: "#99702C",
       afterColor: "#113758",
+      beforeLogo: "/2_Workspage/2_Works page/TBROS/effect/new_logo.png",
+      afterLogo: "/2_Workspage/2_Works page/TBROS/effect/old_logo.png",
     },
     {
       id: 5,
@@ -379,6 +381,8 @@ const TBrosContent = () => {
                 afterSrc={asset.afterSrc}
                 beforeColor={asset.beforeColor}
                 afterColor={asset.afterColor}
+                beforeLogo={asset.beforeLogo}
+                afterLogo={asset.afterLogo}
               />
             )}
           </div>
