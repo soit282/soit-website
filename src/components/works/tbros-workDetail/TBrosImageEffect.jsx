@@ -100,7 +100,13 @@ const TBrosImageEffect = ({
           </div>
 
           {/* Slider Control */}
-          <div className="tbros-slider-track" ref={sliderRef}>
+          <div
+            className="tbros-slider-track"
+            ref={sliderRef}
+            style={{
+              background: `linear-gradient(to right, ${beforeColor} ${sliderPosition}%, ${afterColor} ${sliderPosition}%)`
+            }}
+          >
             <img
               src={controllIcon}
               alt="Slider control"
