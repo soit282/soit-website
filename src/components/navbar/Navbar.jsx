@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { createPortal } from "react-dom";
+import { ROUTES } from "@constants/routes";
 import ParticleExplosion from "../effects/ParticleExplosion";
 import "./Navbar.css";
 import "@styles/grid-system.css";
@@ -136,7 +137,7 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const section1Height = window.innerHeight;
-      const isHomePage = location.pathname === "/";
+      const isHomePage = location.pathname === ROUTES.HOME;
       const maxScale = calculateMaxScale();
 
       if (isHomePage) {
@@ -166,7 +167,7 @@ const Navbar = () => {
     };
 
     // Initial setup based on page
-    if (location.pathname === "/") {
+    if (location.pathname === ROUTES.HOME) {
       // Check if at top of page
       if (window.scrollY === 0) {
         setLogoScale(calculateMaxScale()); // Start with calculated scale
@@ -179,7 +180,7 @@ const Navbar = () => {
 
     // Handle window resize
     const handleResize = () => {
-      if (location.pathname === "/" && window.scrollY < 100) {
+      if (location.pathname === ROUTES.HOME && window.scrollY < 100) {
         handleScroll();
       }
     };
@@ -223,7 +224,7 @@ const Navbar = () => {
       </div>
       <ul className="navbar-menu">
         <li className="navbar-item">
-          <a href="/" className="navbar-link" onClick={toggleMobileMenu}>
+          <a href={ROUTES.HOME} className="navbar-link" onClick={toggleMobileMenu}>
             <span
               className="navbar-shuffle-text text-2 mobile-text-2"
               ref={mobileHomeRef}
@@ -234,7 +235,7 @@ const Navbar = () => {
           </a>
         </li>
         <li className="navbar-item">
-          <a href="/works" className="navbar-link" onClick={toggleMobileMenu}>
+          <a href={ROUTES.WORKS} className="navbar-link" onClick={toggleMobileMenu}>
             <span
               className="navbar-shuffle-text text-2 mobile-text-2"
               ref={mobileWorksRef}
@@ -245,7 +246,7 @@ const Navbar = () => {
           </a>
         </li>
         <li className="navbar-item">
-          <a href="/about" className="navbar-link" onClick={toggleMobileMenu}>
+          <a href={ROUTES.ABOUT} className="navbar-link" onClick={toggleMobileMenu}>
             <span
               className="navbar-shuffle-text text-2 mobile-text-2"
               ref={mobileAboutRef}
@@ -257,7 +258,7 @@ const Navbar = () => {
         </li>
         <li className="navbar-item">
           <a
-            href="/services"
+            href={ROUTES.SERVICES}
             className="navbar-link"
             onClick={toggleMobileMenu}
           >
@@ -272,7 +273,7 @@ const Navbar = () => {
         </li>
         <li className="navbar-item">
           <a
-            href="/playground"
+            href={ROUTES.PLAYGROUND}
             className="navbar-link"
             onClick={toggleMobileMenu}
           >
@@ -286,7 +287,7 @@ const Navbar = () => {
           </a>
         </li>
         <li className="navbar-item">
-          <a href="/contact" className="navbar-link" onClick={toggleMobileMenu}>
+          <a href={ROUTES.CONTACT} className="navbar-link" onClick={toggleMobileMenu}>
             <span className="navbar-shuffle-text text-2 mobile-text-2">
               Let's connect
             </span>
@@ -314,7 +315,7 @@ const Navbar = () => {
         transition: "none",
       }}
     >
-      <a href="/" className="navbar-logo">
+      <a href={ROUTES.HOME} className="navbar-logo">
         <img
           src="/icon/Icon/Số Ít logo.svg"
           alt="Số Ít"
@@ -339,7 +340,7 @@ const Navbar = () => {
           <div className="navbar-menu-wrapper-desktop">
             <ul className="navbar-menu">
               <li className="navbar-item">
-                <a href="/" className="navbar-link">
+                <a href={ROUTES.HOME} className="navbar-link">
                   <span
                     className="navbar-shuffle-text text-6"
                     ref={homeRef}
@@ -350,7 +351,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="navbar-item">
-                <a href="/works" className="navbar-link">
+                <a href={ROUTES.WORKS} className="navbar-link">
                   <span
                     className="navbar-shuffle-text text-6"
                     ref={worksRef}
@@ -361,7 +362,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="navbar-item">
-                <a href="/about" className="navbar-link">
+                <a href={ROUTES.ABOUT} className="navbar-link">
                   <span
                     className="navbar-shuffle-text text-6"
                     ref={aboutRef}
@@ -372,7 +373,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="navbar-item">
-                <a href="/services" className="navbar-link">
+                <a href={ROUTES.SERVICES} className="navbar-link">
                   <span
                     className="navbar-shuffle-text text-6"
                     ref={servicesRef}
@@ -383,7 +384,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="navbar-item">
-                <a href="/playground" className="navbar-link">
+                <a href={ROUTES.PLAYGROUND} className="navbar-link">
                   <span
                     className="navbar-shuffle-text text-6"
                     ref={playgroundRef}
