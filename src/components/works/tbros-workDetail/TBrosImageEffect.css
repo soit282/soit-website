@@ -87,15 +87,14 @@
   grid-column: 5 / span 4;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 120px;
 }
 
 .tbros-layer-logo {
   width: 100%;
-  height: auto;
+  aspect-ratio: 3/2;
   object-fit: contain;
-  max-height: 60%;
 }
 
 .tbros-layer-text {
@@ -115,7 +114,7 @@
 }
 
 .tbros-after-text {
-  color: #99702C;
+  color: #99702c;
 }
 
 /* Responsive Design */
