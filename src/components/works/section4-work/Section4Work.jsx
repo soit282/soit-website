@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { preloadImages } from "@utils/imagePreloader";
 import "./Section4Work.css";
 import "@styles/grid-system.css";
@@ -6,12 +7,13 @@ import "@styles/grid-system.css";
 export default function Section4Work() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const navigate = useNavigate();
 
   // Defer image preloading until after page is interactive
   useEffect(() => {
     preloadImages([
-      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg",
-      "/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg",
+      "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_2_Logo.jpg",
+      "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_18_Space.jpg",
       "/1_Homepage/1_Homepage/2_Feature works/Okkio_1.png",
       "/1_Homepage/1_Homepage/2_Feature works/Okkio_2.png"
     ], 1500);
@@ -47,16 +49,16 @@ export default function Section4Work() {
           className={`project-left-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 4" }}
         >
-          <div className="project-left-hover-area">
+          <div className="project-left-hover-area" onClick={() => navigate('/works/dogma')}>
             <div className="project-image-container">
               <img
-                src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_18_Packaging.jpg"
-                alt="Project Left"
+                src="/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_2_Logo.jpg"
+                alt="Dogma Project"
                 className="project-image project-image-default"
               />
               <img
-                src="/1_Homepage/1_Homepage/2_Feature works/TraMADE_1.jpg"
-                alt="Project Left Hover"
+                src="/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_18_Space.jpg"
+                alt="Dogma Project Hover"
                 className="project-image project-image-hover"
               />
             </div>

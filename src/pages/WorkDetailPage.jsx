@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import TraMadeWorkDetail from "@components/works/traMade-workDetail/TraMadeWorkDetail";
+import DogmaWorkDetail from "@components/works/dogma-workDetail/DogmaWorkDetail";
 
 const WorkDetailPage = () => {
   const { workId } = useParams();
@@ -9,6 +10,8 @@ const WorkDetailPage = () => {
     switch (workId) {
       case "tramade":
         return <TraMadeWorkDetail />;
+      case "dogma":
+        return <DogmaWorkDetail />;
       default:
         return (
           <div style={{ padding: "100px 20px", textAlign: "center" }}>
