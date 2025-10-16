@@ -1,5 +1,6 @@
 import { useState } from "react";
 import LazyImage from "@components/common/LazyImage";
+import controllIcon from "@assets/icon/controll.svg";
 import "./TBrosImageEffect.css";
 
 const TBrosImageEffect = ({
@@ -47,6 +48,12 @@ const TBrosImageEffect = ({
               onChange={handleSliderChange}
               className="tbros-slider-input"
             />
+            <img
+              src={controllIcon}
+              alt="Slider control"
+              className="tbros-slider-thumb"
+              style={{ left: `${sliderPosition}%` }}
+            />
           </div>
         </div>
       </div>
@@ -90,6 +97,12 @@ const TBrosImageEffect = ({
               value={sliderPosition}
               onChange={handleSliderChange}
               className="tbros-slider-input"
+            />
+            <img
+              src={controllIcon}
+              alt="Slider control"
+              className="tbros-slider-thumb"
+              style={{ left: `${sliderPosition}%` }}
             />
           </div>
         </div>

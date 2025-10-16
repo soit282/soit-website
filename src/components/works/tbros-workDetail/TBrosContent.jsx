@@ -46,8 +46,8 @@ const TBrosContent = () => {
       type: "image-effect",
       title: "TBROS 4",
       gridColumn: "1 / span 12",
-      beforeColor: "#B8935C",
-      afterColor: "#003D5C",
+      beforeColor: "#99702C",
+      afterColor: "#113758",
     },
     {
       id: 5,

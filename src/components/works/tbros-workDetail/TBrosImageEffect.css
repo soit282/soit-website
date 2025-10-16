@@ -54,6 +54,9 @@
   transform: translateX(-50%);
   width: 80%;
   z-index: 3;
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .tbros-slider-input {
@@ -65,33 +68,62 @@
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
 }
 
+/* Slider track */
+.tbros-slider-input::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tbros-slider-input::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hide default slider thumb but keep hitbox */
 .tbros-slider-input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
-  background: #ffffff;
-  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: transparent;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: none;
 }
 
 .tbros-slider-input::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: #ffffff;
-  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: transparent;
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.tbros-slider-input::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+/* Custom slider thumb using img element */
+.tbros-slider-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  z-index: 3;
+  transition: transform 0.15s ease;
 }
 
-.tbros-slider-input::-moz-range-thumb:hover {
-  transform: scale(1.2);
+.tbros-slider-control:hover .tbros-slider-thumb {
+  transform: translate(-50%, -50%) scale(1.1);
 }
