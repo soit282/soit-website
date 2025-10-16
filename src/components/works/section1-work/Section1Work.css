@@ -96,11 +96,21 @@
   .section1-work-container {
     gap: 24px;
   }
+
+  .view-toggle-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 /* Mobile */
 @media (max-width: 576px) {
   .section1-work {
     padding: 120px 16px 60px;
+  }
+
+  .view-toggle-buttons {
+    width: 100%;
+    justify-content: space-between;
   }
 }
