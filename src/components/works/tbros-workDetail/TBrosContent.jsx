@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import LazyImage from "@components/common/LazyImage";
 import LazyVideo from "@components/common/LazyVideo";
+import TBrosImageEffect from "./TBrosImageEffect";
 import "./TBrosContent.css";
 import "@styles/grid-system.css";
 
@@ -42,10 +43,11 @@ const TBrosContent = () => {
     },
     {
       id: 4,
-      src: "/2_Workspage/2_Works page/TBROS/TBROS_4.png",
-      type: "image",
+      type: "image-effect",
       title: "TBROS 4",
       gridColumn: "1 / span 12",
+      beforeColor: "#B8935C",
+      afterColor: "#003D5C",
     },
     {
       id: 5,
@@ -351,6 +353,38 @@ const TBrosContent = () => {
   const renderMediaItem = (asset) => {
     const isVisible = visibleItems.has(asset.id);
     const hasHover = asset.hoverSrc && asset.hoverType;
+
+    // Handle image effect separately
+    if (asset.type === "image-effect") {
+      return (
+        <div
+          key={asset.id}
+          className="tbros-media-item"
+          ref={(el) => setupObserver(el, asset.id)}
+          data-id={asset.id}
+          data-visible={isVisible}
+          style={{ gridColumn: asset.gridColumn }}
+        >
+          <div
+            className="tbros-media-wrapper"
+            style={{
+              aspectRatio: asset.customAspectRatio || "3/2",
+            }}
+          >
+            {isVisible && (
+              <TBrosImageEffect
+                src={asset.src}
+                alt={asset.title}
+                beforeSrc={asset.beforeSrc}
+                afterSrc={asset.afterSrc}
+                beforeColor={asset.beforeColor}
+                afterColor={asset.afterColor}
+              />
+            )}
+          </div>
+        </div>
+      );
+    }
 
     // Handle text section separately
     if (asset.type === "text-section") {
