@@ -42,6 +42,8 @@ const DogmaContent = () => {
       title: "Stationery System",
       description: "Complete stationery design",
       gridColumn: "1 / span 12",
+      hoverSrc: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_10_Poster_1 (COVER).mp4",
+      hoverType: "video",
     },
     {
       id: 5,
@@ -110,7 +112,7 @@ const DogmaContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 13,
+      id: 14,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_12_Stamp.mp4",
       type: "video",
       title: "Brand Stamp",
@@ -118,7 +120,7 @@ const DogmaContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 14,
+      id: 15,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_13_Megaphone graphic_1.mp4",
       type: "video",
       title: "Graphic Element 1",
@@ -126,7 +128,7 @@ const DogmaContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 15,
+      id: 16,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_14_Megaphone graphic_2.mp4",
       type: "video",
       title: "Graphic Element 2",
@@ -134,7 +136,7 @@ const DogmaContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 16,
+      id: 17,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_15_Story.mp4",
       type: "video",
       title: "Brand Story",
@@ -142,7 +144,7 @@ const DogmaContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 17,
+      id: 18,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_16_Insta.jpg",
       type: "image",
       title: "Social Media",
@@ -150,7 +152,7 @@ const DogmaContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 18,
+      id: 19,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_17a_Mock up.jpg",
       type: "image",
       title: "Application Mockup A",
@@ -159,7 +161,7 @@ const DogmaContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 19,
+      id: 20,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_17b_Mock up.jpg",
       type: "image",
       title: "Application Mockup B",
@@ -168,7 +170,7 @@ const DogmaContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 20,
+      id: 22,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_18_Space.jpg",
       type: "image",
       title: "Space Design 1",
@@ -176,7 +178,7 @@ const DogmaContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 21,
+      id: 23,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_19_Space.jpg",
       type: "image",
       title: "Space Design 2",
@@ -184,7 +186,7 @@ const DogmaContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 22,
+      id: 24,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_20a_Signage.mp4",
       type: "video",
       title: "Signage System A",
@@ -193,7 +195,7 @@ const DogmaContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 23,
+      id: 25,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_20b_Signage.jpg",
       type: "image",
       title: "Signage System B",
@@ -202,7 +204,7 @@ const DogmaContent = () => {
       customAspectRatio: "155/208",
     },
     {
-      id: 24,
+      id: 26,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_21_Space.jpg",
       type: "image",
       title: "Complete Space",
@@ -210,7 +212,7 @@ const DogmaContent = () => {
       gridColumn: "1 / span 12",
     },
     {
-      id: 25,
+      id: 27,
       src: "/2_Workspage/2_Works page/Dogma/3. Final upload/Dogma_22_Web.mp4",
       type: "video",
       title: "Website Design",
@@ -242,10 +244,15 @@ const DogmaContent = () => {
   useEffect(() => {
     const preloadVisibleVideos = () => {
       dogmaAssets
-        .filter(asset => asset.type === "video" && visibleItems.has(asset.id))
-        .forEach(video => {
-          if (!preloadedVideos.has(video.src)) {
-            preloadVideo(video.src);
+        .filter(asset => visibleItems.has(asset.id))
+        .forEach(asset => {
+          // Preload main video
+          if (asset.type === "video" && !preloadedVideos.has(asset.src)) {
+            preloadVideo(asset.src);
+          }
+          // Preload hover video if exists
+          if (asset.hoverType === "video" && asset.hoverSrc && !preloadedVideos.has(asset.hoverSrc)) {
+            preloadVideo(asset.hoverSrc);
           }
         });
     };
@@ -284,11 +291,12 @@ const DogmaContent = () => {
 
   const renderMediaItem = (asset) => {
     const isVisible = visibleItems.has(asset.id);
+    const hasHover = asset.hoverSrc && asset.hoverType;
 
     return (
       <div
         key={asset.id}
-        className="dogma-media-item"
+        className={`dogma-media-item ${hasHover ? 'has-hover' : ''}`}
         ref={(el) => setupObserver(el, asset.id)}
         data-id={asset.id}
         data-visible={isVisible}
@@ -304,10 +312,11 @@ const DogmaContent = () => {
         >
           {isVisible ? (
             <>
+              {/* Default media */}
               {asset.type === "video" ? (
                 <LazyVideo
                   src={asset.src}
-                  className="dogma-media"
+                  className={`dogma-media ${hasHover ? 'dogma-media-default' : ''}`}
                   autoPlay
                   muted
                   loop
@@ -319,9 +328,34 @@ const DogmaContent = () => {
                 <LazyImage
                   src={asset.src}
                   alt={asset.title}
-                  className="dogma-media"
+                  className={`dogma-media ${hasHover ? 'dogma-media-default' : ''}`}
                   effect="blur"
                 />
+              )}
+
+              {/* Hover media */}
+              {hasHover && (
+                <>
+                  {asset.hoverType === "video" ? (
+                    <LazyVideo
+                      src={asset.hoverSrc}
+                      className="dogma-media dogma-media-hover"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload={preloadedVideos.has(asset.hoverSrc) ? "auto" : "metadata"}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <LazyImage
+                      src={asset.hoverSrc}
+                      alt={`${asset.title} Hover`}
+                      className="dogma-media dogma-media-hover"
+                      effect="blur"
+                    />
+                  )}
+                </>
               )}
             </>
           ) : (
