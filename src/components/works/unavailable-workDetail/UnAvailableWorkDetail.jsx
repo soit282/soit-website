@@ -20,7 +20,7 @@ export default function UnAvailableWorkDetail() {
           className={`unavailable-title-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 12" }}
         >
-          <h1 className="unavailable-title text-2_100pt_medium">UNAVAILABLE</h1>
+          <h1 className="unavailable-title text-2_100pt_medium">UnAvailable</h1>
         </div>
 
         {/* Client Section - Row 2 */}
@@ -36,7 +36,9 @@ export default function UnAvailableWorkDetail() {
 
         {/* Services Section - Row 2 */}
         <div
-          className={`unavailable-details-section ${isVisible ? "visible" : ""}`}
+          className={`unavailable-details-section ${
+            isVisible ? "visible" : ""
+          }`}
           style={{ gridColumn: "3 / span 3" }}
         >
           <div className="detail-item">
@@ -44,9 +46,11 @@ export default function UnAvailableWorkDetail() {
             <span className="detail-value text-6">
               Brand Identity
               <br />
-              Visual System
+              Editorial Design
               <br />
-              Art Direction
+              Signage & Wayfinding
+              <br />
+              Design Systems
             </span>
           </div>
         </div>
@@ -59,12 +63,13 @@ export default function UnAvailableWorkDetail() {
           style={{ gridColumn: "7 / span 6" }}
         >
           <p className="unavailable-description text-4">
-            A unique brand experience that captures the essence of unavailability.
+            UnAvailable is a manufacturer specializing in high quality street &
+            fashion garment based in HCMC, Vietnam.
             <br />
-            UnAvailable represents a distinct approach to visual storytelling,
-            creating memorable moments through carefully crafted design elements.
-            The brand identity reflects this distinctive character while
-            maintaining sophistication and contemporary appeal.
+            The brand identity and tools were stripped back to UnAvailable’s
+            essence “Creating an impact that matters”, leaving a bold yet simple
+            color palette and a refined typographic system across all
+            applications.
           </p>
         </div>
       </div>

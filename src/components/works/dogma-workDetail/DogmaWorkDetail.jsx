@@ -20,7 +20,7 @@ export default function DogmaWorkDetail() {
           className={`dogma-title-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "1 / span 12" }}
         >
-          <h1 className="dogma-title text-2_100pt_medium">DOGMA</h1>
+          <h1 className="dogma-title text-2_100pt_medium">Dogma Collection</h1>
         </div>
 
         {/* Client Section - Row 2 */}
@@ -30,7 +30,7 @@ export default function DogmaWorkDetail() {
         >
           <div className="detail-item">
             <span className="detail-label text-5">Client</span>
-            <span className="detail-value text-6">DOGMA</span>
+            <span className="detail-value text-6">Dogma</span>
           </div>
         </div>
 
@@ -44,30 +44,25 @@ export default function DogmaWorkDetail() {
             <span className="detail-value text-6">
               Brand Identity
               <br />
-              Typography System
+              Social Media Materials
               <br />
-              Spatial Design
+              Web & App
               <br />
-              Brand Guideline System
+              Design Systems
             </span>
           </div>
         </div>
 
         {/* Description Section - Row 2 */}
         <div
-          className={`dogma-description-section ${
-            isVisible ? "visible" : ""
-          }`}
+          className={`dogma-description-section ${isVisible ? "visible" : ""}`}
           style={{ gridColumn: "7 / span 6" }}
         >
           <p className="dogma-description text-4">
-            A progressive coffee brand that challenges conventions.
-            <br />
-            DOGMA embodies the spirit of innovation and quality craftsmanship in
-            every cup. From carefully sourced beans to meticulously designed
-            spaces, DOGMA creates experiences that go beyond traditional coffee
-            culture. The brand identity reflects this forward-thinking approach
-            while maintaining warmth and approachability.
+            Rebrand for Dogma, a cultural platform preserving Vietnam’s heritage
+            while fostering artistic expression. Time & Voices concept balances
+            tradition and innovation, highlighting archival preservation and
+            evolving narratives.
           </p>
         </div>
       </div>
