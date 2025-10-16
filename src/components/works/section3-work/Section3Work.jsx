@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import LazyVideo from "@components/common/LazyVideo";
 import { preloadImages } from "@utils/imagePreloader";
 import "@components/common/LazyMedia.css";
@@ -11,6 +12,7 @@ export default function Section3Work() {
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
   const hoverTimeoutRef = useRef(null);
+  const navigate = useNavigate();
 
   // Defer image preload until after page is interactive
   useEffect(() => {
@@ -76,6 +78,7 @@ export default function Section3Work() {
           style={{ gridColumn: "1 / span 12" }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onClick={() => navigate('/works/tbros')}
         >
           <div className="work-video-container">
             {shouldLoadVideo ? (
