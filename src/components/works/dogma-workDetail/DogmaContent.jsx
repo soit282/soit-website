@@ -53,6 +53,7 @@ const DogmaContent = () => {
       title: "Color Palette",
       description: "Brand color system",
       gridColumn: "1 / span 12",
+      customAspectRatio: "3/1",
     },
     {
       id: 6,
