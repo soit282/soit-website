@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { projects } from "@data/projects";
+import ArrowButton from "@components/common/ArrowButton";
 import "./ListView.css";
 import "@styles/grid-system.css";
 
 export default function ListView() {
   const [expandedId, setExpandedId] = useState(null);
+  const navigate = useNavigate();
 
   // Hover effects for project rows
   useEffect(() => {
@@ -120,12 +122,10 @@ export default function ListView() {
                         <p className="text-8">{project.description}</p>
                       </div>
                       <div className="expanded-actions">
-                        <Link
-                          to={project.detailLink}
-                          className="text-7 view-all-link"
-                        >
-                          View all ↗
-                        </Link>
+                        <ArrowButton
+                          text="View all"
+                          onClick={() => navigate(project.detailLink)}
+                        />
                       </div>
                     </>
                   )}
