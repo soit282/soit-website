@@ -124,6 +124,14 @@ const UnAvailableContent = () => {
       { threshold: 0.01, rootMargin: "100px" } // Optimized for smoother loading
     );
 
+    // Re-observe all items that were rendered before observer was created
+    const items = document.querySelectorAll('.unavailable-media-item[data-id]');
+    items.forEach((item) => {
+      if (observerRef.current && item.dataset.id) {
+        observerRef.current.observe(item);
+      }
+    });
+
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
