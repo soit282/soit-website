@@ -157,7 +157,7 @@ const UnAvailableContent = () => {
           style={
             asset.customAspectRatio
               ? { aspectRatio: asset.customAspectRatio }
-              : { aspectRatio: "3/2" }
+              : { aspectRatio: "16/9" }
           }
         >
           {isVisible ? (
@@ -171,10 +171,11 @@ const UnAvailableContent = () => {
 
               {/* Hover media */}
               {hasHover && (
-                <LazyImage
+                <img
                   src={asset.hoverSrc}
                   alt={`${asset.title} Hover`}
                   className="unavailable-media unavailable-media-hover"
+                  loading="lazy"
                 />
               )}
             </>
