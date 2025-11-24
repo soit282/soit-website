@@ -171,8 +171,8 @@
 
 /* Responsive adjustments for smaller screens */
 
-/* XL breakpoint: 1025px - 1440px */
-@media (min-width: 1025px) and (max-width: 1440px) {
+/* XL breakpoint: 1025px - 1550px */
+@media (min-width: 1025px) and (max-width: 1550px) {
   .text-1 {
     font-size: 105px;
   }
