@@ -444,14 +444,18 @@ const Navbar = () => {
             Menu
           </button>
         </div>
+        </nav>
+      {/* Render mobile menu via Portal to avoid mix-blend-mode inheritance */}
+      {createPortal(mobileMenu, document.body)}
+      {/* Render ParticleExplosion via Portal to avoid mix-blend-mode inheritance */}
+      {createPortal(
         <ParticleExplosion
           trigger={explosionTrigger}
           position={explosionPosition}
           mode={currentMode}
-        />
-      </nav>
-      {/* Render mobile menu via Portal to avoid mix-blend-mode inheritance */}
-      {createPortal(mobileMenu, document.body)}
+        />,
+        document.body
+      )}
     </>
   );
 };
