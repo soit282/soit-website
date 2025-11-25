@@ -48,6 +48,21 @@ class SmoothShuffler {
   }
 }
 
+// Mode configurations for navbar status display
+const NAVBAR_MODE_CONFIG = {
+  vacation: {
+    text: 'We are on vacation',
+    icon: '/icon/Icon/ellipse.svg',
+  },
+  cooking: {
+    text: 'We are cooking',
+    icon: '/icon/Icon/ellipse.svg', // TODO: Replace with cooking icon
+  },
+};
+
+// Set the current active mode here
+const CURRENT_MODE = 'cooking'; // Change to 'vacation' when needed
+
 const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,6 +70,8 @@ const Navbar = () => {
   const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0 });
   const [explosionTrigger, setExplosionTrigger] = useState(0);
   const [explosionPosition, setExplosionPosition] = useState({ x: 0, y: 0 });
+  const [currentMode] = useState(CURRENT_MODE);
+  const modeConfig = NAVBAR_MODE_CONFIG[currentMode];
   const homeRef = useRef(null);
   const worksRef = useRef(null);
   const aboutRef = useRef(null);
@@ -397,7 +414,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Vacation text - positioned at right column */}
+          {/* Status text - positioned at right column */}
           <div className="navbar-vacation-wrapper">
             <span
               className="navbar-vacation text-6"
@@ -410,9 +427,9 @@ const Navbar = () => {
               }}
               style={{ cursor: "pointer" }}
             >
-              We are on vacation
+              {modeConfig.text}
               <img
-                src="/icon/Icon/ellipse.svg"
+                src={modeConfig.icon}
                 alt=""
                 className="navbar-vacation-icon"
               />
@@ -430,6 +447,7 @@ const Navbar = () => {
         <ParticleExplosion
           trigger={explosionTrigger}
           position={explosionPosition}
+          mode={currentMode}
         />
       </nav>
       {/* Render mobile menu via Portal to avoid mix-blend-mode inheritance */}
