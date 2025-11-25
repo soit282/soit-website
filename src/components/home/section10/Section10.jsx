@@ -143,7 +143,7 @@ export default function Section10() {
           <h2 className="section10-heading text-2_100pt_medium">
             <DecryptedText
               text="Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers."
-              speed={60}
+              speed={10}
               maxIterations={15}
               sequential={true}
               useOriginalCharsOnly={true}
