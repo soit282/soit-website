@@ -9,7 +9,7 @@ export default function Section3() {
         <h2 className="section3-heading text-2_100pt_medium">
           <DecryptedText
             text="We collaborate with brands that aim to stand out, scale up, and speak clearly in a digital-first world."
-            speed={60}
+            speed={10}
             maxIterations={15}
             sequential={true}
             useOriginalCharsOnly={true}

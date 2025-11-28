@@ -4,7 +4,8 @@ import "./UnAvailableContent.css";
 import "@styles/grid-system.css";
 
 const UnAvailableContent = () => {
-  const [visibleItems, setVisibleItems] = useState(new Set());
+  // Initialize with first 3 items visible to avoid IntersectionObserver issues on production
+  const [visibleItems, setVisibleItems] = useState(new Set([1, 2, 3]));
   const observerRef = useRef(null);
 
   // Define all UnAvailable assets in order with grid positions
@@ -123,6 +124,14 @@ const UnAvailableContent = () => {
       { threshold: 0.01, rootMargin: "100px" } // Optimized for smoother loading
     );
 
+    // Re-observe all items that were rendered before observer was created
+    const items = document.querySelectorAll('.unavailable-media-item[data-id]');
+    items.forEach((item) => {
+      if (observerRef.current && item.dataset.id) {
+        observerRef.current.observe(item);
+      }
+    });
+
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
@@ -156,7 +165,7 @@ const UnAvailableContent = () => {
           style={
             asset.customAspectRatio
               ? { aspectRatio: asset.customAspectRatio }
-              : { aspectRatio: "3/2" }
+              : { aspectRatio: "16/9" }
           }
         >
           {isVisible ? (
@@ -166,7 +175,6 @@ const UnAvailableContent = () => {
                 src={asset.src}
                 alt={asset.title}
                 className={`unavailable-media ${hasHover ? 'unavailable-media-default' : ''}`}
-                effect="blur"
               />
 
               {/* Hover media */}

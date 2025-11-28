@@ -179,7 +179,7 @@ export default function Section9() {
           <h2 className="section9-heading text-2">
             <DecryptedText
               text="We collaborate with brands that aim to stand out, scale up, and speak clearly in a digital-first world."
-              speed={60}
+              speed={10}
               maxIterations={15}
               sequential={true}
               useOriginalCharsOnly={true}

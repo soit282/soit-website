@@ -86,21 +86,35 @@ class Particle {
   }
 }
 
-const ParticleExplosion = ({ trigger, position = { x: 0, y: 0 } }) => {
+// Mode configurations for different particle effects
+const MODE_CONFIG = {
+  vacation: {
+    particleSvg: '/icon/emoji/vacation.svg',
+  },
+  cooking: {
+    particleSvg: '/icon/emoji/vacation.svg', // TODO: Replace with cooking.svg when available
+  },
+};
+
+const ParticleExplosion = ({ trigger, position = { x: 0, y: 0 }, mode = 'vacation' }) => {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
   const animationRef = useRef(null);
   const imageRef = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const currentModeRef = useRef(mode);
 
   useEffect(() => {
+    const config = MODE_CONFIG[mode] || MODE_CONFIG.vacation;
+    currentModeRef.current = mode;
+
     const img = new Image();
-    img.src = '/icon/emoji/vacation.svg';
+    img.src = config.particleSvg;
     img.onload = () => {
       imageRef.current = img;
       setImageLoaded(true);
     };
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

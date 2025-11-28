@@ -5,7 +5,8 @@ import "./DogmaContent.css";
 import "@styles/grid-system.css";
 
 const DogmaContent = () => {
-  const [visibleItems, setVisibleItems] = useState(new Set());
+  // Initialize with first 3 items visible to avoid IntersectionObserver issues on production
+  const [visibleItems, setVisibleItems] = useState(new Set([1, 2, 3]));
   const [preloadedVideos, setPreloadedVideos] = useState(new Set());
   const observerRef = useRef(null);
 
@@ -52,6 +53,7 @@ const DogmaContent = () => {
       title: "Color Palette",
       description: "Brand color system",
       gridColumn: "1 / span 12",
+      customAspectRatio: "3/1",
     },
     {
       id: 6,
@@ -321,15 +323,12 @@ const DogmaContent = () => {
                   muted
                   loop
                   playsInline
-                  preload={preloadedVideos.has(asset.src) ? "auto" : "metadata"}
-                  loading="lazy"
                 />
               ) : (
                 <LazyImage
                   src={asset.src}
                   alt={asset.title}
                   className={`dogma-media ${hasHover ? 'dogma-media-default' : ''}`}
-                  effect="blur"
                 />
               )}
 
@@ -344,15 +343,12 @@ const DogmaContent = () => {
                       muted
                       loop
                       playsInline
-                      preload={preloadedVideos.has(asset.hoverSrc) ? "auto" : "metadata"}
-                      loading="lazy"
                     />
                   ) : (
                     <LazyImage
                       src={asset.hoverSrc}
                       alt={`${asset.title} Hover`}
                       className="dogma-media dogma-media-hover"
-                      effect="blur"
                     />
                   )}
                 </>

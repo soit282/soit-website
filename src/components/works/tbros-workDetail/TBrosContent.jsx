@@ -7,7 +7,8 @@ import "./TBrosContent.css";
 import "@styles/grid-system.css";
 
 const TBrosContent = () => {
-  const [visibleItems, setVisibleItems] = useState(new Set());
+  // Initialize with first 3 items visible to avoid IntersectionObserver issues on production
+  const [visibleItems, setVisibleItems] = useState(new Set([1, 2, 3]));
   const [preloadedVideos, setPreloadedVideos] = useState(new Set());
   const observerRef = useRef(null);
 
@@ -484,10 +485,6 @@ const TBrosContent = () => {
                   muted
                   loop
                   playsInline
-                  preload={
-                    preloadedVideos.has(asset.src) ? "auto" : "metadata"
-                  }
-                  loading="lazy"
                   style={
                     asset.videoAspectRatio
                       ? { aspectRatio: asset.videoAspectRatio, width: "auto", height: "100%", objectFit: "contain", background: "transparent" }
@@ -499,7 +496,6 @@ const TBrosContent = () => {
                   src={asset.src}
                   alt={asset.title}
                   className={`tbros-media ${hasHover ? "tbros-media-default" : ""}`}
-                  effect="blur"
                 />
               )}
 
@@ -514,19 +510,12 @@ const TBrosContent = () => {
                       muted
                       loop
                       playsInline
-                      preload={
-                        preloadedVideos.has(asset.hoverSrc)
-                          ? "auto"
-                          : "metadata"
-                      }
-                      loading="lazy"
                     />
                   ) : (
-                    <img
+                    <LazyImage
                       src={asset.hoverSrc}
                       alt={`${asset.title} Hover`}
                       className="tbros-media tbros-media-hover"
-                      loading="lazy"
                     />
                   )}
                 </>

@@ -48,13 +48,31 @@ class SmoothShuffler {
   }
 }
 
+// Mode configurations for navbar status display
+const NAVBAR_MODE_CONFIG = {
+  vacation: {
+    text: "We are on vacation",
+    icon: "/icon/Icon/ellipse.svg",
+  },
+  cooking: {
+    text: "We are cooking",
+    icon: "/icon/Icon/ellipse.svg", // TODO: Replace with cooking icon
+  },
+};
+
+// Set the current active mode here
+const CURRENT_MODE = "cooking"; // Change to 'vacation' when needed
+
 const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoScale, setLogoScale] = useState(1);
   const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0 });
+  const [isLogoAnimating, setIsLogoAnimating] = useState(false);
   const [explosionTrigger, setExplosionTrigger] = useState(0);
   const [explosionPosition, setExplosionPosition] = useState({ x: 0, y: 0 });
+  const [currentMode] = useState(CURRENT_MODE);
+  const modeConfig = NAVBAR_MODE_CONFIG[currentMode];
   const homeRef = useRef(null);
   const worksRef = useRef(null);
   const aboutRef = useRef(null);
@@ -121,16 +139,27 @@ const Navbar = () => {
       }
     });
 
-    // Calculate initial scale based on viewport width
+    // Logo constants - matching CSS .navbar-logo-img
+    const LOGO_ASPECT_RATIO = 1404 / 442; // SVG viewBox ratio
+    const LOGO_BASE_HEIGHT = 20; // CSS: .navbar-logo-img { height: 20px }
+    const LOGO_BASE_WIDTH = LOGO_BASE_HEIGHT * LOGO_ASPECT_RATIO; // ≈ 63.5px
+    const NAVBAR_WRAPPER_HEIGHT = 70; // CSS: .navbar-logo-wrapper { height: 70px }
+    const NAVBAR_LEFT_DESKTOP = 24;
+    const NAVBAR_LEFT_MOBILE = 16;
+
+    // Calculate max scale to fill 90% viewport width
     const calculateMaxScale = () => {
-      // Logo SVG viewBox width is 1404px, height 442px
-      // At normal size (height: 20px), width is approximately 63px
-      // We want it to fill about 90% of viewport width
       const targetWidth = window.innerWidth * 0.9;
-      const logoBaseWidth = 63;
-      const maxScale = targetWidth / logoBaseWidth;
+      const maxScale = targetWidth / LOGO_BASE_WIDTH;
       // Cap the scale to prevent extreme pixelation
       return Math.min(maxScale, 25);
+    };
+
+    // Get navbar left position based on screen width
+    const getNavbarLeft = () => {
+      return window.innerWidth <= 576
+        ? NAVBAR_LEFT_MOBILE
+        : NAVBAR_LEFT_DESKTOP;
     };
 
     // Handle scroll to scale and move logo
@@ -141,26 +170,66 @@ const Navbar = () => {
       const maxScale = calculateMaxScale();
 
       if (isHomePage) {
-        // Use smoother easing function for scroll progress
-        const scrollRange = section1Height * 0.6; // Slightly longer scroll range
-        const rawProgress = Math.min(currentScrollY / scrollRange, 1);
+        // Phase 1: Bottom to Center (scroll 0 → 100vh)
+        // Phase 2: Center to Navbar with shrink (scroll 100vh → 160vh)
+        const phase1End = section1Height;
+        const phase2Range = section1Height * 0.6;
 
-        // Apply easing function (ease-out cubic) for smoother animation
-        const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
+        if (currentScrollY <= phase1End) {
+          // Phase 1: Move from bottom to center
+          const rawProgress = currentScrollY / phase1End;
+          const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
 
-        // Calculate scale with smoother interpolation
-        const newScale = maxScale - scrollProgress * (maxScale - 1);
-        setLogoScale(Math.max(1, newScale));
+          // Keep animating
+          setIsLogoAnimating(true);
+          setLogoScale(maxScale);
 
-        // Calculate position with same easing
-        const targetX = -(window.innerWidth / 2 - 40);
-        const targetY = -(window.innerHeight / 2 - 35);
+          // Calculate Y position: logo bottom touches viewport bottom → center
+          const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
+          const startY = (window.innerHeight - scaledLogoHeight) / 2;
+          const currentY = startY * (1 - scrollProgress);
 
-        setLogoPosition({
-          x: targetX * scrollProgress,
-          y: targetY * scrollProgress,
-        });
+          setLogoPosition({
+            x: 0,
+            y: currentY,
+          });
+        } else {
+          // Phase 2: Shrink and move to navbar position
+          const phase2Progress = Math.min(
+            (currentScrollY - phase1End) / phase2Range,
+            1
+          );
+          const scrollProgress = 1 - Math.pow(1 - phase2Progress, 3);
+
+          // Animation complete when scrollProgress reaches 1
+          const animationComplete = scrollProgress >= 1;
+          setIsLogoAnimating(!animationComplete);
+
+          // Scale from maxScale → 1 (exact navbar logo size)
+          const newScale = animationComplete
+            ? 1
+            : maxScale - scrollProgress * (maxScale - 1);
+          setLogoScale(Math.max(1, newScale));
+
+          // Calculate navbar logo center position
+          // Add small offset to account for transform origin vs actual position
+          const navbarLeft = getNavbarLeft();
+          const POSITION_OFFSET_X = 7; // Fine-tune horizontal alignment
+          const logoCenterX =
+            navbarLeft + LOGO_BASE_WIDTH / 2 + POSITION_OFFSET_X;
+          const logoCenterY = NAVBAR_WRAPPER_HEIGHT / 2;
+
+          // Target offset from viewport center to navbar position
+          const targetX = -(window.innerWidth / 2 - logoCenterX);
+          const targetY = -(window.innerHeight / 2 - logoCenterY);
+
+          setLogoPosition({
+            x: targetX * scrollProgress,
+            y: targetY * scrollProgress,
+          });
+        }
       } else {
+        setIsLogoAnimating(false);
         setLogoScale(1);
         setLogoPosition({ x: 0, y: 0 });
       }
@@ -170,17 +239,25 @@ const Navbar = () => {
     if (location.pathname === ROUTES.HOME) {
       // Check if at top of page
       if (window.scrollY === 0) {
-        setLogoScale(calculateMaxScale()); // Start with calculated scale
+        const maxScale = calculateMaxScale();
+        setIsLogoAnimating(true);
+        setLogoScale(maxScale);
+        // Start logo at bottom of viewport (logo bottom touches viewport bottom)
+        const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
+        const startY = (window.innerHeight - scaledLogoHeight) / 2;
+        setLogoPosition({ x: 0, y: startY });
       } else {
-        handleScroll(); // Calculate based on current scroll
+        handleScroll();
       }
     } else {
-      setLogoScale(1); // Normal size on other pages
+      setIsLogoAnimating(false);
+      setLogoScale(1);
+      setLogoPosition({ x: 0, y: 0 });
     }
 
     // Handle window resize
     const handleResize = () => {
-      if (location.pathname === ROUTES.HOME && window.scrollY < 100) {
+      if (location.pathname === ROUTES.HOME) {
         handleScroll();
       }
     };
@@ -224,7 +301,11 @@ const Navbar = () => {
       </div>
       <ul className="navbar-menu">
         <li className="navbar-item">
-          <a href={ROUTES.HOME} className="navbar-link" onClick={toggleMobileMenu}>
+          <a
+            href={ROUTES.HOME}
+            className="navbar-link"
+            onClick={toggleMobileMenu}
+          >
             <span
               className="navbar-shuffle-text text-2 mobile-text-2"
               ref={mobileHomeRef}
@@ -235,7 +316,11 @@ const Navbar = () => {
           </a>
         </li>
         <li className="navbar-item">
-          <a href={ROUTES.WORKS} className="navbar-link" onClick={toggleMobileMenu}>
+          <a
+            href={ROUTES.WORKS}
+            className="navbar-link"
+            onClick={toggleMobileMenu}
+          >
             <span
               className="navbar-shuffle-text text-2 mobile-text-2"
               ref={mobileWorksRef}
@@ -246,7 +331,11 @@ const Navbar = () => {
           </a>
         </li>
         <li className="navbar-item">
-          <a href={ROUTES.ABOUT} className="navbar-link" onClick={toggleMobileMenu}>
+          <a
+            href={ROUTES.ABOUT}
+            className="navbar-link"
+            onClick={toggleMobileMenu}
+          >
             <span
               className="navbar-shuffle-text text-2 mobile-text-2"
               ref={mobileAboutRef}
@@ -287,7 +376,11 @@ const Navbar = () => {
           </a>
         </li>
         <li className="navbar-item">
-          <a href={ROUTES.CONTACT} className="navbar-link" onClick={toggleMobileMenu}>
+          <a
+            href={ROUTES.CONTACT}
+            className="navbar-link"
+            onClick={toggleMobileMenu}
+          >
             <span className="navbar-shuffle-text text-2 mobile-text-2">
               Let's connect
             </span>
@@ -302,13 +395,15 @@ const Navbar = () => {
       className="navbar-logo-wrapper"
       style={{
         position: "fixed",
-        transform:
-          logoScale > 1.5
-            ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
-            : `scale(1)`,
-        left:
-          logoScale > 1.5 ? "50%" : window.innerWidth <= 576 ? "16px" : "24px",
-        top: logoScale > 1.5 ? "50%" : "0px",
+        transform: isLogoAnimating
+          ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
+          : `scale(1)`,
+        left: isLogoAnimating
+          ? "50%"
+          : window.innerWidth <= 576
+          ? "16px"
+          : "24px",
+        top: isLogoAnimating ? "50%" : "0px",
         zIndex: 100011,
         transformOrigin: "center center",
         willChange: "transform",
@@ -397,7 +492,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Vacation text - positioned at right column */}
+          {/* Status text - positioned at right column */}
           <div className="navbar-vacation-wrapper">
             <span
               className="navbar-vacation text-6"
@@ -410,9 +505,9 @@ const Navbar = () => {
               }}
               style={{ cursor: "pointer" }}
             >
-              We are on vacation
+              {modeConfig.text}
               <img
-                src="/icon/Icon/ellipse.svg"
+                src={modeConfig.icon}
                 alt=""
                 className="navbar-vacation-icon"
               />
@@ -427,13 +522,18 @@ const Navbar = () => {
             Menu
           </button>
         </div>
-        <ParticleExplosion
-          trigger={explosionTrigger}
-          position={explosionPosition}
-        />
       </nav>
       {/* Render mobile menu via Portal to avoid mix-blend-mode inheritance */}
       {createPortal(mobileMenu, document.body)}
+      {/* Render ParticleExplosion via Portal to avoid mix-blend-mode inheritance */}
+      {createPortal(
+        <ParticleExplosion
+          trigger={explosionTrigger}
+          position={explosionPosition}
+          mode={currentMode}
+        />,
+        document.body
+      )}
     </>
   );
 };
