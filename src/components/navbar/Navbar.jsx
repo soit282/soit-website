@@ -177,8 +177,8 @@ const Navbar = () => {
 
         if (currentScrollY <= phase1End) {
           // Phase 1: Move from bottom to near top (leaving navbar height space)
-          const rawProgress = currentScrollY / phase1End;
-          const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
+          // Use linear easing for seamless transition to Phase 2
+          const scrollProgress = currentScrollY / phase1End;
 
           // Keep animating
           setIsLogoAnimating(true);
@@ -199,11 +199,11 @@ const Navbar = () => {
           });
         } else {
           // Phase 2: Shrink and move from near top to navbar position
-          const phase2Progress = Math.min(
+          // Use linear easing for seamless transition from Phase 1
+          const scrollProgress = Math.min(
             (currentScrollY - phase1End) / phase2Range,
             1
           );
-          const scrollProgress = 1 - Math.pow(1 - phase2Progress, 3);
 
           // Animation complete when scrollProgress reaches 1
           const animationComplete = scrollProgress >= 1;
