@@ -415,7 +415,6 @@ const Navbar = () => {
         top: isLogoAnimating ? "50%" : "0px",
         zIndex: 100011,
         transformOrigin: "center center",
-        willChange: "transform",
         transition: "none",
       }}
     >
@@ -425,8 +424,9 @@ const Navbar = () => {
           alt="Số Ít"
           className="navbar-logo-img"
           style={{
-            vectorEffect: "non-scaling-stroke",
-            shapeRendering: "geometricPrecision",
+            // SVG rendering optimization - prevent pixelation on scale
+            transform: "translateZ(0)",
+            WebkitFontSmoothing: "antialiased",
           }}
         />
       </a>
