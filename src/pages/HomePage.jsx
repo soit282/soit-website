@@ -18,6 +18,17 @@ const HomePage = () => {
       <Navbar />
       <div className="home-page">
         {/* <Section1 /> */}
+        {/* Spacer for logo scroll animation (Phase 1: 100vh + Phase 2: 60vh = 160vh) */}
+        <div
+          className="logo-animation-spacer"
+          style={{
+            height: "160vh",
+            width: "100%",
+            backgroundColor: "#fff",
+            pointerEvents: "none",
+          }}
+          aria-hidden="true"
+        />
         <Section2 />
         <Section3 />
         <Section4 />
