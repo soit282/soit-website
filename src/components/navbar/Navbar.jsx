@@ -170,13 +170,13 @@ const Navbar = () => {
       const maxScale = calculateMaxScale();
 
       if (isHomePage) {
-        // Phase 1: Bottom to Center (scroll 0 → 100vh)
-        // Phase 2: Center to Navbar with shrink (scroll 100vh → 160vh)
+        // Phase 1: Bottom to near Top (scroll 0 → 100vh)
+        // Phase 2: Near Top to Navbar with shrink (scroll 100vh → 160vh)
         const phase1End = section1Height;
         const phase2Range = section1Height * 0.6;
 
         if (currentScrollY <= phase1End) {
-          // Phase 1: Move from bottom to center
+          // Phase 1: Move from bottom to near top (leaving navbar height space)
           const rawProgress = currentScrollY / phase1End;
           const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
 
@@ -184,17 +184,21 @@ const Navbar = () => {
           setIsLogoAnimating(true);
           setLogoScale(maxScale);
 
-          // Calculate Y position: logo bottom touches viewport bottom → center
+          // Calculate Y position: logo bottom touches viewport bottom → near top
           const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
-          const startY = (window.innerHeight - scaledLogoHeight) / 2;
-          const currentY = startY * (1 - scrollProgress);
+          const startY = (window.innerHeight - scaledLogoHeight) / 2; // Logo at bottom
+          // End position: near top, leaving navbar height space
+          const endY = -(window.innerHeight / 2 - NAVBAR_WRAPPER_HEIGHT - scaledLogoHeight / 2);
+
+          // Interpolate from startY to endY
+          const currentY = startY + (endY - startY) * scrollProgress;
 
           setLogoPosition({
             x: 0,
             y: currentY,
           });
         } else {
-          // Phase 2: Shrink and move to navbar position
+          // Phase 2: Shrink and move from near top to navbar position
           const phase2Progress = Math.min(
             (currentScrollY - phase1End) / phase2Range,
             1
@@ -211,6 +215,10 @@ const Navbar = () => {
             : maxScale - scrollProgress * (maxScale - 1);
           setLogoScale(Math.max(1, newScale));
 
+          // Start position (end of Phase 1): near top with navbar height space
+          const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
+          const phase1EndY = -(window.innerHeight / 2 - NAVBAR_WRAPPER_HEIGHT - scaledLogoHeight / 2);
+
           // Calculate navbar logo center position
           // Add small offset to account for transform origin vs actual position
           const navbarLeft = getNavbarLeft();
@@ -223,9 +231,10 @@ const Navbar = () => {
           const targetX = -(window.innerWidth / 2 - logoCenterX);
           const targetY = -(window.innerHeight / 2 - logoCenterY);
 
+          // Interpolate from phase1EndY to targetY for Y, from 0 to targetX for X
           setLogoPosition({
             x: targetX * scrollProgress,
-            y: targetY * scrollProgress,
+            y: phase1EndY + (targetY - phase1EndY) * scrollProgress,
           });
         }
       } else {
