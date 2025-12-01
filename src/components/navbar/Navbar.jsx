@@ -184,11 +184,12 @@ const Navbar = () => {
           setIsLogoAnimating(true);
           setLogoScale(maxScale);
 
-          // Calculate Y position: logo bottom touches viewport bottom → near top
+          // Calculate Y position: logo bottom touches viewport bottom → top edge aligns with navbar text top
           const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
           const startY = (window.innerHeight - scaledLogoHeight) / 2; // Logo at bottom
-          // End position: near top, leaving navbar height space
-          const endY = -(window.innerHeight / 2 - NAVBAR_WRAPPER_HEIGHT - scaledLogoHeight / 2);
+          // End position: logo top edge aligns with navbar menu text top edge
+          const navbarTextTop = 10;
+          const endY = -(window.innerHeight / 2 - scaledLogoHeight / 2 - navbarTextTop);
 
           // Interpolate from startY to endY
           const currentY = startY + (endY - startY) * scrollProgress;
@@ -215,9 +216,10 @@ const Navbar = () => {
             : maxScale - scrollProgress * (maxScale - 1);
           setLogoScale(Math.max(1, newScale));
 
-          // Start position (end of Phase 1): near top with navbar height space
+          // Start position (end of Phase 1): logo top edge aligned with navbar text top
           const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
-          const phase1EndY = -(window.innerHeight / 2 - NAVBAR_WRAPPER_HEIGHT - scaledLogoHeight / 2);
+          const navbarTextTop = 10;
+          const phase1EndY = -(window.innerHeight / 2 - scaledLogoHeight / 2 - navbarTextTop);
 
           // Calculate navbar logo center position
           // Add small offset to account for transform origin vs actual position
