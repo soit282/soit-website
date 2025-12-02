@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './ParticleExplosion.css';
+import React, { useEffect, useRef, useState } from "react";
+import "./ParticleExplosion.css";
 
 class Particle {
   constructor(x, y, canvas, options = {}) {
@@ -32,8 +32,8 @@ class Particle {
 
     const floorY = this.canvas.height - 50;
 
-    if (this.y + this.size/2 >= floorY) {
-      this.y = floorY - this.size/2;
+    if (this.y + this.size / 2 >= floorY) {
+      this.y = floorY - this.size / 2;
 
       if (Math.abs(this.vy) > 2 && this.bounceCount < this.maxBounces) {
         this.vy = -this.vy * 0.7;
@@ -70,13 +70,7 @@ class Particle {
     ctx.translate(this.x, this.y);
     ctx.rotate(this.rotation);
 
-    ctx.drawImage(
-      image,
-      -this.size / 2,
-      -this.size / 2,
-      this.size,
-      this.size
-    );
+    ctx.drawImage(image, -this.size / 2, -this.size / 2, this.size, this.size);
 
     ctx.restore();
   }
@@ -89,14 +83,18 @@ class Particle {
 // Mode configurations for different particle effects
 const MODE_CONFIG = {
   vacation: {
-    particleSvg: '/icon/emoji/vacation.svg',
+    particleSvg: "/icon/emoji/vacation.svg",
   },
   cooking: {
-    particleSvg: '/icon/emoji/vacation.svg', // TODO: Replace with cooking.svg when available
+    particleSvg: "/icon/emoji/cooking.svg", // TODO: Replace with cooking.svg when available
   },
 };
 
-const ParticleExplosion = ({ trigger, position = { x: 0, y: 0 }, mode = 'vacation' }) => {
+const ParticleExplosion = ({
+  trigger,
+  position = { x: 0, y: 0 },
+  mode = "vacation",
+}) => {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
   const animationRef = useRef(null);
@@ -126,10 +124,10 @@ const ParticleExplosion = ({ trigger, position = { x: 0, y: 0 }, mode = 'vacatio
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 
@@ -158,7 +156,7 @@ const ParticleExplosion = ({ trigger, position = { x: 0, y: 0 }, mode = 'vacatio
 
   const animate = () => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
