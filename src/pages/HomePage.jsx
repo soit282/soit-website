@@ -22,7 +22,7 @@ const HomePage = () => {
         <div
           className="logo-animation-spacer"
           style={{
-            height: "160vh",
+            height: "100vh",
             width: "100%",
             backgroundColor: "#fff",
             pointerEvents: "none",

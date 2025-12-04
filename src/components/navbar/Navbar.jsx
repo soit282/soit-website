@@ -170,9 +170,9 @@ const Navbar = () => {
       const maxScale = calculateMaxScale();
 
       if (isHomePage) {
-        // Phase 1: Bottom to near Top (scroll 0 → 100vh)
-        // Phase 2: Near Top to Navbar with shrink (scroll 100vh → 160vh)
-        const phase1End = section1Height;
+        // Phase 1: Bottom to near Top (scroll 0 → 80vh)
+        // Phase 2: Near Top to Navbar with shrink (scroll 80vh → 128vh)
+        const phase1End = section1Height * 0.5;
         const phase2Range = section1Height * 0.6;
 
         if (currentScrollY <= phase1End) {
@@ -189,7 +189,11 @@ const Navbar = () => {
           const startY = (window.innerHeight - scaledLogoHeight) / 2; // Logo at bottom
           // End position: logo top edge aligns with navbar menu text top edge
           const navbarTextTop = 10;
-          const endY = -(window.innerHeight / 2 - scaledLogoHeight / 2 - navbarTextTop);
+          const endY = -(
+            window.innerHeight / 2 -
+            scaledLogoHeight / 2 -
+            navbarTextTop
+          );
 
           // Interpolate from startY to endY
           const currentY = startY + (endY - startY) * scrollProgress;
@@ -219,7 +223,11 @@ const Navbar = () => {
           // Start position (end of Phase 1): logo top edge aligned with navbar text top
           const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
           const navbarTextTop = 10;
-          const phase1EndY = -(window.innerHeight / 2 - scaledLogoHeight / 2 - navbarTextTop);
+          const phase1EndY = -(
+            window.innerHeight / 2 -
+            scaledLogoHeight / 2 -
+            navbarTextTop
+          );
 
           // Calculate navbar logo center position
           // Add small offset to account for transform origin vs actual position
