@@ -303,10 +303,9 @@
   opacity: 1;
 }
 
-/* When active, rotate vertical line to become horizontal (disappear into horizontal) */
+/* When active, rotate vertical line to become horizontal (merge with horizontal line) */
 .toggle-btn.active .icon-vertical {
   transform: translateX(-50%) rotate(90deg);
-  opacity: 0;
 }
 
 /* Dark color when expanded */
