@@ -1,7 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import "./Section10.css";
-import plusIcon from "/icon/Icon/+.svg";
-import minusIcon from "/icon/Icon/-.svg";
 import arrowIcon from "/icon/Icon/-_.svg";
 import DecryptedText from "../../DecryptedText";
 
@@ -169,15 +167,10 @@ export default function Section10() {
                     activeService === service.id ? "active" : ""
                   }`}
                 >
-                  {activeService === service.id ? (
-                    <img
-                      src={minusIcon}
-                      alt="collapse"
-                      className="minus-icon"
-                    />
-                  ) : (
-                    <img src={plusIcon} alt="expand" className="plus-icon" />
-                  )}
+                  <span className="toggle-icon">
+                    <span className="icon-horizontal"></span>
+                    <span className="icon-vertical"></span>
+                  </span>
                 </button>
               </div>
               <div

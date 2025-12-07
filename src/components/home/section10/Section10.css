@@ -163,8 +163,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: #e8e8e8;
-  padding-left: 24px;
-  padding-right: 24px;
 }
 
 .service-item.expanded .service-header {
@@ -185,10 +183,11 @@
 }
 
 .service-item.expanded .toggle-btn {
-  position: static; /* Remove absolute positioning */
-  grid-column: 12 / span 1; /* Place at column 12 */
+  position: static;
+  grid-column: 12 / span 1;
   justify-self: end;
   align-self: start;
+  padding-top: 24px;
 }
 
 .service-item.expanded .service-content {
@@ -272,27 +271,48 @@
   box-shadow: none;
 }
 
-.plus-icon {
+/* Toggle icon made with CSS */
+.toggle-icon {
   width: 18px;
   height: 18px;
-  transition: all 0.3s ease;
+  position: relative;
+  display: block;
 }
 
-.minus-icon {
-  width: 36px;
-  height: 36px;
-  margin-top: 24px;
-  transition: all 0.3s ease;
+.icon-horizontal,
+.icon-vertical {
+  position: absolute;
+  background-color: #e0e0e0;
+  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
 }
 
-/* Default plus-icon color */
-.plus-icon {
-  filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
-    hue-rotate(314deg) brightness(106%) contrast(82%);
+.icon-horizontal {
+  width: 100%;
+  height: 2.5px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
 }
 
-.toggle-btn.active {
-  transform: rotate(0deg);
+.icon-vertical {
+  width: 2.5px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  opacity: 1;
+}
+
+/* When active, rotate vertical line to become horizontal (disappear into horizontal) */
+.toggle-btn.active .icon-vertical {
+  transform: translateX(-50%) rotate(90deg);
+  opacity: 0;
+}
+
+/* Dark color when expanded */
+.toggle-btn.active .icon-horizontal,
+.toggle-btn.active .icon-vertical {
+  background-color: #1f1f1f;
 }
 
 /* Hover effects only when service is NOT expanded */
@@ -326,20 +346,22 @@
   transition: color 0.5s ease;
 }
 
-.service-item:not(.expanded) .service-header.animate .plus-icon {
-  animation: icon-color-hover 0.5s steps(5) forwards;
+/* Icon color changes on hover states */
+.service-item:not(.expanded) .service-header.animate .icon-horizontal,
+.service-item:not(.expanded) .service-header.animate .icon-vertical {
+  background-color: #303030;
+  transition: background-color 0.5s ease;
 }
 
-.service-item:not(.expanded) .service-header.locked .plus-icon {
-  filter: brightness(0) saturate(100%) invert(17%) sepia(0%) saturate(0%)
-    hue-rotate(0deg) brightness(95%) contrast(91%);
-  transition: filter 0.5s ease;
+.service-item:not(.expanded) .service-header.locked .icon-horizontal,
+.service-item:not(.expanded) .service-header.locked .icon-vertical {
+  background-color: #303030;
 }
 
-.service-item:not(.expanded) .service-header.reset .plus-icon {
-  filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
-    hue-rotate(314deg) brightness(106%) contrast(82%);
-  transition: filter 0.5s ease;
+.service-item:not(.expanded) .service-header.reset .icon-horizontal,
+.service-item:not(.expanded) .service-header.reset .icon-vertical {
+  background-color: #e0e0e0;
+  transition: background-color 0.5s ease;
 }
 
 /* Final locked state - only when not expanded */
@@ -450,15 +472,11 @@
     margin-right: 30px;
   }
 
-  .plus-icon {
+  .toggle-icon {
     width: 16px;
     height: 16px;
   }
 
-  .minus-icon {
-    width: 30px;
-    height: 30px;
-  }
   .service-header {
     padding: 24px 0 48px;
   }
@@ -496,15 +514,11 @@
     font-size: 12px;
   }
 
-  .plus-icon {
+  .toggle-icon {
     width: 14px;
     height: 14px;
   }
 
-  .minus-icon {
-    width: 24px;
-    height: 24px;
-  }
   .service-header {
     padding: 24px 0 48px;
   }
