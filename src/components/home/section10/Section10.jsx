@@ -5,7 +5,7 @@ import DecryptedText from "../../DecryptedText";
 
 export default function Section10() {
   const [activeService, setActiveService] = useState(null);
-  const [expandedService, setExpandedService] = useState(null);
+  const [expandedServices, setExpandedServices] = useState([]); // Can have multiple during transition
   const [closingService, setClosingService] = useState(null);
   const closingTimeoutRef = useRef(null);
 
@@ -85,24 +85,26 @@ export default function Section10() {
       setActiveService(null);
       // Then remove expanded and closing class after animation completes
       closingTimeoutRef.current = setTimeout(() => {
-        setExpandedService(null);
+        setExpandedServices([]);
         setClosingService(null);
       }, 500);
-    } else if (expandedService !== null && expandedService !== serviceId) {
-      // Switching to different item: close current first, then open new
-      setClosingService(expandedService);
-      setActiveService(null);
-      // After closing animation, open the new item
+    } else if (expandedServices.length > 0 && !expandedServices.includes(serviceId)) {
+      // Switching to different item: run both animations simultaneously
+      const previousExpanded = expandedServices[0];
+      setClosingService(previousExpanded);
+      // Keep both expanded during transition, open new item
+      setExpandedServices([previousExpanded, serviceId]);
+      setActiveService(serviceId);
+      // Clean up closing state after animation
       closingTimeoutRef.current = setTimeout(() => {
+        setExpandedServices([serviceId]);
         setClosingService(null);
-        setExpandedService(serviceId);
-        setActiveService(serviceId);
       }, 500);
     } else {
       // Opening new item (no current expanded): set both immediately
       setClosingService(null);
       setActiveService(serviceId);
-      setExpandedService(serviceId);
+      setExpandedServices([serviceId]);
     }
   };
 
@@ -196,7 +198,7 @@ export default function Section10() {
             <div
               key={service.id}
               className={`service-item ${
-                expandedService === service.id ? "expanded grid-container" : ""
+                expandedServices.includes(service.id) ? "expanded grid-container" : ""
               } ${closingService === service.id ? "closing" : ""}`}
               onClick={() => handleServiceClick(service.id)}
               style={{ cursor: "pointer" }}
