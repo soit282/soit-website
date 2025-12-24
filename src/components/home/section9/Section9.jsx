@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import "./Section9.css";
 import "@styles/grid-system.css";
 import ArrowButton from "@components/common/ArrowButton";
-import DecryptedText from "../../DecryptedText";
 
 export default function Section9() {
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
@@ -177,14 +176,7 @@ export default function Section9() {
         <div className="section9-header">
           <p className="section9-label text-4">Clients</p>
           <h2 className="section9-heading text-2">
-            <DecryptedText
-              text="We collaborate with brands that aim to stand out, scale up, and speak clearly in a digital-first world."
-              speed={10}
-              maxIterations={15}
-              sequential={true}
-              useOriginalCharsOnly={true}
-              animateOn="view"
-            />
+            We collaborate with brands that aim to stand out, scale up, and speak clearly in a digital-first world.
           </h2>
         </div>
 
