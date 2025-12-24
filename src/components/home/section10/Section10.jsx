@@ -205,7 +205,7 @@ export default function Section10() {
                 <span className="service-name text-5">{service.name}</span>
                 <button
                   className={`toggle-btn ${
-                    expandedService === service.id ? "active" : ""
+                    activeService === service.id ? "active" : ""
                   }`}
                 >
                   <span className="toggle-icon">
