@@ -204,6 +204,22 @@
   opacity: 0;
 }
 
+/* Closing state - keep grid layout, just animate content */
+.service-item.expanded.closing {
+  background-color: #fff;
+  transition: background-color 0.5s ease;
+}
+
+.service-item.expanded.closing::before {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.service-item.expanded.closing .service-name {
+  padding-bottom: 48px;
+  transition: padding-bottom 0.5s ease;
+}
+
 /* Styling for expanded service items */
 .service-item.expanded .toggle-btn {
   color: #1f1f1f;
@@ -402,30 +418,19 @@
 
 /* Service Content Styles */
 .service-content {
-  display: none;
   overflow: hidden;
-  padding: 0;
   position: relative;
   z-index: 2;
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+  transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.5s ease;
 }
 
 .service-content.active {
-  display: block;
+  max-height: 500px;
+  opacity: 1;
   padding: 24px 0;
-  animation: slideDown 0.5s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    max-height: 0;
-    padding: 0;
-  }
-  to {
-    opacity: 1;
-    max-height: 500px;
-    padding: 24px 0;
-  }
 }
 
 .service-content p {

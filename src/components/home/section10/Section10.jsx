@@ -5,6 +5,9 @@ import DecryptedText from "../../DecryptedText";
 
 export default function Section10() {
   const [activeService, setActiveService] = useState(null);
+  const [expandedService, setExpandedService] = useState(null);
+  const [closingService, setClosingService] = useState(null);
+  const closingTimeoutRef = useRef(null);
 
   const services = [
     {
@@ -71,8 +74,46 @@ export default function Section10() {
   ];
 
   const handleServiceClick = (serviceId) => {
-    setActiveService(activeService === serviceId ? null : serviceId);
+    // Clear any pending timeout
+    if (closingTimeoutRef.current) {
+      clearTimeout(closingTimeoutRef.current);
+    }
+
+    if (activeService === serviceId) {
+      // Closing current item: mark as closing and remove active class
+      setClosingService(serviceId);
+      setActiveService(null);
+      // Then remove expanded and closing class after animation completes
+      closingTimeoutRef.current = setTimeout(() => {
+        setExpandedService(null);
+        setClosingService(null);
+      }, 500);
+    } else if (expandedService !== null && expandedService !== serviceId) {
+      // Switching to different item: close current first, then open new
+      setClosingService(expandedService);
+      setActiveService(null);
+      // After closing animation, open the new item
+      closingTimeoutRef.current = setTimeout(() => {
+        setClosingService(null);
+        setExpandedService(serviceId);
+        setActiveService(serviceId);
+      }, 500);
+    } else {
+      // Opening new item (no current expanded): set both immediately
+      setClosingService(null);
+      setActiveService(serviceId);
+      setExpandedService(serviceId);
+    }
   };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closingTimeoutRef.current) {
+        clearTimeout(closingTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Hover effects for service items
   useEffect(() => {
@@ -155,8 +196,8 @@ export default function Section10() {
             <div
               key={service.id}
               className={`service-item ${
-                activeService === service.id ? "expanded grid-container" : ""
-              }`}
+                expandedService === service.id ? "expanded grid-container" : ""
+              } ${closingService === service.id ? "closing" : ""}`}
               onClick={() => handleServiceClick(service.id)}
               style={{ cursor: "pointer" }}
             >
@@ -164,7 +205,7 @@ export default function Section10() {
                 <span className="service-name text-5">{service.name}</span>
                 <button
                   className={`toggle-btn ${
-                    activeService === service.id ? "active" : ""
+                    expandedService === service.id ? "active" : ""
                   }`}
                 >
                   <span className="toggle-icon">
