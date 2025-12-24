@@ -8,6 +8,7 @@ export default function Section10() {
   const [expandedServices, setExpandedServices] = useState([]); // Can have multiple during transition
   const [closingService, setClosingService] = useState(null);
   const closingTimeoutRef = useRef(null);
+  const isAnimatingRef = useRef(false);
 
   const services = [
     {
@@ -74,34 +75,39 @@ export default function Section10() {
   ];
 
   const handleServiceClick = (serviceId) => {
+    // Block clicks during animation
+    if (isAnimatingRef.current) return;
+
     // Clear any pending timeout
     if (closingTimeoutRef.current) {
       clearTimeout(closingTimeoutRef.current);
+      closingTimeoutRef.current = null;
     }
 
     if (activeService === serviceId) {
-      // Closing current item: mark as closing and remove active class
+      // Closing current item
+      isAnimatingRef.current = true;
       setClosingService(serviceId);
       setActiveService(null);
-      // Then remove expanded and closing class after animation completes
       closingTimeoutRef.current = setTimeout(() => {
         setExpandedServices([]);
         setClosingService(null);
+        isAnimatingRef.current = false;
       }, 500);
-    } else if (expandedServices.length > 0 && !expandedServices.includes(serviceId)) {
+    } else if (activeService !== null && activeService !== serviceId) {
       // Switching to different item: run both animations simultaneously
-      const previousExpanded = expandedServices[0];
-      setClosingService(previousExpanded);
-      // Keep both expanded during transition, open new item
-      setExpandedServices([previousExpanded, serviceId]);
+      isAnimatingRef.current = true;
+      const previousActive = activeService;
+      setClosingService(previousActive);
+      setExpandedServices([previousActive, serviceId]);
       setActiveService(serviceId);
-      // Clean up closing state after animation
       closingTimeoutRef.current = setTimeout(() => {
         setExpandedServices([serviceId]);
         setClosingService(null);
+        isAnimatingRef.current = false;
       }, 500);
     } else {
-      // Opening new item (no current expanded): set both immediately
+      // Opening new item (no current expanded)
       setClosingService(null);
       setActiveService(serviceId);
       setExpandedServices([serviceId]);
@@ -114,6 +120,7 @@ export default function Section10() {
       if (closingTimeoutRef.current) {
         clearTimeout(closingTimeoutRef.current);
       }
+      isAnimatingRef.current = false;
     };
   }, []);
 
