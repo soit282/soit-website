@@ -11,8 +11,11 @@ function AppContent() {
   const footerTheme = location.pathname === "/works" ? "light" : "dark";
   const smoothScrollRef = useRef(null);
 
-  // Initialize smooth scroll for entire app
+  // Initialize smooth scroll for desktop only (touch devices use native scroll)
   useEffect(() => {
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouchDevice) return;
+
     smoothScrollRef.current = new SmoothScroll({
       ease: 0.075,
     });

@@ -515,13 +515,15 @@ const Navbar = () => {
             </span>
           </div>
 
-          <button
-            className="mobile-menu-toggle text-2"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
-          >
-            Menu
-          </button>
+          {location.pathname !== "/" && (
+            <button
+              className="mobile-menu-toggle text-2"
+              onClick={toggleMobileMenu}
+              aria-label="Toggle mobile menu"
+            >
+              Menu
+            </button>
+          )}
         </div>
       </nav>
       {/* Render mobile menu via Portal to avoid mix-blend-mode inheritance */}
