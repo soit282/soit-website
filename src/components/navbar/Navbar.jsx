@@ -139,21 +139,21 @@ const Navbar = () => {
       }
     });
 
-    // Logo constants - matching CSS .navbar-logo-img
+    // Logo constants
     const LOGO_ASPECT_RATIO = 1404 / 442; // SVG viewBox ratio
-    const LOGO_BASE_HEIGHT = 20; // CSS: .navbar-logo-img { height: 20px }
-    const LOGO_BASE_WIDTH = LOGO_BASE_HEIGHT * LOGO_ASPECT_RATIO; // ≈ 63.5px
+    const NAVBAR_LOGO_HEIGHT = 20; // Target navbar logo height in px
+    const NAVBAR_LOGO_WIDTH = NAVBAR_LOGO_HEIGHT * LOGO_ASPECT_RATIO; // ≈ 63.5px
     const NAVBAR_WRAPPER_HEIGHT = 70; // CSS: .navbar-logo-wrapper { height: 70px }
     const NAVBAR_LEFT_DESKTOP = 24;
     const NAVBAR_LEFT_MOBILE = 16;
 
-    // Calculate max scale to fill 90% viewport width
-    const calculateMaxScale = () => {
-      const targetWidth = window.innerWidth * 0.9;
-      const maxScale = targetWidth / LOGO_BASE_WIDTH;
-      // Cap the scale to prevent extreme pixelation
-      return Math.min(maxScale, 25);
-    };
+    // Full display dimensions (base size when animating)
+    const getFullDisplayWidth = () => window.innerWidth * 0.9;
+    const getFullDisplayHeight = () => getFullDisplayWidth() / LOGO_ASPECT_RATIO;
+
+    // Scale to shrink from full display to navbar size
+    const calculateNavbarScale = () =>
+      NAVBAR_LOGO_HEIGHT / getFullDisplayHeight();
 
     // Get navbar left position based on screen width
     const getNavbarLeft = () => {
@@ -167,7 +167,6 @@ const Navbar = () => {
       const currentScrollY = window.scrollY;
       const section1Height = window.innerHeight;
       const isHomePage = location.pathname === ROUTES.HOME;
-      const maxScale = calculateMaxScale();
 
       if (isHomePage) {
         // Phase 1: Bottom to Center (scroll 0 → 100vh)
@@ -176,17 +175,16 @@ const Navbar = () => {
         const phase2Range = section1Height * 0.6;
 
         if (currentScrollY <= phase1End) {
-          // Phase 1: Move from bottom to center
+          // Phase 1: Move from bottom to center at full display size
           const rawProgress = currentScrollY / phase1End;
           const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
 
-          // Keep animating
           setIsLogoAnimating(true);
-          setLogoScale(maxScale);
+          setLogoScale(1); // Full size — img base is already full display size
 
           // Calculate Y position: logo bottom touches viewport bottom → center
-          const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
-          const startY = (window.innerHeight - scaledLogoHeight) / 2;
+          const fullHeight = getFullDisplayHeight();
+          const startY = (window.innerHeight - fullHeight) / 2;
           const currentY = startY * (1 - scrollProgress);
 
           setLogoPosition({
@@ -194,29 +192,28 @@ const Navbar = () => {
             y: currentY,
           });
         } else {
-          // Phase 2: Shrink and move to navbar position
+          // Phase 2: Shrink from full display to navbar size
           const phase2Progress = Math.min(
             (currentScrollY - phase1End) / phase2Range,
             1
           );
           const scrollProgress = 1 - Math.pow(1 - phase2Progress, 3);
 
-          // Animation complete when scrollProgress reaches 1
           const animationComplete = scrollProgress >= 1;
           setIsLogoAnimating(!animationComplete);
 
-          // Scale from maxScale → 1 (exact navbar logo size)
+          // Scale from 1 → navbarScale (shrink down)
+          const navbarScale = calculateNavbarScale();
           const newScale = animationComplete
-            ? 1
-            : maxScale - scrollProgress * (maxScale - 1);
-          setLogoScale(Math.max(1, newScale));
+            ? navbarScale
+            : 1 - scrollProgress * (1 - navbarScale);
+          setLogoScale(newScale);
 
           // Calculate navbar logo center position
-          // Add small offset to account for transform origin vs actual position
           const navbarLeft = getNavbarLeft();
           const POSITION_OFFSET_X = 7; // Fine-tune horizontal alignment
           const logoCenterX =
-            navbarLeft + LOGO_BASE_WIDTH / 2 + POSITION_OFFSET_X;
+            navbarLeft + NAVBAR_LOGO_WIDTH / 2 + POSITION_OFFSET_X;
           const logoCenterY = NAVBAR_WRAPPER_HEIGHT / 2;
 
           // Target offset from viewport center to navbar position
@@ -239,12 +236,11 @@ const Navbar = () => {
     if (location.pathname === ROUTES.HOME) {
       // Check if at top of page
       if (window.scrollY === 0) {
-        const maxScale = calculateMaxScale();
         setIsLogoAnimating(true);
-        setLogoScale(maxScale);
+        setLogoScale(1); // Full display at scale(1)
         // Start logo at bottom of viewport (logo bottom touches viewport bottom)
-        const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
-        const startY = (window.innerHeight - scaledLogoHeight) / 2;
+        const fullHeight = getFullDisplayHeight();
+        const startY = (window.innerHeight - fullHeight) / 2;
         setLogoPosition({ x: 0, y: startY });
       } else {
         handleScroll();
@@ -315,6 +311,7 @@ const Navbar = () => {
             </span>
           </a>
         </li>
+        {/* Unfinished items hidden for now
         <li className="navbar-item">
           <a
             href={ROUTES.WORKS}
@@ -375,6 +372,7 @@ const Navbar = () => {
             </span>
           </a>
         </li>
+        */}
         <li className="navbar-item">
           <a
             href={ROUTES.CONTACT}
@@ -401,8 +399,8 @@ const Navbar = () => {
         left: isLogoAnimating
           ? "50%"
           : window.innerWidth <= 576
-          ? "16px"
-          : "24px",
+            ? "16px"
+            : "24px",
         top: isLogoAnimating ? "50%" : "0px",
         zIndex: 100011,
         transformOrigin: "center center",
@@ -415,10 +413,11 @@ const Navbar = () => {
           src="/icon/Icon/Số Ít logo.svg"
           alt="Số Ít"
           className="navbar-logo-img"
-          style={{
-            vectorEffect: "non-scaling-stroke",
-            shapeRendering: "geometricPrecision",
-          }}
+          style={
+            isLogoAnimating
+              ? { width: "90vw", height: "auto" }
+              : {}
+          }
         />
       </a>
     </div>
@@ -445,6 +444,7 @@ const Navbar = () => {
                   </span>
                 </a>
               </li>
+              {/* Unfinished items hidden for now
               <li className="navbar-item">
                 <a href={ROUTES.WORKS} className="navbar-link">
                   <span
@@ -489,6 +489,7 @@ const Navbar = () => {
                   </span>
                 </a>
               </li>
+              */}
             </ul>
           </div>
 

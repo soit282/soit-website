@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+
 import "./ServiceOffer.css";
 import arrowIcon from "/icon/Icon/→.svg";
 import dropDownIcon from "/icon/Icon/drop_down.svg";
@@ -7,9 +8,10 @@ import ArrowButton from "@components/common/ArrowButton";
 export default function ServiceOffer() {
   const [showFooter, setShowFooter] = useState(false);
   const [selectedService, setSelectedService] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
+  const [submitStatus, setSubmitStatus] = useState("idle"); // idle | sending | sent | error
+  const nameRef = useRef("");
+  const phoneNumberRef = useRef("");
+  const emailRef = useRef("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const expandedRef = useRef(null);
   const smoothScrollInstance = useRef(null);
@@ -19,6 +21,7 @@ export default function ServiceOffer() {
     {
       id: 1,
       title: "Brand Check-up",
+      subtitle: "A solid first step",
       tags: ["3 sessions", "12 days"],
       description:
         "A focused brand audit with our experienced consultant - designed to clarify, assess, and align your brand for what's next.",
@@ -28,6 +31,7 @@ export default function ServiceOffer() {
     {
       id: 2,
       title: "Ultra Identity",
+      subtitle: "Level up your brand",
       tags: ["5 sessions", "30 days"],
       description:
         "Offers a more flexible, layered identity system — giving you the freedom to adapt across platforms, products, and growth phases while staying recognizably you.",
@@ -37,6 +41,7 @@ export default function ServiceOffer() {
     {
       id: 3,
       title: "Full Brand Suite",
+      subtitle: "The complete package",
       tags: ["12 sessions", "90 days"],
       description:
         "A comprehensive rebrand designed to scale with you. From foundational strategy to refined design, we craft a cohesive system that's beautiful, bold, and built to grow.",
@@ -117,6 +122,51 @@ export default function ServiceOffer() {
       .filter((title) => title !== selectedService);
   };
 
+  const handleSubmit = async () => {
+    if (submitStatus === "sending") return;
+
+    const name = nameRef.current;
+    const phoneNumber = phoneNumberRef.current;
+    const email = emailRef.current;
+
+    if (!name && !phoneNumber && !email) return;
+
+    setSubmitStatus("sending");
+
+    try {
+      await fetch("https://formsubmit.co/ajax/here@soitstudio.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          service: selectedService,
+          phone_number: phoneNumber,
+          email: email,
+          _subject: `New Service Inquiry: ${selectedService}`, // Subject line for better email organization
+        }),
+      });
+      setSubmitStatus("sent");
+    } catch {
+      setSubmitStatus("error");
+    }
+  };
+
+  const getSubmitText = () => {
+    switch (submitStatus) {
+      case "sending":
+        return "Sending...";
+      case "sent":
+        return "Sent!";
+      case "error":
+        return "Try again";
+      default:
+        return "Submit";
+    }
+  };
+
   return (
     <section className="service-offer-section">
       <div className="service-offer-header">
@@ -135,13 +185,12 @@ export default function ServiceOffer() {
         {offerings.map((offering) => (
           <div
             key={offering.id}
-            className={`offering-card ${
-              offering.featured ? "featured" : ""
-            } pattern-${offering.bgPattern}`}
+            className={`offering-card ${offering.featured ? "featured" : ""
+              } pattern-${offering.bgPattern}`}
             onClick={() => handleCardClick(offering.title)}
           >
             <div className="offering-header">
-              <p className="offering-subtitle text-3">A solid first step</p>
+              <p className="offering-subtitle text-3">{offering.subtitle}</p>
               <h3 className="offering-title text-5">{offering.title}</h3>
               <div className="offering-tags">
                 {offering.tags.map((tag, index) => (
@@ -169,17 +218,15 @@ export default function ServiceOffer() {
           <div className="expanded-content">
             <div className="footer-text-section">
               <p className="footer-line1 text-2">
-                We are{" "}
+                Tell us about you.{" "}
                 <span
                   className="contact-input text-2"
                   contentEditable
                   suppressContentEditableWarning
-                  onInput={(e) => setCompanyName(e.target.textContent)}
-                  data-placeholder="[Company Name]"
-                >
-                  {companyName}
-                </span>{" "}
-                , and we'd love to discuss
+                  onInput={(e) => (nameRef.current = e.target.textContent)}
+                  data-placeholder="[Your Name]"
+                />
+                , interested in
               </p>
               <p className="footer-line2 text-2">
                 <span
@@ -192,6 +239,11 @@ export default function ServiceOffer() {
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     >
                       {selectedService}
+                      <img
+                        src={dropDownIcon}
+                        alt="dropdown"
+                        className="dropdown-arrow"
+                      />
                     </div>
                     {isDropdownOpen && (
                       <div className="custom-dropdown-menu">
@@ -210,40 +262,30 @@ export default function ServiceOffer() {
                       </div>
                     )}
                   </div>
-                  <img
-                    src={dropDownIcon}
-                    alt="dropdown"
-                    className="dropdown-arrow"
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  />
                 </span>
               </p>
               <p className="contact-text text-2">
-                Please feel free to reach us at{" "}
+                We'll contact you at{" "}
                 <span
                   className="contact-input text-2"
                   contentEditable
                   suppressContentEditableWarning
-                  onInput={(e) => setPhoneNumber(e.target.textContent)}
+                  onInput={(e) => (phoneNumberRef.current = e.target.textContent)}
                   data-placeholder="[phone number]"
-                >
-                  {phoneNumber}
-                </span>{" "}
+                />{" "}
                 or{" "}
                 <span
                   className="contact-input text-2"
                   contentEditable
                   suppressContentEditableWarning
-                  onInput={(e) => setEmail(e.target.textContent)}
+                  onInput={(e) => (emailRef.current = e.target.textContent)}
                   data-placeholder="[email]"
-                >
-                  {email}
-                </span>
+                />
                 .
               </p>
             </div>
-            <div className="submit-section">
-              <ArrowButton text="Submit" className="submit-arrow-button" />
+            <div className="submit-section" onClick={handleSubmit}>
+              <ArrowButton text={getSubmitText()} className="submit-arrow-button" />
             </div>
           </div>
         </div>

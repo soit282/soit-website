@@ -1,9 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import "./Section10.css";
-import plusIcon from "/icon/Icon/+.svg";
-import minusIcon from "/icon/Icon/-.svg";
-import arrowIcon from "/icon/Icon/-_.svg";
-import DecryptedText from "../../DecryptedText";
+
 
 export default function Section10() {
   const [activeService, setActiveService] = useState(null);
@@ -78,11 +75,10 @@ export default function Section10() {
 
   // Hover effects for service items
   useEffect(() => {
-    const serviceHeaders = document.querySelectorAll(
-      ".services-list .service-header"
-    );
+    const serviceItems = document.querySelectorAll(".service-item");
 
-    serviceHeaders.forEach((item) => {
+    serviceItems.forEach((item) => {
+      // Logic from user's provided code in Step 329, but applied to the ITEM not the HEADER
       let animationTimeout;
       let resetTimeout;
       let isHovering = false;
@@ -120,6 +116,7 @@ export default function Section10() {
       }
 
       item.addEventListener("mouseenter", () => {
+        // Animate regardless of expansion state
         isHovering = true;
         startAnimation();
       });
@@ -136,63 +133,40 @@ export default function Section10() {
   }, []);
 
   return (
-    <div className="section10">
+    <div className="section10" id="services">
       <div className="section10-content">
         <div className="section10-header">
+          {/* Added Services h2 to match old design if needed, or keeping it compatible.
+               Old design had <h2>Services</h2> and <p>desc</p>.
+               Current design has the Animated Text. I will keep Animated Text as requested "keep content".
+           */}
           <p className="section10-label text-4">Services</p>
-          <h2 className="section10-heading text-2_100pt_medium">
-            <DecryptedText
-              text="Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers."
-              speed={10}
-              maxIterations={15}
-              sequential={true}
-              useOriginalCharsOnly={true}
-              animateOn="view"
-            />
+          <h2 className="section10-heading text-2">
+            Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers.
           </h2>
         </div>
 
-        <div className="services-list">
+        <div className="services-accordion">
           {services.map((service) => (
             <div
               key={service.id}
-              className={`service-item ${
-                activeService === service.id ? "expanded grid-container" : ""
-              }`}
-              onClick={() => handleServiceClick(service.id)}
-              style={{ cursor: "pointer" }}
+              className={`service-item ${activeService === service.id ? "expanded" : ""}`}
             >
-              <div className="service-header">
+              <div
+                className="service-header"
+                onClick={() => handleServiceClick(service.id)}
+              >
                 <span className="service-name text-5">{service.name}</span>
-                <button
-                  className={`toggle-btn ${
-                    activeService === service.id ? "active" : ""
-                  }`}
-                >
-                  {activeService === service.id ? (
-                    <img
-                      src={minusIcon}
-                      alt="collapse"
-                      className="minus-icon"
-                    />
-                  ) : (
-                    <img src={plusIcon} alt="expand" className="plus-icon" />
-                  )}
+                <button className={`toggle-btn ${activeService === service.id ? "active" : ""}`}>
+                  {activeService === service.id ? "-" : "+"}
                 </button>
               </div>
               <div
-                className={`service-content ${
-                  activeService === service.id ? "active" : ""
-                }`}
+                className={`service-content ${activeService === service.id ? "active" : ""}`}
               >
                 {service.content.map((item, index) => (
-                  <p key={index} className="text-6">
-                    <img
-                      src={arrowIcon}
-                      alt="arrow"
-                      className="content-arrow"
-                    />
-                    {item}
+                  <p key={index}>
+                    &#8599; {item}
                   </p>
                 ))}
               </div>

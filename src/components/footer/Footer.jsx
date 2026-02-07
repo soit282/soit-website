@@ -10,11 +10,11 @@ export default function Footer({ theme = "dark" }) {
           <div className="footer-section">
             <p className="footer-label text-8">General Inquiries</p>
             <a
-              href="mailto:soitstudio.info@gmail.com"
+              href="mailto:here@soitstudio.com"
               className="footer-link text-5"
             >
               <img src={arrowIcon} alt="arrow" className="footer-arrow" />
-              soitstudio.info@gmail.com
+              here@soitstudio.com
             </a>
             <a
               href="https://maps.google.com"

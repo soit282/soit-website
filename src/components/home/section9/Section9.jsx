@@ -159,7 +159,7 @@ export default function Section9() {
   const getHoverColor = (index) => {
     switch (index) {
       case 0:
-        return "white";
+        return "#922b23";
       case 1:
         return "rgba(246, 194, 7, 1)";
       default:
@@ -232,6 +232,11 @@ export default function Section9() {
                       src={client.logo}
                       alt={client.name}
                       className="client-logo"
+                      style={
+                        hoveredCardIndex === index && index % 4 === 0
+                          ? { filter: "invert(1) brightness(2)" }
+                          : {}
+                      }
                     />
                   </div>
                 </div>
