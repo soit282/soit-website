@@ -150,6 +150,8 @@
 .toggle-btn {
   background: none;
   border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
   font-size: 28px;
   /* Matched to text-5 size */
   color: #e0e0e0;

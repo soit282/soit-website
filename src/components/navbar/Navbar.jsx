@@ -66,9 +66,8 @@ const CURRENT_MODE = "cooking"; // Change to 'vacation' when needed
 const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [logoScale, setLogoScale] = useState(1);
-  const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0 });
-  const [isLogoAnimating, setIsLogoAnimating] = useState(false);
+  const logoWrapperRef = useRef(null);
+  const logoImgRef = useRef(null);
   const [explosionTrigger, setExplosionTrigger] = useState(0);
   const [explosionPosition, setExplosionPosition] = useState({ x: 0, y: 0 });
   const [currentMode] = useState(CURRENT_MODE);
@@ -162,6 +161,32 @@ const Navbar = () => {
         : NAVBAR_LEFT_DESKTOP;
     };
 
+    // Direct DOM manipulation for logo (avoids React re-renders on scroll)
+    const applyLogoStyle = (animating, scale, posX, posY) => {
+      const wrapper = logoWrapperRef.current;
+      const img = logoImgRef.current;
+      if (!wrapper) return;
+
+      if (animating) {
+        wrapper.style.transform = `translate(-50%, -50%) translate(${posX}px, ${posY}px) scale(${scale})`;
+        wrapper.style.left = "50%";
+        wrapper.style.top = "50%";
+        if (img) {
+          img.style.width = "90vw";
+          img.style.height = "auto";
+        }
+      } else {
+        const navLeft = window.innerWidth <= 576 ? "16px" : "24px";
+        wrapper.style.transform = "scale(1)";
+        wrapper.style.left = navLeft;
+        wrapper.style.top = "0px";
+        if (img) {
+          img.style.width = "";
+          img.style.height = "";
+        }
+      }
+    };
+
     // Handle scroll to scale and move logo
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -169,30 +194,19 @@ const Navbar = () => {
       const isHomePage = location.pathname === ROUTES.HOME;
 
       if (isHomePage) {
-        // Phase 1: Bottom to Center (scroll 0 → 100vh)
-        // Phase 2: Center to Navbar with shrink (scroll 100vh → 160vh)
         const phase1End = section1Height;
         const phase2Range = section1Height * 0.6;
 
         if (currentScrollY <= phase1End) {
-          // Phase 1: Move from bottom to center at full display size
           const rawProgress = currentScrollY / phase1End;
           const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
 
-          setIsLogoAnimating(true);
-          setLogoScale(1); // Full size — img base is already full display size
-
-          // Calculate Y position: logo bottom touches viewport bottom → center
           const fullHeight = getFullDisplayHeight();
           const startY = (window.innerHeight - fullHeight) / 2;
           const currentY = startY * (1 - scrollProgress);
 
-          setLogoPosition({
-            x: 0,
-            y: currentY,
-          });
+          applyLogoStyle(true, 1, 0, currentY);
         } else {
-          // Phase 2: Shrink from full display to navbar size
           const phase2Progress = Math.min(
             (currentScrollY - phase1End) / phase2Range,
             1
@@ -200,55 +214,44 @@ const Navbar = () => {
           const scrollProgress = 1 - Math.pow(1 - phase2Progress, 3);
 
           const animationComplete = scrollProgress >= 1;
-          setIsLogoAnimating(!animationComplete);
 
-          // Scale from 1 → navbarScale (shrink down)
           const navbarScale = calculateNavbarScale();
           const newScale = animationComplete
             ? navbarScale
             : 1 - scrollProgress * (1 - navbarScale);
-          setLogoScale(newScale);
 
-          // Calculate navbar logo center position
           const navbarLeft = getNavbarLeft();
-          const POSITION_OFFSET_X = 7; // Fine-tune horizontal alignment
+          const POSITION_OFFSET_X = 7;
           const logoCenterX =
             navbarLeft + NAVBAR_LOGO_WIDTH / 2 + POSITION_OFFSET_X;
           const logoCenterY = NAVBAR_WRAPPER_HEIGHT / 2;
 
-          // Target offset from viewport center to navbar position
           const targetX = -(window.innerWidth / 2 - logoCenterX);
           const targetY = -(window.innerHeight / 2 - logoCenterY);
 
-          setLogoPosition({
-            x: targetX * scrollProgress,
-            y: targetY * scrollProgress,
-          });
+          applyLogoStyle(
+            !animationComplete,
+            newScale,
+            targetX * scrollProgress,
+            targetY * scrollProgress
+          );
         }
       } else {
-        setIsLogoAnimating(false);
-        setLogoScale(1);
-        setLogoPosition({ x: 0, y: 0 });
+        applyLogoStyle(false, 1, 0, 0);
       }
     };
 
     // Initial setup based on page
     if (location.pathname === ROUTES.HOME) {
-      // Check if at top of page
       if (window.scrollY === 0) {
-        setIsLogoAnimating(true);
-        setLogoScale(1); // Full display at scale(1)
-        // Start logo at bottom of viewport (logo bottom touches viewport bottom)
         const fullHeight = getFullDisplayHeight();
         const startY = (window.innerHeight - fullHeight) / 2;
-        setLogoPosition({ x: 0, y: startY });
+        applyLogoStyle(true, 1, 0, startY);
       } else {
         handleScroll();
       }
     } else {
-      setIsLogoAnimating(false);
-      setLogoScale(1);
-      setLogoPosition({ x: 0, y: 0 });
+      applyLogoStyle(false, 1, 0, 0);
     }
 
     // Handle window resize
@@ -390,18 +393,10 @@ const Navbar = () => {
 
   const logoElement = (
     <div
+      ref={logoWrapperRef}
       className="navbar-logo-wrapper"
       style={{
         position: "fixed",
-        transform: isLogoAnimating
-          ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
-          : `scale(1)`,
-        left: isLogoAnimating
-          ? "50%"
-          : window.innerWidth <= 576
-            ? "16px"
-            : "24px",
-        top: isLogoAnimating ? "50%" : "0px",
         zIndex: 100011,
         transformOrigin: "center center",
         willChange: "transform",
@@ -410,14 +405,10 @@ const Navbar = () => {
     >
       <a href={ROUTES.HOME} className="navbar-logo">
         <img
+          ref={logoImgRef}
           src="/icon/Icon/Số Ít logo.svg"
           alt="Số Ít"
           className="navbar-logo-img"
-          style={
-            isLogoAnimating
-              ? { width: "90vw", height: "auto" }
-              : {}
-          }
         />
       </a>
     </div>
