@@ -16,9 +16,7 @@
 }
 
 .section10-label {
-  /* display: none; Removed to show the label */
-  /* Typography is handled by utility classes .text-4 and .text-2 now */
-  color: #111;
+  color: #666;
   margin: 0 0 24px 0;
 }
 
@@ -204,6 +202,10 @@
 @media (max-width: 1024px) {
   .section10 {
     padding: 0 24px;
+  }
+
+  .section10-header {
+    padding: 0;
   }
 }
 

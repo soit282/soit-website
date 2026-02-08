@@ -102,8 +102,12 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    // Use requestAnimationFrame for smoother scroll updates
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+    // On desktop: scroll-event-driven RAF (efficient)
+    // On mobile: continuous RAF loop (smooth, avoids throttled scroll events)
     let ticking = false;
+    let rafLoopId = null;
 
     const updateLogoOnScroll = () => {
       if (!ticking) {
@@ -190,7 +194,9 @@ const Navbar = () => {
     // Handle scroll to scale and move logo
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const section1Height = window.innerHeight;
+      // Use visualViewport height on mobile for accurate size (handles URL bar)
+      const viewportHeight = window.visualViewport?.height || window.innerHeight;
+      const section1Height = viewportHeight;
       const isHomePage = location.pathname === ROUTES.HOME;
 
       if (isHomePage) {
@@ -202,7 +208,8 @@ const Navbar = () => {
           const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
 
           const fullHeight = getFullDisplayHeight();
-          const startY = (window.innerHeight - fullHeight) / 2;
+          // Push logo so its bottom is at viewport bottom (same as desktop)
+          const startY = (viewportHeight - fullHeight) / 2;
           const currentY = startY * (1 - scrollProgress);
 
           applyLogoStyle(true, 1, 0, currentY);
@@ -227,7 +234,7 @@ const Navbar = () => {
           const logoCenterY = NAVBAR_WRAPPER_HEIGHT / 2;
 
           const targetX = -(window.innerWidth / 2 - logoCenterX);
-          const targetY = -(window.innerHeight / 2 - logoCenterY);
+          const targetY = -(viewportHeight / 2 - logoCenterY);
 
           applyLogoStyle(
             !animationComplete,
@@ -245,7 +252,8 @@ const Navbar = () => {
     if (location.pathname === ROUTES.HOME) {
       if (window.scrollY === 0) {
         const fullHeight = getFullDisplayHeight();
-        const startY = (window.innerHeight - fullHeight) / 2;
+        const viewportH = window.visualViewport?.height || window.innerHeight;
+        const startY = (viewportH - fullHeight) / 2;
         applyLogoStyle(true, 1, 0, startY);
       } else {
         handleScroll();
@@ -262,11 +270,22 @@ const Navbar = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", updateLogoOnScroll, { passive: true });
+
+    if (isTouchDevice && location.pathname === ROUTES.HOME) {
+      // Continuous RAF loop on mobile for smooth animation
+      const tick = () => {
+        handleScroll();
+        rafLoopId = requestAnimationFrame(tick);
+      };
+      rafLoopId = requestAnimationFrame(tick);
+    } else {
+      window.addEventListener("scroll", updateLogoOnScroll, { passive: true });
+    }
 
     return () => {
       window.removeEventListener("scroll", updateLogoOnScroll);
       window.removeEventListener("resize", handleResize);
+      if (rafLoopId) cancelAnimationFrame(rafLoopId);
     };
   }, [location.pathname]);
 
