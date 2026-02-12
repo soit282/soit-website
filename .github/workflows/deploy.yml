@@ -31,6 +31,14 @@ jobs:
       - name: Add 404 fallback for SPA routing
         run: cp dist/index.html dist/404.html
 
+      - name: Create static HTML for SPA routes (fixes GitHub Pages 404 on direct access)
+        run: |
+          routes=("about" "services" "works" "contact" "playground" "works/tbros" "works/dogma" "works/tramade" "works/unavailable")
+          for route in "${routes[@]}"; do
+            mkdir -p "dist/${route}"
+            cp dist/index.html "dist/${route}/index.html"
+          done
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
