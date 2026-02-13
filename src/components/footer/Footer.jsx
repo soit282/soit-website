@@ -1,8 +1,12 @@
+import { useState } from "react";
 import "./Footer.css";
 import soitLogo from "/icon/Icon/Số Ít logo.svg";
 import arrowIcon from "/icon/Icon/-_.svg";
+import PrivacyPolicyModal from "../PrivacyPolicyModal";
 
 export default function Footer({ theme = "dark" }) {
+  const [showPrivacy, setShowPrivacy] = useState(false);
+
   return (
     <footer className={`footer footer-${theme}`}>
       <div className="footer-top">
@@ -68,8 +72,19 @@ export default function Footer({ theme = "dark" }) {
 
       <div className="footer-bottom">
         <p className="copyright text-6">© So It Studio 2025</p>
-        <p className="privacy-link text-6">Privacy Policy</p>
+        <p
+          className="privacy-link text-6"
+          onClick={() => setShowPrivacy(true)}
+        >
+          Privacy Policy
+        </p>
       </div>
+
+      <PrivacyPolicyModal
+        isOpen={showPrivacy}
+        onClose={() => setShowPrivacy(false)}
+        variant={5}
+      />
     </footer>
   );
 }

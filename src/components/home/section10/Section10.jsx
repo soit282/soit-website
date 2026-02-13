@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Section10.css";
+import DecryptedText from "../../DecryptedText";
 
 
 export default function Section10() {
@@ -142,7 +143,14 @@ export default function Section10() {
            */}
           <p className="section10-label text-4">Services</p>
           <h2 className="section10-heading text-2">
-            Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers.
+            <DecryptedText
+              text="Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers."
+              speed={10}
+              maxIterations={15}
+              sequential={true}
+              useOriginalCharsOnly={true}
+              animateOn="view"
+            />
           </h2>
         </div>
 

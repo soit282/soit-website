@@ -173,7 +173,6 @@
   .navbar-logo-wrapper {
     mix-blend-mode: difference;
     height: 45px;
-    top: 24px !important;
   }
 
   .navbar-logo-img {
@@ -348,7 +347,6 @@
     right: 16px;
   }
   .navbar-logo-wrapper {
-    top: 12px !important;
     height: 34px;
   }
 }

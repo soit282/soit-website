@@ -102,23 +102,6 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-
-    // On desktop: scroll-event-driven RAF (efficient)
-    // On mobile: continuous RAF loop (smooth, avoids throttled scroll events)
-    let ticking = false;
-    let rafLoopId = null;
-
-    const updateLogoOnScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
     // Initialize shuffle effects for all menu items
     const menuRefs = [
       { ref: homeRef, key: "Home" },
@@ -142,151 +125,133 @@ const Navbar = () => {
       }
     });
 
-    // Logo constants
-    const LOGO_ASPECT_RATIO = 1404 / 442; // SVG viewBox ratio
-    const NAVBAR_LOGO_HEIGHT = 20; // Target navbar logo height in px
-    const NAVBAR_LOGO_WIDTH = NAVBAR_LOGO_HEIGHT * LOGO_ASPECT_RATIO; // ≈ 63.5px
-    const NAVBAR_WRAPPER_HEIGHT = 70; // CSS: .navbar-logo-wrapper { height: 70px }
+    // ─── Logo scroll animation ───
+    const wrapper = logoWrapperRef.current;
+    const img = logoImgRef.current;
+    if (!wrapper) return;
+
+    const isHomePage = location.pathname === ROUTES.HOME;
+    const LOGO_ASPECT_RATIO = 1404 / 442;
+    const NAVBAR_LOGO_HEIGHT = 20;
+    const NAVBAR_LOGO_WIDTH = NAVBAR_LOGO_HEIGHT * LOGO_ASPECT_RATIO;
+    const NAVBAR_WRAPPER_HEIGHT = 70;
     const NAVBAR_LEFT_DESKTOP = 24;
     const NAVBAR_LEFT_MOBILE = 16;
 
-    // Full display dimensions (base size when animating)
-    const getFullDisplayWidth = () => window.innerWidth * 0.9;
-    const getFullDisplayHeight = () => getFullDisplayWidth() / LOGO_ASPECT_RATIO;
-
-    // Scale to shrink from full display to navbar size
-    const calculateNavbarScale = () =>
-      NAVBAR_LOGO_HEIGHT / getFullDisplayHeight();
-
-    // Get navbar left position based on screen width
-    const getNavbarLeft = () => {
-      return window.innerWidth <= 576
-        ? NAVBAR_LEFT_MOBILE
-        : NAVBAR_LEFT_DESKTOP;
+    // Compute all animation values from viewport dimensions
+    const computeValues = (vw, vh) => {
+      const navbarLeft = vw <= 576 ? NAVBAR_LEFT_MOBILE : NAVBAR_LEFT_DESKTOP;
+      const fullDisplayH = (vw * 0.9) / LOGO_ASPECT_RATIO;
+      const navbarScale = NAVBAR_LOGO_HEIGHT / fullDisplayH;
+      const startY = (vh - fullDisplayH) / 2;
+      const targetX = -(vw / 2 - (navbarLeft + NAVBAR_LOGO_WIDTH / 2 + 7));
+      const targetY = -(vh / 2 - NAVBAR_WRAPPER_HEIGHT / 2);
+      return { navbarLeft, navbarScale, startY, targetX, targetY };
     };
 
-    // Direct DOM manipulation for logo (avoids React re-renders on scroll)
-    const applyLogoStyle = (animating, scale, posX, posY) => {
-      const wrapper = logoWrapperRef.current;
-      const img = logoImgRef.current;
-      if (!wrapper) return;
+    if (isHomePage) {
+      let cachedVW = window.innerWidth;
+      let cachedVH = window.innerHeight;
+      let vals = computeValues(cachedVW, cachedVH);
 
-      if (animating) {
-        wrapper.style.transform = `translate(-50%, -50%) translate(${posX}px, ${posY}px) scale(${scale})`;
-        wrapper.style.left = "50%";
-        wrapper.style.top = "50%";
-        if (img) {
-          img.style.width = "90vw";
-          img.style.height = "auto";
-        }
-      } else {
-        const navLeft = window.innerWidth <= 576 ? "16px" : "24px";
-        wrapper.style.transform = "scale(1)";
-        wrapper.style.left = navLeft;
-        wrapper.style.top = "0px";
-        if (img) {
-          img.style.width = "";
-          img.style.height = "";
-        }
-      }
-    };
+      let currentAnimatingMode = null;
 
-    // Handle scroll to scale and move logo
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      // Use visualViewport height on mobile for accurate size (handles URL bar)
-      const viewportHeight = window.visualViewport?.height || window.innerHeight;
-      const section1Height = viewportHeight;
-      const isHomePage = location.pathname === ROUTES.HOME;
-
-      if (isHomePage) {
-        const phase1End = section1Height;
-        const phase2Range = section1Height * 0.6;
-
-        if (currentScrollY <= phase1End) {
-          const rawProgress = currentScrollY / phase1End;
-          const scrollProgress = 1 - Math.pow(1 - rawProgress, 3);
-
-          const fullHeight = getFullDisplayHeight();
-          // Push logo so its bottom is at viewport bottom (same as desktop)
-          const startY = (viewportHeight - fullHeight) / 2;
-          const currentY = startY * (1 - scrollProgress);
-
-          applyLogoStyle(true, 1, 0, currentY);
+      const applyLogoStyle = (animating, scale, posX, posY) => {
+        if (animating) {
+          if (currentAnimatingMode !== true) {
+            currentAnimatingMode = true;
+            wrapper.style.left = "50%";
+            wrapper.style.top = "50%";
+            if (img) { img.style.width = "90vw"; img.style.height = "auto"; }
+          }
+          wrapper.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) scale(${scale})`;
         } else {
-          const phase2Progress = Math.min(
-            (currentScrollY - phase1End) / phase2Range,
-            1
-          );
-          const scrollProgress = 1 - Math.pow(1 - phase2Progress, 3);
-
-          const animationComplete = scrollProgress >= 1;
-
-          const navbarScale = calculateNavbarScale();
-          const newScale = animationComplete
-            ? navbarScale
-            : 1 - scrollProgress * (1 - navbarScale);
-
-          const navbarLeft = getNavbarLeft();
-          const POSITION_OFFSET_X = 7;
-          const logoCenterX =
-            navbarLeft + NAVBAR_LOGO_WIDTH / 2 + POSITION_OFFSET_X;
-          const logoCenterY = NAVBAR_WRAPPER_HEIGHT / 2;
-
-          const targetX = -(window.innerWidth / 2 - logoCenterX);
-          const targetY = -(viewportHeight / 2 - logoCenterY);
-
-          applyLogoStyle(
-            !animationComplete,
-            newScale,
-            targetX * scrollProgress,
-            targetY * scrollProgress
-          );
+          if (currentAnimatingMode !== false) {
+            currentAnimatingMode = false;
+            wrapper.style.left = vals.navbarLeft + "px";
+            wrapper.style.top = "0px";
+            if (img) { img.style.width = ""; img.style.height = ""; }
+          }
+          wrapper.style.transform = "translate3d(0, 0, 0) scale(1)";
         }
-      } else {
-        applyLogoStyle(false, 1, 0, 0);
-      }
-    };
-
-    // Initial setup based on page
-    if (location.pathname === ROUTES.HOME) {
-      if (window.scrollY === 0) {
-        const fullHeight = getFullDisplayHeight();
-        const viewportH = window.visualViewport?.height || window.innerHeight;
-        const startY = (viewportH - fullHeight) / 2;
-        applyLogoStyle(true, 1, 0, startY);
-      } else {
-        handleScroll();
-      }
-    } else {
-      applyLogoStyle(false, 1, 0, 0);
-    }
-
-    // Handle window resize
-    const handleResize = () => {
-      if (location.pathname === ROUTES.HOME) {
-        handleScroll();
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    if (isTouchDevice && location.pathname === ROUTES.HOME) {
-      // Continuous RAF loop on mobile for smooth animation
-      const tick = () => {
-        handleScroll();
-        rafLoopId = requestAnimationFrame(tick);
       };
-      rafLoopId = requestAnimationFrame(tick);
-    } else {
-      window.addEventListener("scroll", updateLogoOnScroll, { passive: true });
+
+      const updateLogoPosition = () => {
+        const scrollY = window.scrollY;
+        const phase1End = cachedVH * 0.65;
+        const phase2Range = cachedVH * 0.35;
+
+        if (scrollY <= phase1End) {
+          const progress = scrollY / phase1End;
+          applyLogoStyle(true, 1, 0, vals.startY * (1 - progress));
+        } else {
+          const p = Math.min((scrollY - phase1End) / phase2Range, 1);
+          const done = p >= 1;
+          const scale = done ? vals.navbarScale : 1 - p * (1 - vals.navbarScale);
+          applyLogoStyle(!done, scale, vals.targetX * p, vals.targetY * p);
+        }
+      };
+
+      // RAF loop — only runs during active scrolling, auto-stops
+      let rafId = null;
+      let scrollEndTimer = null;
+
+      const rafLoop = () => {
+        updateLogoPosition();
+        rafId = requestAnimationFrame(rafLoop);
+      };
+
+      const stopRafLoop = () => {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        updateLogoPosition();
+      };
+
+      const handleScroll = () => {
+        if (!rafId) rafId = requestAnimationFrame(rafLoop);
+        clearTimeout(scrollEndTimer);
+        scrollEndTimer = setTimeout(stopRafLoop, 200);
+      };
+
+      // Initial position
+      if (window.scrollY === 0) {
+        applyLogoStyle(true, 1, 0, vals.startY);
+      } else {
+        updateLogoPosition();
+      }
+
+      // Only recalc on width changes (ignore URL bar height changes)
+      const handleResize = () => {
+        if (window.innerWidth !== cachedVW) {
+          cachedVW = window.innerWidth;
+          cachedVH = window.innerHeight;
+          vals = computeValues(cachedVW, cachedVH);
+          updateLogoPosition();
+        }
+      };
+
+      window.addEventListener("resize", handleResize);
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("scroll", handleScroll);
+        clearTimeout(scrollEndTimer);
+        if (rafId) cancelAnimationFrame(rafId);
+        wrapper.style.transform = "";
+        wrapper.style.left = "";
+        wrapper.style.top = "";
+        if (img) { img.style.width = ""; img.style.height = ""; }
+      };
     }
 
-    return () => {
-      window.removeEventListener("scroll", updateLogoOnScroll);
-      window.removeEventListener("resize", handleResize);
-      if (rafLoopId) cancelAnimationFrame(rafLoopId);
-    };
+    // ═══════════════════════════════════════════════════════════════
+    // Non-home page: static navbar position
+    // ═══════════════════════════════════════════════════════════════
+    const navLeft = (window.innerWidth <= 576 ? 16 : 24) + "px";
+    wrapper.style.left = navLeft;
+    wrapper.style.top = "0px";
+    wrapper.style.transform = "translate3d(0, 0, 0) scale(1)";
+    if (img) { img.style.width = ""; img.style.height = ""; }
   }, [location.pathname]);
 
   const createHoverHandlers = (menuKey) => ({
