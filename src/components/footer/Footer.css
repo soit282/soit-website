@@ -151,6 +151,16 @@
 .privacy-link {
   margin: 0;
   white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-dark .privacy-link:hover {
+  color: white;
+}
+
+.footer-light .privacy-link:hover {
+  color: #1f1f1f;
 }
 
 /* Tablet */

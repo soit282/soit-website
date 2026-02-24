@@ -1,24 +1,18 @@
 .section10 {
-  width: 100%;
-  background-color: #ffffff;
-  padding: 240px 0px 120px;
-  box-sizing: border-box;
+  background: #fff;
+  padding: 240px 0 80px 0;
+  /* Full width: moved side padding to children */
+  /* Tripled top padding to 240px */
   position: relative;
-}
-
-.section10-content {
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 120px;
+  z-index: 2;
+  font-family: 'PPNeueMontreal', Arial, sans-serif;
+  color: #111;
 }
 
 .section10-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0 24px;
+  margin-bottom: 20px;
+  padding: 0 40px;
+  /* Aligned text */
 }
 
 .section10-label {
@@ -27,133 +21,62 @@
 }
 
 .section10-heading {
-  margin: 0;
-  max-width: 100%;
+  /* Matched to .clients h2 */
+  /* Mimics .clients-header margin-bottom */
   color: #1f1f1f;
+  margin: 0 0 60px 0;
+  text-align: left;
+  max-width: 100%;
 }
 
-.heading-black {
-  color: #1a1a1a;
+.section10-desc {
+  /* Matched to .clients-desc */
+  /* Matched to .clients-desc */
+  max-width: 800px;
+  margin: 0 0 60px 0;
+  text-align: left;
 }
 
-.heading-gray {
-  color: #cccccc;
-}
-
-.services-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.services-accordion {
+  width: 100%;
+  margin-top: 120px;
+  /* Doubled margin from 60px to 120px */
 }
 
 @keyframes grayscale-hover {
+  0% {
+    background-color: #f2f2f2;
+  }
+
   20% {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
   }
+
   40% {
-    background-color: #eaeaea;
+    background-color: #cecece;
   }
+
   60% {
-    background-color: #dedede;
+    background-color: #b0b0b0;
   }
-  80% {
-    background-color: #d0d0d0;
-  }
+
   100% {
     background-color: #c4c4c4;
   }
 }
 
-@keyframes text-color-hover {
-  0% {
-    color: #e0e0e0;
-  }
-  20% {
-    color: #b8b8b8;
-  }
-  40% {
-    color: #909090;
-  }
-  60% {
-    color: #686868;
-  }
-  80% {
-    color: #4c4c4c;
-  }
-  100% {
-    color: #303030;
-  }
-}
-
-@keyframes icon-color-hover {
-  0% {
-    filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(2%)
-      hue-rotate(314deg) brightness(106%) contrast(82%);
-  }
-  20% {
-    filter: brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(0%)
-      hue-rotate(0deg) brightness(100%) contrast(90%);
-  }
-  40% {
-    filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%)
-      hue-rotate(0deg) brightness(100%) contrast(90%);
-  }
-  60% {
-    filter: brightness(0) saturate(100%) invert(42%) sepia(0%) saturate(0%)
-      hue-rotate(0deg) brightness(98%) contrast(92%);
-  }
-  80% {
-    filter: brightness(0) saturate(100%) invert(30%) sepia(0%) saturate(0%)
-      hue-rotate(0deg) brightness(96%) contrast(91%);
-  }
-  100% {
-    filter: brightness(0) saturate(100%) invert(17%) sepia(0%) saturate(0%)
-      hue-rotate(0deg) brightness(95%) contrast(91%);
-  }
-}
-
 .service-item {
-  border-bottom: 1px solid #e5e5e5;
-  background-color: #fff;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   margin-bottom: 0;
-  transition: background-image 0.5s ease, background-color 0.5s ease;
-}
-
-.service-item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("/1_Homepage/1_Homepage/3_Clients/Background_1.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  z-index: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.service-item::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.1);
-  opacity: 0;
-  z-index: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
+  border-bottom: 1px solid #e5e5e5;
+  /* Light gray border */
+  background-color: #fff;
 }
 
 .service-item:first-child {
   border-top: 1px solid #e5e5e5;
+  /* Light gray border */
 }
 
 /* Expanded state - apply background to entire service-item */
@@ -171,15 +94,8 @@
   display: contents;
 }
 
-.service-item.expanded .service-name {
-  grid-column: 1 / span 3;
-  padding-left: 0;
-  padding-top: 24px;
-  display: flex;
-  align-items: flex-start;
-  color: #1f1f1f !important;
-  position: relative;
-  z-index: 10;
+.service-item.animate {
+  animation: grayscale-hover 0.5s steps(5) forwards;
 }
 
 .service-item.expanded .toggle-btn {
@@ -191,18 +107,20 @@
   padding-top: 0;
 }
 
-.service-item.expanded .service-content {
-  grid-column: 7 / span 4;
-  grid-row: 1;
-  position: static;
+.service-item.animate .service-header span {
+  color: #111;
+  animation: grayscale-hover 0.5s steps(5) forwards;
 }
 
-.service-item.expanded::before {
-  opacity: 0.6;
+/* Final locked state */
+.service-item.locked {
+  background-color: #c4c4c4;
+  transition: background-color 0.3s ease;
 }
 
-.service-item.expanded::after {
-  opacity: 0;
+.service-item.locked .service-header span {
+  color: #111;
+  transition: color 0.3s ease;
 }
 
 /* Closing state - keep grid layout, just animate content */
@@ -227,46 +145,45 @@
   transition: color 0.3s ease;
 }
 
-.toggle-btn.active {
-  color: #1f1f1f;
-  transition: color 0.3s ease;
+/* Reset state - back to white */
+.service-item.reset {
+  background-color: #fff;
+  transition: background-color 0.5s ease;
+}
+
+.service-item.reset .service-header span {
+  color: #e0e0e0;
+  /* Light gray text by default */
+  transition: color 0.5s ease;
 }
 
 .service-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 24px 24px 48px;
+  padding: 20px 40px 40px 40px;
+  /* Bottom padding = 2 * Top padding (40px vs 20px) */
   cursor: pointer;
   position: relative;
-  overflow: visible;
-  justify-content: flex-start;
-  margin-bottom: 0;
   z-index: 2;
+  /* Keep text above the hover effect */
 }
 
-.service-number {
-  font-size: 14px;
-  color: #999;
-  margin-right: 60px;
-  font-weight: 400;
-  min-width: 30px;
-  transition: color 0.4s ease;
-}
-
-.service-name {
-  color: #e0e0e0;
-  transition: color 0.5s ease;
-  flex: 1;
-}
-
+/* Restored Toggle Btn Styles */
 .toggle-btn {
   background: none;
   border: none;
-  font-size: 24px;
-  color: #111;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 28px;
+  /* Matched to text-5 size */
+  color: #e0e0e0;
+  /* Light gray button */
   cursor: pointer;
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  /* Matched to text-5 size */
+  height: 28px;
+  /* Matched to text-5 size */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -436,25 +353,24 @@
 }
 
 .service-content p {
-  color: #1f1f1f;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.4;
+  padding-left: 20px;
+  /* Indent content slightly */
 }
 
-.service-item:not(.expanded) .service-content p {
-  margin: 8px 0 8px 25.8%;
-}
-
-.content-arrow {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-}
-
-/* Tablet */
+/* Media Queries */
 @media (max-width: 1024px) {
+  .section10 {
+    padding: 0 24px;
+  }
+
+  .section10-header {
+    padding: 0;
+  }
+
   .section10-label {
     margin-bottom: 24px;
   }
@@ -486,38 +402,33 @@
   .service-header {
     padding: 24px 0 48px;
   }
+
   .service-name {
     padding-left: 0;
   }
+
   .section10-content {
     gap: 48px;
   }
 }
 
-/* Mobile */
-@media (max-width: 576px) {
+@media (max-width: 700px) {
   .section10 {
-    padding: 120px 16px;
+    padding: 0 16px;
   }
 
-  .service-item.expanded .service-name {
-    grid-column: 1 / span 2;
-    grid-row: 1;
+  .section10-heading {
+    font-size: 2rem;
   }
 
-  .service-item.expanded .service-content {
-    grid-column: 1 / span 4;
-    grid-row: 2;
+  .section10-desc {
+    font-size: 1.1rem;
   }
 
-  .service-item.expanded .toggle-btn {
-    grid-column: 4 / span 1;
-    grid-row: 1;
-  }
-
-  .service-number {
-    margin-right: 20px;
-    font-size: 12px;
+  .services-accordion {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 40px;
   }
 
   .toggle-icon {
@@ -527,5 +438,13 @@
 
   .service-header {
     padding: 24px 0 48px;
+  }
+
+  .service-header span {
+    font-size: 1.2rem;
+  }
+
+  .service-content.active {
+    padding-left: 20px;
   }
 }

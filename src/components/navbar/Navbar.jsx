@@ -334,6 +334,7 @@ const Navbar = () => {
             </span>
           </a>
         </li>
+        {/* Unfinished items hidden for now
         <li className="navbar-item">
           <a
             href={ROUTES.WORKS}
@@ -394,6 +395,7 @@ const Navbar = () => {
             </span>
           </a>
         </li>
+        */}
         <li className="navbar-item">
           <a
             href={ROUTES.CONTACT}
@@ -464,6 +466,7 @@ const Navbar = () => {
                   </span>
                 </a>
               </li>
+              {/* Unfinished items hidden for now
               <li className="navbar-item">
                 <a href={ROUTES.WORKS} className="navbar-link">
                   <span
@@ -508,6 +511,7 @@ const Navbar = () => {
                   </span>
                 </a>
               </li>
+              */}
             </ul>
           </div>
 
@@ -533,13 +537,15 @@ const Navbar = () => {
             </span>
           </div>
 
-          <button
-            className="mobile-menu-toggle text-2"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
-          >
-            Menu
-          </button>
+          {location.pathname !== "/" && (
+            <button
+              className="mobile-menu-toggle text-2"
+              onClick={toggleMobileMenu}
+              aria-label="Toggle mobile menu"
+            >
+              Menu
+            </button>
+          )}
         </div>
       </nav>
       {/* Render mobile menu via Portal to avoid mix-blend-mode inheritance */}
