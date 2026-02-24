@@ -66,9 +66,8 @@ const CURRENT_MODE = "cooking"; // Change to 'vacation' when needed
 const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [logoScale, setLogoScale] = useState(1);
-  const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0 });
-  const [isLogoAnimating, setIsLogoAnimating] = useState(false);
+  const logoWrapperRef = useRef(null);
+  const logoImgRef = useRef(null);
   const [explosionTrigger, setExplosionTrigger] = useState(0);
   const [explosionPosition, setExplosionPosition] = useState({ x: 0, y: 0 });
   const [currentMode] = useState(CURRENT_MODE);
@@ -103,19 +102,6 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    // Use requestAnimationFrame for smoother scroll updates
-    let ticking = false;
-
-    const updateLogoOnScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
     // Initialize shuffle effects for all menu items
     const menuRefs = [
       { ref: homeRef, key: "Home" },
@@ -139,155 +125,134 @@ const Navbar = () => {
       }
     });
 
-    // Logo constants - matching CSS .navbar-logo-img
-    const LOGO_ASPECT_RATIO = 1404 / 442; // SVG viewBox ratio
-    const LOGO_BASE_HEIGHT = 20; // CSS: .navbar-logo-img { height: 20px }
-    const LOGO_BASE_WIDTH = LOGO_BASE_HEIGHT * LOGO_ASPECT_RATIO; // ≈ 63.5px
-    const NAVBAR_WRAPPER_HEIGHT = 70; // CSS: .navbar-logo-wrapper { height: 70px }
+    // ─── Logo scroll animation ───
+    const wrapper = logoWrapperRef.current;
+    const img = logoImgRef.current;
+    if (!wrapper) return;
+
+    const isHomePage = location.pathname === ROUTES.HOME;
+    const LOGO_ASPECT_RATIO = 1404 / 442;
+    const NAVBAR_LOGO_HEIGHT = 20;
+    const NAVBAR_LOGO_WIDTH = NAVBAR_LOGO_HEIGHT * LOGO_ASPECT_RATIO;
+    const NAVBAR_WRAPPER_HEIGHT = 70;
     const NAVBAR_LEFT_DESKTOP = 24;
     const NAVBAR_LEFT_MOBILE = 16;
 
-    // Calculate max scale to fill 90% viewport width
-    const calculateMaxScale = () => {
-      const targetWidth = window.innerWidth * 0.9;
-      const maxScale = targetWidth / LOGO_BASE_WIDTH;
-      // Cap the scale to prevent extreme pixelation
-      return Math.min(maxScale, 25);
+    // Compute all animation values from viewport dimensions
+    const computeValues = (vw, vh) => {
+      const navbarLeft = vw <= 576 ? NAVBAR_LEFT_MOBILE : NAVBAR_LEFT_DESKTOP;
+      const fullDisplayH = (vw * 0.9) / LOGO_ASPECT_RATIO;
+      const navbarScale = NAVBAR_LOGO_HEIGHT / fullDisplayH;
+      const startY = (vh - fullDisplayH) / 2;
+      const targetX = -(vw / 2 - (navbarLeft + NAVBAR_LOGO_WIDTH / 2 + 7));
+      const targetY = -(vh / 2 - NAVBAR_WRAPPER_HEIGHT / 2);
+      return { navbarLeft, navbarScale, startY, targetX, targetY };
     };
 
-    // Get navbar left position based on screen width
-    const getNavbarLeft = () => {
-      return window.innerWidth <= 576
-        ? NAVBAR_LEFT_MOBILE
-        : NAVBAR_LEFT_DESKTOP;
-    };
+    if (isHomePage) {
+      let cachedVW = window.innerWidth;
+      let cachedVH = window.innerHeight;
+      let vals = computeValues(cachedVW, cachedVH);
 
-    // Handle scroll to scale and move logo
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const section1Height = window.innerHeight;
-      const isHomePage = location.pathname === ROUTES.HOME;
-      const maxScale = calculateMaxScale();
+      let currentAnimatingMode = null;
 
-      if (isHomePage) {
-        // Phase 1: Bottom to near Top (scroll 0 → 80vh)
-        // Phase 2: Near Top to Navbar with shrink (scroll 80vh → 128vh)
-        const phase1End = section1Height * 0.5;
-        const phase2Range = section1Height * 0.6;
-
-        if (currentScrollY <= phase1End) {
-          // Phase 1: Move from bottom to near top (leaving navbar height space)
-          // Use linear easing for seamless transition to Phase 2
-          const scrollProgress = currentScrollY / phase1End;
-
-          // Keep animating
-          setIsLogoAnimating(true);
-          setLogoScale(maxScale);
-
-          // Calculate Y position: logo bottom touches viewport bottom → top edge aligns with navbar text top
-          const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
-          const startY = (window.innerHeight - scaledLogoHeight) / 2; // Logo at bottom
-          // End position: logo top edge aligns with navbar menu text top edge
-          const navbarTextTop = 10;
-          const endY = -(
-            window.innerHeight / 2 -
-            scaledLogoHeight / 2 -
-            navbarTextTop
-          );
-
-          // Interpolate from startY to endY
-          const currentY = startY + (endY - startY) * scrollProgress;
-
-          setLogoPosition({
-            x: 0,
-            y: currentY,
-          });
+      const applyLogoStyle = (animating, scale, posX, posY) => {
+        if (animating) {
+          if (currentAnimatingMode !== true) {
+            currentAnimatingMode = true;
+            wrapper.style.left = "50%";
+            wrapper.style.top = "50%";
+            if (img) { img.style.width = "90vw"; img.style.height = "auto"; }
+          }
+          wrapper.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) scale(${scale})`;
         } else {
-          // Phase 2: Shrink and move from near top to navbar position
-          // Use linear easing for seamless transition from Phase 1
-          const scrollProgress = Math.min(
-            (currentScrollY - phase1End) / phase2Range,
-            1
-          );
-
-          // Animation complete when scrollProgress reaches 1
-          const animationComplete = scrollProgress >= 1;
-          setIsLogoAnimating(!animationComplete);
-
-          // Scale from maxScale → 1 (exact navbar logo size)
-          const newScale = animationComplete
-            ? 1
-            : maxScale - scrollProgress * (maxScale - 1);
-          setLogoScale(Math.max(1, newScale));
-
-          // Start position (end of Phase 1): logo top edge aligned with navbar text top
-          const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
-          const navbarTextTop = 10;
-          const phase1EndY = -(
-            window.innerHeight / 2 -
-            scaledLogoHeight / 2 -
-            navbarTextTop
-          );
-
-          // Calculate navbar logo center position
-          // Add small offset to account for transform origin vs actual position
-          const navbarLeft = getNavbarLeft();
-          const POSITION_OFFSET_X = 7; // Fine-tune horizontal alignment
-          const logoCenterX =
-            navbarLeft + LOGO_BASE_WIDTH / 2 + POSITION_OFFSET_X;
-          const logoCenterY = NAVBAR_WRAPPER_HEIGHT / 2;
-
-          // Target offset from viewport center to navbar position
-          const targetX = -(window.innerWidth / 2 - logoCenterX);
-          const targetY = -(window.innerHeight / 2 - logoCenterY);
-
-          // Interpolate from phase1EndY to targetY for Y, from 0 to targetX for X
-          setLogoPosition({
-            x: targetX * scrollProgress,
-            y: phase1EndY + (targetY - phase1EndY) * scrollProgress,
-          });
+          if (currentAnimatingMode !== false) {
+            currentAnimatingMode = false;
+            wrapper.style.left = vals.navbarLeft + "px";
+            wrapper.style.top = "0px";
+            if (img) { img.style.width = ""; img.style.height = ""; }
+          }
+          wrapper.style.transform = "translate3d(0, 0, 0) scale(1)";
         }
-      } else {
-        setIsLogoAnimating(false);
-        setLogoScale(1);
-        setLogoPosition({ x: 0, y: 0 });
-      }
-    };
+      };
 
-    // Initial setup based on page
-    if (location.pathname === ROUTES.HOME) {
-      // Check if at top of page
+      const updateLogoPosition = () => {
+        const scrollY = window.scrollY;
+        // Use faster timing from dev/nam3 branch
+        const phase1End = cachedVH * 0.5;
+        const phase2Range = cachedVH * 0.6;
+
+        if (scrollY <= phase1End) {
+          const progress = scrollY / phase1End;
+          applyLogoStyle(true, 1, 0, vals.startY * (1 - progress));
+        } else {
+          const p = Math.min((scrollY - phase1End) / phase2Range, 1);
+          const done = p >= 1;
+          const scale = done ? vals.navbarScale : 1 - p * (1 - vals.navbarScale);
+          applyLogoStyle(!done, scale, vals.targetX * p, vals.targetY * p);
+        }
+      };
+
+      // RAF loop — only runs during active scrolling, auto-stops
+      let rafId = null;
+      let scrollEndTimer = null;
+
+      const rafLoop = () => {
+        updateLogoPosition();
+        rafId = requestAnimationFrame(rafLoop);
+      };
+
+      const stopRafLoop = () => {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        updateLogoPosition();
+      };
+
+      const handleScroll = () => {
+        if (!rafId) rafId = requestAnimationFrame(rafLoop);
+        clearTimeout(scrollEndTimer);
+        scrollEndTimer = setTimeout(stopRafLoop, 200);
+      };
+
+      // Initial position
       if (window.scrollY === 0) {
-        const maxScale = calculateMaxScale();
-        setIsLogoAnimating(true);
-        setLogoScale(maxScale);
-        // Start logo at bottom of viewport (logo bottom touches viewport bottom)
-        const scaledLogoHeight = LOGO_BASE_HEIGHT * maxScale;
-        const startY = (window.innerHeight - scaledLogoHeight) / 2;
-        setLogoPosition({ x: 0, y: startY });
+        applyLogoStyle(true, 1, 0, vals.startY);
       } else {
-        handleScroll();
+        updateLogoPosition();
       }
-    } else {
-      setIsLogoAnimating(false);
-      setLogoScale(1);
-      setLogoPosition({ x: 0, y: 0 });
+
+      // Only recalc on width changes (ignore URL bar height changes)
+      const handleResize = () => {
+        if (window.innerWidth !== cachedVW) {
+          cachedVW = window.innerWidth;
+          cachedVH = window.innerHeight;
+          vals = computeValues(cachedVW, cachedVH);
+          updateLogoPosition();
+        }
+      };
+
+      window.addEventListener("resize", handleResize);
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("scroll", handleScroll);
+        clearTimeout(scrollEndTimer);
+        if (rafId) cancelAnimationFrame(rafId);
+        wrapper.style.transform = "";
+        wrapper.style.left = "";
+        wrapper.style.top = "";
+        if (img) { img.style.width = ""; img.style.height = ""; }
+      };
     }
 
-    // Handle window resize
-    const handleResize = () => {
-      if (location.pathname === ROUTES.HOME) {
-        handleScroll();
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", updateLogoOnScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", updateLogoOnScroll);
-      window.removeEventListener("resize", handleResize);
-    };
+    // ═══════════════════════════════════════════════════════════════
+    // Non-home page: static navbar position
+    // ═══════════════════════════════════════════════════════════════
+    const navLeft = (window.innerWidth <= 576 ? 16 : 24) + "px";
+    wrapper.style.left = navLeft;
+    wrapper.style.top = "0px";
+    wrapper.style.transform = "translate3d(0, 0, 0) scale(1)";
+    if (img) { img.style.width = ""; img.style.height = ""; }
   }, [location.pathname]);
 
   const createHoverHandlers = (menuKey) => ({
@@ -413,18 +378,10 @@ const Navbar = () => {
 
   const logoElement = (
     <div
+      ref={logoWrapperRef}
       className="navbar-logo-wrapper"
       style={{
         position: "fixed",
-        transform: isLogoAnimating
-          ? `translate(-50%, -50%) translate(${logoPosition.x}px, ${logoPosition.y}px) scale(${logoScale})`
-          : `scale(1)`,
-        left: isLogoAnimating
-          ? "50%"
-          : window.innerWidth <= 576
-          ? "16px"
-          : "24px",
-        top: isLogoAnimating ? "50%" : "0px",
         zIndex: 100011,
         transformOrigin: "center center",
         transition: "none",
@@ -432,6 +389,7 @@ const Navbar = () => {
     >
       <a href={ROUTES.HOME} className="navbar-logo">
         <img
+          ref={logoImgRef}
           src="/icon/Icon/Số Ít logo.svg"
           alt="Số Ít"
           className="navbar-logo-img"
