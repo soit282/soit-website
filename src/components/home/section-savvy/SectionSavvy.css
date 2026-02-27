@@ -1,0 +1,123 @@
+.section-savvy {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.section-savvy-content {
+  width: 100%;
+  color: white;
+  box-sizing: border-box;
+  isolation: isolate;
+  mix-blend-mode: difference;
+}
+
+/* Grid positioning for desktop */
+.section-savvy-text-left {
+  grid-column: 1 / span 6;
+}
+
+.section-savvy-text-center {
+  grid-column: 7 / span 4;
+}
+
+.section-savvy-text-right {
+  grid-column: 12 / span 2;
+}
+
+/* Text alignment styles */
+.section-savvy-content .text-left {
+  text-align: left;
+}
+
+.section-savvy-content .text-center-item {
+  text-align: left;
+}
+
+.section-savvy-content .text-right {
+  text-align: right;
+}
+
+.section-savvy-content p {
+  margin: 0;
+  color: white;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .section-savvy {
+    min-height: 80vh;
+  }
+
+  .section-savvy-background {
+    transform: translateY(0) !important;
+  }
+
+  .section-savvy-content {
+    top: 50% !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .section-savvy-text-left {
+    grid-column: 1 / span 6;
+    grid-row: 1 / span 2;
+  }
+
+  .section-savvy-text-right {
+    grid-column: 7 / span 2;
+    grid-row: 1;
+  }
+
+  .section-savvy-text-center {
+    grid-column: 7 / span 2;
+    grid-row: 2;
+    margin-top: 12px;
+  }
+
+  .section-savvy-content .text-right {
+    text-align: left;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .section-savvy {
+    min-height: 60vh;
+  }
+
+  .section-savvy-background {
+    transform: translateY(0) !important;
+  }
+
+  .section-savvy-content {
+    top: 50% !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .section-savvy-text-left {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  .section-savvy-text-right {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+  }
+
+  .section-savvy-text-center {
+    grid-column: 3 / span 2;
+    grid-row: 2;
+    margin-top: 12px;
+  }
+
+  .section-savvy-content .text-right {
+    text-align: left;
+  }
+}

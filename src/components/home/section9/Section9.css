@@ -45,7 +45,7 @@
 .clients-carousel-track {
   display: flex;
   gap: 0.625%;
-  animation: carousel-slide 20s linear infinite;
+  animation: carousel-slide 30s linear infinite;
 }
 
 @keyframes carousel-slide {
@@ -53,8 +53,8 @@
     transform: translateX(0);
   }
   100% {
-    /* Move exactly 100% to show next set */
-    transform: translateX(calc(-100% - 0.625%));
+    /* Move exactly 6 cards + gaps to loop seamlessly */
+    transform: translateX(calc(-150% - 0.9375%));
   }
 }
 
@@ -66,6 +66,7 @@
   height: auto;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .client-background {
@@ -87,10 +88,11 @@
 }
 
 .client-logo {
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   z-index: 1;
+  transition: filter 0.3s ease;
 }
 
 /* Button styles moved to ArrowButton component */

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import "./Section2.css";
 import ArrowButton from "@components/common/ArrowButton";
 import img1 from "/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_1.jpg";
-import img2 from "/1_Homepage/1_Homepage/1_Intro/Soit Web_Intro_2.png";
+import img2 from "/1_Homepage/1_Homepage/1_Intro/intro-2.jpg";
 
 // Shuffle text effect class
 class SmoothShuffler {

@@ -13,23 +13,45 @@ export default function Section9() {
   const clients = [
     {
       id: 1,
-      name: "OKKIO",
-      logo: "/1_Homepage/1_Homepage/3_Clients/OKKIO_Logo.svg",
+      name: "matchie",
+      logo: "/1_Homepage/1_Homepage/3_Clients/Matchie_logo.svg",
+      hoverBg: "/1_Homepage/1_Homepage/3_Clients/matchie-hover-bg.png",
+      logoWidth: "57%",   // 155.81 / 274
     },
     {
       id: 2,
-      name: "Lêla",
-      logo: "/1_Homepage/1_Homepage/3_Clients/Lêla_logo.svg",
+      name: "CTY Kitchen + Bar",
+      logo: "/1_Homepage/1_Homepage/3_Clients/CTY_logo.svg",
+      hoverBg: "/1_Homepage/1_Homepage/3_Clients/cty-hover-bg.png",
+      logoWidth: "36%",   // 99 / 274
     },
     {
       id: 3,
-      name: "CTY",
-      logo: "/1_Homepage/1_Homepage/3_Clients/CTY_logo.svg",
+      name: "Circular Plastics Company",
+      logo: "/1_Homepage/1_Homepage/3_Clients/cpc-logo-full.svg",
+      hoverBg: "/1_Homepage/1_Homepage/3_Clients/cpc-hover-bg.png",
+      logoWidth: "69%",   // 187.92 / 274
     },
     {
       id: 4,
-      name: "TBros",
-      logo: "/1_Homepage/1_Homepage/3_Clients/tra-made.svg",
+      name: "OKKIO",
+      logo: "/1_Homepage/1_Homepage/3_Clients/OKKIO_Logo.svg",
+      hoverBg: "/1_Homepage/1_Homepage/3_Clients/okkio-hover-bg.png",
+      logoWidth: "49%",   // 132.98 / 274
+    },
+    {
+      id: 5,
+      name: "EUPHORIA",
+      logo: "/1_Homepage/1_Homepage/3_Clients/Euphoria_logo.svg",
+      hoverBg: "/1_Homepage/1_Homepage/3_Clients/euphoria-hover-bg.png",
+      logoWidth: "71%",   // 194 / 274
+    },
+    {
+      id: 6,
+      name: "Dogma",
+      logo: "/1_Homepage/1_Homepage/3_Clients/Dogma_logo.svg",
+      hoverBg: "/1_Homepage/1_Homepage/3_Clients/dogma-hover-bg.png",
+      logoWidth: "49%",   // 135 / 274
     },
   ];
 
@@ -140,32 +162,7 @@ export default function Section9() {
     };
   }, [isMobile]);
 
-  // Helper functions for hover styles
-  const getHoverBackground = (index) => {
-    switch (index) {
-      case 0:
-        return "none";
-      case 1:
-        return "none";
-      case 2:
-        return `url("/1_Homepage/1_Homepage/3_Clients/soit_recent_work.svg")`;
-      case 3:
-        return `url("/1_Homepage/1_Homepage/3_Clients/DJI_0171.png")`;
-      default:
-        return `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`;
-    }
-  };
-
-  const getHoverColor = (index) => {
-    switch (index) {
-      case 0:
-        return "#922b23";
-      case 1:
-        return "rgba(246, 194, 7, 1)";
-      default:
-        return "transparent";
-    }
-  };
+  const clientCount = clients.length;
 
   return (
     <div className="section9">
@@ -207,40 +204,37 @@ export default function Section9() {
         ) : (
           <div className="clients-carousel-wrapper" ref={carouselRef}>
             <div className="clients-carousel-track">
-              {clients.concat(clients).map((client, index) => (
-                <div
-                  key={`${client.id}-${index}`}
-                  className={`client-card ${
-                    hoveredCardIndex === index ? "hovered" : ""
-                  }`}
-                  data-index={index % 4}
-                >
+              {clients.concat(clients).map((client, index) => {
+                const isHovered = hoveredCardIndex === index;
+                return (
                   <div
-                    className="client-background"
-                    style={{
-                      backgroundImage:
-                        hoveredCardIndex === index
-                          ? getHoverBackground(index % 4)
-                          : `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`,
-                      backgroundColor:
-                        hoveredCardIndex === index
-                          ? getHoverColor(index % 4)
-                          : "transparent",
-                    }}
+                    key={`${client.id}-${index}`}
+                    className={`client-card ${isHovered ? "hovered" : ""}`}
+                    data-index={index % clientCount}
                   >
-                    <img
-                      src={client.logo}
-                      alt={client.name}
-                      className="client-logo"
-                      style={
-                        hoveredCardIndex === index && index % 4 === 0
-                          ? { filter: "invert(1) brightness(2)" }
-                          : {}
-                      }
-                    />
+                    <div
+                      className="client-background"
+                      style={{
+                        backgroundImage: isHovered
+                          ? `url("${client.hoverBg}")`
+                          : `url('/1_Homepage/1_Homepage/3_Clients/Background_1.png')`,
+                      }}
+                    >
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                        className="client-logo"
+                        style={{
+                          width: client.logoWidth,
+                          ...(isHovered
+                            ? { filter: "brightness(0) invert(1)" }
+                            : {}),
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

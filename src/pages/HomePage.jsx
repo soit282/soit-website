@@ -4,6 +4,7 @@ import Section3 from "@components/home/section3/Section3";
 import Section4 from "@components/home/section4/Section4";
 import Section5 from "@components/home/section5/Section5";
 import Section6 from "@components/home/section6/Section6";
+import SectionSavvy from "@components/home/section-savvy/SectionSavvy";
 import Section7 from "@components/home/section7/Section7";
 import Section8 from "@components/home/section8/Section8";
 import Section9 from "@components/home/section9/Section9";
@@ -23,6 +24,7 @@ const HomePage = () => {
         <Section4 />
         <Section5 />
         <Section6 />
+        <SectionSavvy />
         <Section7 />
         <Section8 />
         <Section9 />

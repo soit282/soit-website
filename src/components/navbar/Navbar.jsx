@@ -390,7 +390,7 @@ const Navbar = () => {
       <a href={ROUTES.HOME} className="navbar-logo">
         <img
           ref={logoImgRef}
-          src="/icon/Icon/Số Ít logo.svg"
+          src="/icon/Icon/soit-logo.svg"
           alt="Số Ít"
           className="navbar-logo-img"
         />

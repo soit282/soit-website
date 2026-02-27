@@ -146,7 +146,7 @@ const Section1 = () => {
       <div className="section1-logo-container">
         <img
           ref={logoRef}
-          src="/icon/Icon/Số Ít logo.svg"
+          src="/icon/Icon/soit-logo.svg"
           alt="Số Ít"
           className="section1-logo"
           style={getLogoStyle()}

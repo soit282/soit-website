@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import "./Section7.css";
+import "./SectionSavvy.css";
 import "@styles/grid-system.css";
 
-export default function Section7() {
+export default function SectionSavvy() {
   const [mouseY, setMouseY] = useState(50);
   const [isVisible, setIsVisible] = useState(true);
   const [parallaxOffset, setParallaxOffset] = useState(0);
@@ -14,7 +14,6 @@ export default function Section7() {
       const rect = sectionRef.current.getBoundingClientRect();
       const y = ((mouseClientY.current - rect.top) / rect.height) * 100;
       setMouseY(y);
-      // Show text only when mouse is within section bounds
       const isInBounds =
         mouseClientY.current >= rect.top && mouseClientY.current <= rect.bottom;
       setIsVisible(isInBounds);
@@ -27,7 +26,6 @@ export default function Section7() {
   };
 
   const handleMouseLeave = () => {
-    // Don't null out mouseClientY to maintain position during scroll
     setIsVisible(false);
   };
 
@@ -35,17 +33,14 @@ export default function Section7() {
     const handleScroll = () => {
       updateMousePosition();
 
-      // Calculate parallax offset
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
         const scrollProgress = -rect.top;
-        // Parallax speed: 0.5 means background moves at half speed
         const parallaxSpeed = 0.5;
         setParallaxOffset(scrollProgress * parallaxSpeed);
       }
     };
 
-    // Track global mouse position
     const handleGlobalMouseMove = (e) => {
       mouseClientY.current = e.clientY;
     };
@@ -53,7 +48,6 @@ export default function Section7() {
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleGlobalMouseMove);
 
-    // Initial parallax calculation
     handleScroll();
 
     return () => {
@@ -65,20 +59,19 @@ export default function Section7() {
   return (
     <div
       ref={sectionRef}
-      className="section7"
+      className="section-savvy"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Parallax Background */}
       <div
-        className="section7-background"
+        className="section-savvy-background"
         style={{
           position: "absolute",
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: `url('/1_Homepage/1_Homepage/2_Feature works/okkio-feature.jpg')`,
+          backgroundImage: `url('/1_Homepage/1_Homepage/2_Feature works/savvy.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           transform: `translateY(${parallaxOffset}px)`,
@@ -86,7 +79,7 @@ export default function Section7() {
         }}
       />
       <div
-        className="section7-content"
+        className="section-savvy-content"
         style={{
           position: "absolute",
           top: `${mouseY}%`,
@@ -97,18 +90,14 @@ export default function Section7() {
           transition: "opacity 0.3s ease",
         }}
       >
-        {/* Using proper grid system */}
         <div className="grid-container">
-          {/* Text left */}
-          <div className="section7-text-left text-left text-5">
-            <p>OKKIO</p>
+          <div className="section-savvy-text-left text-left text-5">
+            <p>Savvy</p>
           </div>
-          {/* Text center */}
-          <div className="section7-text-center text-center-item text-8">
-            <p>A sensory deep dive into Vietnam's specialty co</p>
+          <div className="section-savvy-text-center text-center-item text-8">
+            <p>A luxury-vibe stay elevated by creative energy for the unordinary.</p>
           </div>
-          {/* Text right */}
-          <div className="section7-text-right text-right text-8">
+          <div className="section-savvy-text-right text-right text-8">
             <p>Branding</p>
           </div>
         </div>

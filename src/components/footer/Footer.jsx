@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Footer.css";
-import soitLogo from "/icon/Icon/Số Ít logo.svg";
+import soitLogo from "/icon/Icon/soit-logo.svg";
 import arrowIcon from "/icon/Icon/-_.svg";
 import PrivacyPolicyModal from "../PrivacyPolicyModal";
 
