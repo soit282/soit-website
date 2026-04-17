@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./Section10.css";
-import DecryptedText from "../../DecryptedText";
+import arrowIcon from "/icon/Icon/-_.svg";
 
 
 export default function Section10() {
   const [activeService, setActiveService] = useState(null);
+  const [expandedServices, setExpandedServices] = useState([]); // Can have multiple during transition
+  const [closingService, setClosingService] = useState(null);
+  const closingTimeoutRef = useRef(null);
+  const isAnimatingRef = useRef(false);
 
   const services = [
     {
@@ -71,8 +75,54 @@ export default function Section10() {
   ];
 
   const handleServiceClick = (serviceId) => {
-    setActiveService(activeService === serviceId ? null : serviceId);
+    // Block clicks during animation
+    if (isAnimatingRef.current) return;
+
+    // Clear any pending timeout
+    if (closingTimeoutRef.current) {
+      clearTimeout(closingTimeoutRef.current);
+      closingTimeoutRef.current = null;
+    }
+
+    if (activeService === serviceId) {
+      // Closing current item
+      isAnimatingRef.current = true;
+      setClosingService(serviceId);
+      setActiveService(null);
+      closingTimeoutRef.current = setTimeout(() => {
+        setExpandedServices([]);
+        setClosingService(null);
+        isAnimatingRef.current = false;
+      }, 500);
+    } else if (activeService !== null && activeService !== serviceId) {
+      // Switching to different item: run both animations simultaneously
+      isAnimatingRef.current = true;
+      const previousActive = activeService;
+      setClosingService(previousActive);
+      setExpandedServices([previousActive, serviceId]);
+      setActiveService(serviceId);
+      closingTimeoutRef.current = setTimeout(() => {
+        setExpandedServices([serviceId]);
+        setClosingService(null);
+        isAnimatingRef.current = false;
+      }, 500);
+    } else {
+      // Opening new item (no current expanded)
+      setClosingService(null);
+      setActiveService(serviceId);
+      setExpandedServices([serviceId]);
+    }
   };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closingTimeoutRef.current) {
+        clearTimeout(closingTimeoutRef.current);
+      }
+      isAnimatingRef.current = false;
+    };
+  }, []);
 
   // Hover effects for service items
   useEffect(() => {
@@ -142,15 +192,8 @@ export default function Section10() {
                Current design has the Animated Text. I will keep Animated Text as requested "keep content".
            */}
           <p className="section10-label text-4">Services</p>
-          <h2 className="section10-heading text-2">
-            <DecryptedText
-              text="Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers."
-              speed={10}
-              maxIterations={15}
-              sequential={true}
-              useOriginalCharsOnly={true}
-              animateOn="view"
-            />
+          <h2 className="section10-heading text-2_100pt_medium">
+            Through a vision-led approach, we've shaped ourselves into a deeply collaborative studio of cross-disciplinary thinkers and makers.
           </h2>
         </div>
 
@@ -158,15 +201,26 @@ export default function Section10() {
           {services.map((service) => (
             <div
               key={service.id}
-              className={`service-item ${activeService === service.id ? "expanded" : ""}`}
+              className={`service-item ${
+                expandedServices.includes(service.id) ? "expanded grid-container" : ""
+              } ${closingService === service.id ? "closing" : ""}`}
+              onClick={() => handleServiceClick(service.id)}
+              style={{ cursor: "pointer" }}
             >
               <div
                 className="service-header"
                 onClick={() => handleServiceClick(service.id)}
               >
                 <span className="service-name text-5">{service.name}</span>
-                <button className={`toggle-btn ${activeService === service.id ? "active" : ""}`}>
-                  {activeService === service.id ? "-" : "+"}
+                <button
+                  className={`toggle-btn ${
+                    activeService === service.id ? "active" : ""
+                  }`}
+                >
+                  <span className="toggle-icon">
+                    <span className="icon-horizontal"></span>
+                    <span className="icon-vertical"></span>
+                  </span>
                 </button>
               </div>
               <div

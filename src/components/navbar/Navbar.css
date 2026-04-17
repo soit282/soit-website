@@ -24,8 +24,10 @@
   height: 70px;
   opacity: 1;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
   mix-blend-mode: difference;
+  /* Prevent rasterization during scale animation */
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
 /* Ensure all navbar content has proper contrast */
@@ -44,6 +46,11 @@
   width: auto;
   display: block;
   filter: invert(1); /* Make logo white for mix-blend-mode */
+  /* Prevent SVG rasterization issues when scaling */
+  image-rendering: optimizeQuality;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 /* Desktop Menu positioning using grid */

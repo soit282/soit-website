@@ -45,6 +45,7 @@
 .arrow-icon {
   width: 70px;
   height: 70px;
+  filter: contrast(1.2) brightness(0.9);
 }
 
 @keyframes bounce {
@@ -58,11 +59,11 @@
   }
 
   40% {
-    transform: translateY(10px);
+    transform: translateY(18px);
   }
 
   60% {
-    transform: translateY(5px);
+    transform: translateY(9px);
   }
 }
 

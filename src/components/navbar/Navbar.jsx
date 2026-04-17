@@ -178,8 +178,9 @@ const Navbar = () => {
 
       const updateLogoPosition = () => {
         const scrollY = window.scrollY;
-        const phase1End = cachedVH * 0.65;
-        const phase2Range = cachedVH * 0.35;
+        // Use faster timing from dev/nam3 branch
+        const phase1End = cachedVH * 0.5;
+        const phase2Range = cachedVH * 0.6;
 
         if (scrollY <= phase1End) {
           const progress = scrollY / phase1End;
@@ -383,7 +384,6 @@ const Navbar = () => {
         position: "fixed",
         zIndex: 100011,
         transformOrigin: "center center",
-        willChange: "transform",
         transition: "none",
       }}
     >
@@ -393,6 +393,11 @@ const Navbar = () => {
           src="/icon/Icon/soit-logo.svg"
           alt="Số Ít"
           className="navbar-logo-img"
+          style={{
+            // SVG rendering optimization - prevent pixelation on scale
+            transform: "translateZ(0)",
+            WebkitFontSmoothing: "antialiased",
+          }}
         />
       </a>
     </div>

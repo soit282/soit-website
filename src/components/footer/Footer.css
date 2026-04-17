@@ -1,5 +1,6 @@
 .footer {
   width: 100%;
+  min-height: 80vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -129,8 +130,7 @@
 }
 
 .footer-logo-img {
-  width: 100%;
-  max-width: 1072px;
+  width: 50vw;
   height: auto;
   opacity: 1;
 }
